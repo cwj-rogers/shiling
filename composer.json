@@ -20,7 +20,7 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": ">=2.0.6",
+        "yiisoft/yii2": "2.0.9",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-redis": "~2.0.0",
@@ -42,7 +42,10 @@
         "codeception/verify": "~0.3.1"
     },
     "config": {
-        "process-timeout": 1800
+        "process-timeout": 1800,
+	"github-oauth": {
+          "github.com": "2bc77b89b31c010a36420a6f9e821007b3b650f0"
+        }
     },
     "extra": {
         "asset-installer-paths": {

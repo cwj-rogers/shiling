@@ -31,4 +31,5 @@ phpunit.phar
 
 composer.lock
 .env
+/storage/web/install.txt
 
