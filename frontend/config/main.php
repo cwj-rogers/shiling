@@ -21,6 +21,13 @@ return [
         ],
     ],
     'components' => [
+        // overtrue 微信SDK
+        'wechat' => [
+            'class' => 'maxwen\easywechat\Wechat',
+            // 'userOptions' => []  # user identity class params
+            // 'sessionParam' => '' # wechat user info will be stored in session under this key
+            // 'returnUrlParam' => '' # returnUrl param stored in session
+        ],
         'user' => [
             'identityClass' => 'frontend\models\User',
             'enableAutoLogin' => true,
@@ -40,7 +47,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'public/404',
+            'errorAction' => 'public/error',
         ],
 
         'urlManager' => [

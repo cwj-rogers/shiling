@@ -1,4 +1,8 @@
 <?php \frontend\assets\CcsliderAsset::register($this);?>
+<?php
+
+use \yii\helpers\Url;
+?>
 
 
 <div id="slider">
@@ -95,7 +99,7 @@
                         </a>
                         <div class="search-content">
                             <h2 class="search-title">
-                                <a href="javascript:;">文章的标题文字信息</a>
+                                <a href="<?= Url::toRoute('article',true)?>">文章的标题文字信息22</a>
                             </h2>
                             <p class="search-desc"> 文章描述信息，这里是文章的简介描述等信息，文章描述信息，这里是文章的简介描述等信息，文章描述信息，这里是文章的简介描述等信息，文章描述信息，这里是文章的简介描述等信息。 </p>
                         </div>
