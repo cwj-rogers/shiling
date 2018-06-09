@@ -54,7 +54,7 @@ class IndexController extends Controller
      * @return 砍价详情
      */
     public function actionUser(){
-        return $this->render('kj-detail');
+        return $this->render('user');
     }
 
     public function actionClear(){
