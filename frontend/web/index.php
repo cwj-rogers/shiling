@@ -2,7 +2,8 @@
 
 require(__DIR__ . '/../../vendor/autoload.php');
 
-require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
+//require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
+require('./Yii.php');
 
 /**
  * 全局环境，必须放在yii.php之后和config文件之前

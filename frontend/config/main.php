@@ -37,6 +37,9 @@ return [
             'class' => 'common\core\Request',
             'baseUrl' => Yii::getAlias('@frontendUrl'),
         ],
+//        'session' => [
+//            'class' => 'yii\web\Session'
+//        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

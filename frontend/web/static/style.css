@@ -1,0 +1,106 @@
+/* 公共 */
+.blank{margin-bottom: 15px}
+html { -webkit-text-size-adjust: none; }
+body{background-color: rgb(235,235,235);padding-bottom: 100px}
+.weui_cell p{margin-bottom: 0}
+
+/* 首页 */
+#sectionA{overflow: hidden}
+    #sectionA img{width: 100%;height: 150px}
+/* 砍价成功广播 */
+#sectionB{padding: 8px;border-bottom: lightgray 1px solid}
+    #sectionB div{text-align: center;font-size: 12px;color: gray}
+    #sectionB div span{background: red;padding: 3px 7px;border-radius: 5px;color: white}
+/* 砍价标题 */
+.kj-title{text-align: center;background-color: white;padding-top: 10px}
+    .kj-title .kj-title-before, .kj-title .kj-title-after{display: inline-block;width: 50px;height: 2px;margin: 5px 10px;background-color: grey;vertical-align: middle;}
+/* 商品样式 */
+.goods{display: flex;flex-direction: row;background-color: white;padding-top: 10px;padding-bottom: 10px}
+    .goods .left{width: 40%;height: 130px;overflow: hidden}
+        .goods .left img{width: 100%;height: 100%}
+    .goods .right{width: 60%;padding-left:10px;display: flex;flex-direction: column;justify-content: space-between;align-items: center}
+        .goods .right .r-top{}
+            .goods .right .r-top .rt-title{font-size: 16px;font-weight: bold}
+            .goods .right .r-top .rt-secondtitle{font-size: 10px;font-weight: normal}
+        .goods .right .r-bottom{width: 100%;display: flex;flex-direction: row;align-items: flex-end}
+            .gooss .right .r-bottom .rb-left{width: 50%;height: 100%}
+                .goods .right .rb-left small{display:block;font-size: 10px;transform: scale(0.90);transform-origin:0 0;-webkit-transform: scale(0.90);-webkit-transform-origin:0 0;text-align: center;white-space: nowrap;overflow: hidden}
+                .goods .right .rb-left span{display:block;color: #b1191a;font-weight: bold;font-size: 16px}
+            .goods .right .r-bottom .rb-right{width: 50%;height: 100%;text-align: right}
+                .goods .right .rb-right a{padding: 6px 15px;background-color: #b1191a;}
+/* 底部按钮 */
+.foot{box-sizing:border-box;width: 100%;height: 50px;padding: 2px;background-color: white;position: fixed;z-index: 1;bottom: 0px;left: 0px;display: flex;flex-direction: row;justify-content: flex-start;}
+    .foot .item{width: 50%;height: 30px;margin: 10px 0;}
+        .foot .item a{display:block;width: 100%;height: 100%;text-align: center;line-height: 30px;color: black}
+            .foot .item a span{color: #b1191a}
+    .foot div+div{border-left: rgb(200,200,200) 1px solid}
+
+.loading-all{color: rgb(200,200,200);text-align: center;margin-top: 30px}
+.la-title-before, .la-title-after{display: inline-block;width: 50px;height: 2px;margin: 5px 10px;background-color: rgb(200,200,200);vertical-align: middle;}
+
+/* 商品列表页 */
+#detail .kj-good-img{width: 100%;height: 200px}
+    #detail .kj-good-img img{width: 100%;height: 100%}
+#detail .good-title-box{position: relative;box-sizing: border-box;padding: 10px 15px;background: white}
+    #detail .good-title-box .good-title{text-align: left;font-size: 16px;font-weight: bold}
+    #detail .good-title-box .good-price{color: #b1191a}
+    #detail .good-title-box .act-rule{position: absolute;right: 10px;top:10px;padding: 5px 10px;background-color: rgba(0,0,0,0.2);border-radius: 15px;color: white;font-size: 12px}
+/* 砍价信息展示区 */
+#detail .kj-introduce{display: flex;flex-direction: column;justify-content: flex-start;align-items: center;background: white;padding-bottom: 30px}
+    /*#detail .kj-introduce div{width: 100%}*/
+    #detail .kj-introduce .kj-success-num{text-align: left;font-size: 12px;margin-bottom: 3px;width: 100%}
+    #detail .kj-introduce .kj-progress{position: relative;margin-top: 40px;width: 100%}
+        #detail .kj-progress .progress{margin: 10px 0;margin-bottom: 5px}
+            #detail .kj-progress .tooltip{z-index: 1}
+                #detail .kj-progress .tooltip .tooltip-inner{background-color: white;color: #b1191a;border: 1px lightgray solid;padding: 5px 10px;}
+        #detail .kj-progress .kj-price-box{display: flex;flex-direction: row;justify-content: space-between}
+            #detail .kj-progress .kj-price-box .pb-left{font-size: 12px;}
+            #detail .kj-progress .kj-price-box .pb-right{font-size: 12px;text-align: right}
+    #detail .kj-introduce .kj-share{padding: 10px;text-align: center}
+        #detail .kj-share button{padding: 15px 50px;border-radius: 20px;border: 2px #b1191a solid;color: #b1191a;background-color: white;display: flex;flex-direction: row;justify-content: center;align-items: center}
+        #detail .kj-share button .glyphicon{font-size: 21px;margin-right: 5px}
+    #detail .kj-introduce .kj-friends{padding: 10px 0}
+        #detail .kj-friends .join-chatheads{padding: 10px 0;display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap}
+        #detail .kj-friends .join-chatheads span{box-sizing: border-box;padding: 5px;width: 49px;height: 49px;border-radius: 50%}
+            #detail .kj-friends .join-chatheads span img{width: 100%;height: 100%;border-radius: 50%}
+    #detail .kj-introduce .kj-rank-list{text-align: center;padding-bottom: 10px;}
+        #detail .kj-rank-list a{padding: 10px 35px;background-color: rgb(230,230,230);color: black;font-size: 12px;border-radius: 10px}
+/* 商品详情页 */
+#detail .good-detail-box{text-align: center;margin-top: 10px;padding: 0;border-top: #b1191a 2px solid}
+    #detail .good-detail-box .good-detail-title{text-align: center;padding: 10px;background-color: white}
+        #detail .good-detail-title p{border-bottom: 1px rgb(235,235,235) solid;margin: 0;padding-bottom: 10px;font-size: 16px;font-weight: bold}
+    #detail .good-detail-box .good-detail-introduce{padding: 10px;background-color: white}
+        #detail .good-detail-introduce .well{font-size: 12px;color: gray;text-align: left;margin: 0}
+    #detail .good-detail-box .good-detail{width: 100%;background-color: rgb(235,235,235)}
+        #detail .good-detail img{width: 100%;margin-bottom: 10px}
+
+/* 分享弹窗 */
+#wx-share{display: none}
+#wx-share .weui_dialog{width: 100%;bottom: 0px;left: unset;top: unset;display: none}
+    #wx-share .weui_dialog .weui_cells{margin-top: 0}
+        #wx-share .weui_dialog .weui_cells .weui_cell{padding: 15px}
+    #wx-share .weui_dialog .weui_dialog_ft{padding: 5px 0;color: #b1191a}
+        #wx-share .weui_dialog .weui_dialog_ft .weui_btn_dialog{color: #b1191a}
+
+/* 砍价弹窗 */
+#wx-rank-list {display: none}
+    #wx-rank-list .weui_dialog{width: 90%;overflow: visible;padding-top: 80px;top: 100px;left: 5%;background-color: white;display: none;}
+    #wx-rank-list .cells-box{width: 100%;height: 100%;max-height: 400px;overflow: scroll}
+        #wx-rank-list .weui_dialog .weui_cells{margin-top: 0em;padding:10px 10px;display: flex;flex-direction: row;justify-content: flex-start}
+            #wx-rank-list .weui_cells .orderly{width: 50px;height: 50px;font-size: 24px;color: grey;text-align: center;line-height: 50px}
+            #wx-rank-list .weui_cells .wrl-left{box-sizing: border-box;padding: 5px;width: 50px;height: 50px;}
+                #wx-rank-list .weui_cells .wrl-left img{width: 100%;height: 100%;border-radius: 50%}
+            #wx-rank-list .weui_cells .wrl-mid{box-sizing: border-box;width: 40%;height: 50px;padding-left: 10px;}
+                #wx-rank-list .weui_cells .wrl-mid div{text-align: left;font-size: 14px;line-height: 25px}
+                #wx-rank-list .weui_cells .wrl-mid .talk{color: lightgray;font-size: 12px}
+            #wx-rank-list .weui_cells .wrl-right{width: 30%;height: 50px;line-height: 50px;font-size: 14px;font-weight: bold;color: #b1191a}
+        #wx-rank-list .weui_dialog .rank-list-crown{width: 160px;height: 150px;position: absolute;top:-70px;left: 80px}
+            #wx-rank-list .weui_dialog .rank-list-crown img{width: 100%;height: 100%}
+    #wx-rank-list .weui_dialog_ft{margin-top: 0px}
+
+/* 规则弹窗 */
+#wx-rule{display: none}
+    #wx-rule .weui_dialog{padding: 0 15px;padding-bottom: 20px;overflow: unset;left: 8%;top: 150px;display: none}
+        #wx-rule .weui_dialog h3{color: #b1191a}
+        #wx-rule .weui_dialog p{text-align: left;font-size: 14px;color: gray}
+        #wx-rule .weui_dialog span{position: absolute;top: -15px;right: -15px;width: 30px;height: 30px;font-size: 28px;text-align: center;line-height: 30px;color: rgb(150,150,150);background: rgb(230,230,230);border-radius: 50%;}
