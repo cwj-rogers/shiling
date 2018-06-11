@@ -36,8 +36,8 @@ use yii\helpers\Url;
     <?=$content?>
 </div>
 <div class="foot">
-    <div class="item"> <a name="" id="" href="<?= Url::toRoute('index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 砍价商品</a></div>
-    <div class="item"> <a name="" id="" href="<?= Url::toRoute('user')?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 我的砍价</a></div>
+    <div class="item "> <a class="<?= Yii::$app->request->getUrl()=="/index/index"?'active':'';?>" name="" id="" href="<?= Url::toRoute('index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 砍价商品</a></div>
+    <div class="item"> <a class="<?= Yii::$app->request->getUrl()=="/index/user"?'active':'';?>" id="" href="<?= Url::toRoute('user')?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 我的砍价</a></div>
 </div>
 
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->

@@ -39,5 +39,24 @@ $(function () {
         } else{
             $('#wx-rule').fadeOut();
         }
-    })
+    });
+
+    $('.cd-item').each(function () {
+        countDown($(this).attr("cd-name"),$(this).attr("cd-date"));
+    });
 });
+
+// 活动结束计时器
+function countDown(className,date) {
+    var starttime = new Date(date);
+    setInterval(function () {
+        var nowtime = new Date();
+        var time = starttime - nowtime;
+        var day = parseInt(time / 1000 / 60 / 60 / 24);
+        var hour = parseInt(time / 1000 / 60 / 60);
+        var minute = parseInt(time / 1000 / 60 % 60);
+        var seconds = parseInt(time / 1000 % 60);
+        $(className).html('还剩' + hour + "时" + minute + "分" + seconds+ "秒");
+        console.log(seconds);
+    }, 1000);
+}
