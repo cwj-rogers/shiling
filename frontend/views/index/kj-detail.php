@@ -25,7 +25,8 @@
             </div>
         </div>
         <div class="kj-share">
-            <button><span class="glyphicon glyphicon-share" aria-hidden="true"></span> <span> 喊好友来砍一刀</span></button>
+            <button class="kj-share-btn"><span class="glyphicon glyphicon-share" aria-hidden="true"></span> <span> 喊好友来砍一刀</span></button>
+            <button class="kanjia-success"> <div><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 砍价成功</div><div><small class="text-muted">点击查看兑换门店</small></div></button>
         </div>
         <div class="kj-friends">
             <div class="join-num">已有 <span class="text-danger">23</span> 人帮你砍价</div>
@@ -98,10 +99,11 @@
         <div class="weui_dialog animated">
             <h3>活动规则</h3>
             <p>1. 邀请好友一起砍价,帮助砍价成功即可以9.9元获取商品;</p>
-            <p>2. 您每天最多帮助同一好友砍价一次;</p>
+            <p>2. 每位好友每天最多帮助您砍价一次;</p>
             <p>3. 活动以城市划分,同一城市好友才有资格帮忙砍价;</p>
             <p>4. 每次砍价金额随机,参与好友越多越容易成功;</p>
             <p>5. 主办方可以根据本活动的实际举办情况对活动规则进行变动或者调整,相关变动或调整将公布在活动页面上,公布后依法生效;</p>
+            <p>6. 如有疑问请拨打400-6966-398咨询</p>
             <span class="cancel">×</span>
         </div>
     </div>

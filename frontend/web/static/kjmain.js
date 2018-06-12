@@ -9,7 +9,7 @@ $(function () {
     $('.tooltip').animate({left:move_distance},1500);
 
     //分享弹窗
-    $('#wx-share .weui_mask, #wx-share .weui_dialog_ft, .kj-share').click(function () {
+    $('#wx-share .weui_mask, #wx-share .weui_dialog_ft, .kj-share-btn').click(function () {
         var stata = $('#wx-share').css('display');
         if (stata=="none"){
             $('#wx-share').show();

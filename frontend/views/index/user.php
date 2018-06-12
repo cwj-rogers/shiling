@@ -8,18 +8,19 @@ use \yii\widgets\Pjax;
         <div class="avatar"><img src="http://hjzhome.image.alimmdn.com/%E7%A0%8D%E4%BB%B7%E6%B4%BB%E5%8A%A8/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180611094043.jpg@294w_294h_1l?spm=a312x.7755591.0.0.26384e08j8RF1R&file=%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180611094043.jpg@294w_294h_1l" alt=""></div>
         <div class="name">阿斯蒂芬卢卡斯积分</div>
     </div>
+
+<!--  pjax刷新我的订单  -->
+    <?php Pjax::begin(); ?>
     <div class="myorder">
         <div class="myorder-title">
             <span>我的订单</span>
             <span class="glyphicon glyphicon-chevron-right"></span>
         </div>
         <div class="order-status">
-            <div class="going active"><span class="glyphicon glyphicon-time"></span> 进行中</div>
-            <div class="finish"><span class="glyphicon glyphicon-check"></span> 已完成</div>
+            <div class="going"><a href="<?= Url::toRoute("user")?>" class="active"><span class="glyphicon glyphicon-time"></span> 进行中 </a></div>
+            <div class="finish"><a href="<?= Url::toRoute("user")?>" class=""><span class="glyphicon glyphicon-check"></span> 已完成 </a></div>
         </div>
     </div>
-
-    <?php Pjax::begin(); ?>
     <?php foreach ([1,2,3,4,5,6,7] as $k=>$v):?>
     <div class="goods orders-box col-xs-12 col-sm-12 col-md-12 col-lg-12 blank">
         <a class="go-detail" href="<?= $k>2? Url::toRoute('index'):Url::toRoute('detail');?>">
@@ -39,7 +40,7 @@ use \yii\widgets\Pjax;
                         <span><strong><?= $k>2?"砍价失败":"还差1190元";?></strong></span>
                     </div>
                     <div class="rb-right">
-                        <div id="<?= "cd-".$k?>" class="count-down <?= $k>2?" ":"cd-item";?>" cd-date="<?= date("Y-m-d H:i:s")?>" cd-name="<?= '#cd-'.$k?>"></div>
+                        <div id="<?= "cd-".$k?>" class="count-down <?= $k>2?" ":"cd-item";?>" cd-date="<?= date("Y-m-d H:i:s",time()+192000)?>" cd-name="<?= '#cd-'.$k?>"></div>
                         <button class="btn btn-danger" type="button">
                             <span><?= $k>3?"重砍一个":"继续砍价";?></span>
                         </button>
