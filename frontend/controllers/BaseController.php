@@ -7,5 +7,8 @@ use yii\web\Session;
 
 class BaseController extends Controller
 {
-
+    public function actionIndex()
+    {
+        p(1,1);
+    }
 }

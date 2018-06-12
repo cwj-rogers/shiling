@@ -86,6 +86,6 @@ class WxUser extends \yii\db\ActiveRecord
             $res=$this->save();
         }
         $info = WxUser::findOne(['open_id'=>$userinfo['id']]);
-        Yii::$app->session->set('userinfo',);p(Yii::$app->session->get('userinfo'),1);
+        Yii::$app->session->set('userinfo',['wx_uid' => $info->wx_uid]);
     }
 }

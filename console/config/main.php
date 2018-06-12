@@ -20,6 +20,12 @@ return [
                 ],
             ],
         ],
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'providers' => [
+                'app\tests\unit\faker\providers\Book',
+            ],
+        ],
     ],
     'controllerMap' => [
         'migrate' => [
