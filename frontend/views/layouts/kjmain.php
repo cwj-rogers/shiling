@@ -1,5 +1,4 @@
 <?php
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 //\frontend\assets\IeAsset::register($this);
@@ -23,11 +22,6 @@ use yii\helpers\Url;
     <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css">
     <link rel="stylesheet" href="<?=Yii::getAlias('@web')?>/static/style.css">
-
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 
@@ -45,7 +39,9 @@ use yii\helpers\Url;
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+<!--<sctipt src="https://cdn.bootcss.com/vue/2.0.0/vue.min.js"></sctipt>-->
 <script src="<?=Yii::getAlias('@web')?>/static/kjmain.js"></script>
+
 </body>
 </html>
 

@@ -11,7 +11,7 @@ use Yii;
  * @property string $ago_order_sn
  * @property integer $user_id
  * @property integer $wg_id
- * @property string $ago_real_price
+ * @property string $ago_cut_total
  * @property integer $ago_cut_number
  * @property integer $ago_need_cut
  * @property integer $ago_share_time
@@ -40,9 +40,9 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'wg_id', 'ago_cut_number', 'ago_need_cut', 'ago_take_method'], 'required'],
+            [['user_id', 'wg_id'], 'required'],
             [['user_id', 'wg_id', 'ago_cut_number', 'ago_need_cut', 'ago_share_time', 'ago_status', 'ago_payment_method', 'ago_take_method', 'ago_return_call'], 'integer'],
-            [['ago_real_price'], 'number'],
+            [['ago_cut_total'], 'number'],
             [['ago_exprice_time', 'created_time'], 'safe'],
             [['ago_order_sn'], 'string', 'max' => 24],
             [['ago_province', 'ago_city'], 'string', 'max' => 10],
@@ -60,7 +60,7 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
             'ago_order_sn' => '商品的名称',
             'user_id' => '用户id',
             'wg_id' => '商品id',
-            'ago_real_price' => '当前价格(原价-累积砍价)',
+            'ago_cut_total' => '累积砍价',
             'ago_cut_number' => '已砍价次数',
             'ago_need_cut' => '需要砍价次数',
             'ago_share_time' => '分享次数',
@@ -73,5 +73,38 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
             'ago_exprice_time' => '到期时间',
             'created_time' => '添加时间',
         ];
+    }
+
+    /**
+     * 创建新的商品订单
+     * @param $wgid
+     * @param $userId
+     */
+    public function createActOrder($wgid,$userId){
+        $wg = WxGoods::findOne($wgid);
+        $userinfo = $_SESSION['userinfo'];
+        if (!empty($wg)){
+            $this->ago_order_sn = '100062'.mt_rand(10000,99999).round(microtime(true)*1000);
+            $this->user_id = $userId;
+            $this->wg_id = $wgid;
+            $this->ago_need_cut = $wg->wg_need_cut;
+            $this->ago_province = $userinfo['province'];
+            $this->ago_city = $userinfo['city'];
+            $this->ago_exprice_time = date('Y-m-d H:i:s', time()+$wg->wg_promote_time);
+            $this->created_time = date('Y-m-d H:i:s');
+            $res = $this->save();
+            if(!$res) p($this->getErrors(),1);
+        }
+    }
+
+    public static function getActOrder($wgId,$userId){
+        $res = static ::find()->select("*")->from(['ago'=>'yii2_wx_activities_order'])->leftJoin("yii2_wx_goods wg","ago.wg_id=wg.wg_id")->where(['ago.wg_id'=>$wgId,'user_id'=>$userId])->asArray()->all();
+        $res = $res[0];
+        $nameArr = explode(" ",$res['wg_name']);
+        $res['wg_name'] = $nameArr[0];
+        $res['centi'] =  intval($res['ago_cut_total']/($res['wg_market_price']-9.9)*100).'%';
+        $res['joiners'] = WxFriendsJoinLog::find()->where(['ago_id'=>$res['ago_id']])->orderBy("fj_cut_price desc")->asArray()->all();
+        //p($res,1);
+        return $res;
     }
 }

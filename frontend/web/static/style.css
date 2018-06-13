@@ -23,8 +23,8 @@ a{color: black}
         .goods .left img{width: 100%;height: 100%}
         .goods .left .fail-mask{position: absolute;width: 100%;height: 130px;left: 0;top: 0;background: rgba(0,0,0,0.8);text-align: center;line-height: 130px;color: rgb(210,210,210);font-size: 21px}
     .goods .right{width: 60%;padding-left:10px;display: flex;flex-direction: column;justify-content: space-between;align-items: center}
-        .goods .right .r-top{}
-            .goods .right .r-top .rt-title{font-size: 16px;font-weight: bold;color: black}
+        .goods .right .r-top{width: 100%}
+            .goods .right .r-top .rt-title{width: 100%;max-height: 75px;font-size: 16px;font-weight: bold;color: black;overflow: hidden}
             .goods .right .r-top .rt-secondtitle{font-size: 10px;font-weight: normal}
         .goods .right .r-bottom{width: 100%;display: flex;flex-direction: row;justify-content: space-between;align-items: flex-end}
             .gooss .right .r-bottom .rb-left{height: 100%}
@@ -52,7 +52,7 @@ a{color: black}
 #detail .kj-introduce{display: flex;flex-direction: column;justify-content: flex-start;align-items: center;background: white;padding-bottom: 30px}
     /*#detail .kj-introduce div{width: 100%}*/
     #detail .kj-introduce .kj-success-num{text-align: left;font-size: 12px;margin-bottom: 3px;width: 100%}
-    #detail .kj-introduce .kj-progress{position: relative;margin-top: 40px;width: 100%}
+    #detail .kj-introduce .kj-progress{position: relative;margin-top: 40px;width: 100%;}
         #detail .kj-progress .progress{margin: 10px 0;margin-bottom: 5px}
             #detail .kj-progress .tooltip{z-index: 1}
                 #detail .kj-progress .tooltip .tooltip-inner{background-color: white;color: #b1191a;border: 1px lightgray solid;padding: 5px 10px;}

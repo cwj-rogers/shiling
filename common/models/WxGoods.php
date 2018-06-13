@@ -72,4 +72,20 @@ class WxGoods extends \yii\db\ActiveRecord
             'updated_time' => '修改时间',
         ];
     }
+
+    public static function goodsList(){
+        $list = static::find()->select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_sort")->where(['>','wg_number', 0])->andWhere(['wg_status'=>1])->andWhere(['wg_type'=>1])->orderBy("wg_sort,created_time")->asArray()->all();
+        $list = array_map(function($v){
+            $v['wg_goods_album'] = substr($v['wg_goods_album'],0, strpos($v['wg_goods_album'],','));
+            $nameArr = explode(" ",$v['wg_name']);
+            $v['wg_name'] = $nameArr[0];
+            $v['wg_name2'] = array_key_exists(1,$nameArr)? $nameArr[1]:'';
+            return $v;
+        },$list);
+        if (!empty($list)){
+            return $list;
+        }else{
+            return [];
+        }
+    }
 }

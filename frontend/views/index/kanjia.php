@@ -10,20 +10,20 @@ use \yii\helpers\Url;
     </div>
     <div class="kj-title col-xs-12 col-sm-12 col-md-12 col-lg-12"><h4 ><i class="kj-title-before"></i>热门砍价商品<i class="kj-title-after"></i></h4></div>
 
-    <?php foreach ([1,2,3,4,5,6,7] as $k=>$v):?>
+    <?php foreach ($res['goodslist'] as $k=>$v):?>
     <div class="goods col-xs-12 col-sm-12 col-md-6 col-lg-6 blank">
-        <a class="go-detail" href="<?= Url::toRoute('detail')?>">
-            <div class="left"><img src="https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/498837070/TB2cJgdhtcnBKNjSZR0XXcFqFXa_!!498837070.jpg_430x430q90.jpg" alt=""></div>
+        <a class="go-detail" href="<?= Url::toRoute(['detail','wg_id'=>$v['wg_id'],'user_id'=>Yii::$app->session->get('userinfo')['user_id']])?>">
+            <div class="left"><img src="<?= $v['wg_goods_album']?>" alt=""></div>
             <div class="right">
                 <div class="r-top">
-                    <div class="rt-title">#北欧风简约沙发#
-                        <span class="rt-secondtitle text-muted"> 驼色简约皮面,手感柔软做工精细,人体工程学最佳坐姿角度...</span>
+                    <div class="rt-title"><?= $v['wg_name']?>
+                        <span class="rt-secondtitle text-muted"> <?= $v['wg_name2']?></span>
                     </div>
                 </div>
                 <div class="r-bottom">
                     <div class="rb-left">
-                        <small class="text-muted">2090人已砍价成功</small>
-                        <span><s>原价1190元</s></span>
+                        <small class="text-muted"><?= $v['wg_finish_deal']?>人已砍价成功</small>
+                        <span><s>原价<?= $v['wg_market_price']?>元</s></span>
                     </div>
                     <div class="rb-right">
                         <button class="btn btn-danger" type="button">

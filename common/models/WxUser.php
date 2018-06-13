@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "{{%wx_user}}".
  *
- * @property string $wx_uid
+ * @property string $user_id
  * @property string $open_id
  * @property string $username
  * @property string $image
@@ -16,8 +16,8 @@ use Yii;
  * @property integer $sex
  * @property string $province
  * @property string $city
- * @property string $reg_time
  * @property string $reg_ip
+ * @property string $reg_time
  * @property string $update_time
  */
 class WxUser extends \yii\db\ActiveRecord
@@ -36,13 +36,13 @@ class WxUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'sex', 'province', 'city'], 'required'],
+            [['open_id', 'username', 'sex', 'province', 'city'], 'required'],
             [['status', 'sex'], 'integer'],
-            [['open_id'], 'string', 'max' => 32],
-            [['username'], 'string', 'max' => 16],
+            [['reg_time', 'update_time'], 'safe'],
+            [['open_id', 'reg_ip'], 'string', 'max' => 32],
+            [['username'], 'string', 'max' => 31],
             [['image', 'province', 'city'], 'string', 'max' => 255],
             [['mobile'], 'string', 'max' => 15],
-            [['username'], 'unique'],
             [['mobile'], 'unique'],
         ];
     }
@@ -53,8 +53,8 @@ class WxUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'wx_uid' => '用户ID',
-            'open_id' => 'Open ID',
+            'user_id' => '用户ID',
+            'open_id' => '微信用户标记',
             'username' => '用户名',
             'image' => '头像路径',
             'status' => '用户状态 1正常 0禁用',
@@ -62,8 +62,8 @@ class WxUser extends \yii\db\ActiveRecord
             'sex' => '性别',
             'province' => '省',
             'city' => '城市',
-            'reg_time' => '注册时间',
             'reg_ip' => '注册IP',
+            'reg_time' => '注册时间',
             'update_time' => '更新时间',
         ];
     }
@@ -73,7 +73,7 @@ class WxUser extends \yii\db\ActiveRecord
      */
     public function createUser(){
         $userinfo = json_decode(Yii::$app->session->get('_wechatUser'),true);
-        $hasuser = WxUser::findOne(['open_id'=>$userinfo['id']]);//p($hasuser,1);
+        $hasuser = WxUser::findOne(['open_id'=>$userinfo['id']]);
         if (empty($hasuser)){
             $this->open_id = $userinfo['id'];
             $this->username = $userinfo['name'];
@@ -83,9 +83,10 @@ class WxUser extends \yii\db\ActiveRecord
             $this->city = $userinfo['original']['city'];
             $this->reg_time = date("Y-m-d H:i:s");
             $this->reg_ip = Yii::$app->request->getUserIP();
-            $res=$this->save();
+            $res = $this->save();
+            if(!$res) wxlog(json_encode($this->getErrors()));
         }
         $info = WxUser::findOne(['open_id'=>$userinfo['id']]);
-        Yii::$app->session->set('userinfo',['wx_uid' => $info->wx_uid]);
+        Yii::$app->session->set('userinfo',$info->toArray());
     }
 }

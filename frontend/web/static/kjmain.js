@@ -5,8 +5,8 @@ $(function () {
 
     //获取process长度,标签移动到计算位置
     $('.tooltip').css('left',0);
-    var  move_distance = $('.progress-bar-danger').width()-$('.tooltip').width()/2;
-    $('.tooltip').animate({left:move_distance},1500);
+    var  move_distance = ($('.progress-bar-danger').width()-$('.tooltip').width() )/2;move_distance=0;
+    if(move_distance>0) $('.tooltip').animate({left:move_distance},1500);
 
     //分享弹窗
     $('#wx-share .weui_mask, #wx-share .weui_dialog_ft, .kj-share-btn').click(function () {
