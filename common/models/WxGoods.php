@@ -16,6 +16,7 @@ use Yii;
  * @property integer $wg_number
  * @property string $wg_view
  * @property integer $wg_finish_deal
+ * @property integer $wg_need_cut
  * @property integer $wg_type
  * @property integer $wg_status
  * @property string $wg_promote_time
@@ -42,7 +43,7 @@ class WxGoods extends \yii\db\ActiveRecord
             [['wg_content', 'wg_finish_deal'], 'required'],
             [['wg_content'], 'string'],
             [['wg_market_price'], 'number'],
-            [['wg_number', 'wg_view', 'wg_finish_deal', 'wg_type', 'wg_status', 'wg_promote_time', 'wg_sort'], 'integer'],
+            [['wg_number', 'wg_view', 'wg_finish_deal', 'wg_type', 'wg_status', 'wg_promote_time', 'wg_sort', 'wg_need_cut'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
             [['wg_name'], 'string', 'max' => 120],
             [['wg_description', 'wg_goods_album'], 'string', 'max' => 255],
@@ -64,6 +65,7 @@ class WxGoods extends \yii\db\ActiveRecord
             'wg_number' => '商品总库存数量，由各sku相加',
             'wg_view' => '查看数量',
             'wg_finish_deal' => '完成数量',
+            'wg_need_cut' => '需要砍价次数',
             'wg_type' => '商品促销 1.砍价 2.拼团 3.竞猜',
             'wg_status' => '状态 0下架 1上架',
             'wg_promote_time' => '有效时长(时间戳)默认',

@@ -93,7 +93,7 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
             $this->ago_exprice_time = date('Y-m-d H:i:s', time()+$wg->wg_promote_time);
             $this->created_time = date('Y-m-d H:i:s');
             $res = $this->save();
-            if(!$res) p($this->getErrors(),1);
+            if(!$res) wxlog(json_encode($this->getErrors()),1);
         }
     }
 

@@ -22,6 +22,8 @@ use yii\helpers\Url;
     <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css">
     <link rel="stylesheet" href="<?=Yii::getAlias('@web')?>/static/style.css">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 
@@ -34,8 +36,6 @@ use yii\helpers\Url;
     <div class="item"> <a class="<?= Yii::$app->request->getUrl()=="/index/user"?'active':'';?>" id="" href="<?= Url::toRoute('user')?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 我的砍价</a></div>
 </div>
 
-<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>

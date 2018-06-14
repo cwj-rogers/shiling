@@ -1,4 +1,6 @@
-<?php?>
+<?php
+use yii\helpers\Url;
+?>
 <div id="detail" class="row">
     <div class="kj-good-img">
         <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
@@ -9,9 +11,9 @@
         <div class="act-rule">活动规则</div>
     </div>
 
-
     <div class="kj-introduce col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="kj-success-num text-muted"><?= $res['wg_finish_deal']?>人已经砍价成功</div>
+        <!--  进度条  -->
         <div class="kj-progress">
             <div class="progress">
                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <?= $res['centi']?>" data-delay="1000" data-toggle="tooltip" data-placement="top" title="已砍<?= $res['ago_cut_total']?>">
@@ -30,7 +32,7 @@
             <button class="kanjia-success"> <div><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 砍价成功</div><div><small class="text-muted">点击查看兑换门店</small></div></button>
             <?php endif;?>
         </div>
-        <div class="kj-friends" id="app">
+        <div class="kj-friends">
             <div class="join-num">已有 <span class="text-danger"><?= count($res['joiners']);?></span> 人帮你砍价</div>
             <div class="join-chatheads">
                 <?php foreach ($res['joiners'] as $k=>$v):?>
@@ -122,6 +124,24 @@
             <div class="rank-list-crown"><img src="http://hjzhome.image.alimmdn.com/%E7%A0%8D%E4%BB%B7%E6%B4%BB%E5%8A%A8/%E7%A0%8D%E4%BB%B7%E9%A1%B5_03.png" alt=""></div>
         </div>
     </div>
-
 </div>
-
+<script>
+    // 用户进入砍价页
+    $(function () {
+        var share_time = <?= $res['ago_share_time']?>;
+        var cut_total = <?= $res['ago_cut_total']?>;
+        var status = <?= $res['ago_status']?>;
+        //用户自己首次砍价
+        if (cut_total==0 && status==1){
+            kanjia.kj();
+        }
+        //用户第一次分享砍价
+    });
+    var kanjia = {};
+    kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$_SESSION['userinfo']['user_id']]) )?>;
+    kanjia.kj = function () {
+        $.getJSON(this.url,function (data) {
+            console.log(data);
+        });
+    }
+</script>
