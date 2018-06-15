@@ -15,6 +15,7 @@ use Yii;
  * @property string $fj_cut_price
  * @property string $fj_join_date
  * @property string $created_time
+ * @property string $fj_lat_lon
  */
 class WxFriendsJoinLog extends \yii\db\ActiveRecord
 {
@@ -37,7 +38,7 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
             [['fj_cut_price'], 'number'],
             [['created_time'], 'safe'],
             [['fj_user_name'], 'string', 'max' => 64],
-            [['fj_image'], 'string', 'max' => 255],
+            [['fj_image','fj_lat_lon'], 'string', 'max' => 255],
         ];
     }
 
@@ -54,16 +55,21 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
             'fj_image' => '用户头像',
             'fj_cut_price' => '砍价金额',
             'fj_join_date' => '参与日期',
+            'fj_lat_lon' => '地理位置',
             'created_time' => '参与时间',
         ];
     }
 
     /**
-     * 砍价规则
-     * @param $ago_id 订单ID
-     * @param $user_id 本人ID 或者 好友ID
+     * @param $order
+     * @param $ago_id
+     * @param $user_id
+     * @param $lat
+     * @param $lon
+     * @return bool
+     * @throws \yii\db\Exception
      */
-    public function kanjiaRule($order, $ago_id, $user_id){
+    public function kanjiaRule($order, $ago_id, $user_id, $lat, $lon){
         //找出商品市场价
         $good = WxGoods::findOne(['wg_id'=>$order['wg_id']]);
         //计算剩余次数和剩余砍价金额
@@ -80,17 +86,31 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
             $price = rand(0,$averagePrice*2-1) + rand(0,100)/100;
             $price = $price<$averagePrice*2? $price : round($remainPrice/$remainNum, 2);
         }
-        if ($price){
-            $this->ago_id = $ago_id;
-            $this->user_id = $user_id;
-            $this->fj_user_name = $_SESSION['userinfo']['username'];
-            $this->fj_image = $_SESSION['userinfo']['image'];
-            $this->fj_cut_price = $price;
-            $this->fj_join_date = date("Y-m-d");
-            $this->created_time = date("Y-m-d H:i:s");
-            $res = $this->save();
-            if(!$res) wxlog(json_encode($this->getErrors()));
-            return $res;
+
+        //开启事务
+//        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            if ($price){
+                //添加记录
+                $this->ago_id = $ago_id;
+                $this->user_id = $user_id;
+                $this->fj_user_name = $_SESSION['userinfo']['username'];
+                $this->fj_image = $_SESSION['userinfo']['image'];
+                $this->fj_cut_price = $price;
+                $this->fj_join_date = date("Y-m-d");
+                $this->created_time = date("Y-m-d H:i:s");
+                $this->fj_lat_lon = $lat.",".$lon;
+                $res = $this->save();
+                if(!$res) wxlog(json_encode($this->getErrors()));
+                p($res);
+                //修改商品订单表
+                return $res;
+            }
+//            $transaction->commit();
+        } catch (Exception $e){
+            $e->getMessage();
+//            $transaction->rollback();
+            return false;
         }
 
     }

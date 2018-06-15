@@ -56,7 +56,7 @@ class IndexController extends Controller
          */
         $userId = Yii::$app->request->get('user_id',0);
         $wgId = Yii::$app->request->get('wg_id',0);
-        if(!$userId || !$wgId){
+        if(!$userId || !$wgId || !isset($_SESSION['userinfo'])){
             return $this->redirect(['index']);
         }
         if($_SESSION['userinfo']['user_id']==$userId){
@@ -77,22 +77,25 @@ class IndexController extends Controller
 
     /**
      * 异步访问砍价功能
-     * @param $agoId 商品订单id
-     * @param $userId 拥有者id
+     * @param $agoId
+     * @param $userId
+     * @param int $lat
+     * @param int $lon
+     * @throws \yii\db\Exception
      */
-    public function actionKj($agoId,$userId)
+    public function actionKj($agoId,$userId,$lat=0,$lon=0)
     {
-        p(1,1);
         if (Yii::$app->request->isAjax && $agoId && $userId){
             //找出商品订单
             $order = WxActivitiesOrder::findOne(['ago_id'=>$agoId,'user_id'=>$userId, 'ago_status'=>1]);
             $order = $order->toArray();
             $SUID = $_SESSION['userinfo']['user_id'];
+
             if ($order['ago_cut_number']<$order['ago_need_cut'] && strtotime($order['ago_exprice_time'])<time()){
                 if($SUID==$userId){
-                    //首次进入砍一次, 首次分享砍一次, 所以分享后自己就用完砍价机会, 前后台都加判断避免刷单
+                    //首次进入砍一次, 首次分享砍一次, 分享后本人已经用完砍价机会, 前后台都加判断避免刷单
                     if(0==$order['ago_share_time']){
-                        $res = (new WxFriendsJoinLog)->kanjiaRule($order,$agoId,$userId);
+                        $res = (new WxFriendsJoinLog)->kanjiaRule($order,$agoId,$userId,$lat,$lon);
                         if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success');
                     }
                 }else{
@@ -100,7 +103,7 @@ class IndexController extends Controller
                     if($_SESSION['userinfo']['city']==$order['ago_city']){
                         $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]); //参与条件
                         if (!empty($exsit)){
-                            $res = (new WxFriendsJoinLog)->kanjiaRule($order,$agoId,$SUID);
+                            $res = (new WxFriendsJoinLog)->kanjiaRule($order,$agoId,$SUID,$lat,$lon);
                             if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success');
                         }else{
                             \common\helpers\FuncHelper::ajaxReturn(202,'今天砍价机会已用完');
@@ -120,7 +123,10 @@ class IndexController extends Controller
      */
     public function actionUserLocal()
     {
-        p(rand(0,2));
+//        p(is_file("./static/kanjia.mp3"));
+        $result = Yii::$app->wechat->app->material->uploadVoice("./static/kanjia.mp3");
+        p($result);
+//        [media_id] => HmvztPXKVwUEkka4a5wltT4s4hraAxHP5QUO_Cuu0rU
     }
 
     /**

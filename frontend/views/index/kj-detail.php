@@ -59,21 +59,21 @@ use yii\helpers\Url;
     <div id="wx-share" class="weui_dialog_alert">
         <div class="weui_mask"></div>
         <div class="weui_dialog animated">
-            <div class="weui_cells">
+            <div class="weui_cells" sname="share-friends">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <p>转发好友</p>
                     </div>
                 </div>
             </div>
-            <div class="weui_cells">
+            <div class="weui_cells" sname="share-quan">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <p>发到朋友圈</p>
                     </div>
                 </div>
             </div>
-            <div class="weui_cells">
+            <div class="weui_cells" sname="share-link">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <p>复制链接</p>
@@ -82,6 +82,20 @@ use yii\helpers\Url;
             </div>
             <div class="weui_dialog_ft">
                 <a href="javascript:;" class="weui_btn_dialog">取消</a>
+            </div>
+        </div>
+        <div class="share-icon-box">
+            <div class="icon-box animated share-friends">
+                <p class="how">点击&nbsp <i class="iconfont icon-sandian"></i> &nbsp并在弹窗中选择</p>
+                <i class="iconfont icon-fasong"></i>
+            </div>
+            <div class="icon-box animated share-quan">
+                <p class="how">点击 <i class="iconfont icon-sandian"></i> 并在弹窗中选择</p>
+                <i class="iconfont icon-iconfontzhizuobiaozhunbduan36"></i>
+            </div>
+            <div class="icon-box animated share-link">
+                <p class="how">点击 <i class="iconfont icon-sandian"></i> 并在弹窗中选择</p>
+                <i class="iconfont icon-fuzhilianjie"></i>
             </div>
         </div>
     </div>
@@ -97,7 +111,7 @@ use yii\helpers\Url;
             <p>4. 每次砍价金额随机,参与好友越多越容易成功;</p>
             <p>5. 主办方可以根据本活动的实际举办情况对活动规则进行变动或者调整,相关变动或调整将公布在活动页面上,公布后依法生效;</p>
             <p>6. 如有疑问请拨打400-6966-398咨询</p>
-            <span class="cancel">×</span>
+            <span class="cancel glyphicon glyphicon-remove"></span>
         </div>
     </div>
 
@@ -124,24 +138,118 @@ use yii\helpers\Url;
             <div class="rank-list-crown"><img src="http://hjzhome.image.alimmdn.com/%E7%A0%8D%E4%BB%B7%E6%B4%BB%E5%8A%A8/%E7%A0%8D%E4%BB%B7%E9%A1%B5_03.png" alt=""></div>
         </div>
     </div>
+
+    <!--  toast提示  -->
+    <div id="toast" style="display: none;">
+        <div class="weui_mask_transparent"></div>
+        <div class="weui_toast">
+            <i class="weui_icon_toast"></i>
+            <p class="weui_toast_content">已完成</p>
+        </div>
+    </div>
+
+    <!--  砍价动画  -->
+    <div id="kj-success" class="weui_dialog_alert">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog animated">
+            <div class="kj-gif animated"><img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/kj.gif" alt=""></div>
+            <div class="kj-info-box animated">
+                <p class="kj-info-title"> 您已砍 <strong class="text-danger">20.12</strong> 元, 再送您一次挥刀拿宝的机会, 分享好友有机会一刀砍到最底价!</p>
+                <p class="kj-info-share">
+                    <button class="btn btn-danger">分享好友,再砍一刀</button>
+                </p>
+            </div>
+            <span class="cancel glyphicon glyphicon-remove"></span>
+        </div>
+        <audio id="player" controls="controls" autoplay="false"">
+            <source src="<?=Yii::getAlias('@web')?>/static/kanjia.mp3"/>
+        </audio>
+    </div>
 </div>
 <script>
+
+    //砍价处理对象
+    var kanjia = {};
+    kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$_SESSION['userinfo']['user_id']]) )?>;
+    kanjia.kj = function () {
+        console.log('发起砍价');
+        // $.getJSON(this.url,{lat:sessionStorage.latitude,lon:sessionStorage.longitude},function (data) {
+        //     console.log(data);
+        //     if (data.code==200){
+        //         $('.join-num').trigger("click");
+        //         return 1;
+        //     }
+        // });
+        var res = 0;
+        $.ajax({
+            url: this.url,
+            type: 'GET',
+            data: {lat:sessionStorage.latitude,lon:sessionStorage.longitude},
+            dataType: 'json',
+            async: false,
+            success: function(data){
+                if (data.code==200){
+                    res = 1;
+                    console.log(data);
+                }
+            }
+        });
+
+        if(1 == res){
+            console.log(res);
+            var player = $("#player")[0];
+            player.play();
+            $('.join-num').trigger("click");
+        }
+    };
+
+    var share_time = <?= $res['ago_share_time']?>;
+    var cut_total = <?= $res['ago_cut_total']?>;
+    var status = <?= $res['ago_status']?>;
     // 用户进入砍价页
     $(function () {
-        var share_time = <?= $res['ago_share_time']?>;
-        var cut_total = <?= $res['ago_cut_total']?>;
-        var status = <?= $res['ago_status']?>;
         //用户自己首次砍价
         if (cut_total==0 && status==1){
             kanjia.kj();
         }
-        //用户第一次分享砍价
-    });
-    var kanjia = {};
-    kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$_SESSION['userinfo']['user_id']]) )?>;
-    kanjia.kj = function () {
-        $.getJSON(this.url,function (data) {
-            console.log(data);
+        //分享弹窗 - 分享按钮
+        $('#wx-share .weui_cells').click(function () {
+            var sname = $(this).attr("sname");console.log(sname);
+            $('.'+sname).siblings(".icon-box").hide();
+            $('.'+sname).show().addClass('bounceInUp');
         });
-    }
+    });
+
+    // 微信分享的数据
+    wx.ready (function () {
+        var $wx_share = ['http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png',<?= json_encode(Yii::$app->request->getHostInfo().Yii::$app->request->getUrl());?>,'荟家装9.9元严选','#荟家装九块九严选# 严选高端产品低价疯抢,最低9.9元打包带回家'];
+        // 微信分享的数据
+        var shareData = {
+            "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
+            "link" : $wx_share[1],    // 分享地址
+            "title" : $wx_share[2],   // 分享标题
+            "desc" : $wx_share[3],   // 分享描述
+            success : function () {
+                toast('分享成功');
+                console.log('分享成功');
+                // 个人分享成功, 获得再次砍价资格
+                if (share_time==0 && status==1){
+                    var res=kanjia.kj();
+                    console.log(res);
+                }
+            }
+        };
+        wx.onMenuShareTimeline (shareData);
+        wx.onMenuShareAppMessage (shareData);
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                sessionStorage.latitude = latitude;
+                sessionStorage.longitude = longitude;
+                console.log(res);
+            }
+        });
+    });
 </script>

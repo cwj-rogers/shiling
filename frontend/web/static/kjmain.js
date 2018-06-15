@@ -1,4 +1,5 @@
-$(function () {
+
+    // 进度条
     setTimeout(function () {
         //获取process长度,标签移动到计算位置
         $('.progress-bar').tooltip('show');
@@ -9,13 +10,14 @@ $(function () {
     },1000);
 
     //分享弹窗
-    $('#wx-share .weui_mask, #wx-share .weui_dialog_ft, .kj-share-btn').click(function () {
+    $('#wx-share .weui_mask, #wx-share .weui_dialog_ft, #wx-share .share-icon-box, .kj-share-btn, #kj-success .btn').click(function () {
         var stata = $('#wx-share').css('display');
         if (stata=="none"){
             $('#wx-share').show();
             $('#wx-share .weui_dialog').show().addClass('bounceInUp');
         } else{
             $('#wx-share').fadeOut();
+            $('#wx-share .icon-box').fadeOut();
         }
     })
 
@@ -41,9 +43,32 @@ $(function () {
         }
     });
 
-    $('.cd-item').each(function () {
-        countDown($(this).attr("cd-name"),$(this).attr("cd-date"));
+    //砍价成功弹窗
+    $('#kj-success .weui_mask, #kj-success .cancel, .join-num, #kj-success .btn').click(function () {
+        var stata = $('#kj-success').css('display');
+        if (stata=="none"){
+            $('#kj-success').show();
+            $('#kj-success .weui_dialog').show().addClass('zoomIn');
+            var player = $("#player")[0]; /*jquery对象转换成js对象*/
+            player.play(); /*播放*/
+            setTimeout(function () {
+                $('#kj-success .kj-gif').show().addClass('zoomIn');
+            },1500);
+            setTimeout(function () {
+                $('#kj-success .kj-gif').find("img").animate({height:'180px'},"slow");
+                $('#kj-success .kj-info-box').show().addClass('bounceInUp');
+            },3000);
+        } else{
+            $('#kj-success').fadeOut();
+            $('#kj-success .kj-info-box').fadeOut();
+            $('#kj-success .kj-gif').fadeOut();
+            $('#kj-success .kj-gif').find("img").animate({height:'300px'});
+        }
     });
+
+//定时器
+$('.cd-item').each(function () {
+    countDown($(this).attr("cd-name"),$(this).attr("cd-date"));
 });
 
 // 活动结束计时器
@@ -59,4 +84,15 @@ function countDown(className,date) {
         $(className).html('还剩' + hour + "时" + minute + "分" + seconds+ "秒");
         console.log(seconds);
     }, 1000);
+}
+
+//Toast
+function toast(content='已完成') {
+    var $toast = $('#toast');
+    $toast.find('.weui_toast_content').text(content);
+    if ($toast.css('display') != 'none') return;
+    $toast.fadeIn(300);
+    setTimeout(function () {
+        $toast.fadeOut(300);
+    }, 2000);
 }

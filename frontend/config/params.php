@@ -8,7 +8,7 @@ return [
 //        'response_type' => 'array',
 //        'log' => [
 //            'level' => 'debug',
-//            'file' => __DIR__.'/wechat.log',
+//            'file' => __DIR__.'/easywechat.log',
 //        ],
 //    ],
     //测试配置
@@ -19,7 +19,7 @@ return [
         'response_type' => 'array',
         'log' => [
             'level' => 'debug',
-            'file' => __DIR__.'/wechat.log',
+            'file' => __DIR__.'/easywechat.log',
         ],
         /**
          * OAuth 配置
