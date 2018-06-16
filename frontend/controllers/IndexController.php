@@ -22,6 +22,9 @@ class IndexController extends Controller
      */
     public function init()
     {
+        if (!Yii::$app->wechat->isWechat){
+            return Yii::$app->wechat->oauth->redirect()->send();
+        }
         //平台验证和授权验证
         if (Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized()){
             Yii::$app->wechat->authorizeRequired()->send();
