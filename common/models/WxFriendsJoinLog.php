@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%wx_friends_join_log}}".
@@ -61,6 +62,7 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param $identity
      * @param $order
      * @param $ago_id
      * @param $user_id
@@ -69,29 +71,38 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
      * @return bool
      * @throws \yii\db\Exception
      */
-    public function kanjiaRule($order, $ago_id, $user_id, $lat, $lon){
+    public function kanjiaRule($identity,$order, $ago_id, $user_id, $lat, $lon){
         //找出商品市场价
         $good = WxGoods::findOne(['wg_id'=>$order['wg_id']]);
-        //计算剩余次数和剩余砍价金额
-        $remainPrice = $good->wg_market_price - $order['ago_cut_total'];
-        $remainNum = $good->wg_need_cut - $order['ago_cut_number'];
+        //计算剩余砍价金额和剩余次数
+        $remainPrice = $good->wg_market_price - $order['ago_cut_total'] - 9.9;
+        $remainNum = $order['ago_need_cut'] - $order['ago_cut_number'];
+
+        if ($identity=="user"){
+            $isShare = ($order['ago_share_time']>0 && $order['ago_share_kanjia']==0)? 1:0;
+        }
         if (1 == $remainNum){
-            $price = $remainPrice;
+            $price = $remainPrice; //最后一次砍价
+            $status = 2;//砍价成功
         }else{
             /**
              * 砍价计算规则
              * 剩余金额/剩余次数=砍价均价, 设置浮动上限
              */
-            $averagePrice = floor($remainPrice/$remainNum);//每次砍的均价取整
-            $price = rand(0,$averagePrice*2-1) + rand(0,100)/100;
-            $price = $price<$averagePrice*2? $price : round($remainPrice/$remainNum, 2);
+            $averagePrice = floor($remainPrice/$remainNum);// 均价取整
+            $price = rand(0,$averagePrice*2-1) + rand(0,100)/100;// 随机波动保留小数点后两位
+            $price = $price<$averagePrice*2? $price : round($remainPrice/$remainNum, 2);// 随机价格校验
+            wxlog("计算价格:$remainPrice -- $remainNum -- averagePrice:{$averagePrice} -- price:{$price}");
         }
 
         //开启事务
-//        $transaction = Yii::$app->db->beginTransaction();
+        $db = Yii::$app->db;
+        $transaction = $db->beginTransaction();
         try{
+            //@Todo 测试多表修改数据,测试入库数据是否正确
             if ($price){
-                //添加记录
+                wxlog("数据开始入库");
+                //砍价表添加记录
                 $this->ago_id = $ago_id;
                 $this->user_id = $user_id;
                 $this->fj_user_name = $_SESSION['userinfo']['username'];
@@ -102,14 +113,27 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
                 $this->fj_lat_lon = $lat.",".$lon;
                 $res = $this->save();
                 if(!$res) wxlog(json_encode($this->getErrors()));
-                p($res);
+
                 //修改商品订单表
-                return $res;
+                $updateArr = [
+                    'ago_cut_total'=> $order['ago_cut_total']+$price,
+                    'ago_cut_number'=> $order['ago_cut_number']+1,
+                    'ago_share_kanjia'=> isset($isShare)? $isShare:0,
+                    'ago_status'=> isset($status)? $status:1,
+                ];
+                $db->createCommand()->update('yii2_wx_activities_order', $updateArr, "ago_id={$ago_id}")->execute();
+
+                //修改商品表
+                if (1 == $remainNum){
+                    $db->createCommand()->update('yii2_wx_goods', ['wg_finish_deal'=>new Expression("`wg_finish_deal`+1")], "wg_id={$order['wg_id']}")->execute();
+                }
             }
-//            $transaction->commit();
+            $transaction->commit();
+            wxlog("数据提交成功");
+            return $price;
         } catch (Exception $e){
-            $e->getMessage();
-//            $transaction->rollback();
+            $e->getMessage();p($e->getMessage());
+            $transaction->rollback();
             return false;
         }
 

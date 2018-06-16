@@ -1,9 +1,51 @@
 <?php
 use yii\helpers\Url;
 ?>
+<script type="text/javascript" charset="utf-8">
+    // 微信分享的数据
+    wx.ready (function () {
+        var $wx_share = ['http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png',<?= json_encode(Yii::$app->request->getHostInfo().Yii::$app->request->getUrl());?>,'荟家装9.9元严选','#荟家装九块九严选# 严选高端产品低价疯抢,最低9.9元打包带回家'];
+        // 微信分享的数据
+        var shareData = {
+            "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
+            "link" : $wx_share[1],    // 分享地址
+            "title" : $wx_share[2],   // 分享标题
+            "desc" : $wx_share[3],   // 分享描述
+            success : function () {
+                kanjia.share();
+            }
+        };
+        wx.onMenuShareTimeline (shareData);
+        wx.onMenuShareAppMessage (shareData);
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                sessionStorage.latitude = latitude;
+                sessionStorage.longitude = longitude;
+                console.log(res);
+            }
+        });
+    });
+</script>
 <div id="detail" class="row">
     <div class="kj-good-img">
-        <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
     </div>
     <div class="good-title-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="good-title"><?= $res['wg_name']?></div>
@@ -26,10 +68,14 @@ use yii\helpers\Url;
             </div>
         </div>
         <div class="kj-share">
-            <?php if($res['ago_status']==1):?>
-            <button class="kj-share-btn"><span class="glyphicon glyphicon-share" aria-hidden="true"></span> <span> 喊好友来砍一刀</span></button>
+            <?php if($res['ago_status']==2):?>
+                <button class="kj-success-btn"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> <span> 砍价成功</span></button>
+            <?php elseif($res['isVisit']):?>
+                <button class="kj-going-btn"><span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span> <span> 开始砍价</span></button>
+            <?php elseif($res['ago_status']==1 && $res['ago_share_kanjia']==0):?>
+                <button class="kj-going-btn"><span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span> <span> 开始砍价</span></button>
             <?php else:?>
-            <button class="kanjia-success"> <div><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 砍价成功</div><div><small class="text-muted">点击查看兑换门店</small></div></button>
+                <button class="kj-share-btn"><span class="glyphicon glyphicon-share" aria-hidden="true"></span> <span> 喊好友来砍一刀</span></button>
             <?php endif;?>
         </div>
         <div class="kj-friends">
@@ -126,7 +172,7 @@ use yii\helpers\Url;
                         <div class="wrl-left"><img src="<?= $v['fj_image']?>" alt=""></div>
                         <div class="wrl-mid">
                             <div class="name"><?= $v['fj_user_name']?></div>
-                            <div class="talk">来一起帮忙砍价!</div>
+                            <div class="talk">来一起帮忙砍价 !</div>
                         </div>
                         <div class="wrl-right">砍掉<?= $v['fj_cut_price']?>元</div>
                     </div>
@@ -159,28 +205,25 @@ use yii\helpers\Url;
                     <button class="btn btn-danger">分享好友,再砍一刀</button>
                 </p>
             </div>
-            <span class="cancel glyphicon glyphicon-remove"></span>
+            <span class="cancel glyphicon glyphicon-remove "></span>
         </div>
+        <button class="kj-ready"></button>
         <audio id="player" controls="controls" autoplay="false"">
             <source src="<?=Yii::getAlias('@web')?>/static/kanjia.mp3"/>
         </audio>
     </div>
+
 </div>
 <script>
-
     //砍价处理对象
     var kanjia = {};
-    kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$_SESSION['userinfo']['user_id']]) )?>;
+    kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$res['user_id']]));?>;
+    kanjia.indexurl = <?= json_encode(Url::toRoute(['index']) )?>;
+    kanjia.shareurl = <?= json_encode(Url::toRoute(['index/share','agoId'=>$res['ago_id']]) )?>;
     kanjia.kj = function () {
-        console.log('发起砍价');
-        // $.getJSON(this.url,{lat:sessionStorage.latitude,lon:sessionStorage.longitude},function (data) {
-        //     console.log(data);
-        //     if (data.code==200){
-        //         $('.join-num').trigger("click");
-        //         return 1;
-        //     }
-        // });
+        // console.log('ajax发起砍价');
         var res = 0;
+        // 只有同步请求才能促发音频
         $.ajax({
             url: this.url,
             type: 'GET',
@@ -188,68 +231,83 @@ use yii\helpers\Url;
             dataType: 'json',
             async: false,
             success: function(data){
+                // console.log('ajax返回数据');
                 if (data.code==200){
                     res = 1;
-                    console.log(data);
+                    cut_total = data.obj;
+                    $("#kj-success .text-danger").text(data.obj);
+                    // console.log(data);
+                }else{
+                    alert(data.msg);//弹出错误
+                    location.href = location.href;
                 }
             }
         });
-
         if(1 == res){
-            console.log(res);
-            var player = $("#player")[0];
-            player.play();
-            $('.join-num').trigger("click");
+            // console.log('砍价成功');
+            $('.kj-ready').trigger("click");
         }
     };
+    kanjia.share = function () {
+        // console.log('用户分享记录');
+        $.getJSON(kanjia.shareurl,function (data) {
+            toast("分享成功");
+            share_time = 1;//用作前段判断
+        });
+    };
 
-    var share_time = <?= $res['ago_share_time']?>;
-    var cut_total = <?= $res['ago_cut_total']?>;
-    var status = <?= $res['ago_status']?>;
+    var share_time = <?= $res['ago_share_time']?>;var cut_total = <?= $res['ago_cut_total']?>;var status = <?= $res['ago_status']?>;var isVisit = <?= $res['isVisit']?>;var share_kanjia = <?= $res['ago_share_kanjia']?>;
     // 用户进入砍价页
     $(function () {
-        //用户自己首次砍价
-        if (cut_total==0 && status==1){
-            kanjia.kj();
+        if(status!=1){
+            alert("此商品砍价活动已经结束");
+            location.href = kanjia.indexurl;
         }
-        //分享弹窗 - 分享按钮
+        //分享弹窗 - 分享行列表
         $('#wx-share .weui_cells').click(function () {
             var sname = $(this).attr("sname");console.log(sname);
             $('.'+sname).siblings(".icon-box").hide();
             $('.'+sname).show().addClass('bounceInUp');
         });
-    });
 
-    // 微信分享的数据
-    wx.ready (function () {
-        var $wx_share = ['http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png',<?= json_encode(Yii::$app->request->getHostInfo().Yii::$app->request->getUrl());?>,'荟家装9.9元严选','#荟家装九块九严选# 严选高端产品低价疯抢,最低9.9元打包带回家'];
-        // 微信分享的数据
-        var shareData = {
-            "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
-            "link" : $wx_share[1],    // 分享地址
-            "title" : $wx_share[2],   // 分享标题
-            "desc" : $wx_share[3],   // 分享描述
-            success : function () {
-                toast('分享成功');
-                console.log('分享成功');
-                // 个人分享成功, 获得再次砍价资格
-                if (share_time==0 && status==1){
-                    var res=kanjia.kj();
-                    console.log(res);
+        //开始砍价按钮
+        $('#detail').on('click','.kj-going-btn',function () {
+            // $(this).attr('disabled','disabled');
+            // console.log("点击砍价");
+            //砍價资格
+            if (isVisit==1){
+                // 朋友
+                kanjia.kj();
+            }else{
+                // 本人: 首次砍价
+                if (cut_total==0){
+                    kanjia.kj();
+                }else if(share_time!=0 && share_kanjia==0){
+                    //本人: 第一次分享砍价
+                    kanjia.kj();
+                }else{
+                    toast("分享给好友多一次砍价机会");
                 }
             }
-        };
-        wx.onMenuShareTimeline (shareData);
-        wx.onMenuShareAppMessage (shareData);
-        wx.getLocation({
-            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-            success: function (res) {
-                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                sessionStorage.latitude = latitude;
-                sessionStorage.longitude = longitude;
-                console.log(res);
-            }
+        })
+
+        //取消砍价弹窗后台自动刷新页面
+        $('#kj-success .weui_mask, #kj-success .cancel').click(function () {
+            setTimeout(function () {
+                location.href = location.href;
+            },1500)
+        })
+
+        //轮播图
+        new Swiper('.swiper-container', {
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            loop:true
         });
     });
 </script>

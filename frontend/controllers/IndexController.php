@@ -7,6 +7,7 @@ use common\models\WxGoods;
 use common\models\WxUser;
 use common\models\WxActivitiesOrder;
 use common\models\WxFriendsJoinLog;
+use yii\db\Expression;
 
 class IndexController extends Controller
 {
@@ -40,6 +41,7 @@ class IndexController extends Controller
             $response->send();
         }
         $res = [];//储存数据集
+        //@Todo 1.参与过得 2.砍价成功的  是否显示
         $res['goodslist'] = WxGoods::goodsList();
         //砍价活动页
         return $this->render('kanjia', ['res'=>$res]);
@@ -59,19 +61,21 @@ class IndexController extends Controller
         if(!$userId || !$wgId || !isset($_SESSION['userinfo'])){
             return $this->redirect(['index']);
         }
+
         if($_SESSION['userinfo']['user_id']==$userId){
-            //自己的访问
+            $isVisit = 0;
+            //是否已经参加过 1.未过期的 2.已经砍价成功的
             $isexist = WxActivitiesOrder::findOne(['user_id'=>$userId,'wg_id'=>$wgId]);
-            //首次进入创建订单
-            if (empty($isexist)){
+            //进入创建订单
+            if (empty($isexist) || in_array($isexist['ago_status'],[2,3,4])){
                 (new WxActivitiesOrder)->createActOrder($wgId, $userId);
             }
-
         }else{
             //朋友访问
-
+            $isVisit = 1;
         }
-        $res = WxActivitiesOrder::getActOrder($wgId, $userId);
+        $res = WxActivitiesOrder::getActOrder($wgId, $userId);//商品订单
+        $res['isVisit'] = $isVisit;
         return $this->render('kj-detail', ['res'=>$res]);
     }
 
@@ -88,30 +92,39 @@ class IndexController extends Controller
         if (Yii::$app->request->isAjax && $agoId && $userId){
             //找出商品订单
             $order = WxActivitiesOrder::findOne(['ago_id'=>$agoId,'user_id'=>$userId, 'ago_status'=>1]);
+            if (empty($order)) \common\helpers\FuncHelper::ajaxReturn(201,'系统无反应');
             $order = $order->toArray();
             $SUID = $_SESSION['userinfo']['user_id'];
 
-            if ($order['ago_cut_number']<$order['ago_need_cut'] && strtotime($order['ago_exprice_time'])<time()){
+            if ($order['ago_cut_number']<$order['ago_need_cut'] && time()<strtotime($order['ago_exprice_time'])){
                 if($SUID==$userId){
-                    //首次进入砍一次, 首次分享砍一次, 分享后本人已经用完砍价机会, 前后台都加判断避免刷单
-                    if(0==$order['ago_share_time']){
-                        $res = (new WxFriendsJoinLog)->kanjiaRule($order,$agoId,$userId,$lat,$lon);
-                        if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success');
+                    //本人: 首次下单砍一次, 分享且没进行砍价, 总共2次机会, 前后台都加判断避免刷单
+                    if(0==$order['ago_cut_total'] ){
+                        wxlog("本人自己发起的砍价");
+                        $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
+                        if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
+                    }elseif ($order['ago_share_time']>0 && $order['ago_share_kanjia']==0){
+                        wxlog("本人分享后发起的砍价");
+                        $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
+                        if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
                     }
                 }else{
-                    //朋友砍价条件: 1.同城 2.每天只能一次
+                    //朋友: 1.同城 2.每天只能一次
                     if($_SESSION['userinfo']['city']==$order['ago_city']){
                         $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]); //参与条件
-                        if (!empty($exsit)){
-                            $res = (new WxFriendsJoinLog)->kanjiaRule($order,$agoId,$SUID,$lat,$lon);
-                            if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success');
+                        if (empty($exsit)){
+                            wxlog("朋友发起的砍价");
+                            $res = (new WxFriendsJoinLog)->kanjiaRule('friends',$order,$agoId,$SUID,$lat,$lon);
+                            if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
                         }else{
-                            \common\helpers\FuncHelper::ajaxReturn(202,'今天砍价机会已用完');
+                            \common\helpers\FuncHelper::ajaxReturn(202,'今天您的帮助次数已用完');
                         }
                     }else{
-                        \common\helpers\FuncHelper::ajaxReturn(202,'双方好友必须在同一城市才能砍价');// 返回失败
+                        \common\helpers\FuncHelper::ajaxReturn(202,'双方好友必须在同一城市');// 返回失败
                     }
                 }
+            }else{
+                \common\helpers\FuncHelper::ajaxReturn(202,'该商品活动已过期');
             }
         }
         // 返回失败
@@ -119,26 +132,29 @@ class IndexController extends Controller
     }
 
     /**
+     * @param $agoId
+     * @throws \yii\db\Exception
+     */
+    public function actionShare($agoId)
+    {
+        Yii::$app->db->createCommand()->update("yii2_wx_activities_order",["ago_share_time"=>new Expression("`ago_share_time`+1")],['ago_id'=>$agoId])->execute();
+        \common\helpers\FuncHelper::ajaxReturn(200,'success');
+    }
+
+    /**
      * 异步记录用户地理位置
      */
     public function actionUserLocal()
     {
-//        p(is_file("./static/kanjia.mp3"));
         $result = Yii::$app->wechat->app->material->uploadVoice("./static/kanjia.mp3");
-        p($result);
-//        [media_id] => HmvztPXKVwUEkka4a5wltT4s4hraAxHP5QUO_Cuu0rU
     }
 
     /**
      * @return 用户中心
      */
-    public function actionUser(){
-        if (Yii::$app->request->isPjax){
-
-        }else{
-
-        }
-        return $this->render('user');
+    public function actionUser($ago_status){
+        $res = WxActivitiesOrder::getOrderList($_SESSION['userinfo']['user_id'],$ago_status);
+        return $this->render('user',['res'=>$res]);
     }
 
     public function actionClear(){

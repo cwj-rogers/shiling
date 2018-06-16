@@ -3,14 +3,20 @@
     setTimeout(function () {
         //获取process长度,标签移动到计算位置
         $('.progress-bar').tooltip('show');
-        var tooltip_length = $('.tooltip').width()/2;//砍价标签长度
-        $('.tooltip').css('left',-tooltip_length);
-        var move_distance = $('.progress-bar-danger').width() - tooltip_length;
-        if(move_distance>0) $('.tooltip').animate({left:move_distance},1500);
+        var tooltip_length = $('.tooltip').width()/2;//砍价标签一半长度
+        var bar_danger = $('.progress-bar-danger').width();// 红色进度条的长度
+        var move_distance = bar_danger - tooltip_length;// 标签移动距离
+        $('.tooltip').css('left',-bar_danger);
+        $('.tooltip-arrow').css('left', '50%');
+        if(bar_danger<tooltip_length){
+            $('.tooltip').animate({left:move_distance},500);
+        }else{
+            if(move_distance>0) $('.tooltip').animate({left:move_distance},1500);
+        }
     },1000);
 
     //分享弹窗
-    $('#wx-share .weui_mask, #wx-share .weui_dialog_ft, #wx-share .share-icon-box, .kj-share-btn, #kj-success .btn').click(function () {
+    $('.kj-share-btn, #wx-share .weui_mask, #wx-share .weui_dialog_ft, #wx-share .share-icon-box, #kj-success .btn').click(function () {
         var stata = $('#wx-share').css('display');
         if (stata=="none"){
             $('#wx-share').show();
@@ -44,7 +50,7 @@
     });
 
     //砍价成功弹窗
-    $('#kj-success .weui_mask, #kj-success .cancel, .join-num, #kj-success .btn').click(function () {
+    $('.kj-ready, #kj-success .weui_mask, #kj-success .cancel, #kj-success .btn').click(function () {
         var stata = $('#kj-success').css('display');
         if (stata=="none"){
             $('#kj-success').show();

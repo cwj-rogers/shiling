@@ -43,11 +43,12 @@ a{color: black}
 
 /* 商品列表页 */
 #detail .kj-good-img{width: 100%;height: 200px}
-    #detail .kj-good-img img{width: 100%;height: 100%}
+    #detail .kj-good-img img{width: 100%;height: 200px}
 #detail .good-title-box{position: relative;box-sizing: border-box;padding: 10px 15px;background: white}
     #detail .good-title-box .good-title{text-align: left;font-size: 16px;font-weight: bold}
     #detail .good-title-box .good-price{color: #b1191a}
     #detail .good-title-box .act-rule{position: absolute;right: 10px;top:10px;padding: 5px 10px;background-color: rgba(0,0,0,0.2);border-radius: 15px;color: white;font-size: 12px}
+
 /* 砍价信息展示区 */
 #detail .kj-introduce{display: flex;flex-direction: column;justify-content: flex-start;align-items: center;background: white;padding-bottom: 30px}
     /*#detail .kj-introduce div{width: 100%}*/
@@ -60,9 +61,9 @@ a{color: black}
             #detail .kj-progress .kj-price-box .pb-left{font-size: 12px;}
             #detail .kj-progress .kj-price-box .pb-right{font-size: 12px;text-align: right}
     #detail .kj-introduce .kj-share{padding: 10px;text-align: center}
-        #detail .kj-share button{padding: 15px 50px;border-radius: 20px;border: 2px #b1191a solid;color: #b1191a;background-color: white;display: flex;flex-direction: row;justify-content: center;align-items: center}
+        #detail .kj-share button{padding: 15px 50px;border-radius: 10px;border: darkred 1px solid;color: white;background-color: #b1191a;display: flex;flex-direction: row;justify-content: center;align-items: center}
         #detail .kj-share button .glyphicon{font-size: 21px;margin-right: 5px}
-        #detail .kj-share .kanjia-success{flex-direction: column;padding: 5px 50px;}
+        #detail .kj-share .kanjia-success{flex-direction: column;}
         #detail .kj-share .kanjia-success div{display: flex;flex-direction: row;align-items: center;margin: 3px 0}
     #detail .kj-introduce .kj-friends{padding: 10px 0}
         #detail .kj-friends .join-chatheads{padding: 10px 0;display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap}
@@ -70,6 +71,7 @@ a{color: black}
             #detail .kj-friends .join-chatheads span img{width: 100%;height: 100%;border-radius: 50%}
     #detail .kj-introduce .kj-rank-list{text-align: center;padding-bottom: 10px;}
         #detail .kj-rank-list a{padding: 10px 35px;background-color: rgb(230,230,230);color: black;font-size: 12px;border-radius: 10px}
+
 /* 商品详情页 */
 #detail .good-detail-box{text-align: center;margin-top: 10px;padding: 0;border-top: #b1191a 2px solid}
     #detail .good-detail-box .good-detail-title{text-align: center;padding: 10px;background-color: white}
@@ -101,7 +103,7 @@ a{color: black}
             #wx-rank-list .weui_cells .wrl-left{box-sizing: border-box;padding: 5px;width: 50px;height: 50px;}
                 #wx-rank-list .weui_cells .wrl-left img{width: 100%;height: 100%;border-radius: 50%}
             #wx-rank-list .weui_cells .wrl-mid{box-sizing: border-box;width: 40%;height: 50px;padding-left: 10px;}
-                #wx-rank-list .weui_cells .wrl-mid div{text-align: left;font-size: 14px;line-height: 25px}
+                #wx-rank-list .weui_cells .wrl-mid div{text-align: left;font-size: 14px;line-height: 25px;white-space:nowrap;overflow: hidden}
                 #wx-rank-list .weui_cells .wrl-mid .talk{color: lightgray;font-size: 12px}
             #wx-rank-list .weui_cells .wrl-right{width: 30%;height: 50px;line-height: 50px;font-size: 14px;font-weight: bold;color: #b1191a}
         #wx-rank-list .weui_dialog .rank-list-crown{width: 160px;height: 150px;position: absolute;top:-70px;left: 80px}

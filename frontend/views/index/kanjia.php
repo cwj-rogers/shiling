@@ -3,8 +3,36 @@ use \yii\helpers\Url;
 ?>
 <div class="row">
     <div id="sectionA">
-        <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
     </div>
+    <script>
+        $(function () {
+            new Swiper('.swiper-container', {
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                loop:true
+            });
+        })
+    </script>
     <div id="sectionB" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div>王女士 [<em> 大力出奇迹 </em>] <span>2</span>刀砍价成功 <<strong> 智能马桶 </strong>> </div>
     </div>
