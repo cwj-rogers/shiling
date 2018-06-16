@@ -33,10 +33,12 @@ use \yii\helpers\Url;
             });
         })
     </script>
-    <div id="sectionB" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div>王女士 [<em> 大力出奇迹 </em>] <span>2</span>刀砍价成功 <<strong> 智能马桶 </strong>> </div>
+<!--    <div id="sectionB" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+<!--        <div>王女士 [<em> 大力出奇迹 </em>] <span>2</span>刀砍价成功 <<strong> 智能马桶 </strong>> </div>-->
+<!--    </div>-->
+    <div class="kj-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h4 ><i class="kj-title-before"></i>热门砍价商品<i class="kj-title-after"></i></h4>
     </div>
-    <div class="kj-title col-xs-12 col-sm-12 col-md-12 col-lg-12"><h4 ><i class="kj-title-before"></i>热门砍价商品<i class="kj-title-after"></i></h4></div>
 
     <?php foreach ($res['goodslist'] as $k=>$v):?>
     <div class="goods col-xs-12 col-sm-12 col-md-6 col-lg-6 blank">
