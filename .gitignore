@@ -33,3 +33,4 @@ composer.lock
 .env
 /storage/web/install.txt
 *.log
+/frontend/config/params-local.php
