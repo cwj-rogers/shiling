@@ -30,7 +30,7 @@ use yii\helpers\Html;
     <div class="goods orders-box col-xs-12 col-sm-12 col-md-12 col-lg-12 blank" agoid="<?= $v['ago_id']?>">
         <a class="go-detail" href="<?= $v['ago_status']!=1? Url::toRoute('index'):Url::toRoute(['detail','wg_id'=>$v['wg_id'],'user_id'=>$v['user_id']]);?>">
             <div class="left">
-                <img src="https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/498837070/TB2cJgdhtcnBKNjSZR0XXcFqFXa_!!498837070.jpg_430x430q90.jpg" alt="">
+                <img src="<?= $v['wg_goods_album']?>" alt="">
                 <div class="fail-mask <?= $v['ago_status']==4?" ":"hide";?>">砍价失败</div>
             </div>
             <div class="right">
