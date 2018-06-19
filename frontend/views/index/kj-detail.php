@@ -6,7 +6,7 @@ use yii\helpers\Url;
     wx.ready (function () {
         var $wx_share = [
             <?= json_encode($res['wg_thumb'])?>,
-            <?= json_encode(Yii::$app->request->getHostInfo().Yii::$app->request->getUrl());?>,
+            <?= json_encode(Url::toRoute(['index/detail','agoId'=>$res['ago_id'],'userId'=>$res['user_id'],'ago_id'=>$res['ago_id']]));?>,
             <?= json_encode($res['wg_name'])?>,
             <?= json_encode($res['wg_title'])?>
         ];
@@ -223,7 +223,7 @@ use yii\helpers\Url;
     var kanjia = {};
     kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$res['user_id']]));?>;
     kanjia.indexurl = <?= json_encode(Url::toRoute(['index']) )?>;
-    kanjia.shareurl = <?= json_encode(Url::toRoute(['index/share','agoId'=>$res['ago_id']]) )?>;
+    kanjia.shareurl = <?= json_encode(Url::toRoute(['index/share','agoId'=>$res['ago_id'],'userId'=>$res['user_id']]) )?>;
     kanjia.kj = function () {
         // console.log('ajax发起砍价');
         var res = 0;
@@ -260,7 +260,7 @@ use yii\helpers\Url;
         });
     };
 
-    var share_time = <?= $res['ago_share_time']?>;var cut_total = <?= $res['ago_cut_total']?>;var status = <?= $res['ago_status']?>;var isVisit = <?= $res['isVisit']?>;var share_kanjia = <?= $res['ago_share_kanjia']?>;
+    var share_time = <?= $res['ago_share_time']?>;var cut_total = <?= $res['ago_cut_total']?>;var status = <?= $res['ago_status']?>;var isVisit = <?= $res['isVisit']?>;var share_kanjia = <?= $res['ago_share_kanjia']?>;var hasVisitShare = <?= $res['hasVisitShare']?>;
     // 用户进入砍价页
     $(function () {
         if(status!=1){
@@ -280,7 +280,11 @@ use yii\helpers\Url;
             //砍價资格
             if (isVisit==1){
                 // 朋友
-                kanjia.kj();
+                if(hasVisitShare==1){
+                    kanjia.kj();
+                }else{
+                    toast("分享给好友即可获得砍价机会","large");
+                }
             }else{
                 // 本人: 首次砍价(作废)
                 // if (cut_total==0){
