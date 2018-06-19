@@ -115,7 +115,7 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
         $nameArr = explode(" ",$res['wg_name']);
         $res['wg_name'] = $nameArr[0];//名称
         $res['wg_title'] = array_key_exists(1,$nameArr)? $nameArr[1]:'';//简述
-        $res['wg_thumb'] = strstr($res['wg_goods_album'],',', true) . "@294w_294h_1l";//分享缩略图
+        $res['wg_thumb'] = strstr($res['wg_goods_album'],',', true);//分享缩略图
         $res['centi'] =  intval($res['ago_cut_total']/($res['wg_market_price']-9.9)*100).'%';//precess百分比
         $res['joiners'] = WxFriendsJoinLog::find()
             ->where(['ago_id'=>$res['ago_id']])
