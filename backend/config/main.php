@@ -22,7 +22,7 @@ return [
     /**
      * 模块
      */
-    'modules' => [],
+    'modules' => ['admin'],
     /* 默认路由 */
     'defaultRoute' => 'index',
     /* 默认布局文件 优先级 控制器>配置文件>系统默认 */

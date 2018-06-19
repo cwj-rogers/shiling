@@ -71,7 +71,7 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
      * @return bool
      * @throws \yii\db\Exception
      */
-    public function kanjiaRule($identity,$order, $ago_id, $user_id, $lat, $lon){
+    public function kanjiaRule($identity, $order, $ago_id, $user_id, $lat, $lon){
         //找出商品市场价
         $good = WxGoods::findOne(['wg_id'=>$order['wg_id']]);
         //计算剩余砍价金额和剩余次数
@@ -82,7 +82,7 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
             $isShare = ($order['ago_share_time']>0 && $order['ago_share_kanjia']==0)? 1:0;
         }
         if (1 == $remainNum){
-            $price = $remainPrice; //最后一次砍价
+            $price = $remainPrice; //最后一次砍价,价格为剩余金额
             $status = 2;//砍价成功
         }else{
             /**
@@ -91,8 +91,8 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
              */
             $averagePrice = floor($remainPrice/$remainNum);// 均价取整
             $price = rand(0,$averagePrice*2-1) + rand(0,100)/100;// 随机波动保留小数点后两位
-            $price = $price<$averagePrice*2? $price : round($remainPrice/$remainNum, 2);// 随机价格校验
-            wxlog("计算价格:$remainPrice -- $remainNum -- averagePrice:{$averagePrice} -- price:{$price}");
+            $price = $price<$averagePrice*2? $price : $averagePrice;// 随机价格校验
+            wxlog("计算价格id{$order['ago_id']}:$remainPrice -- $remainNum -- averagePrice:{$averagePrice} -- price:{$price}");
         }
 
         //开启事务
@@ -122,16 +122,15 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
                 ];
                 $db->createCommand()->update('yii2_wx_activities_order', $updateArr, "ago_id={$ago_id}")->execute();
 
-                //修改商品表
+                //修改商品表,记录砍价成功
                 if (1 == $remainNum){
                     $db->createCommand()->update('yii2_wx_goods', ['wg_finish_deal'=>new Expression("`wg_finish_deal`+1")], "wg_id={$order['wg_id']}")->execute();
                 }
             }
             $transaction->commit();
-//            wxlog("数据提交成功");
             return $price;
         } catch (Exception $e){
-            $e->getMessage();
+            YII::warning(json_encode($e->getMessage()));
             $transaction->rollback();
             return false;
         }

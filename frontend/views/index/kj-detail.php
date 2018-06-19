@@ -256,10 +256,12 @@ use yii\helpers\Url;
         // console.log('用户分享记录');
         $.getJSON(kanjia.shareurl,function (data) {
             toast("分享成功");
-            share_time = 1;//用作前段判断
+            share_time = 1;//自己已分享
+            hasVisitShare = 1;//朋友已分享
         });
     };
 
+    //协助前端判断参数
     var share_time = <?= $res['ago_share_time']?>;var cut_total = <?= $res['ago_cut_total']?>;var status = <?= $res['ago_status']?>;var isVisit = <?= $res['isVisit']?>;var share_kanjia = <?= $res['ago_share_kanjia']?>;var hasVisitShare = <?= $res['hasVisitShare']?>;
     // 用户进入砍价页
     $(function () {
@@ -277,19 +279,15 @@ use yii\helpers\Url;
         //开始砍价按钮
         $('#detail').on('click','.kj-going-btn',function () {
             // console.log("点击砍价");
-            //砍價资格
+            //砍價资格判断
             if (isVisit==1){
-                // 朋友
+                // 朋友砍价
                 if(hasVisitShare==1){
                     kanjia.kj();
                 }else{
                     toast("分享给好友即可获得砍价机会","large");
                 }
             }else{
-                // 本人: 首次砍价(作废)
-                // if (cut_total==0){
-                //     kanjia.kj();
-                // }
                 //只有分享后才能砍价
                 if(share_time!=0 && share_kanjia==0){
                     //本人: 第一次分享砍价
@@ -307,7 +305,7 @@ use yii\helpers\Url;
             },1500)
         });
 
-        //砍价排行榜
+        //砍价排行榜下拉刷新
         // $("#wx-rank-list .cells-box").scroll(function(event){
         //     console.log($(this).scrollTop());
         //     // console.log($(this).offset().top);
