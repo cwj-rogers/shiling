@@ -4,7 +4,12 @@ use yii\helpers\Url;
 <script type="text/javascript" charset="utf-8">
     // 微信分享的数据
     wx.ready (function () {
-        var $wx_share = ['http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png',<?= json_encode(Yii::$app->request->getHostInfo().Yii::$app->request->getUrl());?>,'荟家装9.9元严选','#荟家装九块九严选# 严选高端产品低价疯抢,最低9.9元打包带回家'];
+        var $wx_share = [
+            <?= json_encode($res['wg_thumb'])?>,
+            <?= json_encode(Yii::$app->request->getHostInfo().Yii::$app->request->getUrl());?>,
+            <?= json_encode($res['wg_name'])?>,
+            <?= json_encode($res['wg_title'])?>
+        ];
         // 微信分享的数据
         var shareData = {
             "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
@@ -29,19 +34,15 @@ use yii\helpers\Url;
         });
     });
 </script>
-<div id="detail" class="row">
+<div id="detail" class="row" ago-id="<?= $res['ago_id']?>">
     <div class="kj-good-img">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
-                </div>
+                <?php foreach (explode(',',$res['wg_goods_album']) as $k=>$v):?>
+                    <div class="swiper-slide">
+                        <img src="<?= $v?>" alt="">
+                    </div>
+                <?php endforeach;?>
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -79,9 +80,9 @@ use yii\helpers\Url;
             <?php endif;?>
         </div>
         <div class="kj-friends">
-            <div class="join-num">已有 <span class="text-danger"><?= count($res['joiners']);?></span> 人帮你砍价</div>
+            <div class="join-num">已有 <span class="text-danger"><?= $res['joiners_count'];?></span> 人帮你砍价</div>
             <div class="join-chatheads">
-                <?php foreach ($res['joiners'] as $k=>$v):?>
+                <?php foreach (array_slice($res['joiners'], 0, 14) as $k=>$v):?>
                     <span><img src="<?= $v['fj_image']?>" alt=""></span>
                 <?php endforeach;?>
             </div>
@@ -131,6 +132,9 @@ use yii\helpers\Url;
             </div>
         </div>
         <div class="share-icon-box">
+            <div class="icon-box animated share-index">
+                <img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/share-kj.png" alt="">
+            </div>
             <div class="icon-box animated share-friends">
                 <p class="how">点击&nbsp <i class="iconfont icon-sandian"></i> &nbsp并在弹窗中选择</p>
                 <i class="iconfont icon-fasong"></i>
@@ -190,7 +194,7 @@ use yii\helpers\Url;
         <div class="weui_mask_transparent"></div>
         <div class="weui_toast">
             <i class="weui_icon_toast"></i>
-            <p class="weui_toast_content">已完成</p>
+            <p class="weui_toast_content">分享给好友即可获得砍价机会</p>
         </div>
     </div>
 
@@ -272,31 +276,41 @@ use yii\helpers\Url;
 
         //开始砍价按钮
         $('#detail').on('click','.kj-going-btn',function () {
-            // $(this).attr('disabled','disabled');
             // console.log("点击砍价");
             //砍價资格
             if (isVisit==1){
                 // 朋友
                 kanjia.kj();
             }else{
-                // 本人: 首次砍价
-                if (cut_total==0){
-                    kanjia.kj();
-                }else if(share_time!=0 && share_kanjia==0){
+                // 本人: 首次砍价(作废)
+                // if (cut_total==0){
+                //     kanjia.kj();
+                // }
+                //只有分享后才能砍价
+                if(share_time!=0 && share_kanjia==0){
                     //本人: 第一次分享砍价
                     kanjia.kj();
                 }else{
-                    toast("分享给好友多一次砍价机会");
+                    toast("分享给好友即可获得砍价机会","large");
                 }
             }
-        })
+        });
 
         //取消砍价弹窗后台自动刷新页面
         $('#kj-success .weui_mask, #kj-success .cancel').click(function () {
             setTimeout(function () {
                 location.href = location.href;
             },1500)
-        })
+        });
+
+        //砍价排行榜
+        // $("#wx-rank-list .cells-box").scroll(function(event){
+        //     console.log($(this).scrollTop());
+        //     // console.log($(this).offset().top);
+        //     if($(this).scrollTop()==300){
+        //
+        //     }
+        // });
 
         //轮播图
         new Swiper('.swiper-container', {

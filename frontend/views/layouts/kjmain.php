@@ -51,10 +51,15 @@ use yii\helpers\Url;
 
     // 除详情页外共用的分享页
     var requestUrl = <?= json_encode(strstr(basename(Yii::$app->request->getUrl()), '?',true));?>;
+    var localUrl = location.href;
     if(requestUrl != "detail"){
         wx.ready (function () {
-            var $wx_share = ['http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png','http://wxlocal.hjzhome.com/index','荟家装九块九严选','#荟家装九块九严选# 严选高端产品低价疯抢,最低9.9元打包带回家'];
-            // 微信分享的数据
+            var $wx_share = [
+                'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png',
+                localUrl,
+                '荟家装9.9元严选',
+                '#荟家装九块九严选# 严选高端产品低价疯抢,最低9.9元打包带回家'
+            ];          // 微信分享的数据
             var shareData = {
                 "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
                 "link" : $wx_share[1],    // 分享地址
@@ -62,7 +67,7 @@ use yii\helpers\Url;
                 "desc" : $wx_share[3],   // 分享描述
                 success : function () {
                     // 个人分享成功, 获得再次砍价资格
-                    alert("分享成功");
+                    toast("分享成功");
                 }
             };
             wx.onMenuShareTimeline (shareData);

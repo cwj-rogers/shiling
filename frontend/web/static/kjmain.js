@@ -21,9 +21,11 @@
         if (stata=="none"){
             $('#wx-share').show();
             $('#wx-share .weui_dialog').show().addClass('bounceInUp');
+            $('#wx-share .share-index').show("slow").addClass('bounceInUp');
         } else{
             $('#wx-share').fadeOut();
             $('#wx-share .icon-box').fadeOut();
+            $('#wx-share .share-index').fadeOut();
         }
     })
 
@@ -93,8 +95,10 @@ function countDown(className,date) {
 }
 
 //Toast
-function toast(content='已完成') {
+function toast(content='已完成',type="normal") {
     var $toast = $('#toast');
+    var classname = type=="normal"? "normal":type;
+    $toast.find('.weui_toast').addClass(classname);
     $toast.find('.weui_toast_content').text(content);
     if ($toast.css('display') != 'none') return;
     $toast.fadeIn(300);

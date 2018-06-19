@@ -59,7 +59,7 @@ class IndexController extends Controller
          * 2. 自己: 第一次进入? 创建新商品订单(砍一刀):读取数据库  已分享? 先砍一刀:不操作  砍价成功? 微信通知:到期提醒
          * 3. 好友: 符合砍价条件? 进入砍价: 不符合; 第一次砍价? 创建新用户: 直接砍价;
          */
-        $userId = Yii::$app->request->get('user_id',0);
+        $userId = Yii::$app->request->get('user_id',0);Yii::error("that is something wrong");
         $wgId = Yii::$app->request->get('wg_id',0);
         if(!$userId || !$wgId || !isset($_SESSION['userinfo'])){
             return $this->redirect(['index']);
@@ -101,22 +101,23 @@ class IndexController extends Controller
 
             if ($order['ago_cut_number']<$order['ago_need_cut'] && time()<strtotime($order['ago_exprice_time'])){
                 if($SUID==$userId){
-                    //本人: 首次下单砍一次, 分享且没进行砍价, 总共2次机会, 前后台都加判断避免刷单
-                    if(0==$order['ago_cut_total'] ){
-                        wxlog("本人自己发起的砍价");
+                    //本人: 分享后才能砍价, 前后台都加判断避免刷单
+//                    if(0==$order['ago_cut_total'] ){
+//                        wxlog("本人自己发起的砍价");
+//                        $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
+//                        if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
+//                    }
+                    if ($order['ago_share_time']>0 && $order['ago_share_kanjia']==0){
                         $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
                         if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
-                    }elseif ($order['ago_share_time']>0 && $order['ago_share_kanjia']==0){
-                        wxlog("本人分享后发起的砍价");
-                        $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
-                        if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
+                    }else{
+                        \common\helpers\FuncHelper::ajaxReturn(202,'分享好友后获得砍价机会');
                     }
                 }else{
                     //朋友: 1.同城 2.每天只能一次
                     if($_SESSION['userinfo']['city']==$order['ago_city']){
                         $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]); //参与条件
                         if (empty($exsit)){
-                            wxlog("朋友发起的砍价");
                             $res = (new WxFriendsJoinLog)->kanjiaRule('friends',$order,$agoId,$SUID,$lat,$lon);
                             if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
                         }else{

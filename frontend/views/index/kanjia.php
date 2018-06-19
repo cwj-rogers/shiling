@@ -6,10 +6,7 @@ use \yii\helpers\Url;
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
+                    <img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/kanjia-1.jpg" alt="">
                 </div>
                 <div class="swiper-slide">
                     <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
@@ -47,7 +44,7 @@ use \yii\helpers\Url;
             <div class="right">
                 <div class="r-top">
                     <div class="rt-title"><?= $v['wg_name']?>
-                        <span class="rt-secondtitle text-muted"> <?= $v['wg_name2']?></span>
+                        <span class="rt-secondtitle text-muted"> <?= $v['wg_title']?></span>
                     </div>
                 </div>
                 <div class="r-bottom">

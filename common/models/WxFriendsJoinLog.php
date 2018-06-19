@@ -99,9 +99,8 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
         $db = Yii::$app->db;
         $transaction = $db->beginTransaction();
         try{
-            //@Todo 测试多表修改数据,测试入库数据是否正确
             if ($price){
-                wxlog("数据开始入库");
+//                wxlog("数据开始入库");
                 //砍价表添加记录
                 $this->ago_id = $ago_id;
                 $this->user_id = $user_id;
@@ -129,10 +128,10 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
                 }
             }
             $transaction->commit();
-            wxlog("数据提交成功");
+//            wxlog("数据提交成功");
             return $price;
         } catch (Exception $e){
-            $e->getMessage();p($e->getMessage());
+            $e->getMessage();
             $transaction->rollback();
             return false;
         }

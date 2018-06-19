@@ -172,8 +172,8 @@ $this->beginPage();
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL 设置界面 -->
-                    <?php $this->beginContent('@app/views/layouts/public/setting.php') ?>
-                    <?php $this->endContent() ?>
+<!--                    --><?php //$this->beginContent('@app/views/layouts/public/setting.php') ?>
+<!--                    --><?php //$this->endContent() ?>
                     <!-- END THEME PANEL -->
                     <!-- BEGIN PAGE BAR 快速导航 -->
                     <div class="page-bar">

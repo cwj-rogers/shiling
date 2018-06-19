@@ -24,7 +24,6 @@ class OrderController extends BaseController
     {
         /* 添加当前位置到cookie供后续跳转调用 */
         $this->setForward();//phpinfo();
-
         $params = Yii::$app->request->getQueryParams();
 
         $searchModel = new OrderSearch();

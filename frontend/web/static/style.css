@@ -1,5 +1,5 @@
 /* 公共 */
-.blank{margin-bottom: 15px}
+.blank{margin-bottom: 10px}
 html { -webkit-text-size-adjust: none; }
 body{background-color: rgb(235,235,235);padding-bottom: 100px}
 .weui_cell p{margin-bottom: 0}
@@ -19,7 +19,7 @@ a{color: black}
 /* 商品样式 */
 .goods{display: flex;flex-direction: row;background-color: white;padding-top: 10px;padding-bottom: 10px}
     .goods .go-detail{display: flex;flex-direction: row;width: 100%;height: 100%}
-    .goods .left{width: 40%;height: 130px;overflow: hidden;position: relative}
+    .goods .left{width: 130px;height: 130px;overflow: hidden;position: relative}
         .goods .left img{width: 100%;height: 100%}
         .goods .left .fail-mask{position: absolute;width: 100%;height: 130px;left: 0;top: 0;background: rgba(0,0,0,0.8);text-align: center;line-height: 130px;color: rgb(210,210,210);font-size: 21px}
     .goods .right{width: 60%;padding-left:10px;display: flex;flex-direction: column;justify-content: space-between;align-items: center}
@@ -29,9 +29,10 @@ a{color: black}
         .goods .right .r-bottom{width: 100%;display: flex;flex-direction: row;justify-content: space-between;align-items: flex-end}
             .gooss .right .r-bottom .rb-left{height: 100%}
                 .goods .right .rb-left small{display:block;font-size: 10px;transform: scale(0.90);transform-origin:0 0;-webkit-transform: scale(0.90);-webkit-transform-origin:0 0;text-align: left;white-space: nowrap;overflow: hidden}
-                .goods .right .rb-left span{display:block;color: #b1191a;font-weight: bold;font-size: 16px}
+                .goods .right .rb-left span{display:block;color: #b1191a;font-weight: bold;font-size: 14px}
             .goods .right .r-bottom .rb-right{height: 100%;text-align: right}
                 .goods .right .rb-right a{padding: 6px 15px;background-color: #b1191a;}
+                .goods .right .rb-right button{background: -webkit-linear-gradient(-45deg, #ff0020 0%,#ff0080  100%);border:red 0px;}
 /* 底部按钮 */
 .foot{box-sizing:border-box;width: 100%;height: 50px;padding: 2px;background-color: white;position: fixed;z-index: 1;bottom: 0px;left: 0px;display: flex;flex-direction: row;justify-content: flex-start;}
     .foot .item{width: 50%;height: 30px;margin: 10px 0;}
@@ -61,8 +62,8 @@ a{color: black}
             #detail .kj-progress .kj-price-box .pb-left{font-size: 12px;}
             #detail .kj-progress .kj-price-box .pb-right{font-size: 12px;text-align: right}
     #detail .kj-introduce .kj-share{padding: 10px;text-align: center}
-        #detail .kj-share button{padding: 15px 50px;border-radius: 10px;border: darkred 1px solid;color: white;background-color: #b1191a;display: flex;flex-direction: row;justify-content: center;align-items: center}
-        #detail .kj-share button .glyphicon{font-size: 21px;margin-right: 5px}
+        #detail .kj-share button{padding: 13px 90px;border-radius: 25px;border: darkred 0px solid;color: white;display: flex;flex-direction: row;justify-content: center;align-items: center;background: #b1191a;background: -webkit-linear-gradient(-45deg, #ff0020 0%,#ff0080  100%);}
+        #detail .kj-share button .glyphicon{font-size: 16px;margin-right: 5px}
         #detail .kj-share .kanjia-success{flex-direction: column;}
         #detail .kj-share .kanjia-success div{display: flex;flex-direction: row;align-items: center;margin: 3px 0}
     #detail .kj-introduce .kj-friends{padding: 10px 0}
@@ -70,10 +71,10 @@ a{color: black}
         #detail .kj-friends .join-chatheads span{box-sizing: border-box;padding: 5px;width: 49px;height: 49px;border-radius: 50%}
             #detail .kj-friends .join-chatheads span img{width: 100%;height: 100%;border-radius: 50%}
     #detail .kj-introduce .kj-rank-list{text-align: center;padding-bottom: 10px;}
-        #detail .kj-rank-list a{padding: 10px 35px;background-color: rgb(230,230,230);color: black;font-size: 12px;border-radius: 10px}
+        #detail .kj-rank-list a{padding: 10px 35px;color: #ff0020;font-size: 12px;border-radius: 3px;border: #ff0020 1px solid}
 
 /* 商品详情页 */
-#detail .good-detail-box{text-align: center;margin-top: 10px;padding: 0;border-top: #b1191a 2px solid}
+#detail .good-detail-box{text-align: center;margin-top: 10px;padding: 0;border-top: #ff0020 2px solid}
     #detail .good-detail-box .good-detail-title{text-align: center;padding: 10px;background-color: white}
         #detail .good-detail-title p{border-bottom: 1px rgb(235,235,235) solid;margin: 0;padding-bottom: 10px;font-size: 16px;font-weight: bold}
     #detail .good-detail-box .good-detail-introduce{padding: 10px;background-color: white}
@@ -93,10 +94,11 @@ a{color: black}
         #wx-share .share-icon-box .icon-box{float: left;text-align: center;display: none;}
             #wx-share .share-icon-box .icon-box .icon-sandian{font-size: 32px}
             #wx-share .share-icon-box .icon-box i {font-size: 120px}
+            #wx-share .share-icon-box .share-index img {width: 350px;height: 350px}
 
 /* 排行榜弹窗 */
-#wx-rank-list {display: none}
-    #wx-rank-list .weui_dialog{width: 90%;overflow: visible;padding-top: 80px;top: 100px;left: 5%;background-color: white;display: none;}
+#wx-rank-list {display: none;}
+    #wx-rank-list .weui_dialog{display: none;width: 90%;overflow: visible;padding-top: 80px;top: 100px;left: 5%;background-color: white;}
     #wx-rank-list .cells-box{width: 100%;height: 100%;max-height: 400px;overflow: scroll}
         #wx-rank-list .weui_dialog .weui_cells{margin-top: 0em;padding:10px 10px;display: flex;flex-direction: row;justify-content: flex-start}
             #wx-rank-list .weui_cells .orderly{width: 50px;height: 50px;font-size: 24px;color: grey;text-align: center;line-height: 50px}
@@ -140,3 +142,7 @@ a{color: black}
             #user .order-status .going{box-sizing: border-box;width: 50%;height: 30px;margin: 10px 0px;text-align: center;line-height: 30px;border-right: 1px lightgray solid}
             #user .order-status .finish{width: 50%;height: 30px;margin: 10px 0px;text-align: center;line-height: 30px}
     #user .orders-box .right .rb-right .count-down{font-size: 12px;color: grey;overflow: hidden;word-break: keep-all;white-space: nowrap;}
+
+/*toast样式*/
+#toast .weui_toast{ padding: 0 10px;}
+#toast .large{width: 10em;margin-left: -4.8em;}
