@@ -6,7 +6,7 @@ use yii\helpers\Url;
     wx.ready (function () {
         var $wx_share = [
             <?= json_encode($res['wg_thumb'])?>,
-            <?= json_encode(Url::toRoute(['index/detail','agoId'=>$res['ago_id'],'userId'=>$res['user_id'],'ago_id'=>$res['ago_id']]));?>,
+            <?= json_encode(Url::toRoute(['index/detail','wg_id'=>$res['wg_id'],'user_id'=>$res['user_id'],'ago_id'=>$res['ago_id']]));?>,
             <?= json_encode($res['wg_name'])?>,
             <?= json_encode($res['wg_title'])?>
         ];

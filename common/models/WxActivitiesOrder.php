@@ -120,8 +120,9 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
         $res['joiners'] = WxFriendsJoinLog::find()
             ->where(['ago_id'=>$res['ago_id']])
 //            ->limit(14)
-            ->orderBy("created_time desc")
+            ->orderBy("fj_cut_price desc,created_time desc")
             ->asArray()->all();//取出部分参与人
+
         $res['joiners_count'] = WxFriendsJoinLog::find()
             ->where(['ago_id'=>$res['ago_id']])
             ->count();//参与人数
