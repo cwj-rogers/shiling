@@ -52,7 +52,6 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
         /* 输出结果 */
         //var_dump($result);
         return $result;
-
     }
 
 }

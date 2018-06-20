@@ -42,7 +42,6 @@ use common\helpers\ArrayHelper;
         ]
     ],['class'=>'c-md-12'])->label('文章内容');?>
 
-
     <?= $form->field($model, 'wg_market_price')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'wg_number')->textInput() ?>

@@ -29,6 +29,19 @@ class WxGoodsController extends BaseController
         ];
     }
 
+    //文件上传相关配置
+//    public function actions(){
+//        return [
+//            'upload' => [
+//                'class' => 'kucha\ueditor\UEditorAction',
+//                'config' => [
+//                    "imageUrlPrefix"  => "http://home.com",//图片访问路径前缀
+//                    "imagePathFormat" => "upload/{time}{rand:6}" //上传保存路径
+//                ],
+//            ]
+//        ];
+//    }
+
     /**
      * Lists all WxGoods models.
      * @return mixed
@@ -92,7 +105,6 @@ class WxGoodsController extends BaseController
     public function actionEdit($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->wg_id]);
         } else {
