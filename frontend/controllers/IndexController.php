@@ -47,7 +47,7 @@ class IndexController extends Controller
             //执行服务端业务
             $response = Yii::$app->wechat->server->serve();
             // 将响应输出
-            $response->send();
+            return $response->send();
         }
         $res = [];//储存数据集
         //@Todo 1.参与过得 2.砍价成功的  是否显示
@@ -164,7 +164,7 @@ class IndexController extends Controller
      */
     public function actionUserLocal()
     {
-        $result = Yii::$app->wechat->app->material->uploadVoice("./static/kanjia.mp3");
+//        $result = Yii::$app->wechat->app->material->uploadVoice("./static/kanjia.mp3");
     }
 
     /**
@@ -176,7 +176,7 @@ class IndexController extends Controller
     }
 
     public function actionClear(){
-        Yii::$app->session->removeAll();
-        p(Yii::$app->session);
+//        Yii::$app->session->removeAll();
+//        p(Yii::$app->session);
     }
 }

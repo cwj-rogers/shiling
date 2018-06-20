@@ -4,9 +4,10 @@ use yii\helpers\Url;
 <script type="text/javascript" charset="utf-8">
     // 微信分享的数据
     wx.ready (function () {
+        //url要完整路径
         var $wx_share = [
             <?= json_encode($res['wg_thumb'])?>,
-            <?= json_encode(Url::toRoute(['index/detail','wg_id'=>$res['wg_id'],'user_id'=>$res['user_id'],'ago_id'=>$res['ago_id']]));?>,
+            <?= json_encode(Url::toRoute(['index/detail','wg_id'=>$res['wg_id'],'user_id'=>$res['user_id'],'ago_id'=>$res['ago_id']], true));?>,
             <?= json_encode($res['wg_name'])?>,
             <?= json_encode($res['wg_title'])?>
         ];
