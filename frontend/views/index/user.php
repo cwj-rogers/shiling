@@ -41,7 +41,7 @@ use yii\helpers\Html;
                 </div>
                 <div class="r-bottom">
                     <div class="rb-left">
-                        <small class="text-muted"><?= $v['ago_status']==1?"距离砍价成功":" ";?></small>
+                        <small class="text-muted"><?= $v['ago_status']==1?"距离最低价还差":" ";?></small>
                         <span><strong>¥<?= $v['ago_status']==1? $v['remainPrice']:($v['ago_status']==4?"砍价失败":'砍价成功');?></strong></span>
                     </div>
                     <div class="rb-right">

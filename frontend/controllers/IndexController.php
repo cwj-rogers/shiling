@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 use common\models\WxFriendsShare;
+use common\models\WxPictures;
 use Yii;
 use yii\web\Controller;
 use common\models\WxGoods;
@@ -52,12 +53,18 @@ class IndexController extends Controller
         $res = [];//储存数据集
         //@Todo 1.参与过得 2.砍价成功的  是否显示
         $res['goodslist'] = WxGoods::goodsList();
+        //轮播图
+        $slideshow = WxPictures::find()
+            ->select("wp_id,wp_url,wp_jump_url")
+            ->where(['wp_status'=>1])->orderBy("wp_sort asc")
+            ->asArray()->all();
+
         //砍价活动页
-        return $this->render('kanjia', ['res'=>$res]);
+        return $this->render('kanjia', ['res'=>$res,'slideshow'=>$slideshow]);
     }
 
     /**
-     * @return 砍价详情
+     * @return string|\yii\web\Response
      */
     public function actionDetail(){
         /**
@@ -72,25 +79,44 @@ class IndexController extends Controller
         }
 
         if($_SESSION['userinfo']['user_id']==$userId){
-            $isVisit = 0;
-            //是否已经参加过 1.未过期的 2.已经砍价成功的
+            $isVisit = 0;//是否为游客
+            //此商品是否有库存
+            $goodInfo = WxGoods::findOne($wgId);
+            if($goodInfo['wg_number']==0){
+                $errorMsg = [
+                    "message"=>'参与此商品活动人数已满,请您选择其他商品',
+                    "jumpUrl"=>Yii::$app->request->referrer
+                ];
+                $this->layout = false;
+                return $this->render('/public/wxerror',['message'=>$errorMsg['message'],"jumpUrl"=>$errorMsg['jumpUrl']]);
+            }
+            //是否已经参加过
             $isexist = WxActivitiesOrder::findOne(['user_id'=>$userId,'wg_id'=>$wgId]);
-            //进入创建订单
+            //是否创建订单 1.没参加过 2.砍价完成,支付成功,过期的
             if (empty($isexist) || in_array($isexist['ago_status'],[2,3,4])){
                 (new WxActivitiesOrder)->createActOrder($wgId, $userId);
             }
         }else{
             $agoId = Yii::$app->request->get('ago_id',0);
-            //朋友访问
-            $isVisit = 1;
-            //今天是否参与分享
+            $isVisit = 1;//是否为游客
+            //今天是否已经分享
             $hasVisitShare = WxFriendsShare::findOne(['ago_id'=>$agoId,'user_id'=>$userId,'visitor_id'=>$_SESSION['userinfo']['user_id'],'share_date'=>date("Y-m-d")]);
         }
         $hasVisitShare = isset($hasVisitShare)&&!empty($hasVisitShare)? 1:0;
+
         $res = WxActivitiesOrder::getActOrder($wgId, $userId);//商品订单
-        $res['isVisit'] = $isVisit;
-        $res['hasVisitShare'] = $hasVisitShare;
-        return $this->render('kj-detail', ['res'=>$res]);
+        if ($res && !empty($res)){
+            $res['isVisit'] = $isVisit;
+            $res['hasVisitShare'] = $hasVisitShare;
+            return $this->render('kj-detail', ['res'=>$res]);
+        }else{
+            $errorMsg = [
+                "message"=>'系统出错,找不到此活动',
+                "jumpUrl"=>Yii::$app->request->referrer
+            ];
+            $this->layout = false;
+            return $this->render('/public/wxerror',['message'=>$errorMsg['message'],"jumpUrl"=>$errorMsg['jumpUrl']]);
+        }
     }
 
     /**
@@ -155,7 +181,9 @@ class IndexController extends Controller
         //增加一个分享记录表
         (new WxFriendsShare())->insertLog($agoId, $userId, $_SESSION['userinfo']['user_id']);
         //订单分享记录+1
-        Yii::$app->db->createCommand()->update("yii2_wx_activities_order",["ago_share_time"=>new Expression("`ago_share_time`+1")],['ago_id'=>$agoId])->execute();
+        Yii::$app->db->createCommand()
+            ->update("yii2_wx_activities_order",["ago_share_time"=>new Expression("`ago_share_time`+1")],['ago_id'=>$agoId])
+            ->execute();
         \common\helpers\FuncHelper::ajaxReturn(200,'success');
     }
 
@@ -164,11 +192,15 @@ class IndexController extends Controller
      */
     public function actionUserLocal()
     {
+        $this->layout = false;
+        return $this->render('/public/wxerror',['message'=>1,'waitSecond'=>100,'jumpUrl'=>1]);
 //        $result = Yii::$app->wechat->app->material->uploadVoice("./static/kanjia.mp3");
     }
 
     /**
-     * @return 用户中心
+     *  用户中心
+     * @param $ago_status
+     * @return string
      */
     public function actionUser($ago_status){
         $res = WxActivitiesOrder::getOrderList($_SESSION['userinfo']['user_id'],$ago_status);

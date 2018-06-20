@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\db\Exception;
 
 /**
  * This is the model class for table "{{%wx_activities_order}}".
@@ -86,16 +88,25 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
         $wg = WxGoods::findOne($wgid);
         $userinfo = $_SESSION['userinfo'];
         if (!empty($wg)){
-            $this->ago_order_sn = '100062'.mt_rand(10000,99999).round(microtime(true)*1000);
-            $this->user_id = $userId;
-            $this->wg_id = $wgid;
-            $this->ago_need_cut = $wg->wg_need_cut;
-            $this->ago_province = $userinfo['province'];
-            $this->ago_city = $userinfo['city'];
-            $this->ago_exprice_time = date('Y-m-d H:i:s', time()+$wg->wg_promote_time);
-            $this->created_time = date('Y-m-d H:i:s');
-            $res = $this->save();
-            if(!$res) wxlog(json_encode($this->getErrors()),1);
+            try{
+                $this->ago_order_sn = '100062'.mt_rand(10000,99999).round(microtime(true)*1000);
+                $this->user_id = $userId;
+                $this->wg_id = $wgid;
+                $this->ago_need_cut = $wg->wg_need_cut;
+                $this->ago_province = $userinfo['province'];
+                $this->ago_city = $userinfo['city'];
+                $this->ago_exprice_time = date('Y-m-d H:i:s', time()+$wg->wg_promote_time);
+                $this->created_time = date('Y-m-d H:i:s');
+                $res = $this->save();
+                if(!$res) wxlog(json_encode($this->getErrors()),1);
+                //商品库存减1
+                Yii::$app->db->createCommand()
+                    ->update("yii2_wx_goods",["wg_number"=>new Expression("`wg_number`-1")],['wg_id'=>$wgid])
+                    ->execute();
+            }catch(Exception $e){
+                YII::warning(json_encode($e->getMessage()));
+            }
+
         }
     }
 
@@ -112,22 +123,24 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
             ->orderBy("ago.created_time desc")
             ->asArray()
             ->one();
-        $nameArr = explode(" ",$res['wg_name']);
-        $res['wg_name'] = $nameArr[0];//名称
-        $res['wg_title'] = array_key_exists(1,$nameArr)? $nameArr[1]:'';//简述
-        $res['wg_thumb'] = strstr($res['wg_goods_album'],',', true);//分享缩略图
-        $res['centi'] =  intval($res['ago_cut_total']/($res['wg_market_price']-9.9)*100).'%';//precess百分比
-        $res['joiners'] = WxFriendsJoinLog::find()
-            ->where(['ago_id'=>$res['ago_id']])
-//            ->limit(14)
-            ->orderBy("fj_cut_price desc,created_time desc")
-            ->asArray()->all();//取出部分参与人
-
-        $res['joiners_count'] = WxFriendsJoinLog::find()
-            ->where(['ago_id'=>$res['ago_id']])
-            ->count();//参与人数
-//        p(,1);
-        return $res;
+        if($res && !empty($res)){
+            $nameArr = explode(" ",$res['wg_name']);
+            $res['wg_name'] = $nameArr[0];//名称
+            $res['wg_title'] = array_key_exists(1,$nameArr)? $nameArr[1]:'';//简述
+            $res['wg_thumb'] = strstr($res['wg_goods_album'],',', true);//分享缩略图
+            $res['centi'] =  intval($res['ago_cut_total']/($res['wg_market_price']-9.9)*100).'%';//precess百分比
+            $res['joiners'] = WxFriendsJoinLog::find()
+                ->where(['ago_id'=>$res['ago_id']])
+    //            ->limit(14)
+                ->orderBy("fj_cut_price desc,created_time desc")
+                ->asArray()->all();//取出部分参与人
+            $res['joiners_count'] = WxFriendsJoinLog::find()
+                ->where(['ago_id'=>$res['ago_id']])
+                ->count();//参与人数
+            return $res;
+        }else{
+            return false;
+        }
     }
 
     public static function getOrderList($userId, $ago_status){

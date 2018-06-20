@@ -5,12 +5,11 @@ use \yii\helpers\Url;
     <div id="sectionA">
         <div class="swiper-container">
             <div class="swiper-wrapper">
+                <?php foreach ($slideshow as $k=>$v):?>
                 <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/kanjia-1.jpg" alt="">
+                    <a href="<?= $v['wp_jump_url']? $v['wp_jump_url']:'javascript:;'?>"><img src="<?= $v['wp_url']?>" alt=""></a>
                 </div>
-                <div class="swiper-slide">
-                    <img src="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/9.9%E7%A0%8D%E4%BB%B7.jpg" alt="">
-                </div>
+                <?php endforeach;?>
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -38,29 +37,35 @@ use \yii\helpers\Url;
     </div>
 
     <?php foreach ($res['goodslist'] as $k=>$v):?>
-    <div class="goods col-xs-12 col-sm-12 col-md-6 col-lg-6 blank">
-        <a class="go-detail" href="<?= Url::toRoute(['detail','wg_id'=>$v['wg_id'],'user_id'=>Yii::$app->session->get('userinfo')['user_id']])?>">
-            <div class="left"><img src="<?= $v['wg_goods_album']?>" alt=""></div>
-            <div class="right">
-                <div class="r-top">
-                    <div class="rt-title"><?= $v['wg_name']?>
-                        <span class="rt-secondtitle text-muted"> <?= $v['wg_title']?></span>
+        <?php if($v['wg_type']==1):?>
+        <div class="goods col-xs-12 col-sm-12 col-md-6 col-lg-6 blank">
+            <a class="go-detail" href="<?= Url::toRoute(['detail','wg_id'=>$v['wg_id'],'user_id'=>Yii::$app->session->get('userinfo')['user_id']])?>">
+                <div class="left"><img src="<?= $v['wg_goods_album']?>" alt=""></div>
+                <div class="right">
+                    <div class="r-top">
+                        <div class="rt-title"><?= $v['wg_name']?>
+                            <span class="rt-secondtitle text-muted"> <?= $v['wg_title']?></span>
+                        </div>
+                    </div>
+                    <div class="r-bottom">
+                        <div class="rb-left">
+                            <small class="text-muted"><?= $v['wg_finish_deal']?>人已砍价成功</small>
+                            <span><s>原价<?= $v['wg_market_price']?>元</s></span>
+                        </div>
+                        <div class="rb-right">
+                            <button class="btn btn-danger" type="button">
+                                <span>进入砍价</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="r-bottom">
-                    <div class="rb-left">
-                        <small class="text-muted"><?= $v['wg_finish_deal']?>人已砍价成功</small>
-                        <span><s>原价<?= $v['wg_market_price']?>元</s></span>
-                    </div>
-                    <div class="rb-right">
-                        <button class="btn btn-danger" type="button">
-                            <span>进入砍价</span>
-                        </button>
-                    </div>
-                </div>
+            </a>
+        </div>
+        <?php else:?>
+            <div class="col-xs-12 col-sm-12 blank advert">
+                <img src="<?= $v['wg_goods_album']?>" alt="">
             </div>
-        </a>
-    </div>
+        <?php endif;?>
     <?php endforeach;?>
 
     <div class="loading-all col-xs-12 col-sm-12 col-md-12 col-lg-12">

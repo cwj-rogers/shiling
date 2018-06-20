@@ -9,11 +9,13 @@ use backend\models\search\WxGoodsSearch;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '9.9元砍价';
-$this->params['title_sub'] = '砍价活动订单管理列表';  // 在\yii\base\View中有$params这个可以在视图模板中共享的参数
+$this->params['title_sub'] = '砍价活动商品管理列表';  // 在\yii\base\View中有$params这个可以在视图模板中共享的参数
 /* 先要注册表格所须的资源 */
 \backend\assets\TablesAsset::register($this);
 ?>
-
+<style>
+    .td-img{width: 50px;height: 50px}
+</style>
 <?php
 $columns = [
 //    [
@@ -30,30 +32,45 @@ $columns = [
         'options' => ['width' => '50px;']
     ],
     [
+        'attribute' => 'wg_name',
+        'options' => ['width' => '200px;']
+    ],
+    [
         'header' => '封面',
-        'attribute' => 'wg_goods_album',
+        'value' => 'wg_goods_album',
         'content' => function($model){
-            $thumb = strstr();
-            return Yii::$app->params['pay_status'][$model['pay_status']];<img alt="" class="img-circle" src="/admin/static/images/avatar2.jpg">
+            $thumb = strstr($model->wg_goods_album, ",", true);
+            return'<img alt="" class="td-img" src="'.$thumb.'">';
         },
+        'options' => ['width' => '50px;']
     ],
     [
-        'attribute' => 'wg_market_price'
+        'header' => '市场售价',
+        'value' => 'wg_market_price',
+        'options' => ['width' => '50px;']
     ],
     [
-        'attribute' => 'wg_number'
+        'header' => '商品总库存',
+        'value' => 'wg_number',
+        'options' => ['width' => '50px;']
     ],
     [
-        'attribute' => 'wg_finish_deal'
+        'header' => '完成数量',
+        'value' => 'wg_finish_deal',
+        'options' => ['width' => '50px;']
     ],
     [
-        'attribute' => 'wg_need_cut'
+        'header' => '需要次数',
+        'value' => 'wg_need_cut',
+        'options' => ['width' => '50px;']
     ],
     [
-        'attribute' => 'wg_status'
+        'attribute' => 'wg_status',
+        'options' => ['width' => '50px;']
     ],
     [
-        'attribute' => 'wg_sort'
+        'attribute' => 'wg_sort',
+        'options' => ['width' => '50px;']
     ],
 //    [
 //        'header' => '起租时间',

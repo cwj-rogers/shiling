@@ -70,7 +70,7 @@ class WxGoodsController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionAdd()
     {
         $model = new WxGoods();
 
@@ -89,7 +89,7 @@ class WxGoodsController extends BaseController
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionEdit($id)
     {
         $model = $this->findModel($id);
 

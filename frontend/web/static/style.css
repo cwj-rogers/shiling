@@ -33,6 +33,8 @@ a{color: black}
             .goods .right .r-bottom .rb-right{height: 100%;text-align: right}
                 .goods .right .rb-right a{padding: 6px 15px;background-color: #b1191a;}
                 .goods .right .rb-right button{background: -webkit-linear-gradient(-45deg, #ff0020 0%,#ff0080  100%);border:red 0px;}
+.advert{width: 100%;height: 150px;padding-left: 0px;padding-right: 0px;}
+.advert img{width: 100%;height: 100%}
 /* 底部按钮 */
 .foot{box-sizing:border-box;width: 100%;height: 50px;padding: 2px;background-color: white;position: fixed;z-index: 1;bottom: 0px;left: 0px;display: flex;flex-direction: row;justify-content: flex-start;}
     .foot .item{width: 50%;height: 30px;margin: 10px 0;}

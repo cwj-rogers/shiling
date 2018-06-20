@@ -62,14 +62,14 @@ class WxGoods extends \yii\db\ActiveRecord
             'wg_content' => '商品图文',
             'wg_goods_album' => '商品相册图组，逗号相隔，第一张为封面',
             'wg_market_price' => '市场售价',
-            'wg_number' => '商品总库存数量，由各sku相加',
+            'wg_number' => '商品总库存',
             'wg_view' => '查看数量',
             'wg_finish_deal' => '完成数量',
             'wg_need_cut' => '需要砍价次数',
             'wg_type' => '商品促销 1.砍价 2.拼团 3.竞猜',
-            'wg_status' => '状态 0下架 1上架',
+            'wg_status' => '状态',// 0下架 1上架
             'wg_promote_time' => '有效时长(时间戳)默认',
-            'wg_sort' => '顺序排序值',
+            'wg_sort' => '排序',
             'created_time' => '添加时间',
             'updated_time' => '修改时间',
         ];
@@ -77,9 +77,9 @@ class WxGoods extends \yii\db\ActiveRecord
 
     public static function goodsList(){
         $list = static::find()->
-            select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_sort")
+            select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_type,wg_status")
             ->where(['>','wg_number', 0])
-            ->andWhere(['wg_status'=>1,'wg_type'=>1])
+            ->andWhere(['wg_status'=>1,'wg_type'=>[1,2]])
             ->orderBy("wg_sort desc,created_time desc")
             ->asArray()->all();
 
