@@ -43,10 +43,20 @@ return [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
+                'file' => [
+                    //文件方式存储日志操作对应操作对象
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['info','error'],
+                    'logVars' => [],
                 ],
+                /* 使用数据库存储日志 */
+                'db' => [
+                    //数据库存储日志对象
+                    'class' => 'yii\log\DbTarget',
+                    //同上
+                    'levels' => ['error', 'warning'],
+                    'logVars' => ['_SESSION'],
+                ]
             ],
         ],
         'errorHandler' => [
