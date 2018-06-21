@@ -15,7 +15,7 @@ $context = $this->context;
 $route = $context->action->getUniqueId()?:$context->getUniqueId().'/'.$context->defaultAction;
 $allMenu = Menu::getMenus($route); // 获取后台栏目
 $breadcrumbs = Menu::getBreadcrumbs($route); // 面包屑导航
-//dump($this);exit;
+//p($allMenu);
 
 $this->beginPage();
 ?>

@@ -213,7 +213,7 @@ use yii\helpers\Url;
             <span class="cancel glyphicon glyphicon-remove "></span>
         </div>
         <button class="kj-ready"></button>
-        <audio id="player" controls="controls" autoplay="false"">
+        <audio id="player" controls="controls">
             <source src="<?=Yii::getAlias('@web')?>/static/kanjia.mp3"/>
         </audio>
     </div>
@@ -286,7 +286,7 @@ use yii\helpers\Url;
                 if(hasVisitShare==1){
                     kanjia.kj();
                 }else{
-                    toast("分享给好友即可获得砍价机会","large");
+                    toast("当前页面分享给好友即可获得砍价机会","large");
                 }
             }else{
                 //只有分享后才能砍价
@@ -294,7 +294,7 @@ use yii\helpers\Url;
                     //本人: 第一次分享砍价
                     kanjia.kj();
                 }else{
-                    toast("分享给好友即可获得砍价机会","large");
+                    toast("当前页面分享给好友即可获得砍价机会","large");
                 }
             }
         });
