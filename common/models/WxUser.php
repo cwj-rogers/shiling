@@ -85,9 +85,13 @@ class WxUser extends \yii\db\ActiveRecord
             $this->reg_ip = Yii::$app->request->getUserIP();
             $res = $this->save();
             if(!$res) wxlog(json_encode($this->getErrors()));
+
+            $info = WxUser::findOne(['open_id'=>$userinfo['id']]);
+            $info = $info->toArray();
+            Yii::$app->session->set('userinfo',$info);
+        }else{
+            $info = $hasuser->toArray();
+            Yii::$app->session->set('userinfo',$info);
         }
-        $info = WxUser::findOne(['open_id'=>$userinfo['id']]);
-        $info = !empty($info)? $info->toArray():[];
-        Yii::$app->session->set('userinfo',$info);
     }
 }
