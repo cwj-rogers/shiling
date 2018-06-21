@@ -36,7 +36,7 @@ class WxUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['open_id', 'username', 'sex', 'province', 'city'], 'required'],
+            [['open_id', 'username', 'sex'], 'required'],
             [['status', 'sex'], 'integer'],
             [['reg_time', 'update_time'], 'safe'],
             [['open_id', 'reg_ip'], 'string', 'max' => 32],
@@ -79,8 +79,8 @@ class WxUser extends \yii\db\ActiveRecord
             $this->username = $userinfo['name'];
             $this->image = $userinfo['avatar'];
             $this->sex = $userinfo['original']['sex'];
-            $this->province = $userinfo['original']['province'];
-            $this->city = $userinfo['original']['city'];
+            $this->province = $userinfo['original']['province']? $userinfo['original']['province']:'0';
+            $this->city = $userinfo['original']['city']? $userinfo['original']['city']:'0';
             $this->reg_time = date("Y-m-d H:i:s");
             $this->reg_ip = Yii::$app->request->getUserIP();
             $res = $this->save();
