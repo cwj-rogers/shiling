@@ -18,6 +18,8 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
 
             /* 上传图片 */
             case 'uploadimage':
+                $result = $this->actionUpload();
+                break;
                 /* 上传涂鸦 */
             case 'uploadscrawl':
                 /* 上传视频 */
@@ -33,6 +35,8 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
                 break;
             /* 列出图片 */
             case 'listimage':
+                $result = $this->actionList();
+                break;
                 /* 列出文件 */
             case 'listfile':
                 $result = $this->actionList();
@@ -51,7 +55,9 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
         }
         /* 输出结果 */
         //var_dump($result);
-        return $result;
+//        p($result);
+        header('Content-Type:application/json; charset=utf-8');
+        exit(json_encode($result));
     }
 
 }

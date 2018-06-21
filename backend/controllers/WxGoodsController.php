@@ -96,6 +96,7 @@ class WxGoodsController extends BaseController
         }
     }
 
+
     /**
      * Updates an existing WxGoods model.
      * If update is successful, the browser will be redirected to the 'view' page.
