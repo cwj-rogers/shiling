@@ -45,11 +45,14 @@ use yii\helpers\Html;
                         <span><strong>¥<?= $v['ago_status']==1? $v['remainPrice']:($v['ago_status']==4?"砍价失败":'砍价成功');?></strong></span>
                     </div>
                     <div class="rb-right">
+                        <!-- 活动结束倒计时 -->
                         <?php if ($v['ago_status']==1):?>
-                            <div id="<?= "cd-".$k?>" class="count-down cd-item123" cd-date="<?= $v['ago_exprice_time']?>" cd-name="<?= '#cd-'.$k?>"></div>
+                            <div id="<?= "cd-".$k?>" class="count-down cd-item" cd-date="<?= $v['ago_exprice_time']?>" cd-name="<?= '#cd-'.$k?>"></div>
                         <?php endif;?>
                         <button class="btn btn-danger" type="button">
-                            <span><?= $v['ago_status']==1?"继续砍价":"重砍一个";?></span>
+                            <span>
+                                <?= $v['ago_status']==1?"继续砍价":"重砍一个";?>
+                            </span>
                         </button>
                     </div>
                 </div>

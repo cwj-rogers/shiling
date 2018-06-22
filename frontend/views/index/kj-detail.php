@@ -31,6 +31,7 @@ use yii\helpers\Url;
                 sessionStorage.latitude = latitude;
                 sessionStorage.longitude = longitude;
                 console.log(res);
+                getLocation(latitude+','+longitude);
             }
         });
     });
@@ -56,7 +57,10 @@ use yii\helpers\Url;
     </div>
 
     <div class="kj-introduce col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="kj-success-num text-muted"><?= $res['wg_finish_deal']?>人已经砍价成功</div>
+        <div class="kj-success-num text-muted">
+            <?= $res['wg_finish_deal']?>人已经砍价成功
+            <div class="cut-off-date"></div>
+        </div>
         <!--  进度条  -->
         <div class="kj-progress">
             <div class="progress">
@@ -225,6 +229,7 @@ use yii\helpers\Url;
     kanjia.url = <?= json_encode(Url::toRoute(['index/kj','agoId'=>$res['ago_id'],'userId'=>$res['user_id']]));?>;
     kanjia.indexurl = <?= json_encode(Url::toRoute(['index']) )?>;
     kanjia.shareurl = <?= json_encode(Url::toRoute(['index/share','agoId'=>$res['ago_id'],'userId'=>$res['user_id']]) )?>;
+    kanjia.cutOffDate = <?= json_encode($res['ago_exprice_time']) ?>;
     kanjia.kj = function () {
         // console.log('ajax发起砍价');
         var res = 0;
@@ -306,6 +311,8 @@ use yii\helpers\Url;
             },1500)
         });
 
+        //时间截止时间
+        countDown('.cut-off-date', kanjia.cutOffDate);
         //砍价排行榜下拉刷新
         // $("#wx-rank-list .cells-box").scroll(function(event){
         //     console.log($(this).scrollTop());

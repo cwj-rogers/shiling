@@ -123,9 +123,15 @@ class WxFriendsJoinLog extends \yii\db\ActiveRecord
                 ];
                 $db->createCommand()->update('yii2_wx_activities_order', $updateArr, "ago_id={$ago_id}")->execute();
 
-                //修改商品表,记录砍价成功
                 if (1 == $remainNum){
-                    $db->createCommand()->update('yii2_wx_goods', ['wg_finish_deal'=>new Expression("`wg_finish_deal`+1")], "wg_id={$order['wg_id']}")->execute();
+                    //修改商品表,记录砍价成功
+                    $db->createCommand()
+                        ->update('yii2_wx_goods', ['wg_finish_deal'=>new Expression("`wg_finish_deal`+1")], "wg_id={$order['wg_id']}")
+                        ->execute();
+                    //记录完成时间
+                    $db->createCommand()
+                        ->update('yii2_wx_activities_order', ['ago_finish_date'=>date("Y-m-d H:i:s")], "ago_id={$order['ago_id']}")
+                        ->execute();
                 }
             }
             $transaction->commit();

@@ -81,16 +81,21 @@ $('.cd-item').each(function () {
 
 // 活动结束计时器
 function countDown(className,date) {
-    var starttime = new Date(date);
+    date=date.replace(new RegExp(/-/gm) ,"/");
+    var starttime = new Date(date);console.log(starttime);
     setInterval(function () {
         var nowtime = new Date();
+
         var time = starttime - nowtime;
         var day = parseInt(time / 1000 / 60 / 60 / 24);
-        var hour = parseInt(time / 1000 / 60 / 60);
+        var hour = parseInt(time / 1000 / 60 / 60 % 60);
         var minute = parseInt(time / 1000 / 60 % 60);
         var seconds = parseInt(time / 1000 % 60);
-        $(className).html('还剩' + hour + "时" + minute + "分" + seconds+ "秒");
-        console.log(seconds);
+        if(day>0 || hour>0 || minute>0 || seconds>0){
+            $(className).html(day + "天" + hour + "时" + minute + "分" + seconds+ "秒"+"后截止");
+        }else{
+            $(className).addClass("text-danger").html("活动已过期");
+        }
     }, 1000);
 }
 
@@ -105,4 +110,18 @@ function toast(content='已完成',type="normal") {
     setTimeout(function () {
         $toast.fadeOut(300);
     }, 2000);
+}
+
+//坐标转换为地址
+function getLocation(location) {
+    if (location){
+        //异步上传到服务器
+        $.getJSON(locationUrl,{"location":location},function (res) {
+            if(res.code!=200){
+                toast(res.msg);
+            }
+        })
+    }else{
+        toast("获取地理位置失败请刷新页面");
+    }
 }

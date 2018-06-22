@@ -27,10 +27,10 @@ a{color: black}
             .goods .right .r-top .rt-title{width: 100%;max-height: 75px;font-size: 16px;font-weight: bold;color: black;overflow: hidden}
             .goods .right .r-top .rt-secondtitle{font-size: 10px;font-weight: normal}
         .goods .right .r-bottom{width: 100%;display: flex;flex-direction: row;justify-content: space-between;align-items: flex-end}
-            .gooss .right .r-bottom .rb-left{height: 100%}
+            .gooss .right .r-bottom .rb-left{width: 40%;height: 100%}
                 .goods .right .rb-left small{display:block;font-size: 10px;transform: scale(0.90);transform-origin:0 0;-webkit-transform: scale(0.90);-webkit-transform-origin:0 0;text-align: left;white-space: nowrap;overflow: hidden}
                 .goods .right .rb-left span{display:block;color: #b1191a;font-weight: bold;font-size: 14px}
-            .goods .right .r-bottom .rb-right{height: 100%;text-align: right}
+            .goods .right .r-bottom .rb-right{width: 60%;height: 100%;text-align: right}
                 .goods .right .rb-right a{padding: 6px 15px;background-color: #b1191a;}
                 .goods .right .rb-right button{background: -webkit-linear-gradient(-45deg, #ff0020 0%,#ff0080  100%);border:red 0px;}
 .advert{width: 100%;height: 150px;padding-left: 0px;padding-right: 0px;}
@@ -56,6 +56,7 @@ a{color: black}
 #detail .kj-introduce{display: flex;flex-direction: column;justify-content: flex-start;align-items: center;background: white;padding-bottom: 30px}
     /*#detail .kj-introduce div{width: 100%}*/
     #detail .kj-introduce .kj-success-num{text-align: left;font-size: 12px;margin-bottom: 3px;width: 100%}
+        #detail .kj-introduce .cut-off-date{float: right}
     #detail .kj-introduce .kj-progress{position: relative;margin-top: 40px;width: 100%;}
         #detail .kj-progress .progress{margin: 10px 0;margin-bottom: 5px}
             #detail .kj-progress .tooltip{z-index: 1}
@@ -143,7 +144,8 @@ a{color: black}
         #user .myorder .order-status{width: 100%;height: 50px;display: flex;flex-direction: row;background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px}
             #user .order-status .going{box-sizing: border-box;width: 50%;height: 30px;margin: 10px 0px;text-align: center;line-height: 30px;border-right: 1px lightgray solid}
             #user .order-status .finish{width: 50%;height: 30px;margin: 10px 0px;text-align: center;line-height: 30px}
-    #user .orders-box .right .rb-right .count-down{font-size: 12px;color: grey;overflow: hidden;word-break: keep-all;white-space: nowrap;}
+    #user .orders-box .right .rb-right .count-down{font-size: 10px;margin-left: 10px;width: 100%;color: grey;text-align:right;overflow: hidden;word-break: keep-all;white-space: nowrap;-webkit-transform: scale(0.90);-webkit-transform-origin: 0 0;}
+    #user .orders-box .right .rb-right .text-danger{color: #a94442;}
 
 /*toast样式*/
 #toast .weui_toast{ padding: 0 10px;}

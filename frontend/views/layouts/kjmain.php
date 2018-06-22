@@ -29,6 +29,7 @@ use yii\helpers\Url;
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
         wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage', 'openLocation', 'getLocation'), false, false) ?>);
+        var locationUrl = <?= json_encode(Url::toRoute('user-local'));?>
     </script>
 </head>
 <body>
@@ -79,6 +80,7 @@ use yii\helpers\Url;
                     var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
                     sessionStorage.latitude = latitude;
                     sessionStorage.longitude = longitude;
+                    getLocation(latitude+','+longitude);
                 }
             });
         });
