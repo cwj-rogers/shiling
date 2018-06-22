@@ -76,7 +76,8 @@ class WxGoods extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function goodsList(){
+    //
+    public function goodsList(){
         $list = static::find()
             ->select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_type,wg_status")
             ->where(['>','wg_number', 0])
