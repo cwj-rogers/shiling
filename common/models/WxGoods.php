@@ -70,18 +70,20 @@ class WxGoods extends \yii\db\ActiveRecord
             'wg_status' => '状态',// 0下架 1上架
             'wg_promote_time' => '有效时长(时间戳)默认',
             'wg_sort' => '排序',
+            'wg_city' => '刷选城市',
             'created_time' => '添加时间',
             'updated_time' => '修改时间',
         ];
     }
 
     public static function goodsList(){
-        $list = static::find()->
-            select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_type,wg_status")
+        $list = static::find()
+            ->select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_type,wg_status")
             ->where(['>','wg_number', 0])
-            ->andWhere(['wg_status'=>1,'wg_type'=>[1,2]])
+            ->andWhere(['wg_status'=>1,'wg_type'=>[1,2],'wg_city'=>['通用',$_SESSION['userinfo']['city']]])
             ->orderBy("wg_sort desc,created_time desc")
             ->asArray()->all();
+//        $list = $list->createCommand()->getRawSql();
 
         $list = array_map(function($v){
             $v['wg_goods_album'] = substr($v['wg_goods_album'],0, strpos($v['wg_goods_album'],','));

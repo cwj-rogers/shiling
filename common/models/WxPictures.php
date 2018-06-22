@@ -48,6 +48,7 @@ class WxPictures extends \yii\db\ActiveRecord
             'wp_jump_url' => '跳转地址',
             'wp_status' => '状态 1.上架 0.下架',
             'wp_sort' => '越小越靠前',
+            'wp_city' => '刷选城市',
             'created_time' => 'Created Time',
         ];
     }

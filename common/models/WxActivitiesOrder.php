@@ -25,6 +25,7 @@ use yii\db\Exception;
  * @property integer $ago_take_method
  * @property integer $ago_return_call
  * @property string $ago_exprice_time
+ * @property string ago_finish_date
  * @property string $created_time
  */
 class WxActivitiesOrder extends \yii\db\ActiveRecord
@@ -46,7 +47,7 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
             [['user_id', 'wg_id'], 'required'],
             [['user_id', 'wg_id', 'ago_cut_number', 'ago_need_cut', 'ago_share_time', 'ago_status', 'ago_payment_method', 'ago_take_method', 'ago_return_call','ago_share_kanjia'], 'integer'],
             [['ago_cut_total'], 'number'],
-            [['ago_exprice_time', 'created_time'], 'safe'],
+            [['ago_exprice_time', 'created_time', 'ago_finish_date'], 'safe'],
             [['ago_order_sn'], 'string', 'max' => 24],
             [['ago_province', 'ago_city'], 'string', 'max' => 10],
             [['ago_order_sn'], 'unique'],
@@ -75,6 +76,7 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
             'ago_take_method' => '取货方式 1.到店自取',
             'ago_return_call' => '电话是否回访 ',
             'ago_exprice_time' => '到期时间',
+            'ago_finish_date' => '完成时间',
             'created_time' => '添加时间',
         ];
     }
