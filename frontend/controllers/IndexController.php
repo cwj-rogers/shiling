@@ -116,9 +116,9 @@ class IndexController extends Controller
             $agoId = Yii::$app->request->get('ago_id',0);
             $isVisit = 1;//是否为游客
             //今天是否已经分享
-            $hasVisitShare = WxFriendsShare::findOne(['ago_id'=>$agoId,'user_id'=>$userId,'visitor_id'=>$_SESSION['userinfo']['user_id'],'share_date'=>date("Y-m-d")]);
+            $hasVisitShare = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$_SESSION['userinfo']['user_id'],'share_date'=>date("Y-m-d")]);
         }
-        $hasVisitShare = isset($hasVisitShare)&&!empty($hasVisitShare)? 1:0;
+        $hasVisitShare = (isset($hasVisitShare) && !empty($hasVisitShare))? 1:0;
         // 获取订单信息
         $res = WxActivitiesOrder::getActOrder($wgId, $userId);//商品订单
         if ($res && !empty($res)){
@@ -151,7 +151,6 @@ class IndexController extends Controller
             if (empty($order)) \common\helpers\FuncHelper::ajaxReturn(201,'系统无反应');
             $order = $order->toArray();
             $SUID = $_SESSION['userinfo']['user_id'];
-
             if ($order['ago_cut_number']<$order['ago_need_cut'] && time()<strtotime($order['ago_exprice_time'])){
                 if($SUID==$userId){
                     //本人: 分享后才能砍价, 前后台都加判断避免刷单
@@ -178,7 +177,7 @@ class IndexController extends Controller
                             \common\helpers\FuncHelper::ajaxReturn(202,'分享好友后获得砍价机会');
                         }
                     }else{
-                        \common\helpers\FuncHelper::ajaxReturn(202,'双方好友必须在同一城市');// 返回失败
+                        \common\helpers\FuncHelper::ajaxReturn(202,'双方好友必须在同一城市,当前位置:'.$Scity);// 返回失败
                     }
                 }
             }else{
