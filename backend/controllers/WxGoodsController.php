@@ -66,6 +66,10 @@ class WxGoodsController extends BaseController
         ]);
     }
 
+    public function actionConfig(){
+        p(Yii::$app->params,1);
+    }
+
     /**
      * Displays a single WxGoods model.
      * @param string $id

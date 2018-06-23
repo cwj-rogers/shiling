@@ -10,7 +10,7 @@ use common\models\WxUser;
 use common\models\WxActivitiesOrder;
 use common\models\WxFriendsJoinLog;
 use yii\db\Expression;
-use yii\db\Query;
+use yii\db\Exception;
 
 class IndexController extends Controller
 {
@@ -48,7 +48,6 @@ class IndexController extends Controller
     }
 
     /**
-     * 要用到Session的地方不能用静态
      * @return string|\yii\web\Response
      */
     public function actionIndex(){
@@ -215,8 +214,20 @@ class IndexController extends Controller
              $res = json_decode(file_get_contents($url), true);
              if($res['status']==0){
                 if (isset($res['result']['ad_info']['province']) && isset($res['result']['ad_info']['city'])){
-                    $_SESSION['userinfo']['province'] = $res['result']['ad_info']['province'];
-                    $_SESSION['userinfo']['city'] = $res['result']['ad_info']['city'];
+                    $province = $res['result']['ad_info']['province'];
+                    $city = $res['result']['ad_info']['city'];
+                    $_SESSION['userinfo']['province'] = $province;
+                    $_SESSION['userinfo']['city'] = $city;
+
+                    try{
+                        //更新用户表实时位置
+                        Yii::$app->db->createCommand()
+                            ->update('yii2_wx_user',['province'=>$province,'city'=>$city, 'update_time'=>date("Y-m-d H:i:s")],['user_id'=>$_SESSION['userinfo']['user_id']])
+                            ->execute();
+                    }catch (Exception $e){
+                        throw json_encode($e->getMessage());
+                    }
+
                     \common\helpers\FuncHelper::ajaxReturn(200,'success');
                 }else{
                     \common\helpers\FuncHelper::ajaxReturn(205,'地理位置不存在请刷新页面');
@@ -236,7 +247,7 @@ class IndexController extends Controller
         if(!array_key_exists('userinfo',$_SESSION)){
             return $this->refresh();
         }
-        
+
         $res = WxActivitiesOrder::getOrderList($_SESSION['userinfo']['user_id'],$ago_status);
         return $this->render('user',['res'=>$res]);
     }
