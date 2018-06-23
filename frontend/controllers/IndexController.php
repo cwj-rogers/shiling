@@ -162,8 +162,9 @@ class IndexController extends Controller
                         \common\helpers\FuncHelper::ajaxReturn(202,'分享好友后获得砍价机会');
                     }
                 }else{
-                    //朋友: 1.同城 2.每天只能一次 3.已经分享给朋友
-                    if($_SESSION['userinfo']['city']==$order['ago_city']){
+                    //朋友: 1.同城 2.每天只能一次 3.已经分享给朋友  同城条件放开
+                    $Scity = $_SESSION['userinfo']['city'];
+                    if(mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false){
                         $shareExsit = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$SUID,'share_date'=>date("Y-m-d")]); //参与条件
                         if (!empty($shareExsit)){
                             $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]); //参与条件

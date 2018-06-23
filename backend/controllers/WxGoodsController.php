@@ -67,6 +67,8 @@ class WxGoodsController extends BaseController
     }
 
     public function actionConfig(){
+        $res = mb_strpos('徐州市','市');
+        p($res,1);
         p(Yii::$app->params,1);
     }
 
