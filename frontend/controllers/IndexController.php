@@ -210,6 +210,12 @@ class IndexController extends Controller
     public function actionUserLocal($location)
     {
         if (Yii::$app->request->isAjax){
+            //调用频率15分钟一次
+             $Uinfo = WxUser::findOne(['user_id'=>$_SESSION['userinfo']['user_id'] ]);
+             $timeD = time() - strtotime($Uinfo->update_time);
+             if(!empty($Uinfo) && $timeD<900){
+                 \common\helpers\FuncHelper::ajaxReturn(200,'位置已更新成功');
+             }
              $key = '2H3BZ-LFJR3-YE63J-YEZCQ-DV2YK-L7BYH';
              $url = "https://apis.map.qq.com/ws/geocoder/v1/?location=" . $location . "&key=" . $key;
              $res = json_decode(file_get_contents($url), true);

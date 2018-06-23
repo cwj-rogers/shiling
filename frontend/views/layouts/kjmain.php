@@ -28,8 +28,10 @@ use yii\helpers\Url;
     <!--  微信分享配置  -->
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
-        wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage', 'openLocation', 'getLocation'), false, false) ?>);
-        var locationUrl = <?= json_encode(Url::toRoute('user-local'));?>
+        var locationUrl = <?= json_encode(Url::toRoute('user-local'));?>;
+        $(function () {
+            wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage', 'openLocation', 'getLocation'), false, false) ?>);
+        });
     </script>
 </head>
 <body>
@@ -49,7 +51,7 @@ use yii\helpers\Url;
 <!--<sctipt src="https://cdn.bootcss.com/vue/2.0.0/vue.min.js"></sctipt>-->
 <script src="<?=Yii::getAlias('@web')?>/static/kjmain.js"></script>
 <script type="text/javascript" charset="utf-8">
-
+$(function () {
     // 除详情页外共用的分享页
     var requestUrl = <?= json_encode(strstr(basename(Yii::$app->request->getUrl()), '?',true));?>;
     var localUrl = location.href;
@@ -85,6 +87,7 @@ use yii\helpers\Url;
             });
         });
     }
+})
 </script>
 </body>
 </html>

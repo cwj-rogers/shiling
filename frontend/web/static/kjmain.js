@@ -82,7 +82,7 @@ $('.cd-item').each(function () {
 // 活动结束计时器
 function countDown(className,date) {
     date=date.replace(new RegExp(/-/gm) ,"/");
-    var starttime = new Date(date);console.log(starttime);
+    var starttime = new Date(date);//console.log(starttime);
     setInterval(function () {
         var nowtime = new Date();
 
@@ -117,6 +117,7 @@ function getLocation(location) {
     if (location){
         //异步上传到服务器
         $.getJSON(locationUrl,{"location":location},function (res) {
+            console.log(res);
             if(res.code!=200){
                 toast(res.msg);
             }
