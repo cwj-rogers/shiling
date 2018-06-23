@@ -163,7 +163,7 @@ class IndexController extends Controller
                 }else{
                     //朋友: 1.同城 2.每天只能一次 3.已经分享给朋友  同城条件放开
                     $Scity = $_SESSION['userinfo']['city'];
-                    if(mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false){
+                    if(mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false || $order['ago_city']=="通用"){
                         $shareExsit = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$SUID,'share_date'=>date("Y-m-d")]); //参与条件
                         if (!empty($shareExsit)){
                             $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]); //参与条件
