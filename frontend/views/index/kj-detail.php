@@ -49,7 +49,7 @@ use yii\helpers\Url;
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
         </div>
-        <div class="ago-location">发起: 佛山市</div>
+        <div class="ago-location">发起: <?= $res['ago_city']?></div>
     </div>
     <div class="good-title-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="good-title"><?= $res['wg_name']?></div>
