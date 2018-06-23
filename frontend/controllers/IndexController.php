@@ -151,6 +151,7 @@ class IndexController extends Controller
             if (empty($order)) \common\helpers\FuncHelper::ajaxReturn(201,'系统无反应');
             $order = $order->toArray();
             $SUID = $_SESSION['userinfo']['user_id'];
+            //没砍完+没过期
             if ($order['ago_cut_number']<$order['ago_need_cut'] && time()<strtotime($order['ago_exprice_time'])){
                 if($SUID==$userId){
                     //本人: 分享后才能砍价, 前后台都加判断避免刷单
@@ -161,12 +162,15 @@ class IndexController extends Controller
                         \common\helpers\FuncHelper::ajaxReturn(202,'分享好友后获得砍价机会');
                     }
                 }else{
-                    //朋友: 1.同城 2.每天只能一次 3.已经分享给朋友  同城条件放开
+                    //朋友: 1.同城 2.每天只能一次 3.已经分享给朋友 4."通用产品不判断城市"
                     $Scity = $_SESSION['userinfo']['city'];
-                    if(mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false || $order['ago_city']=="通用"){
-                        $shareExsit = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$SUID,'share_date'=>date("Y-m-d")]); //参与条件
+                    //城市参与条件
+                    if(mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false){
+                        //分享参与条件
+                        $shareExsit = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$SUID,'share_date'=>date("Y-m-d")]);
                         if (!empty($shareExsit)){
-                            $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]); //参与条件
+                            //今日未砍价条件
+                            $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$SUID, 'fj_join_date'=>date("Y-m-d")]);
                             if (empty($exsit)){
                                 $res = (new WxFriendsJoinLog)->kanjiaRule('friends',$order,$agoId,$SUID,$lat,$lon);
                                 if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
