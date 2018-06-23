@@ -165,7 +165,8 @@ class IndexController extends Controller
                     //朋友: 1.同城 2.每天只能一次 3.已经分享给朋友 4."通用产品不判断城市"
                     $Scity = $_SESSION['userinfo']['city'];
                     //城市参与条件
-                    if(mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false){
+                    //mb_strpos($Scity,$order['ago_city'])!=false || mb_strpos($order['ago_city'], $Scity)!=false
+                    if(1){
                         //分享参与条件
                         $shareExsit = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$SUID,'share_date'=>date("Y-m-d")]);
                         if (!empty($shareExsit)){
