@@ -160,8 +160,13 @@ class IndexController extends Controller
                 if($SUID==$userId){
                     //本人: 分享后才能砍价, 前后台都加判断避免刷单
                     if ($order['ago_share_time']>0 && $order['ago_share_kanjia']==0){
-                        $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
-                        if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
+                        $exsit = WxFriendsJoinLog::findOne(['ago_id'=>$agoId,'user_id'=>$order['user_id'], 'fj_join_date'=>date("Y-m-d")]);
+                        if (empty($exsit)){
+                            $res = (new WxFriendsJoinLog)->kanjiaRule('user',$order,$agoId,$userId,$lat,$lon);
+                            if($res) \common\helpers\FuncHelper::ajaxReturn(200,'success', $res);
+                        }else{
+                            \common\helpers\FuncHelper::ajaxReturn(202,'您的砍价次数已用完');
+                        }
                     }else{
                         \common\helpers\FuncHelper::ajaxReturn(202,'分享好友后获得砍价机会');
                     }

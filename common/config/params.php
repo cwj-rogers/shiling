@@ -30,12 +30,13 @@ return [
     /* UEditor编辑器配置 */
     'ueditorConfig' => [
         /* 图片上传配置 */
-        'imageRoot'            => 'http://wx.hjz.com/storage/image', //图片path前缀
+        'imageRoot'            => Yii::getAlias("@storage/web"), //图片path前缀
         //'imageRoot'            => Yii::getAlias("@base/web/storage"), //图片path前缀，服务器解析到/web/目录时，上传到这里
         'imageUrlPrefix'       => Yii::getAlias('@storageUrl'), //图片url前缀
         'imagePathFormat'      => '/image/{yyyy}{mm}/editor{time}{rand:6}',
+
         /*在线图片路径*/
-        'imageManagerListPath' => "storage/web/image",
+        'imageManagerListPath' => Yii::getAlias("@storage/web"),
         'imageManagerListSize' => 20,
 
         /* 文件上传配置 */
