@@ -51,7 +51,7 @@ a{color: black}
 #detail .good-title-box{position: relative;box-sizing: border-box;padding: 10px 15px;background: white}
     #detail .good-title-box .good-title{text-align: left;font-size: 16px;font-weight: bold}
     #detail .good-title-box .good-price{color: #b1191a}
-    #detail .good-title-box .act-rule{position: absolute;right: 10px;top:10px;padding: 5px 10px;background-color: rgba(0,0,0,0.2);border-radius: 15px;color: white;font-size: 12px}
+    #detail .good-title-box .act-rule{position: absolute;right: 10px;top:27px;padding: 5px 10px;background-color: rgba(0,0,0,0.2);border-radius: 15px;color: white;font-size: 12px}
 
 /* 砍价信息展示区 */
 #detail .kj-introduce{display: flex;flex-direction: column;justify-content: flex-start;align-items: center;background: white;padding-bottom: 30px}
