@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use common\core\ActiveForm;
 use common\helpers\ArrayHelper;
+use kucha\ueditor\UEditor;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\WxGoods */
@@ -14,33 +15,61 @@ use common\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'wg_name')->textInput(['maxlength' => true])->label('商品名称简介')->hint('名称+简介两者要用空格隔开,不然报错') ?>
+    <?= $form->field($model, 'wg_name')->textInput(['style'=>'width:100%','maxlength' => true])->label('商品名称简介')->hint('名称+简介两者要用空格隔开,不然报错') ?>
 
-    <?= $form->field($model, 'wg_description')->textarea(['rows' => 4,'maxlength' => true]) ?>
+    <?= $form->field($model, 'wg_description')->textarea(['style'=>'width:100%','rows' => 5,'maxlength' => true]) ?>
 
-    <?= $form->field($model, 'wg_goods_album')->textarea(['rows' => 4])->label('商品图册 (外链接用","隔开)')->hint('图片外链请到<a href="http://wantu.taobao.com" target="_blank">阿里顽兔</a>获取') ?>
+    <?= $form->field($model, 'wg_goods_album')->textarea(['style'=>'width:100%','rows' => 5])->label('商品图册 (外链接用","隔开)')->hint('图片外链请到<a href="http://wantu.taobao.com" target="_blank">阿里顽兔</a>获取') ?>
 
-    <?=$form->field($model, 'wg_content')->widget('\kucha\ueditor\UEditor',[
-        'clientOptions' => [
-            'serverUrl' => Url::to(['/public/ueditor']),//确保serverUrl正确指向后端地址
-            'lang' =>'zh-cn', //中文为 zh-cn
-            'initialFrameWidth' => '100%',
-            'initialFrameHeight' => '400',
-            //定制菜单，参考http://fex.baidu.com/ueditor/#start-toolbar
-            'toolbars' => [
-                [
-                    'fullscreen', 'source', 'undo', 'redo', '|',
-                    'fontsize',
-                    'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
-                    'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
-                    'forecolor', 'backcolor', '|',
-                    'lineheight', '|',
-                    'indent', '|',
-                ],
-                ['preview','simpleupload','insertimage','link','emotion','map','insertvideo','insertcode',]
+    <?=
+        $form->field($model, 'wg_content')->widget('\kucha\ueditor\UEditor',[
+            'clientOptions' => [
+                'serverUrl' => Url::to(['/public/ueditor']),//确保serverUrl正确指向后端地址
+                'lang' =>'zh-cn', //中文为 zh-cn
+                'initialFrameWidth' => '100%',
+                'initialFrameHeight' => '400',
+                //定制菜单，参考http://fex.baidu.com/ueditor/#start-toolbar
+                'toolbars' => [
+                    [
+                        'fullscreen', 'source', 'undo', 'redo', '|',
+                        'fontsize',
+                        'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
+                        'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+                        'forecolor', 'backcolor', '|',
+                        'lineheight', '|',
+                        'indent', '|',
+                    ],
+                    ['preview','simpleupload','insertimage','link','emotion','map','insertvideo','insertcode',]
+                ]
             ]
-        ]
-    ],['class'=>'c-md-12'])->label('文章内容');?>
+        ],['class'=>'c-md-12'])->label('文章内容');
+    ?>
+
+    <?php
+//        UEditor::widget([
+//                'name'=>'uedd',
+//            'clientOptions' => [
+//
+//                //编辑区域大小
+//                'initialFrameHeight' => '200',
+//                //设置语言
+//                'lang' =>'en', //中文为 zh-cn
+//                //定制菜单
+//                'toolbars' => [
+//                    [
+//                        'fullscreen', 'source', 'undo', 'redo', '|',
+//                        'fontsize',
+//                        'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
+//                        'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+//                        'forecolor', 'backcolor', '|',
+//                        'lineheight', '|',
+//                        'indent', '|',
+//                    ],
+//                    ['preview','simpleupload','insertimage','link','emotion','map','insertvideo','insertcode',]
+//                ]
+//            ]
+//        ]);
+    ?>
 
     <?= $form->field($model, 'wg_market_price')->textInput(['maxlength' => true]) ?>
 

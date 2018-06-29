@@ -29,19 +29,6 @@ class WxGoodsController extends BaseController
         ];
     }
 
-    //文件上传相关配置
-//    public function actions(){
-//        return [
-//            'upload' => [
-//                'class' => 'kucha\ueditor\UEditorAction',
-//                'config' => [
-//                    "imageUrlPrefix"  => "http://home.com",//图片访问路径前缀
-//                    "imagePathFormat" => "upload/{time}{rand:6}" //上传保存路径
-//                ],
-//            ]
-//        ];
-//    }
-
     /**
      * Lists all WxGoods models.
      * @return mixed
@@ -67,11 +54,13 @@ class WxGoodsController extends BaseController
     }
 
     public function actionConfig(){
-        $res = mb_strpos('徐州','徐州市');
-        $res2 = mb_strpos('徐州市','徐州');
-        p($res);
-        p($res2,1);
-        p(Yii::$app->params,1);
+//        $res = mb_strpos('徐州','徐州市');
+//        $res2 = mb_strpos('徐州市','徐州');
+//        p($res);
+//        p($res2,1);
+//        p(Yii::$app->params,1);
+        $uploader = new \common\widgets\Uploader();
+        $uploader->index();
     }
 
     /**
@@ -96,7 +85,7 @@ class WxGoodsController extends BaseController
         $model = new WxGoods();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->wg_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -104,6 +93,22 @@ class WxGoodsController extends BaseController
         }
     }
 
+//    public function actions()
+//    {
+//        return [
+//            'upload' => [
+//                'class' => 'kucha\ueditor\UEditorAction',
+//                'config' => [
+//                    "imageUrlPrefix"  => Yii::getAlias('@storageUrl'),//图片访问路径前缀
+//                    "imagePathFormat" => '/image/{yyyy}{mm}/editor{time}{rand:6}', //上传保存路径
+//                    "imageRoot" => Yii::getAlias("@storage/web"),
+//                    //在线图片不加前缀,直接用返回地址
+//                    'imageManagerListPath' => Yii::getAlias("@storage/web/image"),//指定要列出图片的目录
+//                    'imageManagerUrlPrefix' => Yii::getAlias('@storageUrl').'/image',//图片访问路径前缀
+//                ],
+//            ]
+//        ];
+//    }
 
     /**
      * Updates an existing WxGoods model.
@@ -115,7 +120,7 @@ class WxGoodsController extends BaseController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->wg_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
