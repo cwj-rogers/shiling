@@ -25,7 +25,7 @@ use kucha\ueditor\UEditor;
 
     <?= $form->field($model, 'wg_number')->textInput() ?>
 
-    <?=$form->field($model, 'wg_need_cut')->textInput(['class'=>'form-control c-md-1'])->label('砍价次数')->hint('参与人数')?>
+    <?=$form->field($model, 'wg_need_cut')->textInput(['class'=>'form-control c-md-1'])->label('需要砍价次数')->hint('需要参与人数')?>
 
     <?=$form->field($model, 'wg_city')->textInput(['class'=>'form-control c-md-1'])->label('地区')->hint('无限制填"通用",否则填对应城市')?>
 
@@ -58,7 +58,7 @@ use kucha\ueditor\UEditor;
                 ['preview','simpleupload','insertimage','link','emotion','map','insertvideo','insertcode',]
             ]
         ]
-    ],['class'=>'c-md-12'])->label('文章内容');
+    ],['class'=>'c-md-12','style'=>'max-height:5000px'])->label('文章内容');
     ?>
 
     <div class="form-group">

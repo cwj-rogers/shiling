@@ -83,7 +83,7 @@ class WxGoodsSearch extends WxGoods
             'wg_view' => $this->wg_view,
             'wg_finish_deal' => $this->wg_finish_deal,
             'wg_need_cut' => $this->wg_need_cut,
-            'wg_type' => $this->wg_type,
+            'wg_type' => 1,
             'wg_status' => $this->wg_status,
             'wg_promote_time' => $this->wg_promote_time,
             'wg_sort' => $this->wg_sort,

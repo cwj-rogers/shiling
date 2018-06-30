@@ -41,7 +41,7 @@ use yii\helpers\Url;
     <?=$content?>
 </div>
 <div class="foot">
-    <div class="item "> <a class="<?= Yii::$app->request->getUrl()=="/index/index"||Yii::$app->request->getUrl()=="/"?'active':'';?>" name="" id="" href="<?= Url::toRoute('index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 砍价商品</a></div>
+    <div class="item "> <a class="<?= Yii::$app->request->getUrl()=="/index/index"||Yii::$app->request->getUrl()=="/"?'active':'';?>" name="" id="" href="<?= Url::toRoute('index')?>"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> 马上砍价</a></div>
     <div class="item"> <a class="<?= strstr(Yii::$app->request->getUrl(),'?',true)=="/index/user"?'active':'';?>" id="" href="<?= Url::toRoute(['user','ago_status'=>1])?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 我的砍价</a></div>
 </div>
 
