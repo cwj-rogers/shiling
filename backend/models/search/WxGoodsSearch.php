@@ -51,6 +51,11 @@ class WxGoodsSearch extends WxGoods
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=>[
+                'defaultOrder'=>[
+                    'created_time'=>SORT_DESC//设置默认排序是create_time倒序
+                ],
+            ],
         ]);
 
         $this->load($params);
@@ -89,5 +94,22 @@ class WxGoodsSearch extends WxGoods
         $query->andFilterWhere(['like', 'wg_name', $this->wg_name]);
 
         return $dataProvider;
+    }
+
+    public static function dropDown ($column, $value = null){
+        $dropDownList = [
+            "wg_status"=> [
+                "1"=>"上架",
+                "0"=>"下架",
+            ],
+        ];
+        //根据具体值显示对应的值
+        if ($value !== null){
+            $columnData = array_key_exists($column, $dropDownList) ? $dropDownList[$column] : null;
+            return array_key_exists($value, $columnData) ? $columnData[$value] : null;
+        }else{
+            //返回关联数组，用户下拉的filter实现
+            return array_key_exists($column, $dropDownList) ? $dropDownList[$column] : null;
+        }
     }
 }

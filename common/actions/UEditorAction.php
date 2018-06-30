@@ -4,6 +4,7 @@ namespace common\actions;
 use Yii;
 use kucha\ueditor\Uploader;
 use yii\helpers\ArrayHelper;
+use common\widgets\Uploader as wtUploader;
 
 class UEditorAction extends \kucha\ueditor\UEditorAction
 {
@@ -128,7 +129,7 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
          */
         $info = $up->getFileInfo();
         if ($_GET['action']='uploadimage'){
-            $wtUpload = new \common\widgets\Uploader();
+            $wtUpload = new wtUploader();
             $filePath = $this->config['imageRoot'].$info['url'];
             $wtRes = $wtUpload->test_upload_file_c($filePath);
             $res = [
@@ -167,14 +168,27 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
                 break;
             default:
         }
-        $allowFiles = substr(str_replace(".", "|", join("", $allowFiles)), 1);
+//        $allowFiles = substr(str_replace(".", "|", join("", $allowFiles)), 1);
         /* 获取参数 */
         $size = isset($_GET['size']) ? htmlspecialchars($_GET['size']) : $listSize;
         $start = isset($_GET['start']) ? htmlspecialchars($_GET['start']) : 0;
-        $end = (int)$start + (int)$size;
+//        $end = (int)$start + (int)$size;
 
         /* 获取文件列表 */
-        $files = $this->getfiles($path, $allowFiles);
+//        $files = $this->getfiles($path, $allowFiles);
+
+        /* 获取阿里顽兔的图片 */
+        $files = [];
+        $page = $start? ceil($start/20)+1:1;
+        $wtfiles = (new wtUploader())->getList($page, $size);
+        /* 整理数组格式 */
+        array_map(function ($v) use (&$files){
+            $files[] = [
+                'url'   => $v['path'],
+                'mtime' => $v['createStamp']
+            ];
+        }, $wtfiles['result']);
+
         if (!count($files)) {
             return json_encode([
                 "state" => "no match file",
@@ -183,23 +197,14 @@ class UEditorAction extends \kucha\ueditor\UEditorAction
                 "total" => count($files)
             ]);
         }
-
-        /* 获取指定范围的列表 */
-        $len = count($files);
-        for ($i = min($end, $len) - 1, $list = []; $i < $len && $i >= 0 && $i >= $start; $i--) {
-            $list[] = $files[$i];
-        }
-        //倒序
-        //for ($i = $end, $list = array(); $i < $len && $i < $end; $i++){
-        //    $list[] = $files[$i];
-        //}
+        $list = $files;
 
         /* 返回数据 */
         $result = json_encode([
             "state" => "SUCCESS",
             "list"  => $list,
             "start" => $start,
-            "total" => count($files)
+            "total" => $wtfiles['totalCount']
         ]);
         return $result;
     }

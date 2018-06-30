@@ -12,8 +12,8 @@ require_once (dirname ( __FILE__ )."/mediaSDK/alimedia/alimage.class.php");
 class Uploader{
     const AK = '24901306';
     const SK = '797a577b83f45a18550d0e2ed251947b';
-    const SPACE = 'ueditor';
-    const SPACE_PATH = '/wechat';
+    const SPACE = 'ueditor';//'hjzhome';//
+    const SPACE_PATH = '/wechat';//'/品牌logo';//
 
     public function index(){
         $filename = Yii::getAlias("@storage/web/image/201806/editor1529571612734724.png");
@@ -66,7 +66,36 @@ class Uploader{
 //        ]
     }
 
-    public function imageList(){
+    public function getList($page = 1, $pageSize = 100){
+        /*第一步：（必须）引入AlibabaImage类，并设置AK和SK*/
+        $aliImage  = new \AlibabaImage(self::AK, self::SK);
 
+        /* 3:获取指定目录下的文件列表*/
+        $res = $aliImage->listFiles(self::SPACE, self::SPACE_PATH, $page, $pageSize);
+        return $res;
+        /*
+         * [
+                [result] => Array
+                    (
+                        [0] => Array
+                            (
+                                [createStamp] => 1530288592
+                                [dir] => /wechat
+                                [mimeType] => application/octet-stream
+                                [modifyStamp] => 1530288592
+                                [name] => image_1530288592
+                                [namespace] => ueditor
+                                [path] => /wechat/image_1530288592
+                                [region] => hangzhou
+                                [size] => 0
+                                [url] => http://ueditor.file.alimmdn.com/wechat/image_1530288592
+                            )
+                    )
+                [totalCount] => 8
+                [requestId] => 9ff830f5c21041928c6e2afa76e20bd9
+                [totalPage] => 1
+                [isSuccess] => 1
+            ]
+         * */
     }
 }

@@ -40,13 +40,13 @@ class WxGoods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['wg_content', 'wg_finish_deal'], 'required'],
-            [['wg_content'], 'string'],
+            [['wg_content'], 'required'],
+            [['wg_content','wg_city'], 'string'],
             [['wg_market_price'], 'number'],
             [['wg_number', 'wg_view', 'wg_finish_deal', 'wg_type', 'wg_status', 'wg_promote_time', 'wg_sort', 'wg_need_cut'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
             [['wg_name'], 'string', 'max' => 120],
-            [['wg_description', 'wg_goods_album'], 'string', 'max' => 255],
+            [['wg_description', 'wg_goods_album'], 'string', 'max' => 500],
         ];
     }
 
@@ -76,16 +76,37 @@ class WxGoods extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert){
+        //防止覆盖BaseActiveRecord里的event事件
+        if(parent::beforeSave($insert)){
+            //区分插入还是更新
+            if($this->isNewRecord){
+                $this->created_time = date("Y-m-d H:i:s");
+            }else{
+                $this->setAttributes(['updated_time'=>date("Y-m-d H:i:s")]);//更新前执行
+            }
+            return true;
+        }else
+            return false;
+    }
+
     //
     public function goodsList(){
         $list = static::find()
-            ->select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_type,wg_status")
+            ->select("wg_id,wg_name,wg_goods_album,wg_market_price,wg_finish_deal,wg_type,wg_status,wg_city")
             ->where(['>','wg_number', 0])
-            ->andWhere(['wg_status'=>1,'wg_type'=>[1,2],'wg_city'=>['通用',$_SESSION['userinfo']['city']]])
+            ->andWhere(['wg_status'=>1,'wg_type'=>[1,2]])
             ->orderBy("wg_sort desc,created_time desc")
             ->asArray()->all();
 //        $list = $list->createCommand()->getRawSql();
 
+        $Scity = $_SESSION['userinfo']['city'];
+        foreach ($list as $k=>&$v){
+            $cityToSell = explode(',', $v['wg_city']);
+            if ($v['wg_city']!='通用' && !in_array($Scity, $cityToSell)){
+                unset($list[$k]);
+            }
+        }
         $list = array_map(function($v){
             $v['wg_goods_album'] = substr($v['wg_goods_album'],0, strpos($v['wg_goods_album'],','));
             $nameArr = explode(" ",$v['wg_name']);

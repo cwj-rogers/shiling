@@ -33,7 +33,10 @@ $columns = [
     ],
     [
         'attribute' => 'wg_name',
-        'options' => ['width' => '200px;']
+        'options' => ['width' => '200px;'],
+        'content' => function($model){
+            return explode(' ',$model->wg_name)[0];
+        }
     ],
     [
         'header' => '封面',
@@ -43,6 +46,11 @@ $columns = [
             return'<img alt="" class="td-img" src="'.$thumb.'">';
         },
         'options' => ['width' => '50px;']
+    ],
+    [
+        'header' => '地区',
+        'value' => 'wg_city',
+        'options' => ['width' => '80px;']
     ],
     [
         'header' => '市场售价',
@@ -66,6 +74,9 @@ $columns = [
     ],
     [
         'attribute' => 'wg_status',
+        'content' => function($model){
+            return WxGoodsSearch::dropDown('wg_status', $model->wg_status);
+        },
         'options' => ['width' => '50px;']
     ],
     [
@@ -89,7 +100,7 @@ $columns = [
 //        'filter' => Html::activeDropDownList($searchModel, 'pay_status', [0 => '未支付',1 => '已支付'], ['prompt'=>'全部','class'=>'form-control']),
 //    ],
     [
-        'label' => '订单时间',
+        'label' => '创建时间',
         'attribute' => 'created_time',
         'options' => ['width' => '150px;'],
         'format' =>  ['date', 'php:Y-m-d H:i'],

@@ -38,8 +38,9 @@ return [
 
         /*在线图片路径*/
         'imageManagerListSize' => 20,
-        'imageManagerUrlPrefix' => Yii::getAlias('@storageUrl').'/image',//图片访问路径前缀
-        'imageManagerListPath' => Yii::getAlias("@storage/web/image"),//指定要列出图片的目录
+//        'imageManagerUrlPrefix' => Yii::getAlias('@storageUrl').'/image',//图片访问路径前缀
+        "imageManagerUrlPrefix"     => "http://ueditor.image.alimmdn.com",//第三方图片库
+//        'imageManagerListPath' => Yii::getAlias("@storage/web/image"),//指定要列出图片的目录
 
         /* 文件上传配置 */
         'fileRoot'             => Yii::getAlias("@storage/web"), //文件path前缀
