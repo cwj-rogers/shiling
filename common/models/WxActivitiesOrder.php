@@ -62,8 +62,8 @@ class WxActivitiesOrder extends \yii\db\ActiveRecord
         return [
             'ago_id' => 'id',
             'ago_order_sn' => '商品的名称',
-            'user_id' => '用户id',
-            'wg_id' => '商品id',
+            'user_id' => '昵称',
+            'wg_id' => '商品名',
             'ago_cut_total' => '累积砍价',
             'ago_cut_number' => '已砍价次数',
             'ago_need_cut' => '需要砍价次数',
