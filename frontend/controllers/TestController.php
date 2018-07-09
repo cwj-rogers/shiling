@@ -24,7 +24,7 @@ class TestController extends \yii\web\Controller
         ], parent::behaviors());
     }
 
-        public function actionIndex()
+    public function actionIndex()
     {
         $this->layout = false;
 //        Yii::$app->response->headers->add("Access-Control-Allow-Origin", "*");
@@ -32,4 +32,8 @@ class TestController extends \yii\web\Controller
         return $this->render('index');
     }
 
+    public function actionToken()
+    {
+        
+    }
 }

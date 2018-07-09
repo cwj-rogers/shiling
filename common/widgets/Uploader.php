@@ -14,6 +14,12 @@ class Uploader{
     const SK = '797a577b83f45a18550d0e2ed251947b';
     const SPACE = 'ueditor';//'hjzhome';//
     const SPACE_PATH = '/wechat';//'/品牌logo';//
+    private static $alimageHandle;
+
+    public function __construct()
+    {
+        self::$alimageHandle = new \AlibabaImage(self::AK, self::SK);
+    }
 
     public function index(){
         $filename = Yii::getAlias("@storage/web/image/201806/editor1529571612734724.png");
@@ -26,21 +32,27 @@ class Uploader{
      * @param $filename
      * @return array
      */
-    public function test_upload_file_c($filename){
+    public function test_upload_file_c($filename, $space=null, $spacePath=null, $picFileName=null){
         try{
-            $ak = self::AK;
-            $sk = self::SK;
-            $namespace = self::SPACE;
-            /*该测试方法主要是通过UploadOption设置文件上传到服务端的名称和路径*/
+//            $ak = self::AK;
+//            $sk = self::SK;
             /*第一步：（必须）引入AlibabaImage类，并设置AK和SK*/
-            $aliImage  = new \AlibabaImage($ak, $sk);		//设置AK和SK
+            $aliImage  = self::$alimageHandle;		//设置AK和SK
+
+            $namespace = $space? $space : self::SPACE;
+            $nameSpacePath = $spacePath? $spacePath : self::SPACE_PATH;
+//            $picFileName = $picFileName? $picFileName: 'image_'.time();
+            //验证目录, 不存在则创建
+            if(!$aliImage->existsFolder($namespace, $nameSpacePath)){
+                $aliImage->createDir($namespace, $nameSpacePath);
+            }
 
             /*第二步：（必须）在上传策略UploadPolicy中指定用户空间名。也可以根据需要设置其他参数*/
             $uploadPolicy = new \UploadPolicy( $namespace );	// 上传策略。并设置空间名
             /*（可选）开发者可以在UploadPolicy设置路径和文件名，也可在上传选项UploadOption中设置用户自定义的参数*/
             $uploadOption = new \UploadOption();
-            $uploadOption->dir = self::SPACE_PATH;	// 文件路径，(可选，默认根目录"/")
-            $uploadOption->name = 'image_'.time();	// 文件名，(可选，不能包含"/"。若为空，则默认使用文件名)
+            $uploadOption->dir = $nameSpacePath;	// 文件路径，(可选，默认根目录"/")
+            //$uploadOption->name = $picFileName;	// 文件名，(可选，不能包含"/"。若为空，则默认使用文件名)
 
             /*第三步：（必须）进行文件上传*/
             $res = $aliImage->upload( $filename, $uploadPolicy, $uploadOption );
@@ -66,6 +78,13 @@ class Uploader{
 //        ]
     }
 
+    /**
+     * 获取图片列表
+     * @param int $page
+     * @param int $pageSize
+     * @return array
+     * @throws \Exception
+     */
     public function getList($page = 1, $pageSize = 100){
         /*第一步：（必须）引入AlibabaImage类，并设置AK和SK*/
         $aliImage  = new \AlibabaImage(self::AK, self::SK);

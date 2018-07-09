@@ -54,7 +54,7 @@ use yii\helpers\Url;
     <div class="good-title-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="good-title"><?= $res['wg_name']?></div>
         <div class="good-price"><s>¥ <?= $res['wg_market_price']?></s></div>
-        <div class="act-rule">活动规则</div>
+        <div class="act-rule">活动规则<div class="rule-item"></div></div>
     </div>
 
     <div class="kj-introduce col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -100,7 +100,9 @@ use yii\helpers\Url;
         <div class="good-detail-introduce">
             <div class="well">
                 <p>商品描述</p>
-                <p><?= $res['wg_description']?></p>
+                <?php foreach ($res['wg_description'] as $v):?>
+                    <p><?= $v?></p>
+                <?php endforeach;?>
             </div>
         </div>
         <div class="good-detail">
@@ -272,6 +274,10 @@ use yii\helpers\Url;
     var share_time = <?= $res['ago_share_time']?>;var cut_total = <?= $res['ago_cut_total']?>;var status = <?= $res['ago_status']?>;var isVisit = <?= $res['isVisit']?>;var share_kanjia = <?= $res['ago_share_kanjia']?>;var hasVisitShare = <?= $res['hasVisitShare']?>;
     // 用户进入砍价页
     $(function () {
+        //根据屏幕宽度调节轮播图的高度
+        var window_w = window.screen.width;console.log(window_w);
+        $('.kj-good-img').css('height', window_w-50);
+
         if(status!=1){
             alert("此商品砍价活动已经结束");
             location.href = kanjia.indexurl;
