@@ -62,7 +62,12 @@ function p($var,$is_die=0)
     } else if (is_null($var)) {
         var_dump(NULL);
     } else {
-        echo "<pre style='position:relative;z-index:1000;padding:10px;border-radius:5px;background:#F5F5F5;border:1px solid #aaa;font-size:14px;line-height:18px;opacity:0.9;'>" . print_r($var, true) . "</pre>";
+        $is_cli = preg_match("/cli/i", php_sapi_name()) ? true : false;
+        if (!$is_cli){
+            echo "<pre style='position:relative;z-index:1000;padding:10px;border-radius:5px;background:#F5F5F5;border:1px solid #aaa;font-size:14px;line-height:18px;opacity:0.9;'>" . print_r($var, true) . "</pre>";
+        }else{
+            echo print_r($var, true);
+        }
     }
     if ($is_die==1) die;
 }

@@ -123,6 +123,7 @@ class IndexController extends Controller
             $hasVisitShare = WxFriendsShare::findOne(['ago_id'=>$agoId,'visitor_id'=>$_SESSION['userinfo']['user_id'],'share_date'=>date("Y-m-d")]);
         }
         $hasVisitShare = (isset($hasVisitShare) && !empty($hasVisitShare))? 1:0;
+
         // 获取订单信息
         $res = WxActivitiesOrder::getActOrder($wgId, $userId);//商品订单
         if ($res && !empty($res)){

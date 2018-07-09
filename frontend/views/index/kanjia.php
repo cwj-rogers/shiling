@@ -3,7 +3,7 @@ use \yii\helpers\Url;
 ?>
 <div class="row">
     <div id="sectionA">
-        <div class="swiper-container">
+        <div class="swiper-container" id="swiper-banner">
             <div class="swiper-wrapper">
                 <?php foreach ($slideshow as $k=>$v):?>
                 <div class="swiper-slide">
@@ -12,27 +12,65 @@ use \yii\helpers\Url;
                 <?php endforeach;?>
             </div>
             <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination pagination1"></div>
         </div>
     </div>
     <script>
         $(function () {
-            new Swiper('.swiper-container', {
+            //banner轮播图
+            new Swiper('#swiper-banner', {
                 autoplay: {
                     delay: 3000,
                     disableOnInteraction: false,
                 },
                 pagination: {
-                    el: '.swiper-pagination',
+                    el: '.pagination1',
                 },
                 loop:true
             });
+            //砍价广播
+            new Swiper('#swiper-radio', {
+                direction : 'vertical',
+                loop:true,
+                // autoplay:true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                noSwiping : true,
+                preventIntercationOnTransition : true,
+                allowTouchMove: false,
+                // slidesPerView: 1,//设置slider容器能够同时显示的slides数量(carousel模式)。
+                // spaceBetween: 1,
+                // slidesPerGroup: 1, //在carousel mode下定义slides的数量多少为一组。
+                // loopFillGroupWithBlank: true,
+            });
         })
     </script>
-<!--    <div id="sectionB" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-<!--        <div>王女士 [<em> 大力出奇迹 </em>] <span>2</span>刀砍价成功 <<strong> 智能马桶 </strong>> </div>-->
-<!--    </div>-->
-    <div class="kj-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<!--   广播栏  -->
+    <div id="sectionB" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<!--        <div>-->
+<!--            <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt="">-->
+<!--            又一梦氺 5分钟前 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong>-->
+<!--        </div>-->
+        <div class="swiper-container" id="swiper-radio">
+            <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-no-swiping">
+                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>
+                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>
+                    </div>
+                    <div class="swiper-slide swiper-no-swiping">
+                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>
+                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>
+                    </div>
+                    <div class="swiper-slide swiper-no-swiping">
+                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>
+                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="kj-title col-xs-12 col-sm-12 col-md-12 col-lg-12 blank">
         <h4 ><i class="kj-title-before"></i>热门砍价商品<i class="kj-title-after"></i></h4>
     </div>
 
