@@ -58,6 +58,7 @@ class Uploader{
             $res = $aliImage->upload( $filename, $uploadPolicy, $uploadOption );
             return $res;
         }catch (\Exception $e){
+            p($e->getMessage());
         }
 
 //        [

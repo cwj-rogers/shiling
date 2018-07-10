@@ -22,7 +22,7 @@ class FakeController extends \yii\console\Controller
                     'dsn'         => 'mysql:host=gz-cdb-ecmy83dx.sql.tencentcdb.com;port=62387;dbname=bdm314524321_db',
                     'username'    => 'root',
                     'password'    => 'hjzhome888',
-                    'charset'     => 'utf8',
+                    'charset'     => 'GBK',
                     'tablePrefix' => 'ecs_',
                 ],
             ]
@@ -34,29 +34,35 @@ class FakeController extends \yii\console\Controller
     public function upload($path)
     {
         //获取荟家装服务器图片, 判断本地是否存在, 不存在则获取图片保存在临时文件夹, 再用临时地址上传到顽兔, 上传前验证文件目录是否存在
+        // file_get_contents() gbk地址请求-no  utf8地址请求-yes
+        // file_put_contents() gbk保存地址-yes  utf8保存地址-yes(地址乱码)
+        // test_upload_file_c() 文件名编码必须为utf8
+        // urldecode() 解决因为url编码图片不能访问的问题
         try{
             $root = "http://www.hjzhome.com/";
             $localRoot = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/";
-            $localPutRoot = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi/";
+            $localPutRoot = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi2/";
 
             $filename = $root.$path;//远程地址
             $localFilename = $localRoot.$path;//本地图片库
-            $localPutFilename = $localPutRoot.basename($path);//本地临时图片地址
-            $utf8PutFilename = iconv("utf-8","gbk", $localPutFilename);//utf8 本地临时图片地址
+            $urldepath = mb_strpos($path, '%')!==false? iconv("utf-8","gbk", urldecode($path)):$path;//urldecode 转码,转码后为utf8,再转为gbk
+            $localPutFilename = $localPutRoot.basename($urldepath);//本地临时图片地址
             $space = 'hjzimage'; //顽兔图片空间
             $spacePath = dirname($path); //空间相对路径
 
             if (!is_file($localFilename)){
                 //保存到临时文件夹
-                $img = file_get_contents($filename);
-                // 中文地址需要转码为 utf8 才能保存在本地
-                file_put_contents($utf8PutFilename, $img);
-                $localFilename = $localPutFilename;
+                $filename = iconv("gbk","utf-8", $filename);
+                $origin = file_get_contents($filename);
+                file_put_contents($localPutFilename, $origin);
+                $localFilename = iconv("gbk","utf-8", $localPutFilename);
             }
+//            p($localFilename,1);
             $wtRes = $this->uploadAli->test_upload_file_c($localFilename, $space, $spacePath);
             return $wtRes;
         }catch (\Exception $e){
             p($e->getMessage());
+            p(__METHOD__);
             return [];
         }
     }
@@ -112,13 +118,12 @@ class FakeController extends \yii\console\Controller
                 //判断图片格式
                 $postfix = trim(strrchr($vv, '.'),'.');
                 if (in_array($postfix, ["jpg","png","gif","jpeg"])){
-//                    p("good_id:{$v['goods_id']} -- ".$postfix.' -- '.$vv.PHP_EOL.PHP_EOL);
                     $res = $this->upload($vv);
                     if (!array_key_exists('code',$res) || $res['code']!="OK"){
                         $status = 0;
                         $res['url'] = "";
                         p($res);
-                        //记录上传失败图片
+                        //记录上传失败的图片地址
                         $db->createCommand()->insert('move_ali_fail_log',["url"=>$vv, "goods_id"=>$v['goods_id']])->execute();
                     }
                     p("good_id:{$v['goods_id']} -- {$vv} -- {$res['url']}".PHP_EOL.PHP_EOL);
@@ -129,6 +134,12 @@ class FakeController extends \yii\console\Controller
         }
     }
 
+    /**
+     * 商品图册图片上传
+     * @param int $start
+     * @param int $end
+     * @throws \yii\db\Exception
+     */
     public function actionGalleryUpload($start=0, $end=0){
         $db = Yii::$app->getDb();
         $data = (new Query())->select("goods_id,img_url,thumb_url,img_original")
@@ -155,9 +166,71 @@ class FakeController extends \yii\console\Controller
         }
     }
 
+    /**
+     * 上传失败记录表
+     * @throws \yii\db\Exception
+     */
+    public function actionFailRecall(){
+        $db = Yii::$app->getDb();
+        $goodsId = (new Query())->select("goods_id")
+            ->from("move_ali_fail_log")
+            ->where(["status"=>0,"is_all"=>1])
+            ->column();
+
+        $data = (new Query())->select("goods_id,goods_desc_images")
+            ->from("move_ali_log")
+            ->where(['in', 'goods_id',$goodsId])
+            ->all($db);
+
+        foreach ($data as $v){
+            if(empty($v['goods_desc_images'])){
+                continue;
+            }
+            $imageArr = explode(',', $v['goods_desc_images']);
+            $status = 1;
+            foreach ($imageArr as $vv){
+                //判断图片格式
+                $postfix = trim(strrchr($vv, '.'),'.');
+                if (in_array($postfix, ["jpg","png","gif","jpeg"])){
+                    $res = $this->upload($vv);
+                    if (!array_key_exists('code',$res) || $res['code']!="OK"){
+                        $status = 0;
+                        $res['url'] = "";
+                        p($res);
+                        //记录上传失败的图片地址
+                        $db->createCommand()->insert('move_ali_fail_log',["url"=>$vv, "goods_id"=>$v['goods_id']])->execute();
+                    }
+                    p("good_id:{$v['goods_id']} -- {$vv} -- {$res['url']}".PHP_EOL.PHP_EOL);
+                    usleep(1000);
+                }
+            }
+            $db->createCommand()->update('move_ali_fail_log',["status"=>$status],["goods_id"=>$v['goods_id']])->execute();
+        }
+    }
+
+
+
     public function actionZw(){
-        $wtRes = $this->upload("/images/upload/Image/PBL003桦影贝加尔-1.jpg");
-//        $wtRes = $this->uploadAli->test_upload_file_c("E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi/PBL003桦影贝加尔-1.jpg", "hjzimage", "/images/upload/Image");
+//        $urlen = "/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg";
+//        $decode = urldecode("%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg");
+//        $decode = urldecode("/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg");
+//        $decode = iconv("utf-8","gbk", $decode);
+//        $decode = mb_strpos($urlen, '%');
+//        p($decode,1);
+        $wtRes=$this->upload("/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg");
+        p($wtRes,1);
+        $res = Yii::$app->db->createCommand("select url from move_ali_fail_log where goods_id=9999")->queryScalar();
+        $file = "http://www.hjzhome.com/".$res;
+        $putFile = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi/".basename($res);
+        $utf8 = iconv("gbk", "utf-8", $file);
+        $origin = file_get_contents($utf8);
+        file_put_contents($putFile, $origin);
+        try{
+            $putFile = iconv("GB2312", "UTF-8", $putFile);
+            $wtRes = $this->uploadAli->test_upload_file_c($putFile, "hjzimage", dirname($res));
+        }catch (\Exception $e){
+//            p($e->getMessage());
+        }
         p($wtRes);
     }
 
