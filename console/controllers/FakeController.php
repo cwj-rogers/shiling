@@ -41,7 +41,7 @@ class FakeController extends \yii\console\Controller
         try{
             $root = "http://www.hjzhome.com/";
             $localRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/";
-            $localPutRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi2/";
+            $localPutRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi3/";
 
             $filename = $root.$path;//远程地址
             $localFilename = $localRoot.$path;//本地图片库
@@ -107,6 +107,7 @@ class FakeController extends \yii\console\Controller
             ->from("move_ali_log")
             ->where(['between', 'goods_id', $start, $end])
             ->all($db);
+//        p($data,1);
         foreach ($data as $v){
 
             if(empty($v['goods_desc_images'])){
