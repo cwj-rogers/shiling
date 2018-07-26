@@ -26,6 +26,14 @@ return [
                 'app\tests\unit\faker\providers\Book',
             ],
         ],
+        'dbloc' => [
+            'class'       => 'yii\db\Connection',
+            'dsn'         => 'mysql:host=localhost;port=3306;dbname=bdm314524321_db',
+            'username'    => 'root',
+            'password'    => 'root',
+            'charset'     => 'utf8',
+            'tablePrefix' => 'ecs_',
+        ]
     ],
     'controllerMap' => [
         'migrate' => [

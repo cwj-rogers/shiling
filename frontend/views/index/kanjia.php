@@ -16,6 +16,20 @@ use \yii\helpers\Url;
         </div>
     </div>
     <script>
+        var fooluser = <?= json_encode(Url::toRoute("fool-user"))?>;
+        $.getJSON(fooluser,function (data) {
+            var obj = data.obj;
+            var foolusers = '';
+            $.each(obj,function (k,v) {
+                console.log(v);
+                foolusers +=
+                    '<div class="swiper-slide swiper-no-swiping">'+
+                    '<span><img src="'+v.fj_image+'" alt=""></span>'+
+                    '<span class="foolname">'+v.fj_user_name+'</span> <span><strong>北欧布艺简约双人床</strong> <img src="http://hjzhome.image.alimmdn.com/微信/砍价1_2.png">10.88元</span> <span>'+v.leadtime+'分钟前</span>'+
+                    '</div>';
+            });
+            $("#swiper-radio .swiper-wrapper").append(foolusers);
+        });
         $(function () {
             //banner轮播图
             new Swiper('#swiper-banner', {
@@ -29,44 +43,35 @@ use \yii\helpers\Url;
                 loop:true
             });
             //砍价广播
-            new Swiper('#swiper-radio', {
-                direction : 'vertical',
-                loop:true,
-                // autoplay:true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                noSwiping : true,
-                preventIntercationOnTransition : true,
-                allowTouchMove: false,
-                // slidesPerView: 1,//设置slider容器能够同时显示的slides数量(carousel模式)。
-                // spaceBetween: 1,
-                // slidesPerGroup: 1, //在carousel mode下定义slides的数量多少为一组。
-                // loopFillGroupWithBlank: true,
-            });
+            setTimeout(function () {
+                new Swiper('#swiper-radio', {
+                    direction : 'vertical',
+                    loop:true,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                    noSwiping : true,
+                    preventIntercationOnTransition : true,
+                    allowTouchMove: false,
+                    // slidesPerView: 1,//设置slider容器能够同时显示的slides数量(carousel模式)。
+                    // spaceBetween: 1,
+                    // slidesPerGroup: 1, //在carousel mode下定义slides的数量多少为一组。
+                    // loopFillGroupWithBlank: true,
+                });
+            },1000);
+
         })
     </script>
 <!--   广播栏  -->
     <div id="sectionB" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<!--        <div>-->
-<!--            <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt="">-->
-<!--            又一梦氺 5分钟前 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong>-->
-<!--        </div>-->
+
         <div class="swiper-container" id="swiper-radio">
             <div class="swiper-wrapper">
-                    <div class="swiper-slide swiper-no-swiping">
-                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>
-                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>
-                    </div>
-                    <div class="swiper-slide swiper-no-swiping">
-                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>
-                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>
-                    </div>
-                    <div class="swiper-slide swiper-no-swiping">
-                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>
-                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>
-                    </div>
+<!--                    <div class="swiper-slide swiper-no-swiping">-->
+<!--                        <span><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt=""></span>-->
+<!--                        <span>又一梦氺 9.9元成功获得 <strong>#北欧布艺简约双人床#</strong></span> <span>5分钟前</span>-->
+<!--                    </div>-->
             </div>
         </div>
     </div>

@@ -1,0 +1,90 @@
+<?php
+/* @var $this yii\web\View */
+use yii\helpers\Url;
+?>
+<div id="sectionB">
+    <iframe id="contract-box" src=""></iframe>
+</div>
+<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var tokenUnableListener = function (obj){ //当 token 不合法时，SDK 会回调此方法
+            $.ajax({
+                type:'POST',
+                url:<?= json_encode(Url::toRoute("token"))?>,  //第三方服务器获取 token 的 URL，云合同 SDK 无法提供
+                cache:false,
+                dataType: 'json',
+                data:{signerId:"2018062817051800007"},  //第三方获取 token 需要的参数
+                beforeSend:function (xhr){
+                    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                },
+                success: function(data,textStatus,request){
+                    // console.log(data);
+                    YHT.setToken(data.obj);  //重新设置token，从请求头获取 token
+                    YHT.do(obj); //调用此方法，会继续执行上次未完成的操作
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        };
+        YHT.init("AppID", tokenUnableListener);  //必须初始化 YHT
+
+        $.ajax({
+            type:'POST',
+            async:false,  //请使用同步
+            url:<?= json_encode(Url::toRoute("contract"))?>,  //第三方服务器获取合同 ID 的 URL
+            cache:false,
+            dataType:'json',
+            success: function(data, textStatus, jqXHR){
+                var contractId=data.obj;
+                //合同查看方法
+                YHT.queryContract(
+                    function successFun(url) {
+                        // console.log(url);
+                        // window.open(url);
+                        // location.href = url;
+                        var windowH = window.innerHeight;
+                        console.log(windowH);
+                        $("#contract-box").css('height',windowH+'px');
+                        $("#contract-box").attr('src',url);
+                    },
+                    function failFun(data) {
+                        alert(data);
+                    },
+                    contractId
+                );
+            },
+            error: function (data) {
+            }
+        });
+
+        //微信分享配置
+        var localUrl = location.href;
+        var lockContractUrl = <?= json_encode(Url::toRoute(["yht/contract"]))?>;
+        wx.ready (function () {
+            var $wx_share = [
+                'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/9.9small.png',
+                localUrl,
+                '签订合同',
+                '荟家装邀请您进入云合同，点击查看详情'
+            ];
+            // 微信分享的数据
+            var shareData = {
+                "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
+                "link" : $wx_share[1],    // 分享地址
+                "title" : $wx_share[2],   // 分享标题
+                "desc" : $wx_share[3],   // 分享描述
+                success : function () {
+                    // 分享成功, 锁定空置合同
+                    $.getJSON(lockContractUrl,function () {
+                        alert(分享成功)
+                    })
+                }
+            };
+            wx.onMenuShareAppMessage (shareData);
+        });
+    })
+</script>
+
+

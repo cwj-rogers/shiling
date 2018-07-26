@@ -36,49 +36,62 @@ class TestController extends \yii\web\Controller
         return $this->render('index');
     }
 
-    public function actionToken()
+    public function actionToken($runAction=null)
     {
         $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => 'https://api.yunhetong.com/api/',
             // You can set any number of default request options.
 //            'timeout'  => 2.0,
-            'verify' => false
         ]);
-        $params = [
-            'appId' => '20180628170518000017',
-            'appKey' => 'wceNcK55gQE'
-        ];
-        $options = json_encode($params, JSON_UNESCAPED_UNICODE);
+        //判断token是否过期
+        $tokenExist = array_key_exists('tokenInfo',$_SESSION)? $_SESSION['tokenInfo']:" ";
+        if(!is_array($tokenExist) || (time()-$tokenExist['time']>60*14) ){
+            //超时重新获取
+            try{
+                $response = $client->post('auth/login',[
+                    'headers'=>["content-type"=>"application/json;charset=UTF-8","Accept"=>"application/json"],
+                    'body' => "row data",
+                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE"]
+                ]);
+//            p($response->getHeader("token"));
+//            p(Psr7\str($response));//完整显示返回信息
 
-        try{
-            $response = $client->post('auth/login',[
-                'headers'=>["content-type"=>"application/json;charset=UTF-8","Accept"=>"application/json"],
-//                'body' => $options,
-                'json'=>["appId"=>"20180628170518000017","appKey"=>"wceNcK55gQE"]
-            ]);
-            
-            p($response);
-            p($response->getHeaderLine("token"));
-//            p($response->getStatusCode());
-        }catch (RequestException $e){
-            echo Psr7\str($e->getRequest());
-            if ($e->hasResponse()) {
-                echo Psr7\str($e->getResponse());
+                $token = $response->getHeader("token")[0];
+                $_SESSION['tokenInfo'] = ['token'=>$token,'time'=>time()];//使用session存储结果
+            }catch (RequestException $e){
+                p($e->getRequest());
+                if ($e->hasResponse()) {
+                    p(Psr7\str($e->getResponse()));
+                }
             }
+        }else{
+            $token = $_SESSION['tokenInfo']['token'];
         }
-
-//        if (Yii::$app->request->isAjax){
-//            \common\helpers\FuncHelper::ajaxReturn(200,'success',"eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzIzMTkwMjYsImp0aSI6ImJHQktsYzZnSlJzNGdRcWw2SkhzbGRvb1QvbmVTcjVYYVR0TEQ0TGswbEpwbk5yeHEvYVY4TDVia0VQY051QzQyTlZicWhzKzByUjVHeDV6WGZ3N2d3PT0ifQ.vEG0KZBL9WL1is_MUn03kBhLojGuDIOMll2rPTHirygSMW-PdtSbljVL5OprjJDeN0Nyb82aRuE0AcA4Ib7KcQ");
-//        }
-
+        if (Yii::$app->request->isAjax && !$runAction){
+            \common\helpers\FuncHelper::ajaxReturn(200,'success', $token);
+        }else{
+            return $token;
+        }
     }
 
     public function actionContract()
     {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'https://api.yunhetong.com/api/',
+        ]);
+        $token = $this->runAction('token',['runAction'=>1]);
+        $response = $client->get("contract/list/1/2018062817051800007/0/1/10",[
+            'headers'=>["content-type"=>"application/json;charset=UTF-8","token"=>$token],
+        ]);
+//        p(Psr7\str($response));
+        $res = $response->getBody()->getContents();
+        $respBody = json_decode($res,true);
+//        p($respBody);
         if (Yii::$app->request->isAjax){
-            \common\helpers\FuncHelper::ajaxReturn(200,'success',"1807021639542453");
+            $contractId = number_format($respBody['data']['contractList'][0]['id'],0,'','');
+            \common\helpers\FuncHelper::ajaxReturn(200,'success', $contractId);
         }
-
     }
 }

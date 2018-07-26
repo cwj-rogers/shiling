@@ -11,6 +11,7 @@ use common\models\WxActivitiesOrder;
 use common\models\WxFriendsJoinLog;
 use yii\db\Expression;
 use yii\db\Exception;
+use yii\db\Query;
 
 class IndexController extends Controller
 {
@@ -80,7 +81,7 @@ class IndexController extends Controller
      * @return string|\yii\web\Response
      */
     public function actionDetail(){
-        if(!array_key_exists('userinfo',$_SESSION)){
+        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
             return $this->refresh();
         }
         /**
@@ -90,9 +91,7 @@ class IndexController extends Controller
          */
         $userId = Yii::$app->request->get('user_id',0);
         $wgId = Yii::$app->request->get('wg_id',0);
-        if(!$userId || !$wgId || !isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
-            return $this->redirect(['index']);
-        }
+
         //创建订单
         if($_SESSION['userinfo']['user_id']==$userId){
             $isVisit = 0;//是否为游客
@@ -270,6 +269,36 @@ class IndexController extends Controller
 
         $res = WxActivitiesOrder::getOrderList($_SESSION['userinfo']['user_id'],$ago_status);
         return $this->render('user',['res'=>$res]);
+    }
+
+    /**
+     *
+     */
+    public function actionFoolUser(){
+        $data = (new Query())->from("yii2_wx_friends_join_log")
+            ->select("fj_id,user_id,fj_user_name,fj_image,fj_cut_price,created_time")
+            ->limit(10)
+            ->orderBy("fj_id desc")
+            ->all();
+        foreach ($data as $k => $v){
+            $joinTime = strtotime($v['created_time']);
+            $data[$k]['leadtime'] = time()-$joinTime>3600? mt_rand(1,60):ceil((time()-$joinTime)/60);
+        }
+        \common\helpers\FuncHelper::ajaxReturn(200, 'success', $data);
+    }
+
+    public function actionFoolUserInDetail($ago_id){
+        $data = (new Query())->from("yii2_wx_friends_join_log")
+            ->select("fj_id,user_id,fj_user_name,fj_image,fj_cut_price,created_time")
+            ->limit(10)
+            ->where(["ago_id"=>$ago_id])
+            ->orderBy("fj_id desc")
+            ->all();
+        foreach ($data as $k => $v){
+            $joinTime = strtotime($v['created_time']);
+            $data[$k]['leadtime'] = time()-$joinTime>3600? mt_rand(1,60):ceil((time()-$joinTime)/60);
+        }
+        \common\helpers\FuncHelper::ajaxReturn(200, 'success', $data);
     }
 
     public function actionClear(){

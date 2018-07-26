@@ -39,7 +39,7 @@ class FakeController extends \yii\console\Controller
         // test_upload_file_c() 文件名编码必须为utf8
         // urldecode() 解决因为url编码图片不能访问的问题
         try{
-            $root = "http://www.hjzhome.com/";
+            $root = "http://4d.hjzhome.com/";
             $localRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/";
             $localPutRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi3/";
 
@@ -167,37 +167,37 @@ class FakeController extends \yii\console\Controller
         }
     }
 
-
+    /**
+     *  主题图片
+     * @param int $start
+     * @param int $end
+     * @param int $isOrigin
+     * @throws \yii\db\Exception
+     */
     public function actionTopic($start=0, $end=0, $isOrigin=0){
+        $img = iconv("utf-8","gbk","/images/upload/Image/红底新logo.jpg");
+        $res = $this->upload($img);
+        p($res,1);
         $db = Yii::$app->getDb();
-        $data = (new Query())->select("goods_id,goods_desc_images")
+        $data = (new Query())->select("goods_desc_images")
             ->from("move_ali_log")
-            ->where(['between', 'goods_id', $start, $end])
-            ->all($db);
-        foreach ($data as $v){
-
-            if(empty($v['goods_desc_images'])){
-                continue;
-            }
-            $imageArr = explode(',', $v['goods_desc_images']);
-            $status = 1;
-            foreach ($imageArr as $vv){
-                //判断图片格式
-                $postfix = trim(strrchr($vv, '.'),'.');
-                if (in_array($postfix, ["jpg","png","gif","jpeg"])){
-                    $res = $this->upload($vv, $isOrigin);
-                    if (!array_key_exists('code',$res) || $res['code']!="OK"){
-                        $status = 0;
-                        $res['url'] = "";
-                        p($res);
-                        //记录上传失败的图片地址
-                        $db->createCommand()->insert('move_ali_fail_log',["url"=>$vv, "goods_id"=>$v['goods_id']])->execute();
-                    }
-                    p("good_id:{$v['goods_id']} -- {$vv} -- {$res['url']}".PHP_EOL.PHP_EOL);
-                    usleep(1000);
+            ->where(['goods_id'=>3])
+            ->scalar($db);
+        $imageArr = explode(',', $data);
+        foreach ($imageArr as $vv){
+            //判断图片格式
+            $postfix = trim(strrchr($vv, '.'),'.');
+            if (in_array($postfix, ["jpg","png","gif","jpeg"])){
+                $res = $this->upload($vv);
+                if (!array_key_exists('code',$res) || $res['code']!="OK"){
+                    $res['url'] = "";
+                    p($res);
+                    //记录上传失败的图片地址
+                    $db->createCommand()->insert('move_ali_fail_log',["url"=>$vv, "goods_id"=>3])->execute();
                 }
+                p("{$vv} -- {$res['url']}".PHP_EOL.PHP_EOL);
+                usleep(1000);
             }
-            $db->createCommand()->update('move_ali_log',["goods_desc"=>$status],["goods_id"=>$v['goods_id']])->execute();
         }
     }
 
@@ -243,7 +243,53 @@ class FakeController extends \yii\console\Controller
         }
     }
 
+    /**
+     * 坑点 1.因为控制台输入url内容编码为GBK,所以得转码为UTF8后再做urlencode
+     * @param string $url
+     */
+    public function actionUrlUpload($item="",$type=1){
+        //可获取远程内容地址
+        //images/upload/Image/%E5%B0%9A%E9%AB%98%E5%8D%AB%E6%B5%B4%20%E6%B7%8B%E6%B5%B4%E5%B1%8F-2(2).jpg
+        //images/upload/Image/%C9%D0%B8%DF%CE%C0%D4%A1%20%C1%DC%D4%A1%C6%C1-2%282%29.jpg
+        //images/upload/Image/%E5%B0%9A%E9%AB%98%E5%8D%AB%E6%B5%B4%20%E6%B7%8B%E6%B5%B4%E5%B1%8F-2%282%29.jpg
 
+        if ($type==1){
+            $url = (new Query())->from("move_ali_log")
+                ->select("goods_desc_images")
+                ->where(['goods_id'=>$item])
+                ->scalar();
+            $url = strpos($url, 'Git')!==false? ltrim(strstr($url,"t"),'t'):$url;
+            $url = strpos($url, ',')!==false? explode(',',$url) : $url;
+            foreach ($url as $k=> $v){
+                try{
+                    $rawUrl = dirname($v).'/'.rawurlencode(iconv("gbk","utf-8", basename($v)));
+
+                    $origin = file_get_contents("http://www.hjzhome.com/".$rawUrl);
+                    $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi3/".basename($v);
+                    file_put_contents($localFilename, $origin);//p($rawUrl.PHP_EOL.PHP_EOL,1);
+                    $localFilename = iconv("gbk","utf-8", $localFilename);
+                    $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzimage", dirname($v));
+                    p($res);
+                }catch (\Exception $e){
+                    p($k);
+                    p($e->getMessage());
+                }
+            }
+        }elseif ($type==2){
+            $v = $item;
+            $rawUrl = dirname($v).'/'.rawurlencode(iconv("gbk","utf-8", basename($v)));
+            $origin = file_get_contents("http://4d.hjzhome.com/".$rawUrl);
+            $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi3/".basename($v);
+            file_put_contents($localFilename, $origin);
+            $localFilename = iconv("gbk","utf-8", $localFilename);
+            $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzimage", dirname($v));
+            p($res);
+        }elseif ($type==3){
+            $item = iconv("gbk", "utf-8", $item);
+            $res = $this->upload($item);
+            p($res);
+        }
+    }
 
     public function actionZw(){
 //        $urlen = "/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg";

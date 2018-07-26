@@ -11,13 +11,13 @@ a{color: black}
     #sectionA img{width: 100%;height: 150px}
 /* 砍价成功广播 */
 #sectionB{padding: 0px;border-bottom: lightgray 0px solid;background-color: white;height: 40px;overflow: hidden}
-
     /*#sectionB div span{background: red;padding: 3px 7px;border-radius: 5px;color: white}*/
     #sectionB img{height: 26px;border-radius: 25px}
     #sectionB #swiper-radio{width: 100%;height: 100%}
     #sectionB #swiper-radio .swiper-slide{width: 100%;height: 100%;padding-left: 5px;display: flex;flex-direction: row;justify-content: flex-start;align-items: center;}
     #sectionB #swiper-radio .swiper-slide{text-align: center;color: white;background-color: rgba(0,0,0,0.7);white-space: nowrap;font-size: 10px;transform: scale(1);transform-origin:0 0;}
     #sectionB #swiper-radio .swiper-slide span{margin: 0 5px;}
+    #sectionB #swiper-radio .swiper-slide .foolname{display: inline-block;max-width: 100px;overflow: hidden}
 
 /* 砍价标题 */
 .kj-title{text-align: center;background: -webkit-linear-gradient(-45deg, #ff0020 0%,#ff0080 100%);padding: 5px;color: white;}
@@ -55,6 +55,9 @@ a{color: black}
     #detail .swiper-container{height: 100%}
     #detail .kj-good-img img{width: 100%;height: 100%;}
     #detail .ago-location{position: absolute;top: 5px;width: 80px;height: 30px;line-height: 30px;z-index: 888;background: rgba(0,0,0,0.5);color: white;font-size: 10px;text-align: center;border-top-right-radius: 15px;border-bottom-right-radius: 15px}
+    /*弹幕信息*/
+
+
 #detail .good-title-box{position: relative;box-sizing: border-box;padding: 10px 15px;background: white;overflow: visible;}
     #detail .good-title-box .good-title{text-align: left;font-size: 14px;font-weight: bold}
     #detail .good-title-box .good-price{color: #b1191a}

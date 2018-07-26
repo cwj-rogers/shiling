@@ -38,7 +38,7 @@ use yii\helpers\Url;
 </script>
 <div id="detail" class="row" ago-id="<?= $res['ago_id']?>">
     <div class="kj-good-img">
-        <div class="swiper-container">
+        <div class="swiper-container" id="detail-gallery">
             <div class="swiper-wrapper">
                 <?php foreach (explode(',',$res['wg_goods_album']) as $k=>$v):?>
                     <div class="swiper-slide">
@@ -50,6 +50,64 @@ use yii\helpers\Url;
             <div class="swiper-pagination"></div>
         </div>
         <div class="ago-location">发起: <?= $res['ago_city']?></div>
+        <style>
+            #detail #barrage{height: 255px;}
+            #barrage{position: absolute;top: 70px;right: 0px;width: 130px;}
+            #barrage .swiper-wrapper{height: 40px}
+            #barrage .swiper-slide{background: rgba(0,0,0,0.3);padding: 5px 0;padding-left:5px;border-top-left-radius: 50px;border-bottom-left-radius: 50px;overflow: hidden}
+            #barrage .swiper-slide{display: flex;flex-direction: row;justify-content: flex-start;align-items: center}
+            #barrage .swiper-slide div:first-child{margin-right: 5px}
+            #barrage .swiper-slide span{color: white;font-size: 8px;-webkit-transform: scale(0.8 0);-webkit-transform-origin: 0 0;}
+            #barrage .swiper-slide img{width: auto;height: 30px;border-radius: 15px;opacity: 0.9}
+            #barrage .swiper-slide .barrage-box-r{max-width: 90px;max-height: 40px;display: flex;flex-direction: row;justify-content: flex-start;overflow: hidden}
+        </style>
+        <!--    模拟弹幕    -->
+        <div class="swiper-container hide" id="barrage">
+            <div class="swiper-wrapper">
+<!--                <div class="swiper-slide swiper-no-swiping">-->
+<!--                    <div>-->
+<!--                        <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="barrage-box-r">-->
+<!--                        <span>又一梦氺 5分钟前 砍掉15.55元</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+            </div>
+        </div>
+        <script type="text/javascript" charset="utf-8">
+            var foolurl = <?=json_encode(Url::toRoute(["fool-user-in-detail","ago_id"=>$res['ago_id']]))?>;
+            setTimeout(function () {
+                var mySwiper = new Swiper('#barrage', {
+                    autoplay: true,
+                    direction : 'vertical',
+                    height: 280,//你的slide高度
+                    // loop : true,
+                    // slidesOffsetBefore : 140,
+                    //centeredSlides : true,//开始居中
+                    slidesPerView: 6,
+                    spaceBetween: 8,
+                });
+
+                var str = '';
+                $.getJSON(foolurl,function (data) {
+                    console.log(data);
+                    var obj = data.obj;
+                    $.each(obj,function (k,v) {
+                        str +=
+                            '<div class="swiper-slide swiper-no-swiping">'+
+                                '<div>'+
+                                    '<img src="http://thirdwx.qlogo.cn/mmopen/vi_32/cZN9xAaxlYE9TVIej9fVBBKQvvtSfuTVPwyZvj7HRMZQ6icLSPc9T6mTEECqeZ5C1ErnJShRWXGVVn9KZicVcicCg/132" alt="">'+
+                                '</div>'+
+                                '<div class="barrage-box-r">'+
+                                    '<span>又一梦氺 5分钟前 砍掉15.55元</span>'+
+                                '</div>'+
+                            '</div>';
+                    });
+                    mySwiper.appendSlide(str); //加到Swiper的最后
+                });
+            },1000);
+        </script>
     </div>
     <div class="good-title-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="good-title"><?= $res['wg_name']?></div>
@@ -224,8 +282,8 @@ use yii\helpers\Url;
             <source src="<?=Yii::getAlias('@web')?>/static/kanjia.mp3"/>
         </audio>
     </div>
-
 </div>
+
 <script>
     //砍价处理对象
     var kanjia = {};
@@ -330,11 +388,11 @@ use yii\helpers\Url;
         // });
 
         //轮播图
-        new Swiper('.swiper-container', {
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
+        new Swiper('#detail-gallery', {
+            // autoplay: {
+            //     delay: 3000,
+            //     disableOnInteraction: false,
+            // },
             pagination: {
                 el: '.swiper-pagination',
             },
