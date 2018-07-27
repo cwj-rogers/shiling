@@ -38,10 +38,8 @@ class YhtController extends \yii\web\Controller
                 $response = $client->post('auth/login',[
                     'headers'=>["content-type"=>"application/json;charset=UTF-8","Accept"=>"application/json"],
                     'body' => "row data",
-                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE","signerId"=>"1099893"]
+                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE"]
                 ]);
-//            p($response->getHeader("token"));
-//            p(Psr7\str($response));//完整显示返回信息
 
                 $token = $response->getHeader("token")[0];
                 $_SESSION['tokenInfo'] = ['token'=>$token,'time'=>time()];//使用session存储结果
@@ -68,7 +66,7 @@ class YhtController extends \yii\web\Controller
             'base_uri' => 'https://api.yunhetong.com/api/',
         ]);
         $token = $this->runAction('token',['runAction'=>1]);
-        $response = $client->get("contract/list/1/2018062817051800007/0/1/10",[
+        $response = $client->get("contract/list/1/1807261536209921/0/1/10",[
             'headers'=>["content-type"=>"application/json;charset=UTF-8","token"=>$token],
         ]);
 //        p(Psr7\str($response));

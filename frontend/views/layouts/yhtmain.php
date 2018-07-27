@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
     <link rel="stylesheet" href="<?=Yii::getAlias('@web')?>/static/yht.css">
     <!--  阿里ICON  -->
-    <script src="//at.alicdn.com/t/font_764675_194afck00uv.js"></script>
+    <script src="//at.alicdn.com/t/font_764675_fke3qugsgog.js"></script>
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
 
     <!--  微信分享配置  -->
@@ -37,8 +37,8 @@
 
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
 <!-- 如果使用了某些拓展插件还需要额外的JS -->
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>-->
 
 
 
