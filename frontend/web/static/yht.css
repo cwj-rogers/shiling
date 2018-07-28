@@ -60,4 +60,4 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
         #sectionB #personal,#company .bottom .weui-label{color: #4280FF;font-size: 14px}
         #sectionB #personal,#company .bottom .weui-btn_default{color: #4280FF;border: #4280FF 1px solid;font-weight: bold}
     /*签名页*/
-    #sectionB #signature iframe{height: 300px}
+    #sectionB #signature #signature-box{height: 300px;width: 100%}

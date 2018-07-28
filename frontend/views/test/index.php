@@ -22,8 +22,8 @@ use yii\helpers\Url;
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
 
-<!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>-->
-<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>-->
 <script type="text/javascript">
     $(function () {
         var tokenUnableListener = function (obj){ //当 token 不合法时，SDK 会回调此方法
@@ -58,17 +58,17 @@ use yii\helpers\Url;
             success: function(data, textStatus, jqXHR){
                 var contractId=data.obj;
                 //合同查看方法
-                YHT.queryContract(
-                    function successFun(url) {
-                        // console.log(url);
-                        // window.open(url);
-                        // location.href = url;
-                    },
-                    function failFun(data) {
-                        alert(data);
-                    },
-                    contractId
-                );
+                // YHT.queryContract(
+                //     function successFun(url) {
+                //         // console.log(url);
+                //         // window.open(url);
+                //         location.href = url;
+                //     },
+                //     function failFun(data) {
+                //         alert(data);
+                //     },
+                //     contractId
+                // );
                 //合同签署页面
                 // YHT.signContract(
                 //     function successFun(url) {
@@ -82,16 +82,16 @@ use yii\helpers\Url;
                 //     contractId
                 // );
                 //前置绘制签名页面
-                // YHT.dragSignF(
-                //     function successFun(url) {
-                //         window.open(url);
-                //         console.log(url);
-                //         // location.href = url;
-                //     },
-                //     function failFun(data) {
-                //         console.log(data);
-                //     }
-                // );
+                YHT.dragSignF(
+                    function successFun(url) {
+                        window.open(url);
+                        console.log(url);
+                        // location.href = url;
+                    },
+                    function failFun(data) {
+                        console.log(data);
+                    }
+                );
             },
             error: function (data) {
             }

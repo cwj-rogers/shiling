@@ -36,6 +36,10 @@ class TestController extends \yii\web\Controller
         return $this->render('index');
     }
 
+    /**
+     * @param null $runAction
+     * @return mixed
+     */
     public function actionToken($runAction=null)
     {
         $client = new Client([
@@ -46,7 +50,7 @@ class TestController extends \yii\web\Controller
         ]);
         //判断token是否过期
         $tokenExist = array_key_exists('tokenInfo',$_SESSION)? $_SESSION['tokenInfo']:" ";
-        if(!is_array($tokenExist) || (time()-$tokenExist['time']>60*14) ){
+        if(!is_array($tokenExist) || (time()-$tokenExist['time']>0) ){
             //超时重新获取
             try{
                 $response = $client->post('auth/login',[
@@ -75,6 +79,10 @@ class TestController extends \yii\web\Controller
         }
     }
 
+    /**
+     * 异步获取
+     * @throws \yii\base\InvalidRouteException
+     */
     public function actionContract()
     {
         $client = new Client([
@@ -90,7 +98,8 @@ class TestController extends \yii\web\Controller
         $respBody = json_decode($res,true);
 //        p($respBody);
         if (Yii::$app->request->isAjax){
-            $contractId = number_format($respBody['data']['contractList'][0]['id'],0,'','');
+//            $contractId = number_format($respBody['data']['contractList'][0]['id'],0,'','');
+            $contractId = "1807181018464293";
             \common\helpers\FuncHelper::ajaxReturn(200,'success', $contractId);
         }
     }

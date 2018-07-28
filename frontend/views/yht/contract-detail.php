@@ -100,10 +100,10 @@ use yii\helpers\Url;
         </div>
     </div>
     <!--  签名页  -->
-    <div id="signature hide" class="weui-popup__container popup-bottom register-step">
+    <div id="signature" class="weui-popup__container popup-bottom register-step">
         <div class="weui-popup__overlay"></div>
         <div class="weui-popup__modal">
-            <iframe id="signature-box" src=""></iframe>
+            <iframe id="signature-box" src="https://api.yunhetong.com/api_page/app/drag_sing.html?&token=Bybw9SYqJh8z4xUzHh8V4-cz3OMVMzMzM-cmICbxEyYq49zZH-fnJDMe3Nzc5wQ=&dragSign=1"></iframe>
         </div>
     </div>
 </div>
@@ -134,7 +134,7 @@ use yii\helpers\Url;
             });
         };
         YHT.init("AppID", tokenUnableListener);  //必须初始化 YHT
-
+        tokenUnableListener();
         $.ajax({
             type:'POST',
             async:false,  //请使用同步
@@ -144,17 +144,30 @@ use yii\helpers\Url;
             success: function(data, textStatus, jqXHR){
                 var contractId=data.obj;
                 //合同查看方法
-                // YHT.queryContract(
+                YHT.queryContract(
+                    function successFun(url) {
+                        // console.log(url);
+                        window.open(url);
+                        // location.href = url;
+                        var windowH = window.innerHeight;
+                        $("#contract-box").css('height',windowH+'px');
+                        $("#contract-box").attr('src',url);
+                    },
+                    function failFun(data) {
+                        alert(data);
+                    },
+                    contractId
+                );
+                //合同签署页面
+                // YHT.signContract(
                 //     function successFun(url) {
-                //         // console.log(url);
-                //         // window.open(url);
-                //         // location.href = url;
-                //         var windowH = window.innerHeight;
-                //         $("#contract-box").css('height',windowH+'px');
+                //         window.open(url);
+                //         // var windowH = window.innerHeight;
+                //         // $("#contract-box").css('height',windowH+'px');
                 //         $("#contract-box").attr('src',url);
                 //     },
                 //     function failFun(data) {
-                //         alert(data);
+                //         console.log(data);
                 //     },
                 //     contractId
                 // );
@@ -162,11 +175,9 @@ use yii\helpers\Url;
                 YHT.dragSignF(
                     function successFun(url) {
                         // window.open(url);
-                        console.log(url);
+                        // console.log(url);
                         // location.href = url;
-                        // var windowH = window.innerHeight;
-                        // $("#contract-box").css('height',windowH+'px');
-                        $("#signature-box").attr('src',url);
+                        // $("#signature-box").attr('src',url);
                     },
                     function failFun(data) {
                         console.log(data);

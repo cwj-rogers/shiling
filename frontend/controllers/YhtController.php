@@ -22,6 +22,11 @@ class YhtController extends \yii\web\Controller
         return $this->render('index');
     }
 
+    /**
+     * 获取应用token，获取用户token
+     * @param null $runAction
+     * @return mixed
+     */
     public function actionToken($runAction=null)
     {
         $client = new Client([
@@ -36,9 +41,9 @@ class YhtController extends \yii\web\Controller
             //超时重新获取
             try{
                 $response = $client->post('auth/login',[
-                    'headers'=>["content-type"=>"application/json;charset=UTF-8","Accept"=>"application/json"],
+                    'headers'=>["content-type"=>"application/json;charset=UTF-8"],
                     'body' => "row data",
-                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE"]
+                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE","signerId"=>"1099893"]//
                 ]);
 
                 $token = $response->getHeader("token")[0];
@@ -53,12 +58,17 @@ class YhtController extends \yii\web\Controller
             $token = $_SESSION['tokenInfo']['token'];
         }
         if (Yii::$app->request->isAjax && !$runAction){
+//            p($token,1);
             \common\helpers\FuncHelper::ajaxReturn(200,'success', $token);
         }else{
             return $token;
         }
     }
 
+    /**
+     * 异步获取合同号
+     * @throws \yii\base\InvalidRouteException
+     */
     public function actionContract()
     {
         $client = new Client([
@@ -80,6 +90,13 @@ class YhtController extends \yii\web\Controller
         }
     }
 
+    /**
+     * 创建合同
+     * @param $tid
+     * @return string
+     * @throws \yii\base\InvalidRouteException
+     * @throws \yii\db\Exception
+     */
     public function actionContractDetail($tid){
         // 超管点击进入查看合同, 没有空置合同? (是)创建新空置合同 (否)用空置合同   展示空置合同
         return $this->render('contract-detail');die;
