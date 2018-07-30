@@ -54,10 +54,24 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
             #sectionB #register .bottom .icon{font-size: 32px;color: white}
             #sectionB #register .bottom span{margin-left: 20px;}
     /*个人*/
-    #sectionB #personal,#company .weui-popup__modal{background: white}
-    #sectionB #personal,#company .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white}
-    #sectionB #personal,#company hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
-        #sectionB #personal,#company .bottom .weui-label{color: #4280FF;font-size: 14px}
-        #sectionB #personal,#company .bottom .weui-btn_default{color: #4280FF;border: #4280FF 1px solid;font-weight: bold}
+    #sectionB #personal .weui-popup__modal{background: white}
+    #sectionB #personal .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white}
+    #sectionB #personal hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
+        #sectionB #personal .bottom .weui-label{color: #4280FF;font-size: 14px}
+        #sectionB #personal .bottom .weui-btn_default{color: #4280FF;border: #4280FF 1px solid;font-weight: bold}
+    /*公司*/
+    #sectionB #company .weui-popup__modal{background: white}
+    #sectionB #company .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white}
+    #sectionB #company hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
+        #sectionB #company .bottom .weui-label{color: #4280FF;font-size: 14px}
+        #sectionB #company .bottom .weui-btn_default{color: #4280FF;border: #4280FF 1px solid;font-weight: bold}
     /*签名页*/
     #sectionB #signature #signature-box{height: 300px;width: 100%}
+        #sectionB #signature .head p:first-child{text-align: center;font-size: 18px;padding: 15px 0;padding-top: 30px;color: #4280FF;font-weight: bold}
+        #sectionB #signature .head p:last-child{text-align: center;font-size: 12px}
+        #sectionB #signature .body .image{margin:15px 0;text-align: center;}
+        #sectionB #signature .body .image img{height: 100px}
+        #sectionB #signature .body .go-verify{text-align: center;padding: 0 50px}
+        #sectionB #signature .body .go-verify button{background-color: #4280FF;color: white}
+    /*验证码弹窗*/
+    .weui-dialog .weui-prompt-text a{color: #4280FF;border: 1px solid #4280FF;border-radius: 24px;font-size: 16px;}
