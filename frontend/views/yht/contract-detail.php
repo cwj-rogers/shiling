@@ -6,7 +6,7 @@ use yii\helpers\Url;
     <iframe id="contract-box" src=""></iframe>
 
     <!--  权限判断，1.未签约 2.普通用户  -->
-    <?php if ($status!=1 && $isGuest==1):?>
+    <?php if ($status!=1 && $isOwner==1):?>
     <div class="sign">
         <a href="javascript:;" class="weui-flex">
             <div class="weui-flex__item">
@@ -134,7 +134,6 @@ use yii\helpers\Url;
         </div>
         <div class="weui-gallery__opr">
             <a href="javascript:" class="weui-gallery__del">
-<!--                <i class="weui-icon-delete weui-icon_gallery-delete"></i>-->
                 <i class="weui-icon-cancel"></i>
             </a>
         </div>
@@ -143,13 +142,15 @@ use yii\helpers\Url;
 </div>
 <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
 <script type="text/javascript">
-    var type = 0;
-    var contractId = 0;
-    var signerId = 0;
-    var moulageId = 0;
-    var countdownTime = 60;//倒计时60秒
+
     $(function () {
-        $("#signature").removeClass('hide').popup();
+        var type = 0;
+        var contractId = <?= $contractId?>;
+        var signerId = 0;
+        var moulageId = 0;
+        var countdownTime = 60;//倒计时60秒
+
+//        $("#signature").removeClass('hide').popup();
 
         //6.获取短信信息 a.获取短信 b.验证短信
         $(document).on('click','#signature .verify-sms, .weui-dialog .verify-sms2',function () {
@@ -309,62 +310,20 @@ use yii\helpers\Url;
             });
         };
         YHT.init("AppID", tokenUnableListener);  //必须初始化 YHT
-        function contract(){
-            $.ajax({
-                type:'POST',
-                async:false,  //请使用同步
-                url:<?= json_encode(Url::toRoute("contract"))?>,  //第三方服务器获取合同 ID 的 URL
-                cache:false,
-                dataType:'json',
-                success: function(data, textStatus, jqXHR){
-                    var contractId=data.obj;
-                    $("#sectionB").attr('contractId',contractId);
-                    //合同查看方法
-                    YHT.queryContract(
-                        function successFun(url) {
-                            // console.log(url);
-                            // window.open(url);
-                            // location.href = url;
-                            var windowH = window.innerHeight;
-                            $("#contract-box").css('height',windowH+'px');
-                            $("#contract-box").attr('src',url);
-                        },
-                        function failFun(data) {
-                            alert(data);
-                        },
-                        contractId
-                    );
-                    //合同签署页面
-                    // YHT.signContract(
-                    //     function successFun(url) {
-                    //         window.open(url);
-                    //         // var windowH = window.innerHeight;
-                    //         // $("#contract-box").css('height',windowH+'px');
-                    //         $("#contract-box").attr('src',url);
-                    //     },
-                    //     function failFun(data) {
-                    //         console.log(data);
-                    //     },
-                    //     contractId
-                    // );
-                    //前置绘制签名页面
-                    // YHT.dragSignF(
-                    //     function successFun(url) {
-                    //         // window.open(url);
-                    //         // console.log(url);
-                    //         // location.href = url;
-                    //         // $("#signature-box").attr('src',url);
-                    //     },
-                    //     function failFun(data) {
-                    //         console.log(data);
-                    //     }
-                    // );
-                },
-                error: function (data) {
-                }
-            });
-        }
-        // contract();
+        //合同查看方法
+        YHT.queryContract(
+            function successFun(url) {
+                var windowH = window.innerHeight;
+                $("#contract-box").css('height',windowH+'px');
+                $("#contract-box").attr('src',url);
+            },
+            function failFun(data) {
+                alert(data);
+            },
+            contractId
+        );
+
+
         //微信分享配置
         var localUrl = location.href;
         var lockContractUrl = <?= json_encode(Url::toRoute(["yht/contract"]))?>;

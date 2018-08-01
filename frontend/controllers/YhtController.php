@@ -183,10 +183,49 @@ class YhtController extends \yii\web\Controller
             $contractInfo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>$signerId,'cont_has_bind'=>0,'cont_status'=>0]);
             if (empty($contractInfo)){
                 //判断角色 1.平台 2.管理员  合同表必须带有判断类型字段type,合同创建者id,模板id这些搜索字段
+                $authority = $_SESSION['userinfo']['yht_authority'];
+                $client = new YhtClient();
+                $title = "荟家装云合同";
+                $tmpJson = [
+                    "contractTitle"=>"荟家装云合同",
+                    "templateId"=>"TEM1003301",
+                    "contractData"=>[
+                        '${name}'=>"大东",
+                        '${mobile}'=>"13726449403",
+                        '${id_no}'=>"sadfasdf18294903",
+                        '${corporate_name}'=>"深圳荟家装科技有限公司",
+                        '${business_licence}'=>"ASDFGHJKL001",
+                        '${product_name}'=>"创客模式合同",
+                        '${contract_date}'=>"2018-7-26"
+                    ]
+                ];
+                if ($authority==1){
+                    $repInfo = $client->sendReq('post',YhtClient::$url['contract']['template'],$tmpJson);
+                }elseif ($authority==2){
+                    $repInfo = $client->sendReq('post',YhtClient::$url['contract']['template'],$tmpJson,2);
+                }else{
+                    p("用户没有权限",1);
+                }
+                //云合同本地入库 合同表
+                $contractId  = $repInfo["data"]["contractId"];
+                Yii::$app->db->createCommand()->insert('yii2_wx_yht_contract',
+                [
+                    'cont_contractId'=>$contractId,
+                    'cont_owner_signerId'=>$signerId,
+                    'cont_templateId'=>$tid,
+                    'cont_title'=>$title,
+                    'cont_created_time'=>date("Y-m-d H:i:s")
+                ])->execute();
+                //云用户和合同关联表
+                Yii::$app->db->createCommand()->insert('yii2_wx_yht_contract_signer',
+                [
+                    'contract_id'=>$contractId,
+                    'signer_id'=>$signerId,
+                    'is_owner'=>1,
+                ])->execute();
             }else{
                 $contractId = $contractInfo->cont_contractId;
             }
-
             return $this->render('contract-create',['contractId'=>$contractId]);
         }else{
             return $this->render('contract-template');
@@ -207,60 +246,27 @@ class YhtController extends \yii\web\Controller
 
     /**
      * 合同详情
-     * @param $tid
+     * @param $contractId
      * @return string
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\db\Exception
      * TODO 区分管理员和用户
      */
-    public function actionContractDetail($tid){
+    public function actionContractDetail($contractId){
 //        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
 //            return $this->refresh();
 //        }
+
         // 超管点击进入查看合同, 没有空置合同? (是)创建新空置合同 (否)用空置合同   展示空置合同
         return $this->render('contract-detail',['contractId'=>1008611,'status'=>0,'isGuest'=>1]);die;
-
+        $authority = $_SESSION['userinfo']['yht_authority'];
         //1.查数据库
-        $exist = WxYhtContract::findOne(["cont_templateId"=>$tid,"cont_has_signer"=>0]);
-        if (empty($exist)){
-            //创建合同
-            $client = new Client([
-                // Base URI is used with relative requests
-                'base_uri' => 'https://api.yunhetong.com/api/',
-            ]);
-            $token = $this->runAction('token',['runAction'=>1]);//平台token
-            $response = $client->post("contract/templateContract",[
-                'headers'=>["content-type"=>"application/json;charset=UTF-8","token"=>$token],
-                'body' => "row data",
-                'json'=>[
-                    "contractTitle"=>"荟家装云合同",
-                    "templateId"=>"TEM1003301",
-                    "contractData"=>[
-                        '${name}'=>"大东",
-                        '${mobile}'=>"13726449403",
-                        '${id_no}'=>"sadfasdf18294903",
-                        '${corporate_name}'=>"深圳荟家装科技有限公司",
-                        '${business_licence}'=>"ASDFGHJKL001",
-                        '${product_name}'=>"创客模式合同",
-                        '${contract_date}'=>"2018-7-26"
-                    ]
-                ]
-            ]);
-            $res = $response->getBody()->getContents();
-            $respBody = json_decode($res,true);
+        $contractInfo = WxYhtContract::findOne(["cont_contractId"=>$contractId]);
+        if (!empty($contractInfo)){
 
-            //写库
-            $contract = [
-                "cont_templateId"=>$tid,
-                "cont_contractId"=>$respBody["data"]["contractId"],
-                "cont_created_time"=>date("Y-m-d H:i:s")
-            ];
-            Yii::$app->db->createCommand()->insert("yii2_wx_yht_contract",$contract)->execute();
-            $contractId = $respBody["data"]["contractId"];
-            return $this->render('contract-detail',['contractId'=>$contractId]);
+            return $this->render('contract-detail',['contractId'=>$contractId,'status'=>$status,'authority'=>$authority]);
         }else{
-            $contractId = $exist['cont_contractId'];
-            return $this->render('contract-detail',['contractId'=>$contractId]);
+            p("抱歉你所查看的合同不存在",1);
         }
     }
 
