@@ -5,11 +5,14 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7;
 use common\models\WxYhtContract;
+use common\models\WxYhtInfo;
 use common\widgets\YhtClient;
 use common\helpers\FuncHelper as output;
 use common\models\WxUser;
+use yii\db\Query;
 
 class YhtController extends \yii\web\Controller
 {
@@ -38,15 +41,78 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
+     * 我的合同列表
      * @return string
      * TODO 添加访问权限
      */
     public function actionIndex()
     {
-        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
-            return $this->refresh();
+//        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
+//            return $this->refresh();
+//        }
+        return $this->render('index',['list'=>1,'authority'=>2]);
+        //1.获取用户信息
+        $userId = $_SESSION['userinfo']['user_id'];
+        //2.判断用户权限
+        $yhtInfo = WxYhtInfo::findOne(['user_id'=>$userId]);
+        //2.1 用户是否存在
+        if (!empty($yhtInfo)){
+            //保存信息到session
+            $_SESSION['userinfo']['yht_signerId'] = $yhtInfo->yht_signerId;
+            $_SESSION['userinfo']['yht_username'] = $yhtInfo->yht_username;
+            $_SESSION['userinfo']['yht_authority'] = $yhtInfo->yht_authority;
+
+            $authority = $yhtInfo->yht_authority;
+            if ($authority==1){
+                //超级管理员,从接口获取数据
+                $client = new YhtClient();
+                $appId = '2018062817051800007';
+                $url = "contract/list/1/{$appId}/0/1/10";//类型0个人,1.公司 id 状态 页数 条数
+                try{
+                    $contrachInfo = $client->sendReq('get',$url);
+                    $res = $contrachInfo['data']['contractList'];
+                    foreach ($res as $k=>$v){
+                        $res[$k]['gmtCreate'] = date("Y-m-d",strtotime($v['gmtCreate']));
+                    }
+                }catch (GuzzleException $e){
+                    p($e->getMessage());
+                    $res = [];
+                }
+            }else{
+                //普通管理员,普通用户 查数据库
+                $query = new Query();
+                $contrachIds = $query->from('yii2_wx_yht_contract_signer')
+                    ->select("contract_id")
+                    ->where(['signer_id'=>$yhtInfo->yht_signerId])
+                    ->column();
+                $res = $query->from('yii2_wx_yht_contract')
+                    ->select("cont_owner_signerId as signerId,cont_contractId as contractNo,cont_title as title,cont_created_time as gmtCreate")
+                    ->where(['cont_contractId'=>$contrachIds])
+                    ->all();
+                //循环获取每份合同的签署人
+                foreach ($res as $k=>$v){
+                    $res[$k]['gmtCreate'] = date("Y-m-d",strtotime($v['gmtCreate']));
+                }
+            }
+        }else{
+            $res = [];
         }
-        return $this->render('index');
+        return $this->render('index',['list'=>$res]);
+    }
+
+    /**
+     * 用户云平台账号鉴定
+     */
+    public function actionSign(){
+        //1.查是否有云平台信息
+//        $userId = $_SESSION['userinfo']['user_id'];
+//        $res = WxYhtInfo::findOne($userId);
+        $res = [];$userId=123;
+        if (!empty($res)){
+            output::ajaxReturn(200,'success',['userId'=>$userId]);
+        }else{
+            output::ajaxReturn(201,'账号未实名认证');
+        }
     }
 
     /**
@@ -54,66 +120,88 @@ class YhtController extends \yii\web\Controller
      * @param null $runAction
      * @return mixed
      */
-    public function actionToken($runAction=null)
+    public function actionToken($signerId=null)
     {
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://api.yunhetong.com/api/',
-            // You can set any number of default request options.
-//            'timeout'  => 2.0,
-        ]);
-        //判断token是否过期
-        $tokenExist = array_key_exists('tokenInfo',$_SESSION)? $_SESSION['tokenInfo']:" ";
-        if(!is_array($tokenExist) || (time()-$tokenExist['time']>0) ){
-            //超时重新获取
-            try{
-                $response = $client->post('auth/login',[
-                    'headers'=>["content-type"=>"application/json;charset=UTF-8"],
-                    'body' => "row data",
-                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE","signerId"=>"1099893"]//
-                ]);
+        if (Yii::$app->request->isAjax){
+            //判断token是否过期
+            $tokenExist = array_key_exists('tokenInfo',$_SESSION)? $_SESSION['tokenInfo']:" ";
+            if(!is_array($tokenExist) || (time()-$tokenExist['time']>YhtClient::$timeOut) ){
+                $client = new YhtClient();
+                //超时重新获取
+                try{
+    //                $response = $client->post('auth/login',[
+    //                    'headers'=>["content-type"=>"application/json;charset=UTF-8"],
+    //                    'body' => "row data",
+    //                    'json'=>["appId"=>"2018062817051800007","appKey"=>"wceNcK55gQE","signerId"=>"1099893"]//
+    //                ]);
+    //                $token = $response->getHeader("token")[0];
 
-                $token = $response->getHeader("token")[0];
-                $_SESSION['tokenInfo'] = ['token'=>$token,'time'=>time()];//使用session存储结果
-            }catch (RequestException $e){
-                p($e->getRequest());
-                if ($e->hasResponse()) {
-                    p(Psr7\str($e->getResponse()));
+                    $token = $client->initToken();
+                    $_SESSION['tokenInfo'] = ['token'=>$token,'time'=>time()];//使用session存储结果
+                }catch (RequestException $e){
+                    p($e->getRequest());
+                    if ($e->hasResponse()) {
+                        p(Psr7\str($e->getResponse()));
+                    }
                 }
+            }else{
+                $token = $_SESSION['tokenInfo']['token'];
             }
-        }else{
-            $token = $_SESSION['tokenInfo']['token'];
-        }
-        if (Yii::$app->request->isAjax && !$runAction){
-//            p($token,1);
             \common\helpers\FuncHelper::ajaxReturn(200,'success', $token);
-        }else{
-            return $token;
         }
     }
 
     /**
      * 异步获取合同号
-     * @throws \yii\base\InvalidRouteException
+     * @throws GuzzleException
      */
     public function actionContract()
     {
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://api.yunhetong.com/api/',
-        ]);
-        $token = $this->runAction('token',['runAction'=>1]);
-        $response = $client->get("contract/list/1/1807261536209921/0/1/10",[
-            'headers'=>["content-type"=>"application/json;charset=UTF-8","token"=>$token],
-        ]);
-//        p(Psr7\str($response));
-        $res = $response->getBody()->getContents();
-        $respBody = json_decode($res,true);
-//        p($respBody,1);
         if (Yii::$app->request->isAjax){
-//            $contractId = number_format($respBody['data']['contractList'][0]['id'],0,'','');
-            $contractId = "1807261536209921";
+//            $client = new YhtClient();
+//            try{
+//                $res = $client->sendReq('get', "contract/list/1/2018062817051800007/0/1/10");
+//            }catch (RequestException $e){
+//                p($e->getMessage());
+//            }
+            $contractId = "1807041546065011";
             \common\helpers\FuncHelper::ajaxReturn(200,'success', $contractId);
+        }
+    }
+
+    /**
+     * 超级管理员创建可分享合同
+     * @param null $contractId
+     * @return string
+     */
+    public function actionContractCreate($tid=null){
+//        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
+//            return $this->refresh();
+//        }
+        if ($tid!=null){
+            $signerId = $_SESSION['userinfo']['yht_signerId'];
+            $contractInfo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>$signerId,'cont_has_bind'=>0,'cont_status'=>0]);
+            if (empty($contractInfo)){
+                //判断角色 1.平台 2.管理员  合同表必须带有判断类型字段type,合同创建者id,模板id这些搜索字段
+            }else{
+                $contractId = $contractInfo->cont_contractId;
+            }
+
+            return $this->render('contract-create',['contractId'=>$contractId]);
+        }else{
+            return $this->render('contract-template');
+        }
+    }
+
+    /**
+     * 分享成功合同, 异步锁定
+     * @param $contractId
+     * @throws \yii\db\Exception
+     */
+    public function actionContractLock($contractId){
+        if (Yii::$app->request->isAjax){
+            Yii::$app->db->createCommand()->update('yii2_wx_yht_contract',['cont_has_bind'=>1],['cont_contractId'=>$contractId])->execute();
+            output::ajaxReturn(200);
         }
     }
 
@@ -123,15 +211,14 @@ class YhtController extends \yii\web\Controller
      * @return string
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\db\Exception
+     * TODO 区分管理员和用户
      */
     public function actionContractDetail($tid){
 //        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
 //            return $this->refresh();
 //        }
         // 超管点击进入查看合同, 没有空置合同? (是)创建新空置合同 (否)用空置合同   展示空置合同
-        return $this->render('contract-detail');die;
-
-
+        return $this->render('contract-detail',['contractId'=>1008611,'status'=>0,'isGuest'=>1]);die;
 
         //1.查数据库
         $exist = WxYhtContract::findOne(["cont_templateId"=>$tid,"cont_has_signer"=>0]);
@@ -170,15 +257,15 @@ class YhtController extends \yii\web\Controller
             ];
             Yii::$app->db->createCommand()->insert("yii2_wx_yht_contract",$contract)->execute();
             $contractId = $respBody["data"]["contractId"];
+            return $this->render('contract-detail',['contractId'=>$contractId]);
         }else{
             $contractId = $exist['cont_contractId'];
+            return $this->render('contract-detail',['contractId'=>$contractId]);
         }
-        //2. 获取合同号返给前端
-//        \common\helpers\FuncHelper::ajaxReturn(200,'success', $contractId);
-
     }
 
     public function actionCreateUser(){
+        output::ajaxReturn(200,'success');
         if(Yii::$app->request->isAjax){
             list($username, $certifyNum, $phoneNo, $type) = array_values(Yii::$app->request->get());//取参数
             $yhtClient = new YhtClient();
@@ -206,7 +293,7 @@ class YhtController extends \yii\web\Controller
 
                 if ($res['code']==200){
                     $signerId = $res['data']['signerId'];//返回用户id
-                    $_SESSION['signerId'] = $signerId;//保存到session
+                    $_SESSION['userinfo']['yht_signerId'] = $signerId;//保存到session
 
                     //创建印模
                     $urlMoulage = $type==1? YhtClient::$url['user']['addPM']:YhtClient::$url['user']['addCM'];
@@ -242,10 +329,11 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
-     * 获取用户印模
+     * 获取用户base64印模图片
      * @param $moulageId
      */
     public function actionGetMoulage($moulageId){
+        output::ajaxReturn(200,'success');
         if (Yii::$app->request->isAjax){
             $yhtClient = new YhtClient();
             try{
@@ -267,6 +355,7 @@ class YhtController extends \yii\web\Controller
      * @param $contractId
      */
     public function actionVerify($contractId){
+        output::ajaxReturn(200,'success',['phoneNo'=>13345674443]);
         $yhtClient = new YhtClient();
         try{
             $res = $yhtClient->sendReq('get',"contract/msg/verificationCode/0/{$contractId}",null,2);
@@ -287,6 +376,7 @@ class YhtController extends \yii\web\Controller
      * @param $code
      */
     public function actionVerifyCheck($contractId, $code){
+        output::ajaxReturn(200,'success');
         $yhtClient = new YhtClient();
         try{
             $res = $yhtClient->sendReq('post',"contract/msg/verificationCode",[
@@ -304,5 +394,14 @@ class YhtController extends \yii\web\Controller
             Yii::error($e->getMessage());
             p($e->getMessage());
         }
+    }
+
+    /**
+     * 验证成功页
+     * @param $contractId
+     * @return string
+     */
+    public function actionVerifySuccess($contractId){
+        return $this->render('verify-success',['contractId'=>$contractId]);
     }
 }

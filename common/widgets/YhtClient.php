@@ -32,6 +32,7 @@ class YhtClient extends \yii\base\Component
             'addPM'=>'user/personMoulage'
         ]
     ];
+    public static $timeOut = 900;
     public $tokenConf = [
         "appId"=>"2018062817051800007",
         "appKey"=>"wceNcK55gQE",

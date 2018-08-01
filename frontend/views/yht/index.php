@@ -2,120 +2,77 @@
 /* @var $this yii\web\View */
 use yii\helpers\Url;
 ?>
-<div id="sectionA">
+<div id="sectionD">
     <header>
-        <p><img src="http://hjzhome.image.alimmdn.com/首页图片/logo-mini.png" alt=""></p>
-        <p>云合同签署平台</p>
+        <p>云合同列表</p>
     </header>
-    <div class="weui-grids">
-        <a href="<?= Url::toRoute(["yht/contract-detail","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
-            <div class="weui-grid-icon">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-qianhetong"></use>
-                </svg>
-            </div>
-            <p class="weui-grid__label">
-                地区门店加盟合同
-            </p>
-        </a>
-        <a href="<?= Url::toRoute(["yht/contract-detail","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
-            <div class="weui-grid-icon">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-qianhetong"></use>
-                </svg>
-            </div>
-            <p class="weui-grid__label">
-                创客模式加盟合同
-            </p>
-        </a>
-        <a href="<?= Url::toRoute(["yht/contract-detail","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
-            <div class="weui-grid-icon">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-qianhetong"></use>
-                </svg>
-            </div>
-            <p class="weui-grid__label">
-                供应商供给合同
-            </p>
-        </a>
-
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">我的云合同</div>
+        <div class="weui-panel__bd">
+            <a href="<?= Url::toRoute(['yht/contract-detail'])?>" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-qianhetong"></use>
+                    </svg>
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">创客模式合作 <span>2018-07-26</span></h4>
+                    <p class="weui-media-box__desc">合同编号: 1807261536209921</p>
+                </div>
+                <div class="weui-media-box__bd arrows">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-jiantou"></use>
+                    </svg>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-qianhetong"></use>
+                    </svg>
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">创客模式合作 <span>2018-07-26</span></h4>
+                    <p class="weui-media-box__desc">合同编号: 1807261536209921</p>
+                </div>
+                <div class="weui-media-box__bd arrows">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-jiantou"></use>
+                    </svg>
+                </div>
+            </a>
+        </div>
+<!--        <div class="weui-panel__ft">-->
+<!--            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">-->
+<!--                <div class="weui-cell__bd">查看更多</div>-->
+<!--                <span class="weui-cell__ft"></span>-->
+<!--            </a>-->
+<!--        </div>-->
     </div>
+
+    <!--  超级管理员选择跳转  -->
+    <div id="super-admin" class="weui-popup__container">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="top">
+                <p>合同管理员</p>
+                <p>可以根据自己需求选择当前需要使用的功能</p>
+            </div>
+            <div class="bottom">
+                <a href="<?= Url::toRoute(['yht/contract-create'])?>" class="weui-btn weui-btn_primary">去创建新合同</a>
+                <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">查看合同列表</a>
+            </div>
+        </div>
+    </div>
+
 </div>
-<!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>-->
-<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
 <script type="text/javascript">
     $(function () {
-        var tokenUnableListener = function (obj){ //当 token 不合法时，SDK 会回调此方法
-            $.ajax({
-                type:'POST',
-                url:<?= json_encode(Url::toRoute("token"))?>,  //第三方服务器获取 token 的 URL，云合同 SDK 无法提供
-                cache:false,
-                dataType: 'json',
-                data:{signerId:"2018062817051800007"},  //第三方获取 token 需要的参数
-                beforeSend:function (xhr){
-                    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-                },
-                success: function(data,textStatus,request){
-                    console.log(data);
-                    YHT.setToken(data.obj);  //重新设置token，从请求头获取 token
-                    YHT.do(obj); //调用此方法，会继续执行上次未完成的操作
-                },
-                error: function (data) {
-                    alert(data);
-                }
-            });
-        };
-        YHT.init("AppID", tokenUnableListener);  //必须初始化 YHT
-
-        $.ajax({
-            type:'POST',
-            async:false,  //请使用同步
-            url:<?= json_encode(Url::toRoute("contract"))?>,  //第三方服务器获取合同 ID 的 URL
-            cache:false,
-            dataType:'json',
-            data:{},
-            success: function(data, textStatus, jqXHR){
-                var contractId=data.obj;
-                //合同查看方法
-                // YHT.queryContract(
-                //     function successFun(url) {
-                //         console.log(url);
-                //         // window.open(url);
-                //         // location.href = url;
-                //     },
-                //     function failFun(data) {
-                //         alert(data);
-                //     },
-                //     contractId
-                // );
-                //合同签署页面
-                // YHT.signContract(
-                //     function successFun(url) {
-                //         // window.open(url);
-                //         console.log(url);
-                //         // location.href = url;
-                //     },
-                //     function failFun(data) {
-                //         console.log(data);
-                //     },
-                //     contractId
-                // );
-                //前置绘制签名页面
-                // YHT.dragSignF(
-                //     function successFun(url) {
-                //         // window.open(url);
-                //         console.log(url);
-                //         location.href = url;
-                //     },
-                //     function failFun(data) {
-                //         console.log(data);
-                //     }
-                // );
-            },
-            error: function (data) {
-            }
-        });
-    })
+        let authority = <?= $authority?>;
+        if (authority===1){
+            $("#super-admin").popup();
+        }
+    });
 </script>
 
 

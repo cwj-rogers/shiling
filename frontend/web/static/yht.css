@@ -29,11 +29,8 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 /*首页样式*/
 #sectionA{}
     #sectionA header{width: 100%;padding: 20px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
-    #sectionA header p{width: 150px;text-align: center;margin-bottom: 10px;font-size: 24px}
-    #sectionA header p+p{width: 100%;color: grey}
-    #sectionA header p img{width: 100%}
+    #sectionA header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
     #sectionA .weui-grid{width:50%}
-
     #sectionA .weui-grid .weui-grid-icon{text-align: center}
         #sectionA .weui-grid .weui-grid-icon .icon{font-size: 88px}
         #sectionA .weui-grid .weui-grid__label{margin-top: 10px;color: grey}
@@ -41,7 +38,7 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 /*查看合同*/
 #sectionB{}
     #sectionB #contract-box{width: 100%;height: 500px}
-    #sectionB .sign{width: 140px;height: 50px;background: #4280FF;position: fixed;right: 10px;bottom: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
+    #sectionB .sign{width: 140px;height: 50px;background: #4280FF;position: fixed;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
         #sectionB .sign .weui-flex__item{text-align: center;line-height: 50px;color: white}
         #sectionB .sign .weui-flex__item+.weui-flex__item{flex: 2}
         #sectionB .sign .icon{font-size: 38px;display: block;margin-top: 5px;color: white}
@@ -55,23 +52,51 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
             #sectionB #register .bottom span{margin-left: 20px;}
     /*个人*/
     #sectionB #personal .weui-popup__modal{background: white}
-    #sectionB #personal .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white}
+    #sectionB #personal .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white;font-weight: bold}
     #sectionB #personal hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
         #sectionB #personal .bottom .weui-label{color: #4280FF;font-size: 14px}
         #sectionB #personal .bottom .weui-btn_default{color: #4280FF;border: #4280FF 1px solid;font-weight: bold}
     /*公司*/
     #sectionB #company .weui-popup__modal{background: white}
-    #sectionB #company .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white}
+    #sectionB #company .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white;font-weight: bold}
     #sectionB #company hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
         #sectionB #company .bottom .weui-label{color: #4280FF;font-size: 14px}
         #sectionB #company .bottom .weui-btn_default{color: #4280FF;border: #4280FF 1px solid;font-weight: bold}
     /*签名页*/
-    #sectionB #signature #signature-box{height: 300px;width: 100%}
-        #sectionB #signature .head p:first-child{text-align: center;font-size: 18px;padding: 15px 0;padding-top: 30px;color: #4280FF;font-weight: bold}
-        #sectionB #signature .head p:last-child{text-align: center;font-size: 12px}
-        #sectionB #signature .body .image{margin:15px 0;text-align: center;}
+    #sectionB #signature{background-color: white}
+    #sectionB #signature #signature-box{height: 300px;width: 100%;}
+        #sectionB #signature .head{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;font-weight: bold}
+        #sectionB #signature hr{color: #4280FF;background-color: #4280FF;height: 1px;border: none;}
+        #sectionB #signature .body p{text-align: center;font-size: 12px;color: grey;font-weight: normal;margin-bottom: 10px}
+        #sectionB #signature .body .image{margin:10px 0;margin-top: 15px;text-align: center;position: relative}
         #sectionB #signature .body .image img{height: 100px}
+        #sectionB #signature .body .image .show-gallery{position: absolute;top:5px;right: 50px;font-size: 12px;color: grey}
         #sectionB #signature .body .go-verify{text-align: center;padding: 0 50px}
         #sectionB #signature .body .go-verify button{background-color: #4280FF;color: white}
     /*验证码弹窗*/
+    .weui-dialog .weui-prompt-text{padding: 0 40px;}
     .weui-dialog .weui-prompt-text a{color: #4280FF;border: 1px solid #4280FF;border-radius: 24px;font-size: 16px;}
+    .weui-dialog .weui-prompt-text .weui-btn_disabled{color:grey;border: 1px solid grey;}
+    .weui-dialog .weui-dialog__bd .weui-cell_warn{margin-top: 10px;font-size: 12px}
+    .weui-dialog .weui-dialog__bd .weui-input{margin-top: 3px}
+    /*印模画框*/
+    .weui-gallery .frame{box-sizing: border-box;height: 100%;width: 100%;border:30px solid rgba(0,0,0,1);border-width: 80px 0px 80px 0px;display: flex;flex-direction: row;justify-content: center;align-items: center;background-color: white}
+    .weui-gallery .frame img{width: 300px}
+    .weui-gallery .weui-gallery__opr i{font-size: 38px;color: white;}
+
+/*合同列表*/
+#sectionD{}
+    #sectionD header{width: 100%;padding: 20px;padding-bottom: 0px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
+    #sectionD header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
+    #sectionD #super-admin .weui-popup__modal{display: flex;flex-direction: column;justify-content: center;align-items: center}
+    #sectionD #super-admin .top{padding: 50px 0;padding-bottom: 30px}
+    #sectionD #super-admin .top p{text-align: center;font-size: 24px;color: gray;padding: 5px 0;}
+    #sectionD #super-admin .top p+p{text-align: center;font-size: 14px;color: gray}
+    #sectionD #super-admin .bottom{margin-bottom: 150px}
+    #sectionD #super-admin .bottom button{padding: 0 50px}
+
+    #sectionD .weui-panel .weui-media-box__hd{display: flex;flex-direction: row;align-items: center;justify-content: center}
+    #sectionD .weui-panel .weui-media-box__hd .icon{font-size: 60px}
+    #sectionD .weui-panel .weui-media-box__bd p{margin-top: 5px}
+    #sectionD .weui-panel .weui-media-box__bd h4 span{font-size: 12px;color: grey;float: right;line-height: 27px;margin-right: 15px}
+    #sectionD .weui-panel .arrows{flex: 0.1;color: grey}
