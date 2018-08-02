@@ -23,7 +23,8 @@ class YhtClient extends \yii\base\Component
         'token'=>'auth/login',
         'contract'=>[
             'list'=>'contract/list',
-            'template'=>'contract/templateContract'
+            'template'=>'contract/templateContract',
+            'sign'=>'contract/sign'
         ],
         'user'=>[
             'addC'=>'user/company',
@@ -33,7 +34,7 @@ class YhtClient extends \yii\base\Component
         ]
     ];
     public static $timeOut = 900;
-    public $tokenConf = [
+    public static $tokenConf = [
         "appId"=>"2018062817051800007",
         "appKey"=>"wceNcK55gQE",
 //        "signerId"=>"1099893"
@@ -57,7 +58,7 @@ class YhtClient extends \yii\base\Component
     public function initToken($signerId=null){
         if ($signerId){
             //用户长效令牌
-            $userOpt = array_merge($this->tokenConf,["signerId"=>$signerId]);
+            $userOpt = array_merge(self::$tokenConf,["signerId"=>$signerId]);
             $reqOpt = $this->getReqOption(0, $userOpt);
             $response = $this->client->post(self::$url['token'],$reqOpt);
             /*请求返回结果*/
@@ -68,7 +69,7 @@ class YhtClient extends \yii\base\Component
             $tokenExist = array_key_exists('tokenInfo',$_SESSION)? $_SESSION['tokenInfo']:" ";
             if(!is_array($tokenExist) || (time()-$tokenExist['time']>60*15) ){
                 //超时重新获取
-                $reqOpt = $this->getReqOption(0, $this->tokenConf);
+                $reqOpt = $this->getReqOption(0, self::$tokenConf);
                 $response = $this->client->post(self::$url['token'],$reqOpt);
                 /*请求返回结果*/
                 $token = $response->getHeader("token")[0]; //头部token

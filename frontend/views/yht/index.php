@@ -25,23 +25,24 @@ use yii\helpers\Url;
                     </svg>
                 </div>
             </a>
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__hd">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-qianhetong"></use>
-                    </svg>
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">创客模式合作 <span>2018-07-26</span></h4>
-                    <p class="weui-media-box__desc">合同编号: 1807261536209921</p>
-                </div>
-                <div class="weui-media-box__bd arrows">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-jiantou"></use>
-                    </svg>
-                </div>
-            </a>
+<!--            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">-->
+<!--                <div class="weui-media-box__hd">-->
+<!--                    <svg class="icon" aria-hidden="true">-->
+<!--                        <use xlink:href="#icon-qianhetong"></use>-->
+<!--                    </svg>-->
+<!--                </div>-->
+<!--                <div class="weui-media-box__bd">-->
+<!--                    <h4 class="weui-media-box__title">创客模式合作 <span>2018-07-26</span></h4>-->
+<!--                    <p class="weui-media-box__desc">合同编号: 1807261536209921</p>-->
+<!--                </div>-->
+<!--                <div class="weui-media-box__bd arrows">-->
+<!--                    <svg class="icon" aria-hidden="true">-->
+<!--                        <use xlink:href="#icon-jiantou"></use>-->
+<!--                    </svg>-->
+<!--                </div>-->
+<!--            </a>-->
         </div>
+<!--    底部更多资料    -->
 <!--        <div class="weui-panel__ft">-->
 <!--            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">-->
 <!--                <div class="weui-cell__bd">查看更多</div>-->
