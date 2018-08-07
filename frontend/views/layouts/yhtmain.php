@@ -29,7 +29,7 @@
     </script>
 </head>
 <body>
-    <div id="container" style="position: relative;z-index: 888;margin-bottom: 80px">
+    <div id="container" style="position: relative;z-index: 888;margin-bottom: 0px">
         <?=$content?>
     </div>
     <!-- 通用页脚 -->

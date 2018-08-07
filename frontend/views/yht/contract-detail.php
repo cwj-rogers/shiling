@@ -3,10 +3,10 @@
 use yii\helpers\Url;
 ?>
 <div id="sectionB">
-    <iframe id="contract-box" src=""></iframe>
+    <iframe id="contract-box" src="" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto"></iframe>
 
     <!--  权限判断，1.未签约 2.非合同创建者  -->
-    <?php if ($status==0 && $isOwner==0):?>
+    <?php if ($status==0 && $isGuest==1):?>
     <div class="sign">
         <a href="javascript:;" class="weui-flex">
             <div class="weui-flex__item">
@@ -150,29 +150,67 @@ use yii\helpers\Url;
         var moulageId = 0;
         var countdownTime = 60;//倒计时60秒
 
-       // $("#signature").removeClass('hide').popup();
-        //6.获取短信信息 a.获取短信 b.验证短信
+        // $("#signature").removeClass('hide').popup();
+
+
+        //6.获取短信信息 a.添加签署人+静默签署 b.获取短信 c.验证短信+ 双方签署成功
         $(document).on('click','#signature .verify-sms, .weui-dialog .verify-sms2',function () {
             let urlSendSms = <?= json_encode(Url::toRoute(['yht/verify','contractId'=>$contractId]))?>;
+            let urlContractSign = <?= json_encode(Url::toRoute(['yht/contract-sign','contractId'=>$contractId]))?>;
+            let utlVerifySuccess = <?= json_encode(Url::toRoute(['yht/verify-success','contractId'=>$contractId]))?>;
+            let urlVerify = <?= json_encode(Url::toRoute(['yht/verify-check','contractId'=>$contractId]))?>;
             let objName = $(this).hasClass("verify-sms");
             if (countdownTime===60){
-                //发送短信验证码
-                $.getJSON(urlSendSms,function (data) {
+                //添加签署人+静默签署
+                $.showLoading('正在添加签署人');
+                $.getJSON(urlContractSign,function (data) {
                     if (data.code===200){
-                        $.toast("短信已发送！", "success",function () {
-                            //短信验证码输入窗口
-                            objName && $.verifyPrompt(data);
-                            //开启计时插件
-                            countDown(".weui-dialog .count-down",countdownTime);
-                        });
-                    }else {
-                        $.toast(data.msg,'cancel');
+                        $.hideLoading();
+                        //是否进行短信验证
+                        if (data.obj.verifyPhone===1){
+                            //发送短信验证码,区分首次获取+再次获取
+                            $.showLoading('正在发送验证码');
+                            $.getJSON(urlSendSms,function (data) {
+                                if (data.code===200){
+                                    $.hideLoading();
+                                    $.toast("短信已发送！", "success",function () {
+                                        //短信验证码输入窗口
+                                        objName && $.verifyPrompt(data);
+                                        //开启计时插件
+                                        countDown(".weui-dialog .count-down",countdownTime);
+                                    });
+                                }else {
+                                    $.hideLoading();
+                                    $.toast(data.msg,'cancel');
+                                }
+                            });
+                        }else{
+                            $.hideLoading();
+                            $.showLoading('用户信息验证');
+                            $.getJSON(urlVerify,function (data) {
+                                if (data.code===200){
+                                    $.hideLoading();
+                                    $.toast("验证成功",function () {
+                                        location.href = utlVerifySuccess;
+                                    });
+                                } else {
+                                    $.hideLoading();
+                                    $.toast(data.msg,'forbidden');
+                                }
+                            });
+                        }
+                    } else{
+                        $.hideLoading();
+                        $.alert(data.msg);
                     }
                 });
             } else {
                 $.toast('稍等,请在'+countdownTime+'秒后重新获取','text');
             }
         });
+        // $.verifyPrompt({'obj':{'phoneNo':10086}});
+        // countDown(".weui-dialog .count-down");
+        //6.1 获取短信+短信验证
         $.verifyPrompt = (data,error='')=>{
             let urlVerify = <?= json_encode(Url::toRoute(['yht/verify-check','contractId'=>$contractId]))?>;
             let utlVerifySuccess = <?= json_encode(Url::toRoute(['yht/verify-success','contractId'=>$contractId]))?>;
@@ -209,8 +247,6 @@ use yii\helpers\Url;
                 }
             });
         };
-        // $.verifyPrompt({'obj':{'phoneNo':10086}});
-        // countDown(".weui-dialog .count-down");
         // 活动结束计时器
         function countDown(className) {
             let cdInterval = setInterval(function () {
@@ -228,16 +264,18 @@ use yii\helpers\Url;
 
 
         //5. 签名页 查看专属印模
-        let signatrueInit = (moulageId)=>{
-            let urlGetMoulage = <?= json_encode(Url::toRoute(['yht/get-moulage']))?> +'?moulageId='+moulageId;
+        function signatrueInit(moulageId) {
+            let urlGetMoulage = <?= json_encode(Url::toRoute(['yht/get-moulage']))?> +'?moulageId='+moulageId+'&contractId='+contractId;
             $.getJSON(urlGetMoulage,function (data) {
-               if (data.code==200){
-                   let base64 = "data:image/png;base64,"+data.obj.imgBase;
-                   $("#signature .image img").attr("src", base64);
-                   $("#signature").removeClass('hide').popup();
-               }
+                if (data.code===200){
+                    let base64 = "data:image/png;base64,"+data.obj;
+                    $("#signature .image img").attr("src", base64);
+                    $("#signature").removeClass('hide').popup();
+                }else{
+                    $.alert(data.msg);
+                }
             });
-        };
+        }
         //5.1 放大专属印模
         $('#signature').on('click','.image',function (e) {
             let base64 = $(this).find("img").attr('src');
@@ -290,11 +328,12 @@ use yii\helpers\Url;
 
         //2.进入签约 判断是否云合同用户 是,跳到签名页 否,进入注册流程
         $('#sectionB').on('click','.sign',function () {
-            var urlSign = <?= json_encode(Url::toRoute(['yht/sign']))?>;
+            let urlSign = <?= json_encode(Url::toRoute(['yht/sign']))?>;
            $.getJSON(urlSign,function (data) {
-                if (data.code==200){
+                if (data.code===200){
                     signatrueInit(data.obj.moulageId);
                 }else{
+                    //进入注册流程
                     $.toast(data.msg,'cancel',function () {
                         $("#register").removeClass('hide').popup();
                     });
@@ -328,7 +367,7 @@ use yii\helpers\Url;
         //1.1 合同查看方法
         YHT.queryContract(
             function successFun(url) {
-                var windowH = window.innerHeight;
+                var windowH = window.innerHeight - 80;
                 $("#contract-box").css('height',windowH+'px');
                 $("#contract-box").attr('src',url);
             },
@@ -339,8 +378,7 @@ use yii\helpers\Url;
         );
 
         //微信分享配置
-        var localUrl = location.href;
-        var lockContractUrl = <?= json_encode(Url::toRoute(["yht/contract"]))?>;
+        var localUrl = "http://www.hjzhome.com";
         wx.ready (function () {
             var $wx_share = [
                 'http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png?t=1533178660358',
@@ -356,9 +394,7 @@ use yii\helpers\Url;
                 "desc" : $wx_share[3],   // 分享描述
                 success : function () {
                     // 分享成功, 锁定空置合同
-                    $.getJSON(lockContractUrl,function () {
-                        alert(分享成功)
-                    })
+                    $.alert('分享成功');
                 }
             };
             wx.onMenuShareAppMessage (shareData);

@@ -9,15 +9,16 @@ use yii\helpers\Url;
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">我的云合同</div>
         <div class="weui-panel__bd">
-            <a href="<?= Url::toRoute(['yht/contract-detail'])?>" class="weui-media-box weui-media-box_appmsg">
+            <?php foreach ($list as $k=>$v):?>
+            <a href="<?= Url::toRoute(['yht/contract-detail','contractId'=>$v['contractNo']])?>" class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__hd">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-qianhetong"></use>
                     </svg>
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">创客模式合作 <span>2018-07-26</span></h4>
-                    <p class="weui-media-box__desc">合同编号: 1807261536209921</p>
+                    <h4 class="weui-media-box__title"><?= $v['title']?> <span><?= $v['gmtCreate']?></span></h4>
+                    <p class="weui-media-box__desc">合同编号: <?= $v['contractNo']?></p>
                 </div>
                 <div class="weui-media-box__bd arrows">
                     <svg class="icon" aria-hidden="true">
@@ -25,6 +26,7 @@ use yii\helpers\Url;
                     </svg>
                 </div>
             </a>
+            <?php endforeach;?>
 <!--            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">-->
 <!--                <div class="weui-media-box__hd">-->
 <!--                    <svg class="icon" aria-hidden="true">-->

@@ -7,7 +7,7 @@ use yii\helpers\Url;
         <p>云合同签署平台</p>
     </header>
     <div class="weui-grids">
-        <a href="<?= Url::toRoute(["yht/contract-detail","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
+        <a href="<?= Url::toRoute(["yht/contract-create","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
             <div class="weui-grid-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-qianhetong"></use>
@@ -17,7 +17,7 @@ use yii\helpers\Url;
                 地区门店加盟合同
             </p>
         </a>
-        <a href="<?= Url::toRoute(["yht/contract-detail","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
+        <a href="<?= Url::toRoute(["yht/contract-create","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
             <div class="weui-grid-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-qianhetong"></use>
@@ -27,7 +27,7 @@ use yii\helpers\Url;
                 创客模式加盟合同
             </p>
         </a>
-        <a href="<?= Url::toRoute(["yht/contract-detail","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
+        <a href="<?= Url::toRoute(["yht/contract-create","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
             <div class="weui-grid-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-qianhetong"></use>

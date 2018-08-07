@@ -24,6 +24,7 @@ class YhtClient extends \yii\base\Component
         'contract'=>[
             'list'=>'contract/list',
             'template'=>'contract/templateContract',
+            'signer'=>'contract/signer',
             'sign'=>'contract/sign'
         ],
         'user'=>[
@@ -33,7 +34,8 @@ class YhtClient extends \yii\base\Component
             'addPM'=>'user/personMoulage'
         ]
     ];
-    public static $timeOut = 900;
+    public static $pos = ['123','321'];
+    public static $timeOut = 888;
     public static $tokenConf = [
         "appId"=>"2018062817051800007",
         "appKey"=>"wceNcK55gQE",
@@ -64,10 +66,9 @@ class YhtClient extends \yii\base\Component
             /*请求返回结果*/
             $token = $response->getHeader("token")[0]; //头部token
         }else{
-            //平台长效命令
-            //判断token是否过期
+            //平台长效命令, 判断token是否过期
             $tokenExist = array_key_exists('tokenInfo',$_SESSION)? $_SESSION['tokenInfo']:" ";
-            if(!is_array($tokenExist) || (time()-$tokenExist['time']>60*15) ){
+            if(!is_array($tokenExist) || (time()-$tokenExist['time']>self::$timeOut) ){
                 //超时重新获取
                 $reqOpt = $this->getReqOption(0, self::$tokenConf);
                 $response = $this->client->post(self::$url['token'],$reqOpt);
@@ -114,30 +115,26 @@ class YhtClient extends \yii\base\Component
     }
 
     /**
-     * @param null $method 方法
-     * @param null $url 具体地址
-     * @param null $json 具体参数
-     * @param int $type token类型
+     * @param null $method
+     * @param null $url
+     * @param array|null $json
+     * @param int $type
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \yii\db\Exception
      */
-    public function sendReq($method=null, $url=null, $json=null, $type=1){
-//        $json = [
-//            "contractTitle"=>"荟家装云合同",
-//            "templateId"=>"TEM1003301",
-//            "contractData"=>[
-//                '${name}'=>"大东",
-//                '${mobile}'=>"13726449403",
-//                '${id_no}'=>"sadfasdf18294903",
-//                '${corporate_name}'=>"深圳荟家装科技有限公司",
-//                '${business_licence}'=>"ASDFGHJKL001",
-//                '${product_name}'=>"创客模式合同",
-//                '${contract_date}'=>"2018-7-26"
-//            ]
-//        ];
+    public function sendReq($method=null, $url=null,array $json=null, $type=1){
+        $userInfo = $_SESSION['userinfo'];
+        //日志 请求参数
+        Yii::$app->db->createCommand()->insert('yii2_wx_yht_log',['user_id'=>$userInfo['user_id'],'username'=>$userInfo['username'],'action'=>'request','resource'=>$url,'content'=>json_encode($json),'created_at'=>date('Y-m-d H:i:s')])->execute();
+
         $reqHeader = $this->getReqOption($type, $json);
         $response = $this->client->request($method, $url, $reqHeader);
         $res = $response->getBody()->getContents();
+
+        //日志 请求参数
+        Yii::$app->db->createCommand()->insert('yii2_wx_yht_log',['user_id'=>$userInfo['user_id'],'username'=>$userInfo['username'],'action'=>'response','resource'=>$url,'content'=>$res,'created_at'=>date('Y-m-d H:i:s')])->execute();
+
         $respArr = json_decode($res,true);
         return $respArr;
     }
