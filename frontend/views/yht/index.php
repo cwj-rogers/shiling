@@ -62,7 +62,7 @@ use yii\helpers\Url;
                 <p>可以根据自己需求选择当前需要使用的功能</p>
             </div>
             <div class="bottom">
-                <a href="<?= Url::toRoute(['yht/contract-create'])?>" class="weui-btn weui-btn_primary">去创建新合同</a>
+                <a href="<?= Url::toRoute(['yht/template'])?>" class="weui-btn weui-btn_primary">去创建新合同</a>
                 <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">查看合同列表</a>
             </div>
         </div>

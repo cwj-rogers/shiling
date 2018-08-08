@@ -13,8 +13,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>云合同</title>
-    <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.css">
+<!--    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">-->
+
     <link rel="stylesheet" href="<?=Yii::getAlias('@web')?>/static/yht.css">
     <!--  阿里ICON  -->
     <script src="//at.alicdn.com/t/font_764675_t732n1zggk.js"></script>
@@ -45,6 +48,7 @@
 </html>
 
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>-->
 <!-- 如果使用了某些拓展插件还需要额外的JS -->
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>-->
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>-->

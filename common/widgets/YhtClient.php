@@ -34,7 +34,7 @@ class YhtClient extends \yii\base\Component
             'addPM'=>'user/personMoulage'
         ]
     ];
-    public static $pos = ['123','321'];
+    public static $pos = ['jiafang','yifang'];
     public static $timeOut = 888;
     public static $tokenConf = [
         "appId"=>"2018062817051800007",

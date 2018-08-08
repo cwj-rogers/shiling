@@ -7,40 +7,21 @@ use yii\helpers\Url;
         <p>云合同签署平台</p>
     </header>
     <div class="weui-grids">
-        <a href="<?= Url::toRoute(["yht/contract-create","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
+        <?php foreach ($list as $k=>$v):?>
+        <a href="<?= Url::toRoute(['yht/template-form',"tid"=>$v['templateId'],'formName'=>$v['form_name'],'tmp_name'=>$v['tmp_name']])?>" class="weui-grid js_grid">
             <div class="weui-grid-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-qianhetong"></use>
                 </svg>
             </div>
             <p class="weui-grid__label">
-                地区门店加盟合同
+                <?= $v['tmp_name']?>
             </p>
         </a>
-        <a href="<?= Url::toRoute(["yht/contract-create","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
-            <div class="weui-grid-icon">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-qianhetong"></use>
-                </svg>
-            </div>
-            <p class="weui-grid__label">
-                创客模式加盟合同
-            </p>
-        </a>
-        <a href="<?= Url::toRoute(["yht/contract-create","tid"=>"TEM1003301"])?>" class="weui-grid js_grid">
-            <div class="weui-grid-icon">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-qianhetong"></use>
-                </svg>
-            </div>
-            <p class="weui-grid__label">
-                供应商供给合同
-            </p>
-        </a>
-
+        <?php endforeach;?>
     </div>
 </div>
-<!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>-->
+
 <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
 <script type="text/javascript">
     $(function () {

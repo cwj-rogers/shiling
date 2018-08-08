@@ -51,7 +51,7 @@ class YhtController extends \yii\web\Controller
         if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
             return $this->refresh();
         }
-//        return $this->render('index',['list'=>1,'authority'=>2]);
+
         //1.获取用户信息
         $userId = $_SESSION['userinfo']['user_id'];
         //2.判断用户权限
@@ -139,6 +139,38 @@ class YhtController extends \yii\web\Controller
         }
     }
 
+    /**
+     * 模板选择页
+     * @return string|\yii\web\Response
+     */
+    public function actionTemplate(){
+        if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
+            return $this->refresh();
+        }
+        $query = new Query();
+        $tmpList = $query->from('yii2_wx_yht_template')
+            ->orderBy("tmp_id desc")
+            ->all();
+        return $this->render('contract-template',['list'=>$tmpList]);
+    }
+
+    /**
+     * 模板信息填写页
+     * @param $tid
+     * @param $formName
+     * @param $tmp_name
+     * @return string
+     */
+    public function actionTemplateForm($tid,$formName,$tmp_name){
+        $signerId = $_SESSION['userinfo']['yht_signerId'];
+        $contractInfo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>$signerId,'cont_has_bind'=>0,'cont_status'=>0]);
+        if (empty($contractInfo)){
+            return $this->render($formName,['tid'=>$tid,'tmp_name'=>$tmp_name]);
+        }else{
+            $contractId = $contractInfo->cont_contractId;
+            return $this->redirect(['yht/contract-create','tid'=>$tid,'tmp_name'=>$tmp_name]);
+        }
+    }
 
     /**
      * 超级管理员创建可分享合同
@@ -148,7 +180,7 @@ class YhtController extends \yii\web\Controller
      * @throws \yii\db\Exception
      * TODO 完善模板列表 理顺合同创建逻辑
      */
-    public function actionContractCreate($tid=null){
+    public function actionContractCreate($tid=null,$tmp_name=null){
         if(!isset($_SESSION['userinfo']) || !isset($_SESSION['userinfo']['user_id'])){
             return $this->refresh();
         }
@@ -160,19 +192,19 @@ class YhtController extends \yii\web\Controller
                 //判断角色 1.平台 2.管理员  合同表必须带有判断类型字段type,合同创建者id,模板id这些搜索字段
                 $authority = $_SESSION['userinfo']['yht_authority'];
                 $client = new YhtClient();
-                $title = "荟家装云合同";
+                $reqInfo = [];
+                //处理提交的表单信息
+                if(empty($_POST)){
+                    return $this->render('fail',['msg'=>'提交信息不能为空']);
+                }
+                foreach ($_POST as $k=>$v){
+                    $key = '${'.$k.'}';
+                    $reqInfo[$key] = $v;
+                }
                 $tmpJson = [
-                    "contractTitle"=>"荟家装云合同",
-                    "templateId"=>"TEM1003301",
-                    "contractData"=>[
-                        '${name}'=>"大东",
-                        '${mobile}'=>"13726449403",
-                        '${id_no}'=>"sadfasdf18294903",
-                        '${corporate_name}'=>"深圳荟家装科技有限公司",
-                        '${business_licence}'=>"ASDFGHJKL001",
-                        '${product_name}'=>"创客模式合同",
-                        '${contract_date}'=>date("Y-m-d")
-                    ]
+                    "contractTitle"=>$tmp_name,
+                    "templateId"=>$tid,
+                    "contractData"=>$reqInfo
                 ];
                 if ($authority==1){
                     //超级管理员创建(平台)
@@ -181,12 +213,14 @@ class YhtController extends \yii\web\Controller
                     //管理员(个人)
                     $repInfo = $client->sendReq('post',YhtClient::$url['contract']['template'],$tmpJson,2);
                 }else{
-//                    p("用户没有权限",1);
                     return $this->render('fail',['msg'=>"用户没有权限"]);
                 }
                 $db = Yii::$app->db;
                 $trans = $db->beginTransaction();
                 try{
+                    if ($repInfo['code']!=200){
+                        return $this->render('fail',['msg'=>$repInfo['msg']]);
+                    }
                     // 获取远程云合同数据,记录入库 合同表
                     // 解决返回数据变成科学计数法的bug
                     $contractId = $repInfo["data"]["contractId"];
@@ -195,7 +229,7 @@ class YhtController extends \yii\web\Controller
                             'cont_contractId'=>number_format($contractId,0,'',''),
                             'cont_owner_signerId'=>$signerId,
                             'cont_templateId'=>$tid,
-                            'cont_title'=>$title,
+                            'cont_title'=>$tmp_name,
                             'cont_created_time'=>date("Y-m-d H:i:s")
                         ])->execute();
                     //云用户和合同关联表
@@ -220,7 +254,7 @@ class YhtController extends \yii\web\Controller
                     "signValidateType" => 0//签署验证方式：0 不校验，1 短信验证
                 ];
 
-                $signRes = $client->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signers"=>[$signerInfo] ]);
+                $signRes = $client->sendReq('post',YhtClient::$url['contract']['signer'],["idType"=>0,"idContent"=>$contractId,"signers"=>[$signerInfo] ]);
                 if ($signRes['code']!=200){
                     return $this->render('fail',['msg'=>$signRes['msg']]);
                 }
@@ -228,8 +262,6 @@ class YhtController extends \yii\web\Controller
                 $contractId = $contractInfo->cont_contractId;
             }
             return $this->render('contract-create',['contractId'=>$contractId]);
-        }else{
-            return $this->render('contract-template');
         }
     }
 
@@ -376,6 +408,40 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
+     * 获取用户base64印模图片
+     * @param $moulageId
+     */
+    public function actionGetMoulage($moulageId){
+//        output::ajaxReturn(200,'success');
+        if (Yii::$app->request->isAjax){
+            $yhtClient = new YhtClient();
+            try{
+                $user_id = $_SESSION['userinfo']['user_id'];
+                $exist = Yii::$app->db->createCommand("select yht_moulage_base64 from yii2_wx_yht_info where user_id={$user_id}")->queryScalar();
+                if (!empty($exist) && $exist){
+                    $base64 = $exist;
+                }else{
+                    $res = $yhtClient->sendReq('get',"user/moulage/$moulageId");
+                    if ($res['code']==200){
+                        $base64 = $res['data']['moulage']['imgBase'];
+                        //保存到数据库
+                        Yii::$app->db->createCommand()->update('yii2_wx_yht_info',['yht_moulage_base64'=>$base64],['user_id'=>$user_id])->execute();
+                    }else{
+                        output::ajaxReturn($res['code'],$res['msg']);
+                    }
+                }
+                output::ajaxReturn(200,'success', $base64);
+            }catch (GuzzleException $e){
+                Yii::error($e->getMessage());
+                output::ajaxReturn(401,'请求远程资源失败');
+            }catch (\yii\db\Exception $e){
+                Yii::error($e->getMessage());
+                output::ajaxReturn(402,'请求远程资源失败');
+            }
+        }
+    }
+
+    /**
      * 添加签署人+ 静默合同签署
      * @param $contractId
      * @throws \yii\db\Exception
@@ -409,40 +475,6 @@ class YhtController extends \yii\web\Controller
             }catch (GuzzleException $e){
                 Yii::error($e->getMessage());
                 output::ajaxReturn(400,$e->getMessage());
-            }
-        }
-    }
-
-    /**
-     * 获取用户base64印模图片
-     * @param $moulageId
-     */
-    public function actionGetMoulage($moulageId){
-//        output::ajaxReturn(200,'success');
-        if (Yii::$app->request->isAjax){
-            $yhtClient = new YhtClient();
-            try{
-                $user_id = $_SESSION['userinfo']['user_id'];
-                $exist = Yii::$app->db->createCommand("select yht_moulage_base64 from yii2_wx_yht_info where user_id={$user_id}")->queryScalar();
-                if (!empty($exist) && $exist){
-                    $base64 = $exist;
-                }else{
-                    $res = $yhtClient->sendReq('get',"user/moulage/$moulageId");
-                    if ($res['code']==200){
-                        $base64 = $res['data']['moulage']['imgBase'];
-                        //保存到数据库
-                        Yii::$app->db->createCommand()->update('yii2_wx_yht_info',['yht_moulage_base64'=>$base64],['user_id'=>$user_id])->execute();
-                    }else{
-                        output::ajaxReturn($res['code'],$res['msg']);
-                    }
-                }
-                output::ajaxReturn(200,'success', $base64);
-            }catch (GuzzleException $e){
-                Yii::error($e->getMessage());
-                output::ajaxReturn(401,'请求远程资源失败');
-            }catch (\yii\db\Exception $e){
-                Yii::error($e->getMessage());
-                output::ajaxReturn(402,'请求远程资源失败');
             }
         }
     }
@@ -543,5 +575,13 @@ class YhtController extends \yii\web\Controller
             'content'=>$content,
             'created_at'=>date("Y-m-d H:i:s")
         ])->execute();
+    }
+
+    public function actionTmpContent(){
+        $arr = [
+            'name1'
+        ];
+        $str = json_encode($arr);
+        Yii::$app->db->createCommand()->update('yii2_wx_yht_template',['content'=>$str],['tmp_id'=>1])->execute();
     }
 }
