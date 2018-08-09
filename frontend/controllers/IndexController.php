@@ -92,8 +92,8 @@ class IndexController extends Controller
         $userId = Yii::$app->request->get('user_id',0);
         $wgId = Yii::$app->request->get('wg_id',0);
 
-        //创建订单
         if($_SESSION['userinfo']['user_id']==$userId){
+            //自己进入
             $isVisit = 0;//是否为游客
             //此商品是否有库存
             $goodInfo = WxGoods::findOne($wgId);
@@ -108,10 +108,17 @@ class IndexController extends Controller
             //是否已经参加过
             $isexist = WxActivitiesOrder::findOne(['user_id'=>$userId,'wg_id'=>$wgId]);
             //是否创建订单 1.没参加过 2.砍价完成,支付成功,过期的
+
             if (empty($isexist) || in_array($isexist['ago_status'],[2,3,4])){
                 (new WxActivitiesOrder)->createActOrder($wgId, $userId);
+            }else{
+                $expriceTime = strtotime($isexist->ago_exprice_time);
+                if (time()>$expriceTime){
+                    (new WxActivitiesOrder)->createActOrder($wgId, $userId);
+                }
             }
         }else{
+            //好友进入
             $agoId = Yii::$app->request->get('ago_id',0);
             if(!$agoId){
                 $agoId = WxActivitiesOrder::findOne(['user_id'=>$userId,'wg_id'=>$wgId]);
