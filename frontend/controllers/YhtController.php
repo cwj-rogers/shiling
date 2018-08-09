@@ -410,6 +410,9 @@ class YhtController extends \yii\web\Controller
                     ];
                     Yii::$app->db->createCommand()->insert('yii2_wx_yht_info',$inData)->execute();
                     output::ajaxReturn(200,'success',['signerId'=>$signerId,'moulageId'=>$moulageId]);
+                }elseif ($res['code']==20209){
+                    //认证号码已经存在
+                    output::ajaxReturn($res['code'],"提交的资料格式不正确");
                 }else{
                     output::ajaxReturn($res['code'],"提交的资料格式不正确");
                 }

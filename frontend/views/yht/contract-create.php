@@ -10,7 +10,7 @@ use yii\helpers\Url;
         var $wx_share = [
             'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/splash_1532757769.png?t=1533178660358',
             detailUrl,
-            '签订合同',
+            '云合同签订',
             '荟家装邀请您进入云合同，点击查看详情'
         ];
         // 微信分享的数据

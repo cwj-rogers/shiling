@@ -149,9 +149,7 @@ use yii\helpers\Url;
         var signerId = 0;
         var moulageId = 0;
         var countdownTime = 60;//倒计时60秒
-
         // $("#signature").removeClass('hide').popup();
-
 
         //6.获取短信信息 a.添加签署人+静默签署 b.获取短信 c.验证短信+ 双方签署成功
         $(document).on('click','#signature .verify-sms, .weui-dialog .verify-sms2',function () {
