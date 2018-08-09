@@ -59,7 +59,7 @@
             var localUrl = "http://www.hjzhome.com";
             wx.ready (function () {
                 var $wx_share = [
-                    "http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png",
+                    "http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/splash_1532757769.png?t=1533178660358",
                     localUrl,
                     "荟家装创客招募",
                     "荟家装邀请您加入创客团队,资源总部出,场地总部出,服务总部出,助你创业路上奋力前行"
