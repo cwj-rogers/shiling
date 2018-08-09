@@ -27,7 +27,7 @@
 <body>
     <script type="text/javascript" charset="utf-8">
         $(function () {
-            wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage'), true, false); ?>);
+            wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false, false); ?>);
         });
 
     </script>
@@ -59,10 +59,10 @@
             var localUrl = "http://www.hjzhome.com";
             wx.ready (function () {
                 var $wx_share = [
-                    'http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png',
+                    "http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png",
                     localUrl,
-                    '荟家装创客招募',
-                    '荟家装邀请您加入创客团队,资源总部出,场地总部出,服务总部出,助你创业路上奋力前行'
+                    "荟家装创客招募",
+                    "荟家装邀请您加入创客团队,资源总部出,场地总部出,服务总部出,助你创业路上奋力前行"
                 ];
                 // 微信分享的数据
                 var shareData = {
@@ -76,6 +76,7 @@
                     }
                 };
                 wx.onMenuShareAppMessage (shareData);
+                wx.onMenuShareTimeline (shareData);
             });
         }
     });

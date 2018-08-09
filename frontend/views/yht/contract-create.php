@@ -28,6 +28,7 @@ use yii\helpers\Url;
         };
         //只支持发送给朋友
         wx.onMenuShareAppMessage (shareData);
+        wx.onMenuShareTimeline (shareData);
     });
 </script>
 <div id="sectionB">
