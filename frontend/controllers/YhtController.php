@@ -102,7 +102,6 @@ class YhtController extends \yii\web\Controller
         }else{
             $res = [];
         }
-//        p($res,1);
         return $this->render('index',['list'=>$res,'authority'=>isset($authority)? $authority:0]);
     }
 

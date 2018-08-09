@@ -158,7 +158,7 @@ use yii\helpers\Url;
             let urlSendSms = <?= json_encode(Url::toRoute(['yht/verify','contractId'=>$contractId]))?>;
             let urlContractSign = <?= json_encode(Url::toRoute(['yht/contract-sign','contractId'=>$contractId]))?>;
             let utlVerifySuccess = <?= json_encode(Url::toRoute(['yht/verify-success','contractId'=>$contractId]))?>;
-            let urlVerify = <?= json_encode(Url::toRoute(['yht/verify-check','contractId'=>$contractId]))?>;
+            let urlVerifyCheck = <?= json_encode(Url::toRoute(['yht/verify-check','contractId'=>$contractId]))?>;
             let objName = $(this).hasClass("verify-sms");
             if (countdownTime===60){
                 //添加签署人+静默签署
@@ -185,9 +185,10 @@ use yii\helpers\Url;
                                 }
                             });
                         }else{
+                            //不要手机短信验证
                             $.hideLoading();
                             $.showLoading('用户信息验证');
-                            $.getJSON(urlVerify,function (data) {
+                            $.getJSON(urlVerifyCheck,function (data) {
                                 if (data.code===200){
                                     $.hideLoading();
                                     $.toast("验证成功",function () {
@@ -328,8 +329,10 @@ use yii\helpers\Url;
 
         //2.进入签约 判断是否云合同用户 是,跳到签名页 否,进入注册流程
         $('#sectionB').on('click','.sign',function () {
+            $.showLoading('正在获取用户信息');
             let urlSign = <?= json_encode(Url::toRoute(['yht/sign']))?>;
            $.getJSON(urlSign,function (data) {
+               $.hideLoading();
                 if (data.code===200){
                     signatrueInit(data.obj.moulageId);
                 }else{
@@ -376,29 +379,6 @@ use yii\helpers\Url;
             },
             contractId
         );
-
-        //微信分享配置
-        var localUrl = "http://www.hjzhome.com";
-        wx.ready (function () {
-            var $wx_share = [
-                'http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png?t=1533178660358',
-                localUrl,
-                '签订合同',
-                '荟家装邀请您进入云合同，点击查看详情'
-            ];
-            // 微信分享的数据
-            var shareData = {
-                "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
-                "link" : $wx_share[1],    // 分享地址
-                "title" : $wx_share[2],   // 分享标题
-                "desc" : $wx_share[3],   // 分享描述
-                success : function () {
-                    // 分享成功, 锁定空置合同
-                    $.alert('分享成功');
-                }
-            };
-            wx.onMenuShareAppMessage (shareData);
-        });
     })
 </script>
 

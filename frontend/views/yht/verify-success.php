@@ -7,7 +7,7 @@ use yii\helpers\Url;
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">签署成功</h2>
-            <p class="weui-msg__desc">恭喜您，成功签署<span style="color: #0a6aa1">《创客模式合同》</span>！双方合同受《电子签名法》等法律条款保障，符合法律法规对电子合同有效性和合法性的规定。
+            <p class="weui-msg__desc">恭喜您，成功签署<span style="color: #0a6aa1">《<?= $title?>》</span>！双方合同受《电子签名法》等法律条款保障，符合法律法规对电子合同有效性和合法性的规定。
                  <a href="<?= Url::toRoute(['yht/contract-detail','contractId'=>$contractId])?>">查看合同</a></p>
         </div>
         <div class="weui-msg__opr-area">

@@ -47,20 +47,20 @@ use yii\helpers\Url;
 
     <div class="weui-cells__title">经营地区门店</div>
     <div class="weui-cells weui-cells_form">
-        <input type="hidden" name="date" value="2018年8月8号">
-        <input type="hidden" name="date+1year" value="2019年8月8号">
-        <input type="hidden" name="date2" value="2018年8月8号">
-        <input type="hidden" name="date3" value="2018年8月8号">
+        <input type="hidden" name="date" value="<?= date("Y年m月d日")?>">
+        <input type="hidden" name="date+1year" value="<?= date("Y年m月d日",strtotime('+1year'))?>">
+        <input type="hidden" name="date2" value="<?= date("Y年m月d日")?>">
+        <input type="hidden" name="date3" value="<?= date("Y年m月d日")?>">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">地区</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="area" type="text" >
+                <input class="weui-input" name="area" type="text" placeholder="例:佛山市禅城区">
             </div>
         </div>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">门店</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="shop" type="text" >
+                <input class="weui-input" name="shop" type="text" placeholder="例:智慧新城店">
             </div>
         </div>
     </div>

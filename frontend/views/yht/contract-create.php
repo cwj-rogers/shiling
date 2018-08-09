@@ -2,6 +2,34 @@
 /* @var $this yii\web\View */
 use yii\helpers\Url;
 ?>
+<script type="text/javascript" charset="utf-8">
+    //微信分享配置
+    var detailUrl = <?= json_encode(Url::toRoute(["yht/contract-detail",'contractId'=>$contractId], true))?>;
+    var lockContractUrl = <?= json_encode(Url::toRoute(["yht/contract-lock",'contractId'=>$contractId], true))?>;
+    wx.ready (function () {
+        var $wx_share = [
+            'http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png',
+            detailUrl,
+            '签订合同',
+            '荟家装邀请您进入云合同，点击查看详情'
+        ];
+        // 微信分享的数据
+        var shareData = {
+            "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
+            "link" : $wx_share[1],    // 分享地址
+            "title" : $wx_share[2],   // 分享标题
+            "desc" : $wx_share[3],   // 分享描述
+            success : function () {
+                // 分享成功, 锁定空置合同
+                $.getJSON(lockContractUrl,function () {
+                    $.alert("合同已成功发送,到微信@朋友吧","分享成功");
+                })
+            }
+        };
+        //只支持发送给朋友
+        wx.onMenuShareAppMessage (shareData);
+    });
+</script>
 <div id="sectionB">
     <iframe id="contract-box" src="" contract="<?= $contractId?>" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto"></iframe>
 <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
@@ -42,33 +70,6 @@ use yii\helpers\Url;
             },
             contractId
         );
-
-        //微信分享配置
-        var detailUrl = <?= json_encode(Url::toRoute(["yht/contract-detail",'contractId'=>$contractId]))?>;
-        var lockContractUrl = <?= json_encode(Url::toRoute(["yht/contract-lock",'contractId'=>$contractId]))?>;
-        wx.ready (function () {
-            var $wx_share = [
-                'http://hjzhome.image.alimmdn.com/微信/云合同/splash_1532757769.png?t=1533178660358',
-                detailUrl,
-                '签订合同',
-                '荟家装邀请您进入云合同，点击查看详情'
-            ];
-            // 微信分享的数据
-            var shareData = {
-                "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
-                "link" : $wx_share[1],    // 分享地址
-                "title" : $wx_share[2],   // 分享标题
-                "desc" : $wx_share[3],   // 分享描述
-                success : function () {
-                    // 分享成功, 锁定空置合同
-                    $.getJSON(lockContractUrl,function () {
-                        $.alert("合同已成功发送,到微信@朋友吧","分享成功");
-                    })
-                }
-            };
-            //只支持发送给朋友
-            wx.onMenuShareAppMessage (shareData);
-        });
     })
 </script>
 
