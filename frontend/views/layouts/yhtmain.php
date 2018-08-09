@@ -51,9 +51,8 @@
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>-->
 
 <script type="text/javascript" charset="utf-8">
-    $(function () {
         let action = <?= json_encode(Yii::$app->requestedAction->id)?>;
-        if (action != 'contract-create'){
+        if (action !== "contract-create"){
             //通用微信分享配置
             var localUrl = "http://www.hjzhome.com";
             wx.ready (function () {
@@ -79,7 +78,6 @@
                 wx.onMenuShareTimeline (shareData);
             });
         }
-    });
 </script>
 
 
