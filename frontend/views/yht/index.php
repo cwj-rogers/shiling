@@ -27,6 +27,14 @@ use yii\helpers\Url;
                 </div>
             </a>
             <?php endforeach;?>
+
+        </div>
+        <div class="weui-loadmore">
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line" style="display: none">
+            <span class="weui-loadmore__tips">已经到底了</span>
         </div>
 <!--    底部更多资料    -->
 <!--        <div class="weui-panel__ft">-->
@@ -38,27 +46,51 @@ use yii\helpers\Url;
     </div>
 
     <!--  超级管理员选择跳转  -->
-    <div id="super-admin" class="weui-popup__container">
-        <div class="weui-popup__overlay"></div>
-        <div class="weui-popup__modal">
-            <div class="top">
-                <p>合同管理员</p>
-                <p>可以根据自己需求选择当前需要使用的功能</p>
-            </div>
-            <div class="bottom">
-                <a href="<?= Url::toRoute(['yht/template'])?>" class="weui-btn weui-btn_primary">去创建新合同</a>
-                <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">查看合同列表</a>
-            </div>
+    <?php if($authority==1 || $authority==2):?>
+        <div id="administrator">
+            <a href="<?= Url::toRoute(['yht/template'])?>" class="temp"><span>创 建</span><span>合 同</span></a>
         </div>
-    </div>
+    <?php endif;?>
 </div>
-<script type="text/javascript">
+<script>
     $(function () {
-        let authority = <?= $authority?>;
-        if (authority!==0){
-            $("#super-admin").popup();
-        }
+        let loadMoreUrl = <?= json_encode(Url::toRoute(['index']))?>;
+
+        var loading = false;  //状态标记
+        $(document.body).infinite().on("infinite", function() {
+            if(loading) return;
+            loading = true;
+
+            let offset = $('.weui-media-box').length;
+            let list = "";
+            $.getJSON(loadMoreUrl,{offset:offset},function (data) {
+                if (data.obj.list.length>0){
+                    let arr = data.obj.list;
+                    $.each(arr,function (k,v) {
+                        list +=
+                            '<a href="<?= Url::toRoute(['yht/contract-detail'])?>?contractId='+v.contractNo+'"  class="weui-media-box weui-media-box_appmsg">'+
+                            '<div class="weui-media-box__hd">'+
+                            '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-qianhetong"></use></svg>'+
+                            '</div>'+
+                            '<div class="weui-media-box__bd">'+
+                            '<h4 class="weui-media-box__title">'+v.title+' <span>'+v.gmtCreate+'</span></h4>'+
+                            '<p class="weui-media-box__desc">合同编号: '+v.contractNo+'</p>'+
+                            '</div>'+
+                            '<div class="weui-media-box__bd arrows">'+
+                            '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-jiantou"></use></svg>'+
+                            '</div>'+
+                            '</a>';
+                    });
+                    loading = false;
+                    $(".weui-panel__bd").append(list);
+                }else{
+                    loading = true;
+                    $('.weui-loadmore').hide();
+                    $('.weui-loadmore_line').show();
+                }
+            })
+        });
+        //$(".weui-panel__bd").destroyInfinite(); //可以销毁插件
     });
 </script>
-
 

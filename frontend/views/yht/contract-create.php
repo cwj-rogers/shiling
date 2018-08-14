@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 use yii\helpers\Url;
 ?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes" />
 <script type="text/javascript" charset="utf-8">
     //微信分享配置
     var detailUrl = <?= json_encode(Url::toRoute(["yht/contract-detail",'contractId'=>$contractId], true))?>;
@@ -28,11 +29,11 @@ use yii\helpers\Url;
         };
         //只支持发送给朋友
         wx.onMenuShareAppMessage (shareData);
-        wx.onMenuShareTimeline (shareData);
     });
 </script>
+
 <div id="sectionB">
-    <iframe id="contract-box" src="" contract="<?= $contractId?>" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto"></iframe>
+    <iframe id="contract-box" src="" contract="<?= $contractId?>" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto" style="width: 100%"></iframe>
 <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -49,7 +50,6 @@ use yii\helpers\Url;
                     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
                 },
                 success: function(data,textStatus,request){
-                    // console.log(data);
                     YHT.setToken(data.obj);  //重新设置token，从请求头获取 token
                     YHT.do(obj); //调用此方法，会继续执行上次未完成的操作
                 },
@@ -67,7 +67,7 @@ use yii\helpers\Url;
                 $("#contract-box").attr('src',url);
             },
             function failFun(data) {
-                alert(data);
+                $.alert(data);
             },
             contractId
         );

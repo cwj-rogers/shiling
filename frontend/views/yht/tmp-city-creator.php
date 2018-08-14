@@ -2,6 +2,9 @@
 /* @var $this yii\web\View */
 use yii\helpers\Url;
 ?>
+<header class="cont_header">
+    <p>云合同资料填写</p>
+</header>
 <form action="<?= Url::toRoute(['yht/contract-create','tid'=>$tid,'tmp_name'=>$tmp_name])?>" method="post">
     <div class="weui-cells__title">甲方名称</div>
     <div class="weui-cells">
@@ -36,7 +39,7 @@ use yii\helpers\Url;
             <div class="weui-cell__ft">
                 <div class="weui-count">
                     <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" name="money" type="number" value="10" style="font-size: 18px;width: 28px">
+                    <input class="weui-count__number" name="money" type="number" value="100" style="font-size: 18px;width: 40px">
                     <a class="weui-count__btn weui-count__increase"></a>
                 </div>
             </div>
@@ -73,7 +76,7 @@ use yii\helpers\Url;
 </form>
 <script>
     $(function () {
-        var MAX = 99, MIN = 1;
+        var MAX = 1000, MIN = 10;
         $('.weui-count__decrease').click(function (e) {
             var $input = $(e.currentTarget).parent().find('.weui-count__number');
             var number = parseInt($input.val() || "0") - 1

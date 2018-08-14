@@ -27,7 +27,7 @@
 <body>
     <script type="text/javascript" charset="utf-8">
         $(function () {
-            wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false, false) ?>);
+            wx.config(<?= Yii::$app->wechat->js->config(array('onMenuShareAppMessage'), false, false) ?>);
         });
     </script>
     <div id="container" style="position: relative;z-index: 888;margin-bottom: 0px">
@@ -52,7 +52,7 @@
 
 <script type="text/javascript" charset="utf-8">
         let action = <?= json_encode(Yii::$app->requestedAction->id)?>;
-        if (action !== "contract-create"){
+        if (action!=="contract-create" && action!=="contract-detail"){
             //通用微信分享配置
             var localUrl = "http://www.hjzhome.com";
             wx.ready (function () {
@@ -75,7 +75,6 @@
                     }
                 };
                 wx.onMenuShareAppMessage (shareData);
-                wx.onMenuShareTimeline (shareData);
             });
         }
 </script>

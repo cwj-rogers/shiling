@@ -4,7 +4,7 @@ use yii\helpers\Url;
 ?>
 <div id="sectionA">
     <header>
-        <p>云合同签署平台</p>
+        <p>创建云合同</p>
     </header>
     <div class="weui-grids">
         <?php foreach ($list as $k=>$v):?>
@@ -21,3 +21,9 @@ use yii\helpers\Url;
         <?php endforeach;?>
     </div>
 </div>
+<script>
+    $(function () {
+        let authority = <?= $authority?>;
+
+    })
+</script>

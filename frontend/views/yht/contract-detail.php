@@ -2,9 +2,37 @@
 /* @var $this yii\web\View */
 use yii\helpers\Url;
 ?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes" />
+<script type="text/javascript" charset="utf-8">
+    //微信分享配置
+    var detailUrl = <?= json_encode(Url::toRoute(["yht/contract-detail",'contractId'=>$contractId], true))?>;
+    var localUrl = "http://www.hjzhome.com";
+    var authority = <?= $authority?>;
+    let yhturl = authority===3? localUrl:detailUrl;
+    wx.ready (function () {
+        var $wx_share = [
+            'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/splash_1532757769.png?t=1533178660358',
+            yhturl,
+            '云合同签订',
+            '荟家装邀请您进入云合同，点击查看详情'
+        ];
+        // 微信分享的数据
+        var shareData = {
+            "imgUrl" : $wx_share[0],    // 分享显示的缩略图地址
+            "link" : $wx_share[1],    // 分享地址
+            "title" : $wx_share[2],   // 分享标题
+            "desc" : $wx_share[3],   // 分享描述
+            success : function () {
+                // 分享成功, 锁定空置合同
+                $.alert("合同已成功发送,到微信@朋友吧","分享成功");
+            }
+        };
+        //只支持发送给朋友
+        wx.onMenuShareAppMessage (shareData);
+    });
+</script>
 <div id="sectionB">
-    <iframe id="contract-box" src="" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto"></iframe>
-
+    <iframe id="contract-box" src="" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto" style="height: 500px;width: 100%"></iframe>
     <!--  权限判断，1.未签约 2.非合同创建者  -->
     <?php if ($status==0 && $isGuest==1):?>
     <div class="sign">
@@ -47,21 +75,28 @@ use yii\helpers\Url;
             <div class="top">个人用户</div>
             <hr>
             <div class="bottom">
+                <div class="weui-cells__title">用户姓名</div>
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">用户姓名:</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">姓名:</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" name="username" type="text" placeholder="请输入用户姓名">
                         </div>
                     </div>
+                </div>
+                <div class="weui-cells__title">身份证号码</div>
+                <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">身份证号码:</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">身份证:</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" name="certifyNum" type="text" placeholder="请输入身份证号码">
                         </div>
                     </div>
+                </div>
+                <div class="weui-cells__title">手机号</div>
+                <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">手机号:</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">手机:</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" name="phoneNo" type="number" pattern="[0-9]*" placeholder="请输入手机号">
                         </div>
@@ -80,21 +115,28 @@ use yii\helpers\Url;
             <div class="top">企业用户</div>
             <hr>
             <div class="bottom">
+                <div class="weui-cells__title">企业名称</div>
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">企业名称:</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">名称:</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" name="username" type="text" placeholder="请输入企业名称">
                         </div>
                     </div>
+                </div>
+                <div class="weui-cells__title">营业执照</div>
+                <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label class="weui-label">营业执照:</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" name="certifyNum" type="text" placeholder="请输入营业执照注册号">
                         </div>
                     </div>
+                </div>
+                <div class="weui-cells__title">手机号</div>
+                <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">手机号:</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">手机:</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" name="phoneNo" type="number" pattern="[0-9]*" placeholder="请输入手机号">
                         </div>
@@ -150,6 +192,10 @@ use yii\helpers\Url;
         var moulageId = 0;
         var countdownTime = 60;//倒计时60秒
         // $("#signature").removeClass('hide').popup();
+        $.showLoading("正在载入合同");
+        setTimeout(function () {
+            $.hideLoading();
+        },3500);
 
         //6.获取短信信息 a.添加签署人+静默签署 b.获取短信 c.验证短信+ 双方签署成功
         $(document).on('click','#signature .verify-sms, .weui-dialog .verify-sms2',function () {
@@ -368,12 +414,12 @@ use yii\helpers\Url;
         //1.1 合同查看方法
         YHT.queryContract(
             function successFun(url) {
-                var windowH = window.innerHeight - 80;
+                var windowH = window.innerHeight - 70;
                 $("#contract-box").css('height',windowH+'px');
                 $("#contract-box").attr('src',url);
             },
             function failFun(data) {
-                alert(data);
+                $.alert(data);
             },
             contractId
         );

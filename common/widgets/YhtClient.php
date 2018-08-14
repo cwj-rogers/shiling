@@ -36,10 +36,11 @@ class YhtClient extends \yii\base\Component
     ];
     public static $pos = ['jiafang','yifang'];
     public static $timeOut = 888;
+    public static $hjzSignerId = 1099894;
+    public static $verifyPhone = 0;//验证手机
     public static $tokenConf = [
         "appId"=>"2018062817051800007",
-        "appKey"=>"wceNcK55gQE",
-//        "signerId"=>"1099893"
+        "appKey"=>"wceNcK55gQE"
     ];
     /**
      * @var Client
@@ -132,7 +133,7 @@ class YhtClient extends \yii\base\Component
         $response = $this->client->request($method, $url, $reqHeader);
         $res = $response->getBody()->getContents();
 
-        //日志 请求参数
+        //日志 返回参数
         Yii::$app->db->createCommand()->insert('yii2_wx_yht_log',['user_id'=>$userInfo['user_id'],'username'=>$userInfo['username'],'action'=>'response','resource'=>$url,'content'=>$res,'created_at'=>date('Y-m-d H:i:s')])->execute();
 
         $respArr = json_decode($res,true);
