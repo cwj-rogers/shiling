@@ -25,7 +25,8 @@ class YhtClient extends \yii\base\Component
             'list'=>'contract/list',
             'template'=>'contract/templateContract',
             'signer'=>'contract/signer',
-            'sign'=>'contract/sign'
+            'sign'=>'contract/sign',
+            'cz'=>'contract/cz'
         ],
         'user'=>[
             'addC'=>'user/company',
@@ -38,6 +39,7 @@ class YhtClient extends \yii\base\Component
     public static $timeOut = 888;
     public static $hjzSignerId = 1099894;
     public static $verifyPhone = 0;//验证手机
+    public static $cz = 0;//是否开启合同存证
     public static $tokenConf = [
         "appId"=>"2018062817051800007",
         "appKey"=>"wceNcK55gQE"

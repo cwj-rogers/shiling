@@ -182,7 +182,8 @@ use yii\helpers\Url;
     </div>
 
 </div>
-<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>
 <script type="text/javascript">
 
     $(function () {

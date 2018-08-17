@@ -6,7 +6,7 @@ use yii\helpers\Url;
     <header>
         <p>云合同列表</p>
     </header>
-    <div class="weui-panel weui-panel_access">
+    <div class="weui-panel weui-panel_access" style="padding-bottom: 100px">
         <div class="weui-panel__hd">我的云合同</div>
         <div class="weui-panel__bd">
             <?php foreach ($list as $k=>$v):?>
@@ -18,7 +18,9 @@ use yii\helpers\Url;
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title"><?= $v['title']?> <span><?= $v['gmtCreate']?></span></h4>
-                    <p class="weui-media-box__desc">合同编号: <?= $v['contractNo']?></p>
+                    <p class="weui-media-box__desc">合同编号: <?= $v['contractNo']?>
+                        <span class="status<?= $v['status']?>"><?= $v['status']?'已签署':'待签署'?></span>
+                    </p>
                 </div>
                 <div class="weui-media-box__bd arrows">
                     <svg class="icon" aria-hidden="true">
@@ -29,7 +31,7 @@ use yii\helpers\Url;
             <?php endforeach;?>
 
         </div>
-        <div class="weui-loadmore">
+        <div class="weui-loadmore loadmore" style="display: none">
             <i class="weui-loading"></i>
             <span class="weui-loadmore__tips">正在加载</span>
         </div>
@@ -61,12 +63,14 @@ use yii\helpers\Url;
             if(loading) return;
             loading = true;
 
+            $('.loadmore').show();
             let offset = $('.weui-media-box').length;
             let list = "";
             $.getJSON(loadMoreUrl,{offset:offset},function (data) {
                 if (data.obj.list.length>0){
                     let arr = data.obj.list;
                     $.each(arr,function (k,v) {
+                        var status = v.status==1? '已签署':'待签署';
                         list +=
                             '<a href="<?= Url::toRoute(['yht/contract-detail'])?>?contractId='+v.contractNo+'"  class="weui-media-box weui-media-box_appmsg">'+
                             '<div class="weui-media-box__hd">'+
@@ -74,7 +78,7 @@ use yii\helpers\Url;
                             '</div>'+
                             '<div class="weui-media-box__bd">'+
                             '<h4 class="weui-media-box__title">'+v.title+' <span>'+v.gmtCreate+'</span></h4>'+
-                            '<p class="weui-media-box__desc">合同编号: '+v.contractNo+'</p>'+
+                            '<p class="weui-media-box__desc">合同编号: '+v.contractNo+'<span class="status'+v.status+'">'+status+'</span>'+'</p>'+
                             '</div>'+
                             '<div class="weui-media-box__bd arrows">'+
                             '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-jiantou"></use></svg>'+
@@ -83,14 +87,16 @@ use yii\helpers\Url;
                     });
                     loading = false;
                     $(".weui-panel__bd").append(list);
+                    $('.loadmore').hide();
                 }else{
                     loading = true;
-                    $('.weui-loadmore').hide();
+                    $(document.body).destroyInfinite(); //可以销毁插件
+                    $('.loadmore').hide();
                     $('.weui-loadmore_line').show();
                 }
             })
         });
-        //$(".weui-panel__bd").destroyInfinite(); //可以销毁插件
+
     });
 </script>
 

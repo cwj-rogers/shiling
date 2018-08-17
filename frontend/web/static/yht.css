@@ -1,5 +1,5 @@
 /* 移动端定义字体的代码 */
-body{font-family:Helvetica,Microsoft Yahei;}
+body{font-family:Helvetica,Microsoft Yahei;background-color: lightgray}
 /*去掉系统中元素被触摸时产生的半透明灰色遮罩*/
 a,button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);}
 /*传统的base.css*/
@@ -27,10 +27,12 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 
 
 /*首页样式*/
-#container{height: 100%}
-.cont_header{position: relative;width: 100%;padding: 20px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
-.cont_header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
-.cont_header::after{content: " ";position: absolute;left: 0;bottom: 0;right: 0;height: 1px;border-top: 1px solid #E5E5E5;color: #E5E5E5;}
+#container{height: 100%;max-width: 768px;position: relative;z-index: 888;margin: 0 auto;background-color: white;}
+.weui-footer{max-width: 768px;z-index: 1;margin: 0 auto;}
+    .cont_header{position: relative;width: 100%;padding: 20px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
+    .cont_header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
+    .cont_header::after{content: " ";position: absolute;left: 0;bottom: 0;right: 0;height: 1px;border-top: 1px solid #E5E5E5;color: #E5E5E5;}
+/*云合同模板页*/
 #sectionA{}
     #sectionA header{width: 100%;padding: 20px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
     #sectionA header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
@@ -39,13 +41,15 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
         #sectionA .weui-grid .weui-grid-icon .icon{font-size: 88px}
         #sectionA .weui-grid .weui-grid__label{margin-top: 10px;color: grey}
 
-/*查看合同*/
+/*查看合同详情和创建合同*/
 #sectionB{}
     /*详情页iframe*/
-    #sectionB .sign{width: 140px;height: 50px;background: #4280FF;position: fixed;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
+    #sectionB .sign{position: absolute;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
         #sectionB .sign .weui-flex__item{text-align: center;line-height: 50px;color: white}
         #sectionB .sign .weui-flex__item+.weui-flex__item{flex: 2}
         #sectionB .sign .icon{font-size: 38px;display: block;margin-top: 5px;color: white}
+    /*web端控制页面宽度*/
+    #sectionB .weui-popup__modal div{max-width: 700px;margin: 0 auto;box-sizing: border-box}
     /*选择角色*/
     #sectionB .register-step{height: 300px}
         #sectionB .register-step .weui-popup__modal{height: 400px;}
@@ -102,9 +106,16 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
     #sectionD .weui-panel .weui-media-box__hd{display: flex;flex-direction: row;align-items: center;justify-content: center}
     #sectionD .weui-panel .weui-media-box__hd .icon{font-size: 60px}
     #sectionD .weui-panel .weui-media-box__bd p{margin-top: 5px}
-    #sectionD .weui-panel .weui-media-box__bd h4 span{font-size: 12px;color: grey;float: right;line-height: 27px;margin-right: 15px}
+    #sectionD .weui-panel .weui-media-box__bd p .status0{float: right;margin-right: 10px}
+    #sectionD .weui-panel .weui-media-box__bd p .status1{float: right;margin-right: 10px;color: #4280FF}
+    #sectionD .weui-panel .weui-media-box__bd h4 span{font-size: 12px;color: grey;float: right;line-height: 27px;margin-right: 10px}
     #sectionD .weui-panel .arrows{flex: 0.1;color: grey}
 
-    #sectionD #administrator{position: fixed;bottom: 30px;right: 15px;width: 80px;height: 80px}
+    #sectionD #administrator{position: absolute;top: 20px;right: 15px;width: 80px;height: 80px}
     #sectionD #administrator .temp{width: 100%;height: 100%;background-color: rgba(66,128,255,0.7);color: white;display: flex;flex-direction: column;justify-content: center;border-radius: 40px;box-sizing: border-box;border: #4280FF 2px solid;}
     #sectionD #administrator .temp span{text-align: center}
+
+/*合同表单*/
+.tmp-form{padding-bottom: 100px;}
+.tmp-form .tmp-submit{background-color: white}
+.tmp-form .weui-cells__tips{padding-bottom: 10px;background-color: white}
