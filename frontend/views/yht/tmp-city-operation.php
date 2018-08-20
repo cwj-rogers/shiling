@@ -91,15 +91,15 @@ use yii\helpers\Url;
         </div>
     </div>
 
-    <div class="weui-cells__title">合同补充条款</div>
-    <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" rows="6" name="other"></textarea>
-                <div class="weui-textarea-counter"><span>0</span>/1000</div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="weui-cells__title">合同补充条款</div>-->
+<!--    <div class="weui-cells weui-cells_form">-->
+<!--        <div class="weui-cell">-->
+<!--            <div class="weui-cell__bd">-->
+<!--                <textarea class="weui-textarea" placeholder="请输入文本" rows="6" name="other"></textarea>-->
+<!--                <div class="weui-textarea-counter"><span>0</span>/1000</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="weui-cell tmp-submit">
         <input type="submit" class="weui-btn weui-btn_primary">
