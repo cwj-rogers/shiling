@@ -233,7 +233,7 @@ class IndexController extends Controller
              $Uinfo = WxUser::findOne(['user_id'=>$_SESSION['userinfo']['user_id'] ]);
              $timeD = time() - strtotime($Uinfo->update_time);
              if(!empty($Uinfo) && $timeD<900){
-                 \common\helpers\FuncHelper::ajaxReturn(200,'位置已更新成功');
+                 \common\helpers\FuncHelper::ajaxReturn(200,'位置更新太频繁');
              }
              $key = '2H3BZ-LFJR3-YE63J-YEZCQ-DV2YK-L7BYH';
              $url = "https://apis.map.qq.com/ws/geocoder/v1/?location=" . $location . "&key=" . $key;
@@ -244,7 +244,6 @@ class IndexController extends Controller
                     $city = $res['result']['ad_info']['city'];
                     $_SESSION['userinfo']['province'] = $province;
                     $_SESSION['userinfo']['city'] = $city;
-
                     try{
                         //更新用户表实时位置
                         Yii::$app->db->createCommand()
@@ -253,7 +252,6 @@ class IndexController extends Controller
                     }catch (Exception $e){
                         throw json_encode($e->getMessage());
                     }
-
                     \common\helpers\FuncHelper::ajaxReturn(200,'success');
                 }else{
                     \common\helpers\FuncHelper::ajaxReturn(205,'地理位置不存在请刷新页面');
@@ -279,7 +277,7 @@ class IndexController extends Controller
     }
 
     /**
-     *
+     * 主页伪造弹幕
      */
     public function actionFoolUser(){
         $data = (new Query())->from("yii2_wx_friends_join_log")
@@ -294,6 +292,10 @@ class IndexController extends Controller
         \common\helpers\FuncHelper::ajaxReturn(200, 'success', $data);
     }
 
+    /**
+     * 商品详情页伪造弹幕
+     * @param $ago_id
+     */
     public function actionFoolUserInDetail($ago_id){
         $data = (new Query())->from("yii2_wx_friends_join_log")
             ->select("fj_id,user_id,fj_user_name,fj_image,fj_cut_price,created_time")
@@ -309,7 +311,7 @@ class IndexController extends Controller
     }
 
     public function actionClear(){
-//        Yii::$app->session->removeAll();
-//        p(Yii::$app->session);
+        Yii::$app->session->removeAll();
+        p(Yii::$app->session);
     }
 }
