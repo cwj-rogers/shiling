@@ -17,10 +17,13 @@ use yii\helpers\Url;
                     </svg>
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title"><?= $v['title']?> <span><?= $v['gmtCreate']?></span></h4>
-                    <p class="weui-media-box__desc">合同编号: <?= $v['contractNo']?>
+                    <div class="box__bd-top">
+                        <h4 class="weui-media-box__title"><?= $v['title']?></h4> <span><?= $v['gmtCreate']?></span>
+                    </div>
+                    <div class="box__bd-bottom">
+                        <p class="weui-media-box__desc">合同编号: <?= $v['contractNo']?></p>
                         <span class="status<?= $v['status']?>"><?= $v['status']?'已签署':'待签署'?></span>
-                    </p>
+                    </div>
                 </div>
                 <div class="weui-media-box__bd arrows">
                     <svg class="icon" aria-hidden="true">
@@ -77,8 +80,14 @@ use yii\helpers\Url;
                             '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-qianhetong"></use></svg>'+
                             '</div>'+
                             '<div class="weui-media-box__bd">'+
-                            '<h4 class="weui-media-box__title">'+v.title+' <span>'+v.gmtCreate+'</span></h4>'+
-                            '<p class="weui-media-box__desc">合同编号: '+v.contractNo+'<span class="status'+v.status+'">'+status+'</span>'+'</p>'+
+                                '<div class="box__bd-top">'+
+                                    '<h4 class="weui-media-box__title">'+v.title+'</h4>'+
+                                    '<span>'+v.gmtCreate+'</span>'+
+                                '</div>'+
+                                '<div class="box__bd-bottom">'+
+                                    '<p class="weui-media-box__desc">合同编号: '+v.contractNo+'</p>'+
+                                    '<span class="status'+v.status+'">'+status+'</span>'+
+                                '</div>'+
                             '</div>'+
                             '<div class="weui-media-box__bd arrows">'+
                             '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-jiantou"></use></svg>'+
