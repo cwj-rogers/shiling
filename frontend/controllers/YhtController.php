@@ -212,7 +212,7 @@ class YhtController extends \yii\web\Controller
              **/
             $reqInfo = [];
             foreach ($_POST as $k=>$v){
-                if(empty($v)){
+                if(empty($v) && $k!="other"){
                     return $this->render('fail',['msg'=>"请提交完整的资料"]);
                 }
                 $key = '${'.$k.'}';
