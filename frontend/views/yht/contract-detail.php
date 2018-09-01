@@ -216,7 +216,7 @@ use yii\helpers\Url;
                     if (data.code===200){
                         $.hideLoading();
                         //是否进行短信验证
-                        if (data.obj.verifyPhone===1){
+                        if (data.obj.verifyPhone==1){
                             //发送短信验证码,区分首次获取+再次获取
                             $.showLoading('正在发送验证码');
                             $.getJSON(urlSendSms,function (data) {

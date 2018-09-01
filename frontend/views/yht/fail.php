@@ -12,7 +12,7 @@ use yii\helpers\Url;
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
 <!--                <a href="--><?//= Url::toRoute(['yht/contract-detail'])?><!--" class="weui-btn weui-btn_primary">查看合同详情</a>-->
-                <a href="//www.hjzhome.com" class="weui-btn weui-btn_default">访问官网</a>
+                <a href="<?= Url::toRoute(['yht/index'])?>" class="weui-btn weui-btn_default">回到首页</a>
             </p>
         </div>
     </div>
