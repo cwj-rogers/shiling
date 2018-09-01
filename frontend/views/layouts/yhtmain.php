@@ -19,7 +19,7 @@
     <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.css">
 
-    <link rel="stylesheet" href="<?=Yii::getAlias('@web')?>/static/yht.css">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@web')?>/static/yht.css?t=20181142">
     <!--  阿里ICON  -->
     <script src="//at.alicdn.com/t/font_764675_t732n1zggk.js"></script>
     <!-- jQuery (content里的插件都依赖 jQuery，所以必须放在前边) -->

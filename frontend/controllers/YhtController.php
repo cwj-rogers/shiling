@@ -1,6 +1,7 @@
 <?php
 
 namespace frontend\controllers;
+use yii\base\Exception;
 use yii\helpers\Url;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -233,11 +234,11 @@ class YhtController extends \yii\web\Controller
                 return $this->render('fail',['msg'=>"用户没有权限"]);
             }
             $db = Yii::$app->db;
-            $trans = $db->beginTransaction();
             try{
                 if ($repInfo['code']!=200){
                     return $this->render('fail',['msg'=>$repInfo['msg']]);
                 }
+                $trans = $db->beginTransaction();
                 // 1.获取新创建云合同ID 2.合同表记录入库
                 $contractId = number_format($repInfo["data"]["contractId"],0,'','');// 解决返回数据变成科学计数法的bug
 
@@ -258,26 +259,28 @@ class YhtController extends \yii\web\Controller
                         'is_owner'=>1,
                         'created_at'=>date("Y-m-d H:i:s")
                     ])->execute();
+
+                //自动添加参与者(甲方荟家装signerId)
+                $hjzSignerId = YhtClient::$hjzSignerId;
+                $signerInfo = [
+                    "signerId" => $hjzSignerId,//签署者 id
+                    "signPositionType" => 1,//签署的定位方式：0 关键字定位，1 签名占位符定位，2 签署坐标
+                    "positionContent" => YhtClient::$pos[0],//对应定位方式的内容，如果用签名占位符定位可以传多个签名占位符，并以分号隔开,最多 20 个;如果用签署坐标定位，则该参数包含三个信息：“页面,x 轴坐标,y 轴坐标”（如 20,30,49）
+                    "signValidateType" => 0//签署验证方式：0 不校验，1 短信验证
+                ];
+                $signRes = $client->sendReq('post',YhtClient::$url['contract']['signer'],["idType"=>0,"idContent"=>$contractId,"signers"=>[$signerInfo] ]);
+                if ($signRes['code']!=200){
+                    throw new \yii\db\Exception($signRes['msg']);
+                }else{
+                    return $this->redirect(['yht/contract-create','contractId'=>$contractId]);
+                }
+
                 $trans->commit();
             }catch (\yii\db\Exception $e){
                 $trans->rollBack();
                 return $this->render('fail',['msg'=>$e->getMessage()]);
             }
-            //成功入库  自动添加甲方(荟家装的signerId)
-            $hjzSignerId = YhtClient::$hjzSignerId;
-            $signerInfo = [
-                "signerId" => $hjzSignerId,//签署者 id
-                "signPositionType" => 1,//签署的定位方式：0 关键字定位，1 签名占位符定位，2 签署坐标
-                "positionContent" => YhtClient::$pos[0],//对应定位方式的内容，如果用签名占位符定位可以传多个签名占位符，并以分号隔开,最多 20 个;如果用签署坐标定位，则该参数包含三个信息：“页面,x 轴坐标,y 轴坐标”（如 20,30,49）
-                "signValidateType" => 0//签署验证方式：0 不校验，1 短信验证
-            ];
-            $signRes = $client->sendReq('post',YhtClient::$url['contract']['signer'],["idType"=>0,"idContent"=>$contractId,"signers"=>[$signerInfo] ]);
 
-            if ($signRes['code']!=200){
-                return $this->render('fail',['msg'=>$signRes['msg']]);
-            }else{
-                return $this->redirect(['yht/contract-create','contractId'=>$contractId]);
-            }
         }
         //判断是否为合同创建者访问
         $isOwn = WxYhtContract::findOne(['cont_contractId'=>$contractId,'cont_owner_signerId'=>$signerId]);
