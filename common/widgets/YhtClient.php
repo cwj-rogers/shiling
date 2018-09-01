@@ -37,7 +37,7 @@ class YhtClient extends \yii\base\Component
     ];
     public static $pos = ['jiafang','yifang'];
     public static $timeOut = 888;
-    public static $hjzSignerId = 1099894;//超级管理员(公司)的signerId
+    public static $hjzSignerId = 2064620;//超级管理员(公司)的signerId
     public static $verifyPhone = 1;//验证手机
     public static $cz = 1;//是否开启合同存证
     public static $tokenConf = [

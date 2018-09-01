@@ -418,7 +418,7 @@ class YhtController extends \yii\web\Controller
                         'user_id'=>$_SESSION['userinfo']['user_id'],
                         'yht_type'=>$type,
                         'yht_username'=>$username,
-                        'yht_certifyType'=>$type==2? 0:"",
+                        'yht_certifyType'=>$type==2? 1:"",
                         'yht_identityRegion'=>$type==1? 0:"",
                         'yht_certifyNum'=>$certifyNum,
                         'yht_phoneRegion'=>$type==1? 0:"",
