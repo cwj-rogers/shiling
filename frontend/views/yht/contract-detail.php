@@ -187,18 +187,22 @@ use yii\helpers\Url;
 <script type="text/javascript">
 
     $(function () {
+        //测试功能
+        // $("#signature").removeClass('hide').popup();
+        // $.verifyPrompt({'obj':{'phoneNo':10086}});
+        // countDown(".weui-dialog .count-down");
+
         var type = 0;
         var contractId = <?= $contractId?>;
         var signerId = 0;
         var moulageId = 0;
         var countdownTime = 60;//倒计时60秒
-        // $("#signature").removeClass('hide').popup();
         $.showLoading("正在载入合同");
         setTimeout(function () {
             $.hideLoading();
         },3500);
 
-        //6.获取短信信息 a.添加签署人+静默签署 b.获取短信 c.验证短信+ 双方签署成功
+        //6.1 获取短信信息 a.添加签署人+静默签署 b.获取短信 c.验证短信+ 双方签署成功
         $(document).on('click','#signature .verify-sms, .weui-dialog .verify-sms2',function () {
             let urlSendSms = <?= json_encode(Url::toRoute(['yht/verify','contractId'=>$contractId]))?>;
             let urlContractSign = <?= json_encode(Url::toRoute(['yht/contract-sign','contractId'=>$contractId]))?>;
@@ -254,9 +258,7 @@ use yii\helpers\Url;
                 $.toast('稍等,请在'+countdownTime+'秒后重新获取','text');
             }
         });
-        // $.verifyPrompt({'obj':{'phoneNo':10086}});
-        // countDown(".weui-dialog .count-down");
-        //6.1 获取短信+短信验证
+        //6.2 获取短信+短信验证
         $.verifyPrompt = (data,error='')=>{
             let urlVerify = <?= json_encode(Url::toRoute(['yht/verify-check','contractId'=>$contractId]))?>;
             let utlVerifySuccess = <?= json_encode(Url::toRoute(['yht/verify-success','contractId'=>$contractId]))?>;
@@ -372,7 +374,7 @@ use yii\helpers\Url;
         });
 
 
-        //2.进入签约 判断是否云合同用户 是,跳到签名页 否,进入注册流程
+        //2.进入签约 判断是否已注册云合同用户 是,跳到签名页 否,进入注册流程
         $('#sectionB').on('click','.sign',function () {
             $.showLoading('正在获取用户信息');
             let urlSign = <?= json_encode(Url::toRoute(['yht/sign']))?>;

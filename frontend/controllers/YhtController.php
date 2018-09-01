@@ -50,6 +50,7 @@ class YhtController extends \yii\web\Controller
     {
         //判断访问的客户端, 非微信用户跳转到web统一登录口
         if(!Yii::$app->wechat->isWechat && !Yii::$app->session->has("userinfo")){
+            //添加不作验证的地址特例
             $webLoginUrl = Url::toRoute(['yht-login/web'],true);
             $_SERVER['accessUrl'] = Yii::$app->request->getAbsoluteUrl();
             return $this->redirect($webLoginUrl)->send();
@@ -370,7 +371,7 @@ class YhtController extends \yii\web\Controller
      * @throws \yii\db\Exception
      */
     public function actionCreateUser(){
-//        output::ajaxReturn(200,'success');
+        //output::ajaxReturn(200,'success');
         if(Yii::$app->request->isAjax){
             list($username, $certifyNum, $phoneNo, $type) = array_values(Yii::$app->request->get());//取参数
             $yhtClient = new YhtClient();
@@ -385,7 +386,7 @@ class YhtController extends \yii\web\Controller
                         "caType" => "B2"
                     ]);
                 }elseif ($type==2){
-                    $res = $yhtClient->sendReq('post',YhtClient::$url['user']['addP'],[
+                    $res = $yhtClient->sendReq('post',YhtClient::$url['user']['addC'],[
                         "userName"=>$username,
                         "certifyType" => "0",
                         "certifyNum" => $certifyNum,
@@ -427,14 +428,14 @@ class YhtController extends \yii\web\Controller
                     output::ajaxReturn(200,'success',['signerId'=>$signerId,'moulageId'=>$moulageId]);
                 }elseif ($res['code']==20209){
                     //认证号码已经存在
-                    output::ajaxReturn($res['code'],"提交的资料格式不正确");
+                    output::ajaxReturn($res['code'],"认证号码已经存在");
                 }else{
                     output::ajaxReturn($res['code'],"提交的资料格式不正确");
                 }
             }catch (GuzzleException $e){
                 Yii::error($e->getMessage());
 //                p($e->getMessage());
-                return $this->render('fail',['msg'=>$e->getMessage()]);
+                output::ajaxReturn(400,"提交的资料格式不正确");
             }
         }
     }

@@ -6,13 +6,16 @@ use Yii;
 use common\models\WxYhtInfo;
 use common\widgets\YhtClient;
 use common\models\WxUser;
-use yii\db\Query;
 
 class YhtLoginController extends \yii\web\Controller
 {
     public $enableCsrfValidation = false;
     public $layout = 'yhtmain';
 
+    /**
+     * PC web端登录
+     * @return string|\yii\web\Response
+     */
     public function actionWeb(){
         //非微信用户登录
         if (Yii::$app->request->isPost){
@@ -39,6 +42,27 @@ class YhtLoginController extends \yii\web\Controller
             }
         }else{
             return $this->render('/yht/web-login');
+        }
+    }
+
+    public function actionRegister(){
+        if (!Yii::$app->wechat->isWechat){
+            //web 端进入弹出二维码,扫描进入微信注册渠道
+            return $this->render('/yht/web-register',['showQrcode'=>1]);
+        }else{
+            if (Yii::$app->request->isPost){
+
+            }else{
+                //平台验证和授权验证
+                if (!Yii::$app->wechat->isAuthorized()){
+                    return Yii::$app->wechat->authorizeRequired()->send();
+                }
+                //用户是否存在
+                if(!Yii::$app->session->has("userinfo") && Yii::$app->wechat->isAuthorized()){
+                    (new WxUser)->createUser();
+                }
+                return $this->render('/yht/web-register',['showQrcode'=>0]);
+            }
         }
     }
 }

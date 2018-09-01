@@ -38,11 +38,13 @@ class YhtClient extends \yii\base\Component
     public static $pos = ['jiafang','yifang'];
     public static $timeOut = 888;
     public static $hjzSignerId = 1099894;//超级管理员signerId
-    public static $verifyPhone = 0;//验证手机
-    public static $cz = 0;//是否开启合同存证
+    public static $verifyPhone = 1;//验证手机
+    public static $cz = 1;//是否开启合同存证
     public static $tokenConf = [
-        "appId"=>"2018062817051800007",
-        "appKey"=>"wceNcK55gQE"
+        "appId"=>"2018070415294900020",
+        "appKey"=>"kG1nwr4N"
+        //"appId"=>"2018062817051800007",
+        //"appKey"=>"wceNcK55gQE"
     ];
     /**
      * @var Client

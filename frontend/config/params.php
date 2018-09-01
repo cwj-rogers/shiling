@@ -21,5 +21,5 @@ return [
             'callback' => '/index',
         ],
     ],
-
+    'diySharePage'=>["contract-create","contract-detail","register"]
 ];

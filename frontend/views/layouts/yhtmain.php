@@ -65,8 +65,8 @@
        $('#container').css('min-height',height-60);
        // $.alert(height);
     });
-    let action = <?= json_encode(Yii::$app->requestedAction->id)?>;
-    if (action!=="contract-create" && action!=="contract-detail"){
+    let isAllow = <?= json_encode(!in_array(Yii::$app->requestedAction->id, Yii::$app->params['diySharePage']));?>;
+    if (isAllow){
         //通用微信分享配置
         var localUrl = "http://www.hjzhome.com";
         wx.ready (function () {
