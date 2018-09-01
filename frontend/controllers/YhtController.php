@@ -260,7 +260,7 @@ class YhtController extends \yii\web\Controller
                         'created_at'=>date("Y-m-d H:i:s")
                     ])->execute();
 
-                //自动添加参与者(甲方荟家装signerId)
+                //添加甲方签署人(荟家装)
                 $hjzSignerId = YhtClient::$hjzSignerId;
                 $signerInfo = [
                     "signerId" => $hjzSignerId,//签署者 id
@@ -477,7 +477,7 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
-     * 动作:印模页点击验证  促发:添加签署人+ 静默合同签署
+     * 动作:印模页点击验证  促发:添加乙方签署人+ 静默合同签署
      * @param $contractId
      * @throws \yii\db\Exception
      */
