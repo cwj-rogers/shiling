@@ -391,7 +391,7 @@ class YhtController extends \yii\web\Controller
                 }elseif ($type==2){
                     $res = $yhtClient->sendReq('post',YhtClient::$url['user']['addC'],[
                         "userName"=>$username,
-                        "certifyType" => "0",
+                        "certifyType" => "1",
                         "certifyNum" => $certifyNum,
                         "phoneNo" => $phoneNo,
                         "caType" => "B2"
