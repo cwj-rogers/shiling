@@ -8,7 +8,7 @@ use yii\helpers\Url;
     var detailUrl = <?= json_encode(Url::toRoute(["yht/contract-detail",'contractId'=>$contractId], true))?>;
     var localUrl = "http://www.hjzhome.com";
     var authority = <?= $authority?>;
-    let yhturl = authority===3? localUrl:detailUrl;
+    let yhturl = authority===3? localUrl:detailUrl;//乙方限制分享权限
     wx.ready (function () {
         var $wx_share = [
             'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/splash_1532757769.png?t=1533178660358',

@@ -44,7 +44,7 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 /*查看合同详情和创建合同*/
 #sectionB{}
     /*详情页iframe*/
-    #sectionB .sign{position: absolute;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
+    #sectionB .sign{position: fixed;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
         #sectionB .sign .weui-flex__item{text-align: center;line-height: 50px;color: white}
         #sectionB .sign .weui-flex__item+.weui-flex__item{flex: 2}
         #sectionB .sign .icon{font-size: 38px;display: block;margin-top: 5px;color: white}

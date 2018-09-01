@@ -272,22 +272,21 @@ class YhtController extends \yii\web\Controller
                 if ($signRes['code']!=200){
                     throw new \yii\db\Exception($signRes['msg']);
                 }else{
+                    $trans->commit();
                     return $this->redirect(['yht/contract-create','contractId'=>$contractId]);
                 }
-
-                $trans->commit();
             }catch (\yii\db\Exception $e){
                 $trans->rollBack();
                 return $this->render('fail',['msg'=>$e->getMessage()]);
             }
-
-        }
-        //判断是否为合同创建者访问
-        $isOwn = WxYhtContract::findOne(['cont_contractId'=>$contractId,'cont_owner_signerId'=>$signerId]);
-        if (!empty($isOwn)){
-            return $this->render('contract-create',['contractId'=>$contractId]);
         }else{
-            return $this->redirect(['yht/contract-detail','contractId'=>$contractId]);
+            //判断是否为合同创建者访问
+//            $isOwn = WxYhtContract::findOne(['cont_contractId'=>$contractId,'cont_owner_signerId'=>$signerId]);
+//            if (!empty($isOwn)){
+                return $this->render('contract-create',['contractId'=>$contractId]);
+//            }else{
+//                return $this->redirect(['yht/contract-detail','contractId'=>$contractId]);
+//            }
         }
     }
 
