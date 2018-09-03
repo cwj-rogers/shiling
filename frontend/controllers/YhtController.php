@@ -376,7 +376,6 @@ class YhtController extends \yii\web\Controller
      * @throws \yii\db\Exception
      */
     public function actionCreateUser(){
-        output::ajaxReturn(200,'success');
         if(Yii::$app->request->isAjax){
             list($username, $certifyNum, $phoneNo, $type) = array_values(Yii::$app->request->get());//取参数
             $yhtClient = new YhtClient();
