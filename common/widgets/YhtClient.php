@@ -106,8 +106,9 @@ class YhtClient extends \yii\base\Component
                 'json' => $opt
             ];
         }elseif ($type==2){
+            $signerId = $_SESSION['userinfo']['yht_signerId'];
             $reqOpt = [
-                'headers'=>["content-type"=>"application/json;charset=UTF-8",'token'=>$this->initToken(Yii::$app->session->get('signerId',0))],
+                'headers'=>["content-type"=>"application/json;charset=UTF-8",'token'=>$this->initToken($signerId)],
                 'body' => "row data",
                 'json' => $opt
             ];
@@ -123,7 +124,7 @@ class YhtClient extends \yii\base\Component
      * @param null $method
      * @param null $url
      * @param array|null $json
-     * @param int $type
+     * @param int $type token类型
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \yii\db\Exception

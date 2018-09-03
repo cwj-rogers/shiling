@@ -11,7 +11,7 @@ use yii\helpers\Url;
         var $wx_share = [
             'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/splash_1532757769.png?t=1533178660358',
             detailUrl,
-            '云合同签订',
+            <?= json_encode($contTitle)?>,
             '荟家装邀请您进入云合同，点击查看详情'
         ];
         // 微信分享的数据
@@ -37,6 +37,9 @@ use yii\helpers\Url;
 <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
 <script type="text/javascript">
     $(function () {
+        //分享提醒
+        $.alert("点击右上角 ... 把合同分享给好友，立即进行线上云合同签署", "合同创建成功");
+
         let contractId = <?= $contractId?>;
         //1. 加载合同详情作背景
         var tokenUnableListener = function (obj){ //当 token 不合法时，SDK 会回调此方法

@@ -11,7 +11,7 @@ fieldset,img {border:0;}
 address,caption, cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
 ol,ul {list-style:none;}
 capation,th{text-align:inherit;}
-h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+/*h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}*/
 q:before, q:after{content:'';}
 abbr,acronym{border:0;}
 a{text-decoration:none;}
@@ -59,6 +59,7 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
             #sectionB #register .bottom .icon{font-size: 32px;color: white}
             #sectionB #register .bottom span{margin-left: 20px;}
     /*个人*/
+    #sectionB #personal .form-personal{width: 100%;height: auto}
     #sectionB #personal .weui-popup__modal{background: white}
     #sectionB #personal .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white;font-weight: bold}
     #sectionB #personal hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
@@ -128,6 +129,16 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
     #register .tmp-submit a{width: 100%}
     #register .weui-gallery span{color: white;text-align: center;padding-top: 50px;background-size: initial}
     #register .weui-gallery .weui-gallery__opr img{width: 80px}
+    /*条款*/
+    #explain{z-index: 888;}
+    #explain .weui-popup__modal{padding: 0 15px;box-sizing: border-box;width: 100%;background-color: white}
+    #explain .weui-popup__modal h3{margin: 5px 0;margin-top: 15px}
+    #explain .weui-popup__modal p{margin-bottom: 5px;font-size: 12px}
+    #explain .weui-popup__modal ul{margin-bottom: 5px;padding-left: 15px;font-size: 12px;}
+    #explain .weui-popup__modal .text-item{text-indent:2em;}
+    #explain .weui-check__label {flex-direction: row;justify-content: center;align-items: center}
+    #explain .weui-check__label .weui-cell__bd{font-size: 12px;flex: none}
+    #explain .weui-cell .weui-btn{width: 100%;margin: 15px 0;}
 /*合同表单*/
 .tmp-form{padding-bottom: 100px;}
 .tmp-form .tmp-submit{background-color: white}

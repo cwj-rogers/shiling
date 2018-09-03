@@ -13,7 +13,7 @@ use yii\helpers\Url;
         var $wx_share = [
             'http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/splash_1532757769.png?t=1533178660358',
             yhturl,
-            '云合同签订',
+            <?= json_encode($contTitle)?>,
             '荟家装邀请您进入云合同，点击查看详情'
         ];
         // 微信分享的数据
@@ -46,6 +46,9 @@ use yii\helpers\Url;
         </a>
     </div>
     <?php endif;?>
+
+
+
     <!--  选择角色  -->
     <div id="register" class="hide weui-popup__container popup-bottom register-step">
         <div class="weui-popup__overlay"></div>
@@ -68,7 +71,7 @@ use yii\helpers\Url;
         </div>
     </div>
     <!--  个人用户  -->
-    <div id="personal" class="hide weui-popup__container popup-bottom register-step">
+    <div id="personal" class="hide weui-popup__container popup-bottom register-step user-type">
         <div class="weui-popup__overlay"></div>
         <form action="" class="form-personal">
         <div class="weui-popup__modal">
@@ -108,7 +111,7 @@ use yii\helpers\Url;
         </form>
     </div>
     <!--  企业用户  -->
-    <div id="company" class="hide weui-popup__container popup-bottom register-step">
+    <div id="company" class="hide weui-popup__container popup-bottom register-step user-type">
         <div class="weui-popup__overlay"></div>
         <form action="" class="form-company">
         <div class="weui-popup__modal">
@@ -180,6 +183,80 @@ use yii\helpers\Url;
             </a>
         </div>
     </div>
+    <!--  电子合同条款  -->
+    <div id="explain" class="weui-popup__container">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <h3>电子合同的法律地位</h3>
+            <p class="text-item">电子合同又称电子商务合同，根据联合国国际贸易法委员会《电子商务示范法》以及世界各国颁布的电子交易法，同时结合我国《合同法》的有关规定，电子合同可以界定为：电子合同是双方或多方当事人之间通过电子信息网络以电子的形式达成的设立、变更、终止财产性民事权利义务关系的协议。</p>
+            <p class="text-item">关于电子合同这种合同形式的法律效力，我国立法上已经予以确认：我国《合同法》第十一条规定“书面形式是指合同书、信件和数据电文（包括电报、电传、传真、电子数据交换和电子邮件）等可以有形地表现所载内容的形式。”由此可见，法律已经明确了电子合同的有效性。</p>
+
+            <h3>电子合同的法律效力</h3>
+            <p style="color: #0b94ea">《电子签名法》第二条对电子签名的定义：数据电文中以电子形式所含、所附用于识别签名人身份并表明签名人认可其中内容的数据。</p>
+            <p>《电子签名法》第三条规定</p>
+            <p class="text-item">当事人约定使用电子签名、数据电文的文书，不得仅因为其采用电子签名、数据电文的形式而否定其法律效力。可见电子签名本身已被法律所认可。</p>
+            <p>《电子签名法》第十四条规定</p>
+            <p class="text-item">可靠的电子签名与手写签名或者盖章具有同等的法律效力。只有使用“可靠的电子签名”，电子合同才有可能具有与纸质合同同等的法律效力，即书证效力。</p>
+
+            <h3>可靠电子签名的法定条件</h3>
+            <p style="color: #0b94ea">《电子签名法》第十三条电子签名同时符合下列条件的，视为可靠的电子签名；</p>
+            <ul>
+                <li>1.电子签名制作数据用于电子签名时，属于电子签名人专有；</li>
+                <li>2.签署时电子签名制作数据仅有电子签名人控制；</li>
+                <li>3.签署后对电子签名的任何改动能够被发现；</li>
+                <li>4.签署后对数据电文内容和形式的任何改动能够被发现。</li>
+            </ul>
+            <p style="color: #da3f3f">* 当事人通过云合同生成的手写签名完全符合可靠电子签名的法定条件，属于可靠的电子签名。</p>
+
+            <h3>有效电子合同的成立条件</h3>
+            <p style="color: #0b94ea">条件一：满足《民法通则》第55条关于合同有效要件的规定：</p>
+            <p class="text-item">行为人具有相应的民事行为能力；意思表示真实；不违反法律或者社会公共利益。</p>
+            <p style="color: #0b94ea">条件二：满足《中华人民共和国电子签名法》关于有效电子签名的规定：</p>
+            <p class="text-item">该法第十四条规定：“可靠的电子签名与手写签名或者盖章具有同等的法律效力。”</p>
+            <p style="color: #da3f3f">在第三方签约平台签署的合同，只要满足以上两个条件，即可视为有效的电子合同。</p>
+
+            <h3>诉讼依据</h3>
+            <div class="left">
+                <p style="color: #0b94ea">1、2012年《民事诉讼法》修改后，第六十三条规定，民事证据包括：</p>
+                <ul>
+                    <li>（一）当事人的陈述；</li>
+                    <li>（二）书证；</li>
+                    <li>（三）物证；</li>
+                    <li>（四）视听资料；</li>
+                    <li>（五）电子数据；</li>
+                    <li>（六）证人证言；</li>
+                    <li>（七）鉴定意见；</li>
+                    <li>（八）勘验笔录。</li>
+                </ul>
+                <p style="color: #da3f3f">电子数据已经成为独立的证据类型。</p>
+            </div>
+            <div class="right">
+                <p style="color: #0b94ea">2、最高人民法院2015年2月4日公布</p>
+                <p class="text-item">《最高人民法院关于适用〈中华人民共和国民事诉讼法〉的解释》网上聊天记录、博客、微博客、手机短信、 电子签名、域名等形成或者存储在电子介质中的信息可以作为民事诉讼中的证据。</p>
+                <p style="color: #0b94ea">3、《电子签名法》第六条：符合下列条件的数据电文，视为满足法律、法规规定的文件保存要求，可以作为电子证据使用</p>
+                <ul>
+                    <li>（一）能够有效地表现所载内容并可供随时调取查用；</li>
+                    <li>（二）数据电文的格式与其生成、发送或者接收时的格式相同，或者格式不相同但是能够准确表现原来生成、发送或者接收的内容；</li>
+                    <li>（三）能够识别数据电文的发件人、收件人以及发送、接收的时间。</li>
+                </ul>
+            </div>
+            <!-- 复选 -->
+            <div class="weui-cells weui-cells_checkbox">
+                <label class="weui-cell weui-check__label" for="s11">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="checkbox" id="s11" >
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <span>荟家装云合同条款阅读完毕并同意上述条款</span>
+                    </div>
+                </label>
+                <div class="weui-cell">
+                    <a href="javascript:;" class="explain-submit weui-btn weui-btn_primary">确定无误</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>-->
@@ -241,7 +318,7 @@ use yii\helpers\Url;
                                 if (data.code===200){
                                     $.hideLoading();
                                     $.toast("验证成功",function () {
-                                        location.href = utlVerifySuccess;
+                                        // location.href = utlVerifySuccess;
                                     });
                                 } else {
                                     $.hideLoading();
@@ -280,8 +357,10 @@ use yii\helpers\Url;
                         return false;
                     }
                     urlVerify = urlVerify + '&code=' + input;
+                    $.showLoading('等待验证');
                     $.getJSON(urlVerify,function (data) {
                         if (data.code==200){
+                            $.hideLoading();
                             $.toast("验证成功",function () {
                                 location.href = utlVerifySuccess;
                             });
@@ -337,20 +416,45 @@ use yii\helpers\Url;
 
         // 4.提交资料注册用户
         $("#sectionB").on('click','.submit-info',function (e) {
+            //是否已经同意云合同条款
+            if (explainStatus==0){
+                $.toast("注册前请仔细阅读云合同条款","text",function () {
+                    $("#explain").popup();
+                });
+                return false;
+            }
+            //注册前端判断
+            if(!$("input[name=username]").val().length){
+                $.alert("姓名/名称 不能为空");
+                return false;
+            }
+            if(!$("input[name=certifyNum]").val().length){
+                $.alert("填写资料不能为空");
+                return false;
+            }
+            if(!(/^\d+$/.test($("input[name=phoneNo]").val()))){
+                $.alert("手机号必须为数字");
+                return false;
+            }else if($("input[name=phoneNo]").val().length!=11){
+                $.alert("手机号必须为11位数字");
+                return false;
+            }
+
             var url = <?= json_encode(Url::toRoute(['yht/create-user']))?>;
             var form = $(this).attr("form");
             var items = $('.'+form).serialize()+'&type='+type;
             url = url+'?'+items;
             console.log(url);
             if (type>0){
+                $.showLoading('信息验证中');
                 $.getJSON(url,function (data) {
                     console.log(data);
+                    $.hideLoading();
                     if (data.code===200){
                         signerId = data.obj.signerId;
                         moulageId = data.obj.moulageId;
                         $.alert('<i class="weui-icon-success weui-icon_msg"></i>', "认证成功,领取专属印章", function() {
                             //点击确认,1.获取印模base64 2.打开签名页
-                            // $("#signature").removeClass('hide').popup();
                             signatrueInit(moulageId);
                         });
                     }else {
@@ -359,6 +463,25 @@ use yii\helpers\Url;
                 })
             }else{
                 $.toast("请返回选择角色", "cancel");
+            }
+        });
+        //4.1 电子合同条款
+        let explainStatus = 0;
+        $("#explain .weui-cell__hd").click(function () {
+            let status = $("input[type='checkbox']").prop('checked');
+            console.log(status);
+            if (status==false){
+                explainStatus = 0;
+            } else{
+                explainStatus = 1;
+            }
+        });
+        $("#explain .explain-submit").click(function () {
+            $.closePopup();
+            if(type == 1){
+                $("#personal").removeClass('hide').popup();
+            }else{
+                $("#company").removeClass('hide').popup();
             }
         });
 
@@ -376,10 +499,17 @@ use yii\helpers\Url;
 
         //2.进入签约 判断是否已注册云合同用户 是,跳到签名页 否,进入注册流程
         $('#sectionB').on('click','.sign',function () {
+            if(type == 1){
+                $("#personal").removeClass('hide').popup();
+                return false;
+            }else if (type == 2) {
+                $("#company").removeClass('hide').popup();
+                return false;
+            }
             $.showLoading('正在获取用户信息');
             let urlSign = <?= json_encode(Url::toRoute(['yht/sign']))?>;
-           $.getJSON(urlSign,function (data) {
-               $.hideLoading();
+            $.getJSON(urlSign,function (data) {
+                $.hideLoading();
                 if (data.code===200){
                     signatrueInit(data.obj.moulageId);
                 }else{
@@ -388,7 +518,7 @@ use yii\helpers\Url;
                         $("#register").removeClass('hide').popup();
                     });
                 }
-           })
+            })
         });
 
 

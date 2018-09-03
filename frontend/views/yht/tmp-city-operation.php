@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 ?>
 <header class="cont_header">
-    <p>云合同资料填写</p>
+    <p>省级运营商授权经营协议书</p>
 </header>
 <form class="tmp-form" action="<?= Url::toRoute(['yht/contract-create','tid'=>$tid,'tmp_name'=>$tmp_name])?>" method="post">
     <div class="weui-cells__title">甲方名称</div>

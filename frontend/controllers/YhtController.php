@@ -1,7 +1,6 @@
 <?php
 
 namespace frontend\controllers;
-use yii\base\Exception;
 use yii\helpers\Url;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -14,6 +13,7 @@ use common\models\WxYhtInfo;
 use common\widgets\YhtClient;
 use common\helpers\FuncHelper as output;
 use common\models\WxUser;
+use yii\db\Expression;
 use yii\db\Query;
 
 class YhtController extends \yii\web\Controller
@@ -97,7 +97,7 @@ class YhtController extends \yii\web\Controller
                 }
             }else{
                 $offset = Yii::$app->request->get("offset",0);
-                $limit = Yii::$app->request->isAjax?5:10;
+                $limit = Yii::$app->request->isAjax? 5:10;
                 //普通管理员,普通用户 查数据库
                 $query = new Query();
                 $contrachIds = $query->from('yii2_wx_yht_contract_signer')
@@ -155,6 +155,7 @@ class YhtController extends \yii\web\Controller
         }
         $query = new Query();
         $tmpList = $query->from('yii2_wx_yht_template')
+            ->where(["is_show"=>1])
             ->orderBy("tmp_id desc")
             ->all();
         $authority = $_SESSION['userinfo']['yht_authority'];
@@ -259,7 +260,8 @@ class YhtController extends \yii\web\Controller
                         'is_owner'=>1,
                         'created_at'=>date("Y-m-d H:i:s")
                     ])->execute();
-
+                //签约负责人创建数量
+                $db->createCommand()->update('yii2_wx_yht_info',["yht_create_contract_num"=>new Expression("`yht_create_contract_num`+1")])->execute();
                 //添加甲方签署人(荟家装)
                 $hjzSignerId = YhtClient::$hjzSignerId;
                 $signerInfo = [
@@ -281,12 +283,13 @@ class YhtController extends \yii\web\Controller
             }
         }else{
             //判断是否为合同创建者访问
-//            $isOwn = WxYhtContract::findOne(['cont_contractId'=>$contractId,'cont_owner_signerId'=>$signerId]);
-//            if (!empty($isOwn)){
-                return $this->render('contract-create',['contractId'=>$contractId]);
-//            }else{
-//                return $this->redirect(['yht/contract-detail','contractId'=>$contractId]);
-//            }
+            $isOwn = WxYhtContract::findOne(['cont_contractId'=>$contractId,'cont_owner_signerId'=>$signerId]);
+            if (!empty($isOwn)){
+                return $this->render('contract-create',['contractId'=>$contractId,'contTitle'=>$isOwn->cont_title]);
+            }else{
+                // 防止其他人进入
+                return $this->redirect(['yht/contract-detail','contractId'=>$contractId]);
+            }
         }
     }
 
@@ -347,7 +350,7 @@ class YhtController extends \yii\web\Controller
                 $isGuest = 1;
             }
             $authority = isset($yhtInfo->yht_authority)? $yhtInfo->yht_authority:3;
-            return $this->render('contract-detail',['contractId'=>$contractId,'status'=>$status,'isGuest'=>$isGuest,'authority'=>$authority]);
+            return $this->render('contract-detail',['contractId'=>$contractId,'status'=>$status,'isGuest'=>$isGuest,'authority'=>$authority,'contTitle'=>$contractInfo->cont_title]);
         }else{
             //p("抱歉你所查看的合同不存在",1);
             return $this->render('fail',['msg'=>"抱歉! 40011你所查看的合同不存在"]);
@@ -373,7 +376,7 @@ class YhtController extends \yii\web\Controller
      * @throws \yii\db\Exception
      */
     public function actionCreateUser(){
-        //output::ajaxReturn(200,'success');
+        output::ajaxReturn(200,'success');
         if(Yii::$app->request->isAjax){
             list($username, $certifyNum, $phoneNo, $type) = array_values(Yii::$app->request->get());//取参数
             $yhtClient = new YhtClient();
@@ -497,13 +500,7 @@ class YhtController extends \yii\web\Controller
                 //添加签署人
                 $addRes = $client->sendReq('post',YhtClient::$url['contract']['signer'],["idType"=>0,"idContent"=>$contractId,"signers"=>[$signerInfo] ]);
                 if ($addRes['code']==200){
-                    //乙方静默合同签署
-                    $signRes = $client->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>$signerId]);
-                    if ($signRes['code']==200){
-                        output::ajaxReturn(200,'success',['verifyPhone'=>$verifyPhone]);
-                    }else{
-                        output::ajaxReturn($addRes['code'],$addRes['msg']);
-                    }
+                    output::ajaxReturn(200,'success',['verifyPhone'=>$verifyPhone]);
                 }else{
                     output::ajaxReturn($addRes['code'],$addRes['msg']);
                 }
@@ -531,7 +528,6 @@ class YhtController extends \yii\web\Controller
         }catch (GuzzleException $e){
             Yii::error($e->getMessage());
             output::ajaxReturn(401,'请求远程资源失败');
-            //p($e->getMessage());
         }
     }
 
@@ -543,58 +539,61 @@ class YhtController extends \yii\web\Controller
      */
     public function actionVerifyCheck($contractId, $code=null){
         $yhtClient = new YhtClient();
+        $db = Yii::$app->db;//开启事务
+        $trans = $db->beginTransaction();
+        $signerId = $_SESSION['userinfo']['yht_signerId'];
+        $userId = $_SESSION['userinfo']['user_id'];
         try{
             if ($code){
-                //带短信验证
+                //手机短信码验证
                 $res = $yhtClient->sendReq('post',"contract/msg/verificationCode",[
                     "idType"=> 0, //id 类型：0 为合同 ID，1 合同自定义编号
                     "idContent"=> $contractId, //ID 内容
                     "verificationCode"=> $code //验证码，四位数字
                 ],2);
-            }
+                if ($res['code']==200){
+                    //乙方进行合同签署
+                    $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>$signerId]);
+                    if ($signRes['code']==200){
 
-            if ($code===null || $res['code']==200){
-                //最后一步,获取合同创建人甲方signerId
-                $ownerSignerId = Yii::$app->db->createCommand("select cont_owner_signerId from yii2_wx_yht_contract where cont_contractId={$contractId}")->queryScalar();
-                //甲方签署, 合同签署成功
-                $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>$ownerSignerId]);
-                if ($signRes['code']==200){
-                    //合同存证
-                    $czId = " ";
-                    if (YhtClient::$cz){
-                        $czRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['cz'],['idType'=>0,'idContent'=>$contractId]);
-                        if ($czRes['code']==200){
-                            $czId = $czRes['data']['czId'];
-                        }
-                    }
-                    //双方完成签署, 合同进行锁定
-                    $db = Yii::$app->db;//开启事务
-                    $trans = $db->beginTransaction();
-                    try{
-                        $signerId = $_SESSION['userinfo']['yht_signerId'];
-                        $userId = $_SESSION['userinfo']['user_id'];
-                        //进行锁定,插入乙方记录
-                        $db->createCommand()->insert('yii2_wx_yht_contract_signer',['contract_id'=>$contractId,'user_id'=>$userId,'signer_id'=>$signerId,'created_at'=>date("Y-m-d H:i:s")])->execute();
-                        //更新合同状态，更新合同锁定状态
-                        $db->createCommand()->update('yii2_wx_yht_contract',['cont_status'=>1,'cont_has_bind'=>2,'cont_czid'=>$czId],['cont_contractId'=>$contractId])->execute();
-
-                        $trans->commit();
-                        output::ajaxReturn(200,'success');
-                    }catch (\yii\db\Exception $e){
-                        $trans->rollBack();
-                        output::ajaxReturn(204,"抱歉! 系统出错,请刷新再试");
+                    }else{
+                        output::ajaxReturn($signRes['code'],$signRes['msg']);
                     }
                 }else{
-                    output::ajaxReturn($signRes['code'],$signRes['msg']);
+                    output::ajaxReturn($res['code'],$res['msg']);
                 }
+            }
+            //最后一步,获取合同创建人甲方signerId
+            $ownerSignerId = Yii::$app->db->createCommand("select cont_owner_signerId from yii2_wx_yht_contract where cont_contractId={$contractId}")->queryScalar();
+            //合同签署,甲方发起签署
+            $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>$ownerSignerId]);
+            if ($signRes['code']==200){
+                //合同存证
+                $czId = " ";
+                if (YhtClient::$cz){
+                    $czRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['cz'],['idType'=>0,'idContent'=>$contractId]);
+                    if ($czRes['code']==200){
+                        $czId = $czRes['data']['czId'];
+                    }
+                }
+                //双方完成签署, 合同进行锁定
+                //进行锁定,插入乙方记录
+                $db->createCommand()->insert('yii2_wx_yht_contract_signer',['contract_id'=>$contractId,'user_id'=>$userId,'signer_id'=>$signerId,'created_at'=>date("Y-m-d H:i:s")])->execute();
+                //更新合同状态，更新合同锁定状态
+                $db->createCommand()->update('yii2_wx_yht_contract',['cont_status'=>1,'cont_has_bind'=>2,'cont_czid'=>$czId],['cont_contractId'=>$contractId])->execute();
+                $trans->commit();
+                output::ajaxReturn(200,'success');
             }else{
-                output::ajaxReturn($res['code'],$res['msg']);
+                output::ajaxReturn($signRes['code'],$signRes['msg']);
             }
         }catch (GuzzleException $e){
             Yii::error($e->getMessage());
             output::ajaxReturn(400,'请求远程资源失败');
         }catch (\yii\db\Exception $e){
-            output::ajaxReturn($res['code'],$res['msg']);
+            $trans->rollBack();
+//            Yii::error($e->getMessage());
+            wxlog($e->getMessage());
+            output::ajaxReturn(204,"抱歉! 系统出错,请刷新再试");
         }
     }
 
