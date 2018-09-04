@@ -565,7 +565,7 @@ class YhtController extends \yii\web\Controller
             //最后一步,获取合同创建人甲方signerId
             $ownerSignerId = Yii::$app->db->createCommand("select cont_owner_signerId from yii2_wx_yht_contract where cont_contractId={$contractId}")->queryScalar();
             //合同签署,甲方发起签署
-            $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>$ownerSignerId]);
+            $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>YhtClient::$hjzSignerId]);
             if ($signRes['code']==200){
                 //合同存证
                 $czId = " ";
