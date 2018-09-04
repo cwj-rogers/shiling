@@ -6,7 +6,7 @@ use yii\helpers\Url;
     <title>荟家装云合同登录</title>
 </head>
 <div class="weui-msg">
-    <div class="weui-msg__icon-area">
+    <div class="weui-msg__icon-area" style="padding:0 50px">
 <!--            <i class="weui-icon-waiting weui-icon_msg"></i>-->
         <img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/%E4%BA%91X%E8%8D%9F.png?t=1534325733315" alt="">
     </div>
@@ -49,7 +49,6 @@ use yii\helpers\Url;
                         <a href="<?= Url::toRoute(['yht-login/register'])?>" class="weui-btn weui-btn_default">注册</a>
                     </div>
                 </div>
-
             </div>
             <div class="weui-cells__tips">请按真实身份仔细认真填写, 冒认他人信息登录平台将进行法律追究</div>
 

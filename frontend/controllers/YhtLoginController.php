@@ -6,6 +6,7 @@ use Yii;
 use common\models\WxYhtInfo;
 use common\widgets\YhtClient;
 use common\models\WxUser;
+use common\helpers\FuncHelper as output;
 
 class YhtLoginController extends \yii\web\Controller
 {
@@ -63,6 +64,15 @@ class YhtLoginController extends \yii\web\Controller
                 }
                 return $this->render('/yht/web-register',['showQrcode'=>0]);
             }
+        }
+    }
+
+    public function actionDownUrl($contractId=null,$url=null){
+        if (Yii::$app->request->isAjax){
+            $shortUrl = Yii::$app->wechat->url->shorten($url);
+            output::ajaxReturn(200,'success',$shortUrl);
+        }else{
+            return $this->render('/yht/down-url',['contractId'=>$contractId]);
         }
     }
 }

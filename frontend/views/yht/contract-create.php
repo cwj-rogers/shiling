@@ -34,7 +34,14 @@ use yii\helpers\Url;
 
 <div id="sectionB">
     <iframe id="contract-box" src="" contract="<?= $contractId?>" frameborder="0" marginheight=0 marginwidth=0 scrolling="auto" style="width: 100%"></iframe>
-<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
+</div>
+
+<!-- 根据不同的客户端访问加载不同JS -->
+<?php if (!Yii::$app->wechat->isWechat):?>
+    <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>
+<?php else:?>
+    <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
+<?php endif;?>
 <script type="text/javascript">
     $(function () {
         //分享提醒

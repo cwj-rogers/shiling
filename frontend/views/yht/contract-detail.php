@@ -258,9 +258,23 @@ use yii\helpers\Url;
         </div>
     </div>
 
+    <!--  下载合同链接  -->
+    <div id="download" style="display: none;top: 60px;">
+        <a href="javascript:;" class="weui-flex">
+            <div class="weui-flex__item">
+                <i class="weui-icon-download" style="color: white;font-size: 28px"></i>
+            </div>
+            <div class="weui-flex__item yht-download">下载合同</div>
+        </a>
+    </div>
 </div>
-<!--<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>-->
-<script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>
+
+<!-- 根据不同的客户端访问加载不同JS -->
+<?php if (!Yii::$app->wechat->isWechat):?>
+    <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>
+<?php else:?>
+    <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
+<?php endif;?>
 <script type="text/javascript">
 
     $(function () {
@@ -268,7 +282,8 @@ use yii\helpers\Url;
         // $("#signature").removeClass('hide').popup();
         // $.verifyPrompt({'obj':{'phoneNo':10086}});
         // countDown(".weui-dialog .count-down");
-
+        let isWechat = <?= json_encode(Yii::$app->wechat->isWechat)?>;
+        let conStatus = <?= json_encode($status)?>;
         var type = 0;
         var contractId = <?= $contractId?>;
         var signerId = 0;
@@ -278,6 +293,19 @@ use yii\helpers\Url;
         setTimeout(function () {
             $.hideLoading();
         },3500);
+        if(isWechat){
+            if (conStatus){
+                // 微信端 + 签署完成
+                $("#download").show().click(function () {
+                    location.href = <?= json_encode(Url::toRoute(['yht-login/down-url','contractId'=>$contractId]))?>;
+                });
+            }
+        }else{
+            //PC 端全屏查看
+            $("#container").css('max-width','100%');
+        }
+
+        //下载合同功能
 
         //6.1 获取短信信息 a.添加签署人+静默签署 b.获取短信 c.验证短信+ 双方签署成功
         $(document).on('click','#signature .verify-sms, .weui-dialog .verify-sms2',function () {

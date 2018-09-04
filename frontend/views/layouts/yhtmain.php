@@ -52,11 +52,6 @@
 <!-- 如果使用了某些拓展插件还需要额外的JS -->
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>-->
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>-->
-<?php if (!Yii::$app->wechat->isWechat):?>
-    <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/yht.js"></script>
-<?php else:?>
-    <script type="text/javascript" charset="utf-8" src="https://api.yunhetong.com/api_page/api/m/yht.js"></script>
-<?php endif;?>
 
 <script type="text/javascript" charset="utf-8">
     $(function () {

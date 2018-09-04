@@ -44,10 +44,10 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 /*查看合同详情和创建合同*/
 #sectionB{}
     /*详情页iframe*/
-    #sectionB .sign{position: fixed;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
-        #sectionB .sign .weui-flex__item{text-align: center;line-height: 50px;color: white}
-        #sectionB .sign .weui-flex__item+.weui-flex__item{flex: 2}
-        #sectionB .sign .icon{font-size: 38px;display: block;margin-top: 5px;color: white}
+    #sectionB .sign,#download{position: fixed;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
+        #sectionB .sign,#download .weui-flex__item{text-align: center;line-height: 50px;color: white}
+        #sectionB .sign,#download .weui-flex__item+.weui-flex__item{flex: 2}
+        #sectionB .sign,#download .icon{font-size: 38px;display: block;margin-top: 5px;color: white}
     /*web端控制页面宽度*/
     #sectionB .weui-popup__modal div{max-width: 700px;margin: 0 auto;box-sizing: border-box}
     /*选择角色*/
