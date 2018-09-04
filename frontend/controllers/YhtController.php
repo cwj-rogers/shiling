@@ -196,8 +196,7 @@ class YhtController extends \yii\web\Controller
         $signerId = $_SESSION['userinfo']['yht_signerId'];
         //获取post资料，创建新合同
         if (Yii::$app->request->isPost && $contractId==null){
-            //判断角色 1.平台 2.管理员  合同表必须带有判断类型字段type,合同创建者id,模板id这些搜索字段
-
+            //判断角色 1.平台 2.管理员
             $authority = $_SESSION['userinfo']['yht_authority'];
             $client = new YhtClient();
             //处理提交的表单信息
@@ -230,16 +229,14 @@ class YhtController extends \yii\web\Controller
             if ($authority==1 || $authority==2){
                 //超级管理员创建(平台)
                 $repInfo = $client->sendReq('post',YhtClient::$url['contract']['template'],$tmpJson);
-                //管理员(个人)
-                //$repInfo = $client->sendReq('post',YhtClient::$url['contract']['template'],$tmpJson,2);
+                if ($repInfo['code']!=200){
+                    return $this->render('fail',['msg'=>$repInfo['msg']]);
+                }
             }else{
                 return $this->render('fail',['msg'=>"用户没有权限"]);
             }
             $db = Yii::$app->db;
             try{
-                if ($repInfo['code']!=200){
-                    return $this->render('fail',['msg'=>$repInfo['msg']]);
-                }
                 $trans = $db->beginTransaction();
                 // 1.获取新创建云合同ID 2.合同表记录入库
                 $contractId = number_format($repInfo["data"]["contractId"],0,'','');// 解决返回数据变成科学计数法的bug
@@ -264,9 +261,8 @@ class YhtController extends \yii\web\Controller
                 //签约负责人创建数量
                 $db->createCommand()->update('yii2_wx_yht_info',["yht_create_contract_num"=>new Expression("`yht_create_contract_num`+1")])->execute();
                 //添加甲方签署人(荟家装)
-                $hjzSignerId = YhtClient::$hjzSignerId;
                 $signerInfo = [
-                    "signerId" => $hjzSignerId,//签署者 id
+                    "signerId" => YhtClient::$hjzSignerId,//签署者 id
                     "signPositionType" => 1,//签署的定位方式：0 关键字定位，1 签名占位符定位，2 签署坐标
                     "positionContent" => YhtClient::$pos[0],//对应定位方式的内容，如果用签名占位符定位可以传多个签名占位符，并以分号隔开,最多 20 个;如果用签署坐标定位，则该参数包含三个信息：“页面,x 轴坐标,y 轴坐标”（如 20,30,49）
                     "signValidateType" => 0//签署验证方式：0 不校验，1 短信验证
@@ -308,7 +304,7 @@ class YhtController extends \yii\web\Controller
 
 
     /**
-     * 合同详情
+     * 云合同详情
      * @param $contractId
      * @return string|\yii\web\Response
      * @throws \yii\db\Exception
@@ -373,7 +369,7 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
-     *  新用户注册为云合同用户
+     *  注册成为云合同用户
      * @throws \yii\db\Exception
      */
     public function actionCreateUser(){
@@ -446,7 +442,7 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
-     * 获取用户base64印模图片
+     * 获取用户印模图片
      * @param $moulageId
      */
     public function actionGetMoulage($moulageId){
@@ -480,14 +476,14 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
-     * 动作:印模页点击验证  促发:添加乙方签署人+ 静默合同签署
+     * 添加乙方签署人
      * @param $contractId
      * @throws \yii\db\Exception
      */
     public function actionContractSign($contractId){
         if (Yii::$app->request->isAjax){
             $signerId = $_SESSION['userinfo']['yht_signerId'];
-            //添加签署人+静默合同签署
+            //添加签署人
             $client = new YhtClient();
             $verifyPhone = YhtClient::$verifyPhone;//签署验证方式
             $signerInfo = [
@@ -532,7 +528,7 @@ class YhtController extends \yii\web\Controller
     }
 
     /**
-     * 验证短信码 + 甲方签署成功 + 合同存证
+     * 验证短信码 + 乙方签署成功 + 甲方签署成功 + 更新数据库 + 合同存证
      * @param $contractId
      * @param $code
      * @throws \yii\db\Exception
@@ -564,9 +560,9 @@ class YhtController extends \yii\web\Controller
                 }
             }
             //最后一步,获取合同创建人甲方signerId
-            $ownerSignerId = Yii::$app->db->createCommand("select cont_owner_signerId from yii2_wx_yht_contract where cont_contractId={$contractId}")->queryScalar();
+            //$ownerSignerId = Yii::$app->db->createCommand("select cont_owner_signerId from yii2_wx_yht_contract where cont_contractId={$contractId}")->queryScalar();
             //合同签署,甲方发起签署
-            $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["idType"=>0,"idContent"=>$contractId,"signerId"=>YhtClient::$hjzSignerId]);
+            $signRes = $yhtClient->sendReq('post',YhtClient::$url['contract']['sign'],["signerId"=>YhtClient::$hjzSignerId,"idType"=>0,"idContent"=>$contractId]);
             if ($signRes['code']==200){
                 //合同存证
                 $czId = " ";
