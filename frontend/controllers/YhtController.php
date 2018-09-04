@@ -4,7 +4,7 @@ namespace frontend\controllers;
 use yii\helpers\Url;
 use Yii;
 use yii\helpers\ArrayHelper;
-use GuzzleHttp\Client;
+use yii\web\UploadedFile;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7;
@@ -179,6 +179,26 @@ class YhtController extends \yii\web\Controller
         }else{
             return $this->redirect(['yht/contract-create','contractId'=>$contractInfo->cont_contractId]);
         }
+    }
+
+    public function actionUpload(){
+        $model = new Upload();
+        $uploadSuccessPath = "";
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, "file");
+            //文件上传存放的目录
+            $dir = "../../public/uploads/" . date("Ymd");
+            if (!is_dir($dir))
+                mkdir($dir);
+            if ($model->validate()) {
+                //文件名
+                $fileName = date("HiiHsHis") . $model->file->baseName . "." . $model->file->extension;
+                $dir = $dir . "/" . $fileName;
+                $model->file->saveAs($dir);
+                $uploadSuccessPath = "/uploads/" . date("Ymd") . "/" . $fileName;
+            }
+        }
+        return $this->render('upload');
     }
 
     /**
