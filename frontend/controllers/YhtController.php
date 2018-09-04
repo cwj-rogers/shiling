@@ -108,6 +108,7 @@ class YhtController extends \yii\web\Controller
                 $res = $query->from('yii2_wx_yht_contract')
                     ->select("cont_owner_signerId as signerId,cont_contractId as contractNo,cont_title as title,cont_created_time as gmtCreate,cont_status as status")
                     ->where(['cont_contractId'=>$contrachIds])
+                    ->andWhere(['cont_is_del'=>0])
                     ->offset($offset)->limit($limit)
                     ->orderBy("cont_created_time desc")
                     ->all();
