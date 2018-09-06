@@ -11,12 +11,10 @@ class WxReceiveController extends Controller
     {
         //验证服务器
         if (Yii::$app->request->get('echostr',false)){
-            //执行服务端业务
-            $response = Yii::$app->wechat->server->serve();
-            // 将响应输出
-            return $response->send();
         }
 
+        //执行服务端业务
+        $response = Yii::$app->wechat->server->serve();
         // 接受处理传来的消息
         Yii::$app->wechat->server->push(function ($message) {
             switch ($message['MsgType']) {
@@ -49,6 +47,8 @@ class WxReceiveController extends Controller
                     break;
             }
         });
+        // 将响应输出
+        return $response->send();
 //        return "欢迎关注我们公众号";
     }
 }
