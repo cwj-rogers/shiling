@@ -52,13 +52,6 @@ class IndexController extends Controller
      * @return string|\yii\web\Response
      */
     public function actionIndex(){
-        //验证服务器
-        if (Yii::$app->request->get('echostr',false)){
-            //执行服务端业务
-            $response = Yii::$app->wechat->server->serve();
-            // 将响应输出
-            return $response->send();
-        }
         if(!array_key_exists('userinfo',$_SESSION)){
             return $this->refresh();
         }

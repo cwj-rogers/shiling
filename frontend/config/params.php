@@ -21,5 +21,6 @@ return [
             'callback' => '/index',
         ],
     ],
+    //云合同分享配置
     'diySharePage'=>["contract-create","contract-detail","register"]
 ];
