@@ -3,7 +3,8 @@
 use yii\helpers\Url;
 ?>
 <header class="cont_header">
-    <p>云合同资料填写</p>
+    <p>荟家装共享合作协议书</p>
+    <a href="<?= Url::toRoute(['yht/contract-demo','contractId'=>$demoId])?>" class="weui-btn weui-btn_primary cont-demo"><i class="weui-icon-search"></i>查看模板</a>
 </header>
 <form class="tmp-form" action="<?= Url::toRoute(['yht/contract-create','tid'=>$tid,'tmp_name'=>$tmp_name])?>" method="post">
     <div class="weui-cells__title">甲方名称</div>

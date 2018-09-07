@@ -175,11 +175,18 @@ class YhtController extends \yii\web\Controller
         $signerId = $_SESSION['userinfo']['yht_signerId'];
         $contractInfo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>$signerId,'cont_has_bind'=>0,'cont_status'=>0]);
         if (empty($contractInfo)){
-            return $this->render($formName,['tid'=>$tid,'tmp_name'=>$tmp_name]);
+            //查出数据库可当demo的合同
+            $demo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>YhtClient::$hjzSignerId,'cont_type'=>2]);
+            $demoId = 0;
+            if (!empty($demo)){
+                $demoId = $demo->cont_contractId;
+            }
+            return $this->render($formName,['tid'=>$tid,'tmp_name'=>$tmp_name,'demoId'=>$demoId]);
         }else{
             return $this->redirect(['yht/contract-create','contractId'=>$contractInfo->cont_contractId]);
         }
     }
+
 
     public function actionUpload(){
 //        $model = new Upload();
@@ -376,6 +383,14 @@ class YhtController extends \yii\web\Controller
             return $this->render('fail',['msg'=>"抱歉! 40011你所查看的合同不存在"]);
         }
     }
+
+    /*
+     * 查看合同模板
+     */
+    public function actionContractDemo($contractId){
+        return $this->render('contract-demo',['contractId'=>$contractId]);
+    }
+
 
     /**
      * 判断用户云平台账号是否存在

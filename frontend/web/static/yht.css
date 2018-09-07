@@ -139,7 +139,15 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
     #explain .weui-check__label {flex-direction: row;justify-content: center;align-items: center}
     #explain .weui-check__label .weui-cell__bd{font-size: 12px;flex: none}
     #explain .weui-cell .weui-btn{width: 100%;margin: 15px 0;}
-/*合同表单*/
+
+/*合同模板表单填写*/
 .tmp-form{padding-bottom: 100px;}
 .tmp-form .tmp-submit{background-color: white}
 .tmp-form .weui-cells__tips{padding-bottom: 10px;background-color: white}
+.cont_header .cont-demo{position: absolute;top:15px;right: 20px;background-color: #4280FF;border-radius: 23px;padding: 0 15px;}
+.cont_header .cont-demo i{color: white;font-size: 18px;font-weight: bold;margin-right: 5px}
+
+/*合同demo*/
+#contract-demo{position: relative;width: 100%}
+#contract-demo .go-back{width: 100%;position: absolute;bottom: 15px;display: flex;flex-direction: row;justify-content: center;align-items: center}
+#contract-demo .go-back a{background-color: #4280FF;color: white;width: 90%;}

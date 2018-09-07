@@ -4,6 +4,7 @@ use yii\helpers\Url;
 ?>
 <header class="cont_header">
     <p>城市合伙人合作意向书</p>
+    <a href="<?= Url::toRoute(['yht/contract-demo','contractId'=>$demoId])?>" class="weui-btn weui-btn_primary cont-demo"><i class="weui-icon-search"></i>查看模板</a>
 </header>
 <form class="tmp-form" action="<?= Url::toRoute(['yht/contract-create','tid'=>$tid,'tmp_name'=>$tmp_name])?>" method="post">
     <div class="weui-cells__title">甲方名称</div>
