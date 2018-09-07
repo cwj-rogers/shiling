@@ -26,7 +26,8 @@ class YhtClient extends \yii\base\Component
             'template'=>'contract/templateContract',
             'signer'=>'contract/signer',
             'sign'=>'contract/sign',
-            'cz'=>'contract/cz'
+            'cz'=>'contract/cz',
+            'upload'=>'/contract/fileContract'
         ],
         'user'=>[
             'addC'=>'user/company',
@@ -35,16 +36,17 @@ class YhtClient extends \yii\base\Component
             'addPM'=>'user/personMoulage'
         ]
     ];
-    public static $pos = ['jiafang','yifang'];
+    public static $pos = ['jiafang','yifang'];//占位符定位
+    public static $posKey = ['甲方','乙方'];//关键字定位
     public static $timeOut = 888;
     public static $hjzSignerId = 2064620;//超级管理员(公司)的signerId
     public static $verifyPhone = 1;//验证手机
     public static $cz = 1;//是否开启合同存证
     public static $tokenConf = [
-        "appId"=>"2018070415294900020",
-        "appKey"=>"kG1nwr4N"
-        //"appId"=>"2018062817051800007",
-        //"appKey"=>"wceNcK55gQE"
+//        "appId"=>"2018070415294900020",
+//        "appKey"=>"kG1nwr4N"
+        "appId"=>"2018062817051800007",
+        "appKey"=>"wceNcK55gQE"
     ];
     /**
      * @var Client
@@ -112,6 +114,13 @@ class YhtClient extends \yii\base\Component
                 'body' => "row data",
                 'json' => $opt
             ];
+        }elseif ($type==3){
+            $body = \GuzzleHttp\Psr7\stream_for($_FILES['contract']['tmp_name']);
+            $reqOpt = [
+                'headers'=>["content-type"=>"multipart/form-data;charset=UTF-8",'token'=>$this->initToken()],
+                'body' => $body,
+                'json' => $opt
+            ];
         }else{
             $reqOpt = [
                 'headers'=>["content-type"=>"application/json;charset=UTF-8"],
@@ -124,7 +133,7 @@ class YhtClient extends \yii\base\Component
      * @param null $method
      * @param null $url
      * @param array|null $json
-     * @param int $type token类型
+     * @param int $type token类型 1.平台 2.用户
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \yii\db\Exception

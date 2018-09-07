@@ -182,10 +182,17 @@ class YhtController extends \yii\web\Controller
     }
 
     public function actionUpload(){
-        $model = new Upload();
-        $uploadSuccessPath = "";
+//        $model = new Upload();
+//        $uploadSuccessPath = "";
         if (Yii::$app->request->isPost) {
-            $model->file = UploadedFile::getInstance($model, "file");
+            $client = new YhtClient();
+            $tmpJson = [
+                'contractTitle'=>'合同标题',
+            ];
+            $repInfo = $client->sendReq('post',YhtClient::$url['contract']['upload'],$tmpJson);
+            p($repInfo,1);
+            p($_FILES,1);
+//            $model->file = UploadedFile::getInstance($model, "file");
             //文件上传存放的目录
             $dir = "../../public/uploads/" . date("Ymd");
             if (!is_dir($dir))

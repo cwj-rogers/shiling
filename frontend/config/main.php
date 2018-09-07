@@ -37,9 +37,6 @@ return [
             'class' => 'common\core\Request',
             'baseUrl' => Yii::getAlias('@frontendUrl'),
         ],
-        'session' => [
-            'class' => 'yii\web\Session'
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -62,7 +59,17 @@ return [
         'errorHandler' => [
             'errorAction' => 'public/error',
         ],
-
+        'session' => [
+            'class' => 'yii\web\Session'
+        ],
+        'cache' => [
+            'class' => 'yii\redis\Cache',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+            ]
+        ],
         'urlManager' => [
             'enablePrettyUrl' => env('FRONTEND_PRETTY_URL', true),
             'showScriptName' => false,
