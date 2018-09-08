@@ -17,7 +17,7 @@ use yii\helpers\Url;
     </div>
     <div class="weui-msg__opr-area">
         <div class="img-box">
-            <?php if (!strpos(Yii::$app->request->getAbsoluteUrl(),'wxlocal')):?>
+            <?php if (strpos(Yii::$app->request->getAbsoluteUrl(),'wxlocal')):?>
                 <img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95.png" alt="测试">
             <?php else:?>
                 <img src="http://hjzhome.image.alimmdn.com/%E5%BE%AE%E4%BF%A1/%E4%BA%91%E5%90%88%E5%90%8C/%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95-%E6%AD%A3%E5%BC%8F.png" alt="正式">
