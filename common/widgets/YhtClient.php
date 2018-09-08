@@ -43,10 +43,10 @@ class YhtClient extends \yii\base\Component
     public static $verifyPhone = 1;//验证手机
     public static $cz = 1;//是否开启合同存证
     public static $tokenConf = [
-        "appId"=>"2018070415294900020",
-        "appKey"=>"kG1nwr4N"
-//        "appId"=>"2018062817051800007",
-//        "appKey"=>"wceNcK55gQE"
+        "appId"=>"2018070415294900020",//正式
+        "appKey"=>"kG1nwr4N"//正式
+//        "appId"=>"2018062817051800007",//测试
+//        "appKey"=>"wceNcK55gQE"//测试
     ];
     /**
      * @var Client
