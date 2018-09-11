@@ -25,7 +25,9 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 
 .icon {width: 1em; height: 1em;vertical-align: -0.15em;fill: currentColor;overflow: hidden;}
 
-
+/*全局*/
+.weui-cells .weui-cell .weui-cell__hd .sm{font-size: 14px}
+.weui-cells .weui-cell .weui-cell__hd .xs{font-size: 12px}
 /*首页样式*/
 #container{height: 100%;max-width: 768px;position: relative;z-index: 888;margin: 0 auto;background-color: white;}
 .weui-footer{max-width: 768px;z-index: 1;margin: 0 auto;}
@@ -85,7 +87,7 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
         #sectionB #signature .body p{text-align: center;font-size: 12px;color: grey;font-weight: normal;margin-bottom: 10px}
         #sectionB #signature .body .image{margin:10px 0;margin-top: 15px;text-align: center;position: relative}
         #sectionB #signature .body .image img{height: 100px}
-        #sectionB #signature .body .image .show-gallery{position: absolute;top:5px;right: 50px;font-size: 12px;color: grey}
+        #sectionB #signature .body .image .show-gallery{position: absolute;top:0px;right: 13px;font-size: 12px;color: #4280FF;padding: 6px 10px;}
         #sectionB #signature .body .go-verify{text-align: center;padding: 0 50px}
         #sectionB #signature .body .go-verify button{background-color: #4280FF;color: white}
     /*验证码弹窗*/
@@ -150,8 +152,10 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 .tmp-form{padding-bottom: 100px;}
 .tmp-form .tmp-submit{background-color: white}
 .tmp-form .weui-cells__tips{padding-bottom: 10px;background-color: white}
+/*absolute 是为了兼容电脑端防止错位*/
 .cont_header .cont-demo{position: absolute;top:60px;right: 10px;background-color: #4280FF;border-radius: 23px;padding: 0 10px;font-size: 16px;z-index: 888}
 .cont_header .cont-demo i{color: white;font-size: 18px;font-weight: bold;margin-right: 5px}
+.tmp-form .weui-cells .weui-cell .weui-cell__hd p{max-width: 160px;overflow: hidden;white-space: nowrap}
 
 /*合同demo*/
 #contract-demo{position: relative;width: 100%}

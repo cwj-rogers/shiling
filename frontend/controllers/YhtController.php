@@ -368,14 +368,20 @@ class YhtController extends \yii\web\Controller
                 if (empty($exist)){
                     return $this->render('fail',['msg'=>"抱歉! 40012非合同签署双方不能查看合同"]);
                 }
+            }elseif ($contractInfo['cont_has_bind']==0){
+                //非合同创建人访问,则合同视为已使用
+                if ($contractInfo->cont_owner_signerId != $signerId){
+                    WxYhtContract::updateAll(['cont_has_bind'=>1],['cont_contractId'=>$contractId]);
+                }
             }
             $status = $contractInfo->cont_status;//合同状态
-            //用户身份
+            //用户身份(是否客人)
             if ($contractInfo->cont_owner_signerId == $signerId){
                 $isGuest = 0;
             }else{
                 $isGuest = 1;
             }
+            //是否为管理人
             $authority = isset($yhtInfo->yht_authority)? $yhtInfo->yht_authority:3;
             return $this->render('contract-detail',['contractId'=>$contractId,'status'=>$status,'isGuest'=>$isGuest,'authority'=>$authority,'contTitle'=>$contractInfo->cont_title]);
         }else{

@@ -49,6 +49,7 @@
 </html>
 
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script src="<?=Yii::getAlias('@web')?>/static/yht.js?t=20180911"></script>
 <!-- 如果使用了某些拓展插件还需要额外的JS -->
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>-->
 <!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>-->
