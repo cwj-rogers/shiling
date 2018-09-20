@@ -22,6 +22,7 @@ use Yii;
  * @property string $yht_moulageId
  * @property string $yht_moulage_base64
  * @property string $yht_created_time
+ * @property string yht_landmark
  */
 class WxYhtInfo extends \yii\db\ActiveRecord
 {
@@ -42,7 +43,7 @@ class WxYhtInfo extends \yii\db\ActiveRecord
             [['user_id', 'yht_moulage_base64'], 'required'],
             [['user_id', 'yht_authority', 'yht_type'], 'integer'],
             [['yht_moulage_base64'], 'string'],
-            [['yht_created_time'], 'safe'],
+            [['yht_created_time','yht_landmark'], 'safe'],
             [['yht_signerId', 'yht_moulageId'], 'string', 'max' => 16],
             [['yht_node_tmp'], 'string', 'max' => 255],
             [['yht_username'], 'string', 'max' => 128],
@@ -75,6 +76,7 @@ class WxYhtInfo extends \yii\db\ActiveRecord
             'yht_moulageId' => '云合同平台印模ID',
             'yht_moulage_base64' => '印模图片 Base64 数据',
             'yht_created_time' => '创建时间',
+            'yht_landmark' => '合同编号标志'
         ];
     }
 }

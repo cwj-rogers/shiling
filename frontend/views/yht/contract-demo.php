@@ -22,6 +22,12 @@ use yii\helpers\Url;
             $.hideLoading();
         },3500);
 
+        let isWechat = <?= json_encode(Yii::$app->wechat->isWechat)?>;
+        if(!isWechat){
+            //PC 端全屏查看
+            $("#container").css('max-width','100%');
+        }
+
         let contractId = <?= $contractId?>;
         //1. 加载合同详情作背景
         var tokenUnableListener = function (obj){ //当 token 不合法时，SDK 会回调此方法

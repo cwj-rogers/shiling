@@ -10,7 +10,7 @@ use yii\helpers\Url;
         <div class="weui-panel__hd">我的云合同</div>
         <div class="weui-panel__bd">
             <?php foreach ($list as $k=>$v):?>
-            <a href="<?= Url::toRoute(['yht/contract-detail','contractId'=>$v['contractNo']])?>" class="weui-media-box weui-media-box_appmsg">
+            <a href="<?= Url::toRoute(['yht/contract-detail','contractId'=>$v['contractId']])?>" class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__hd">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-qianhetong"></use>
@@ -21,7 +21,7 @@ use yii\helpers\Url;
                         <h4 class="weui-media-box__title"><?= $v['title']?></h4> <span><?= $v['gmtCreate']?></span>
                     </div>
                     <div class="box__bd-bottom">
-                        <p class="weui-media-box__desc">合同编号: <?= $v['contractNo']?></p>
+                        <p class="weui-media-box__desc">合同编号: <?= $v['contractId'];?></p>
                         <span class="status<?= $v['status']?>"><?= $v['status']?'已签署':'待签署'?></span>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ use yii\helpers\Url;
                     $.each(arr,function (k,v) {
                         var status = v.status==1? '已签署':'待签署';
                         list +=
-                            '<a href="<?= Url::toRoute(['yht/contract-detail'])?>?contractId='+v.contractNo+'"  class="weui-media-box weui-media-box_appmsg">'+
+                            '<a href="<?= Url::toRoute(['yht/contract-detail'])?>?contractId='+v.contractId+'"  class="weui-media-box weui-media-box_appmsg">'+
                             '<div class="weui-media-box__hd">'+
                             '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-qianhetong"></use></svg>'+
                             '</div>'+
@@ -85,7 +85,7 @@ use yii\helpers\Url;
                                     '<span>'+v.gmtCreate+'</span>'+
                                 '</div>'+
                                 '<div class="box__bd-bottom">'+
-                                    '<p class="weui-media-box__desc">合同编号: '+v.contractNo+'</p>'+
+                                    '<p class="weui-media-box__desc">合同编号: '+v.contractId+'</p>'+
                                     '<span class="status'+v.status+'">'+status+'</span>'+
                                 '</div>'+
                             '</div>'+

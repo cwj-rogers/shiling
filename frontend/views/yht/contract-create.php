@@ -46,6 +46,11 @@ use yii\helpers\Url;
     $(function () {
         //分享提醒
         $.alert("点击右上角 ... 把合同分享给好友，立即进行线上云合同签署", "合同创建成功");
+        let isWechat = <?= json_encode(Yii::$app->wechat->isWechat)?>;
+        if(!isWechat){
+            //PC 端全屏查看
+            $("#container").css('max-width','100%');
+        }
 
         let contractId = <?= $contractId?>;
         //1. 加载合同详情作背景

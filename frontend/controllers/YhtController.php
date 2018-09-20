@@ -78,6 +78,7 @@ class YhtController extends \yii\web\Controller
             $_SESSION['userinfo']['yht_signerId'] = $yhtInfo->yht_signerId;
             $_SESSION['userinfo']['yht_username'] = $yhtInfo->yht_username;
             $_SESSION['userinfo']['yht_authority'] = $yhtInfo->yht_authority;
+            $_SESSION['userinfo']['yht_landmark'] = $yhtInfo->yht_landmark;
 
             $authority = $yhtInfo->yht_authority;
             if (0){
@@ -106,7 +107,7 @@ class YhtController extends \yii\web\Controller
                     ->column();
 
                 $res = $query->from('yii2_wx_yht_contract')
-                    ->select("cont_owner_signerId as signerId,cont_contractId as contractNo,cont_title as title,cont_created_time as gmtCreate,cont_status as status")
+                    ->select("cont_owner_signerId as signerId,cont_contractId as contractId,cont_contractNo as contractNo,cont_title as title,cont_created_time as gmtCreate,cont_status as status")
                     ->where(['cont_contractId'=>$contrachIds])
                     ->andWhere(['cont_is_del'=>0])
                     ->offset($offset)->limit($limit)
@@ -199,18 +200,6 @@ class YhtController extends \yii\web\Controller
             $repInfo = $client->sendReq('post',YhtClient::$url['contract']['upload'],$tmpJson);
             p($repInfo,1);
             p($_FILES,1);
-//            $model->file = UploadedFile::getInstance($model, "file");
-            //文件上传存放的目录
-            $dir = "../../public/uploads/" . date("Ymd");
-            if (!is_dir($dir))
-                mkdir($dir);
-            if ($model->validate()) {
-                //文件名
-                $fileName = date("HiiHsHis") . $model->file->baseName . "." . $model->file->extension;
-                $dir = $dir . "/" . $fileName;
-                $model->file->saveAs($dir);
-                $uploadSuccessPath = "/uploads/" . date("Ymd") . "/" . $fileName;
-            }
         }
         return $this->render('upload');
     }
@@ -232,6 +221,7 @@ class YhtController extends \yii\web\Controller
         if (Yii::$app->request->isPost && $contractId==null){
             //判断角色 1.平台 2.管理员
             $authority = $_SESSION['userinfo']['yht_authority'];
+            $yht_landmark = $_SESSION['userinfo']['yht_landmark'];
             $client = new YhtClient();
             //处理提交的表单信息
             if(empty($_POST)){
@@ -255,7 +245,11 @@ class YhtController extends \yii\web\Controller
                 $key = '${'.$k.'}';
                 $reqInfo[$key] = $v;
             }
+            //顺序号获取
+            $num = (new Query())->from("yii2_wx_yht_contract")->where(['>','cont_created_time',date("Y-m-d")])->andWhere(['<','cont_created_time',date("Y-m-d",strtotime("+1day"))])->count();
+            $contractNo = output::getContractCode($yht_landmark,$num);
             $tmpJson = [
+                "contractNo"=>$contractNo,
                 "contractTitle"=>$tmp_name,
                 "templateId"=>$tid,
                 "contractData"=>$reqInfo
@@ -278,6 +272,7 @@ class YhtController extends \yii\web\Controller
                 $db->createCommand()->insert('yii2_wx_yht_contract',
                     [
                         'cont_contractId'=>$contractId,
+                        'cont_contractNo'=>$contractNo,
                         'cont_owner_signerId'=>$signerId,
                         'cont_templateId'=>$tid,
                         'cont_title'=>$tmp_name,
@@ -293,7 +288,7 @@ class YhtController extends \yii\web\Controller
                         'created_at'=>date("Y-m-d H:i:s")
                     ])->execute();
                 //签约负责人创建数量
-                $db->createCommand()->update('yii2_wx_yht_info',["yht_create_contract_num"=>new Expression("`yht_create_contract_num`+1")])->execute();
+                $db->createCommand()->update('yii2_wx_yht_info',["yht_create_contract_num"=>new Expression("`yht_create_contract_num`+1")],['yht_signerId'=>$signerId])->execute();
                 //添加甲方签署人(荟家装)
                 $signerInfo = [
                     "signerId" => YhtClient::$hjzSignerId,//签署者 id
@@ -631,8 +626,7 @@ class YhtController extends \yii\web\Controller
             output::ajaxReturn(400,'请求远程资源失败');
         }catch (\yii\db\Exception $e){
             $trans->rollBack();
-//            Yii::error($e->getMessage());
-            wxlog($e->getMessage());
+            Yii::error($e->getMessage());
             output::ajaxReturn(204,"抱歉! 系统出错,请刷新再试");
         }
     }
@@ -653,12 +647,12 @@ class YhtController extends \yii\web\Controller
      * @throws \yii\db\Exception
      */
     private function log($con=null, $content=null){
-        Yii::$app->db->createCommand()->insert('yii2_wx_yht_log',[
-            'username'=>$_SESSION['userinfo']['username'],
-            'controller'=>$con,
-            'content'=>$content,
-            'created_at'=>date("Y-m-d H:i:s")
-        ])->execute();
+//        Yii::$app->db->createCommand()->insert('yii2_wx_yht_log',[
+//            'username'=>$_SESSION['userinfo']['username'],
+//            'controller'=>$con,
+//            'content'=>$content,
+//            'created_at'=>date("Y-m-d H:i:s")
+//        ])->execute();
     }
 
     public function actionClear(){

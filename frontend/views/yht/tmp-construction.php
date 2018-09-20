@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 ?>
 <header class="cont_header">
+<!--    荟家装整装销售施工合同 -->
     <p><?= $tmp_name?></p>
     <a href="<?= Url::toRoute(['yht/contract-demo','contractId'=>$demoId])?>" class="weui-btn weui-btn_primary cont-demo"><i class="weui-icon-search"></i>查看模板</a>
 </header>
@@ -170,7 +171,7 @@ use yii\helpers\Url;
             <div class="weui-cell__ft">
                 <div class="weui-count">
                     <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" name="money4" type="number" value="60000" style="font-size: 18px;width: 80px">
+                    <input class="weui-count__number" name="money4" type="number" step="0.01" value="60000" style="font-size: 18px;width: 80px">
                     <a class="weui-count__btn weui-count__increase"></a>
                 </div>
             </div>
@@ -183,7 +184,7 @@ use yii\helpers\Url;
             <div class="weui-cell__ft">
                 <div class="weui-count">
                     <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" name="money5" type="number" value="38000" style="font-size: 18px;width: 80px">
+                    <input class="weui-count__number" name="money5" type="number" step="0.01" value="38000" style="font-size: 18px;width: 80px">
                     <a class="weui-count__btn weui-count__increase"></a>
                 </div>
             </div>
@@ -226,6 +227,7 @@ use yii\helpers\Url;
 <script>
     // var S2B = {};
     $(function () {
+        //初始化计数器
         weuiCount(['.weui-count__decrease','.weui-count__increase'], 8888888, 10, 100, S2B);
         weuiCount(['.weui-count__decrease2','.weui-count__increase2'], 365, 1, 1);
 
@@ -275,8 +277,8 @@ use yii\helpers\Url;
         let money2 = parseInt($("input[name=money2]").val());
         $("input[name=money1]").val(smalltoBIG(money2));
         //分期价格重新算
-        $("input[name=money4]").val(parseFloat(money2*0.6));
-        $("input[name=money5]").val(parseFloat(money2*0.38));
+        $("input[name=money4]").val(parseFloat(money2*0.6).toFixed(2));
+        $("input[name=money5]").val(parseFloat(money2*0.38).toFixed(2));
     }
     //金额小写转大写
     function smalltoBIG(n)

@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 ?>
 <header class="cont_header">
+<!--  城市合伙人授权经营协议书  -->
     <p>城市合伙人授权经营协议书</p>
     <a href="<?= Url::toRoute(['yht/contract-demo','contractId'=>$demoId])?>" class="weui-btn weui-btn_primary cont-demo"><i class="weui-icon-search"></i>查看模板</a>
 </header>
