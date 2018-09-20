@@ -536,6 +536,8 @@ class YhtController extends \yii\web\Controller
                 $addRes = $client->sendReq('post',YhtClient::$url['contract']['signer'],["idType"=>0,"idContent"=>$contractId,"signers"=>[$signerInfo] ]);
                 if ($addRes['code']==200){
                     output::ajaxReturn(200,'success',['verifyPhone'=>$verifyPhone]);
+                }elseif (mb_strpos($addRes['msg'],2213757) !== false){
+                    output::ajaxReturn(200,'success',['verifyPhone'=>$verifyPhone]);
                 }else{
                     output::ajaxReturn($addRes['code'],$addRes['msg']);
                 }
