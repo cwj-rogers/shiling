@@ -2,14 +2,42 @@
 
 ?>
     <script>
-        var vm = new Vue({
-            el: '#example',
-            data: data
+        var app;
+        var basePath = "http://wx.hjz.com/admin";
+        var url = {
+            'stats':basePath+'/yht/stats',
+        };
+        $(function () {
+            app = new Vue({
+                el: '#wrapper',
+                data: {
+                    message:'hello world!',
+                    time:'页面加载于 ' + new Date().toLocaleString(),
+                    contracts:[
+                        {},
+                        {},
+                        {},
+                        {},
+                        {}
+                    ],
+                    stats:init(),
+                }
+            });
+            // init();
         });
+        function init() {
+            $.getJSON(url.stats,function (data) {
+                console.log(data.obj.conTotal[0]);
+                app.stats = data.obj;
+                console.log(app.stats);
+                console.log(app.stats.conTotal,app.stats.conTotal[0]);
+            })
+        }
     </script>
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom white-bg">
+                <!--    顶部导航栏     -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <div class="navbar-header">
                         <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
@@ -93,10 +121,10 @@
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <span class="label label-success pull-right">月</span>
-                                    <h5>浏览量</h5>
+                                    <h5>合同数量</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <h1 class="no-margins">386,200</h1>
+                                    <h1 class="no-margins">{{ stats }}</h1>
                                     <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i>
                                     </div>
                                     <small>总计浏览量</small>
@@ -324,55 +352,41 @@
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>项目</th>
-                                                    <th>进度</th>
-                                                    <th>任务</th>
-                                                    <th>日期</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>米莫说｜MiMO Show</td>
-                                                    <td><span class="pie">0.52/1.561</span>
-                                                    </td>
-                                                    <td>20%</td>
-                                                    <td>2014.11.11</td>
-                                                    <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>商家与购物用户的交互试衣应用</td>
-                                                    <td><span class="pie">6,9</span>
-                                                    </td>
-                                                    <td>40%</td>
-                                                    <td>2014.11.11</td>
-                                                    <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>天狼---智能硬件项目</td>
-                                                    <td><span class="pie">3,1</span>
-                                                    </td>
-                                                    <td>75%</td>
-                                                    <td>2014.11.11</td>
-                                                <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>线下超市+线上商城+物流配送互联系统</td>
-                                                <td><span class="pie">4,9</span>
-                                                </td>
-                                                <td>18%</td>
-                                                <td>2014.11.11</td>
-                                                <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        <div class="row gray-bg" style="margin:0px;padding: 15px 0;">
+                                            <div class="col-md-3" v-for="contract in contracts">
+                                                <div class="ibox">
+                                                    <div class="ibox-content">
+                                                        <a href="article.html" class="btn-link">
+                                                            <h2>
+                                                                想知道宁泽涛每天游多少圈？送他 Misfit 最新款 Speedo Shine
+                                                            </h2>
+                                                        </a>
+                                                        <div class="small m-b-xs">
+                                                            <strong>高 晨</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 小时前</span>
+                                                        </div>
+                                                        <p>
+                                                            就算你敢带着 Apple Watch 下水游泳，它也不能记录你游了多少圈。 夏天刚来时就不停地听到有人提起“有没有在我游泳的时候可以帮忙数圈的设备”，今天 Misfit 终于赶在夏天结束之前推出可追踪游泳运动的新款 Shine。这款新设备是 Misfit 与泳衣品牌 Speedo （速比涛）合作推出，因此被命名为 Speedo Shine。
+                                                        </p>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h5>标签：</h5>
+                                                                <button class="btn btn-primary btn-xs" type="button">Apple Watch</button>
+                                                                <button class="btn btn-white btn-xs" type="button">速比涛</button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="small text-right">
+                                                                    <h5>状态：</h5>
+                                                                    <div> <i class="fa fa-comments-o"> </i> 56 评论 </div>
+                                                                    <i class="fa fa-eye"> </i> 144 浏览
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>
