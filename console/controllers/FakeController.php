@@ -4,6 +4,7 @@ namespace console\controllers;
 use common\widgets\Uploader;
 use Yii;
 use yii\db\Query;
+use yii\helpers\Console;
 
 /**
  * Class FakeController
@@ -36,7 +37,7 @@ class FakeController extends \yii\console\Controller
      * @param int $isOrigin
      * @return array
      */
-    public function upload($path,$isOrigin=0)
+    private function upload($path,$isOrigin=0)
     {
         //获取荟家装服务器图片, 判断本地是否存在, 不存在则获取图片保存在临时文件夹, 再用临时地址上传到顽兔, 上传前验证文件目录是否存在
         // file_get_contents() gbk地址请求-no  utf8地址请求-yes
@@ -45,8 +46,8 @@ class FakeController extends \yii\console\Controller
         // urldecode() 解决因为url编码图片不能访问的问题
         try{
             $basePath = "http://tx.hjzhome.com/";
-            $localRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/";
-            $localPutRoot = $isOrigin?"/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi4/";
+            $localRoot = $isOrigin? "/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/";
+            $localPutRoot = $isOrigin? "/home/image/":"E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi4/";
 
             $filename = $basePath.$path;//远程地址
             $localFilename = $localRoot.$path;//本地图片库
@@ -79,9 +80,9 @@ class FakeController extends \yii\console\Controller
      * @throws \yii\db\Exception
      */
     public function actionGetData($start=0, $end=0){
-//        $origin = file_get_contents("http://tx.hjzhome.com/images/201809/thumb_img/212_thumb_G_1536284906395.jpg");
-//        file_put_contents("E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi4/123.jpg", $origin);
-        //p($end,1);
+//        $origin = file_get_contents("http://tx.hjzhome.com/images/btn_fold.gif");
+//        file_put_contents("E:\phpStudy\PHPTutorial\WWW\hjz\htdocs/images/alishi4/123.gif", $origin);
+//        p($end,1);
         $db = Yii::$app->getDb();
         $data = (new Query())->select("goods_id,tuijie_img,goods_thumb,goods_img")
             ->from("ecs_goods")
@@ -113,43 +114,108 @@ class FakeController extends \yii\console\Controller
     }
 
     /**
-     * 富文本图片上传顽兔
+     * 富文本上传本地图片到顽兔
      * @param int $start
      * @param int $end
      * @throws \yii\db\Exception
      */
     public function actionDescUpload($start=0, $end=0, $isOrigin=0){
         $db = Yii::$app->getDb();
-        $data = (new Query())->select("goods_id,goods_desc_images")
-            ->from("move_ali_log")
+        $data = (new Query())->from("ecs_goods")
+            ->select("goods_id,goods_desc")
             ->where(['between', 'goods_id', $start, $end])
+            ->andWhere("is_real=1 or is_delete=0")
             ->all($db);
-//        p($data,1);
-        foreach ($data as $v){
-
-            if(empty($v['goods_desc_images'])){
+        //p($data,1);
+        foreach ($data as $desc){
+            preg_match_all("/<img src=\"(.*)\"/U", $desc['goods_desc'], $matches);//正则匹配图片地址
+            p($matches[1]);
+            //不符合规则图片地址过滤
+            if(empty($matches[1])){
                 continue;
             }
-            $imageArr = explode(',', $v['goods_desc_images']);
             $status = 1;
-            foreach ($imageArr as $vv){
+            foreach ($matches[1] as $key=>$imgUrl){
+                $existHjzhome = strpos($imgUrl,'hjzhome.com');//已经上传到顽兔
+                $existHjzhome2 = strpos($imgUrl,'hjzhome.image');//已经上传到顽兔
+                //过滤不符合规则图片地址
+                if($existHjzhome || $existHjzhome2){
+                    continue;
+                }
+                //p($imgUrl.PHP_EOL.PHP_EOL);continue;
                 //判断图片格式
-                $postfix = trim(strrchr($vv, '.'),'.');
+                $postfix = trim(strrchr($imgUrl, '.'),'.');
                 if (in_array($postfix, ["jpg","png","gif","jpeg"])){
-                    $res = $this->upload($vv, $isOrigin);
+                    $res = $this->upload($imgUrl, $isOrigin);
                     if (!array_key_exists('code',$res) || $res['code']!="OK"){
                         $status = 0;
                         $res['url'] = "";
-                        p($res);
+                        p("上传失败!!! -- {$desc['goods_id']} -- $imgUrl");
                         //记录上传失败的图片地址
-                        $db->createCommand()->insert('move_ali_fail_log',["url"=>$vv, "goods_id"=>$v['goods_id']])->execute();
+                        $db->createCommand()->insert('move_ali_fail_log',["url"=>$imgUrl, "goods_id"=>$desc['goods_id']])->execute();
                     }
-                    p("good_id:{$v['goods_id']} -- {$vv} -- {$res['url']}".PHP_EOL.PHP_EOL);
-                    usleep(1000);
+                    p("$key -- {$desc['goods_id']} -- {$imgUrl}".PHP_EOL.PHP_EOL);
+                    usleep(800);
                 }
             }
-            $db->createCommand()->update('move_ali_log',["goods_desc"=>$status],["goods_id"=>$v['goods_id']])->execute();
+            $db->createCommand()->insert('move_ali_log',["goods_desc"=>$status,"goods_id"=>$desc['goods_id'] ])->execute();
         }
+    }
+
+    /**
+     * 富文本替换上传成功的图片地址
+     * @param int $start
+     * @param int $end
+     */
+    public function actionReplace($start=0, $end=0){
+        $db = Yii::$app->getDb();
+        $data = (new Query())->from("ecs_goods")
+            ->select("goods_id,goods_desc")
+            ->where(['between', 'goods_id', $start, $end])
+            ->andWhere("is_real=1 or is_delete=0")
+            ->all($db);
+        //$newDesc = $this->get_img_thumb_url($data[0]['goods_desc'],"http://image.hjzhome.com/");
+        //p("操作阿斯蒂芬",1,1);
+        foreach ($data as $key=>$desc){
+            preg_match_all("/<img src=\"\/(.*)\"/U", $desc['goods_desc'], $matches);//正则匹配图片地址
+            //不符合规则图片地址过滤
+            if(empty($matches[1])){
+                continue;
+            }
+            $matches[1]['goods_id'] = $desc['goods_id'];
+            p($matches[1]);
+            p(PHP_EOL.$desc['goods_desc'].PHP_EOL.PHP_EOL);
+            //添加图片前缀
+            $newDesc = $this->get_img_thumb_url($desc['goods_desc'],"http://image.hjzhome.com/");
+            try{
+                p(PHP_EOL.$newDesc.PHP_EOL.PHP_EOL);
+                $res = $this->confirm(iconv('utf-8','gbk',"是否继续操作?"),1);
+                if (!$res){
+                    p("停止操作",0,1);
+                    break;
+                }
+                @$db->createCommand()->update('ecs_goods',["goods_desc"=>$newDesc],["goods_id"=>$desc['goods_id']])->execute();
+                p("更新成功!!! {$desc['goods_id']}".PHP_EOL.PHP_EOL,0,1);
+                usleep(800);
+            }catch (\yii\db\Exception $e){
+                p("更新失败!!! {$desc['goods_id']} -- ".$e->getMessage().PHP_EOL.PHP_EOL,0,1);
+            }
+        }
+    }
+
+    /**
+     *  图片地址替换成压缩URL
+     * @param string $content  内容
+     * @param string $prefix  前缀
+     * @param string $suffix  后缀
+     * @return null|string|string[]
+     */
+    private function get_img_thumb_url($content="",$prefix="",$suffix="")
+    {
+/*        $pregRule = "/<[img|IMG].*?src=[\'|\"][\/](.*?(?:[\.jpg|\.jpeg|\.png|\.gif]))[\'|\"].*?[\/]?>/";*/
+        $pregRule = "/<img src=\"\/(.*)\"/U";
+        $content = preg_replace($pregRule, '<img src="'.$prefix.'${1}'.$suffix.'"', $content);
+        return $content;
     }
 
     /**
@@ -193,7 +259,8 @@ class FakeController extends \yii\console\Controller
     }
 
     /**
-     *  主题图片
+     * updated the topic pictures
+     *
      * @param int $start
      * @param int $end
      * @param int $isOrigin
@@ -279,6 +346,7 @@ class FakeController extends \yii\console\Controller
         //images/upload/Image/%C9%D0%B8%DF%CE%C0%D4%A1%20%C1%DC%D4%A1%C6%C1-2%282%29.jpg
         //images/upload/Image/%E5%B0%9A%E9%AB%98%E5%8D%AB%E6%B5%B4%20%E6%B7%8B%E6%B5%B4%E5%B1%8F-2%282%29.jpg
 
+        if (empty($item)) return false;
         if ($type==1){
             $url = (new Query())->from("move_ali_log")
                 ->select("goods_desc_images")
@@ -302,28 +370,70 @@ class FakeController extends \yii\console\Controller
                 }
             }
         }elseif ($type==2){
+            //处理绝对路径
             $v = $item;
+            $spacePath = basename(dirname($v));
             $rawUrl = dirname($v).'/'.rawurlencode(iconv("gbk","utf-8", basename($v)));
-            $origin = file_get_contents("http://4d.hjzhome.com/".$rawUrl);
-            $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi3/".basename($v);
+            $origin = file_get_contents($rawUrl);
+            $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($v);
             file_put_contents($localFilename, $origin);
             $localFilename = iconv("gbk","utf-8", $localFilename);
-            $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzimage", dirname($v));
-            p($res);
+            $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzhome", 'hjzWebsite/'.$spacePath);
+            if ($res['code']=="OK"){
+                p($res['url']);
+            }else{
+                p($res);
+            }
         }elseif ($type==3){
-            $item = iconv("gbk", "utf-8", $item);
-            $res = $this->upload($item);
-            p($res);
+            // 处理相对路径的图片
+            $rootPath = "https://show.metinfo.cn/muban/M1156010/328/";
+            $basePath = $item;
+            $spacePath = basename(dirname($basePath));
+            $fullRemoteUrl = $rootPath.$basePath;
+            $rawUrl = dirname($fullRemoteUrl).'/'.rawurlencode(iconv("gbk","utf-8", basename($fullRemoteUrl)));
+            $origin = file_get_contents($rawUrl);
+            $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($fullRemoteUrl);
+            file_put_contents($localFilename, $origin);
+
+            $localFilename = iconv("gbk","utf-8", $localFilename);
+            $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzhome", 'hjzWebsite/'.$spacePath);
+            if ($res['code']=="OK"){
+                p($res['url']);
+            }else{
+                p($res);
+            }
+        }elseif ($type==4){
+            $str = "upload/thumb_src/125_100/1500452786.jpg,upload/thumb_src/125_100/1500449642.jpg,upload/thumb_src/125_100/1500451911.jpg,upload/thumb_src/125_100/1500456343.jpg";
+            $arr = explode(',', $str);
+            // 处理相对路径的图片
+            foreach ($arr as $k=>$v){
+                $rootPath = "https://show.metinfo.cn/muban/M1156010/328/";
+                $basePath = $v;
+                $fullRemoteUrl = $rootPath.$basePath;
+//                $rawUrl = dirname($fullRemoteUrl).'/'.rawurlencode(iconv("gbk","utf-8", basename($fullRemoteUrl)));
+                $origin = file_get_contents($fullRemoteUrl);
+                $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($fullRemoteUrl);
+                file_put_contents($localFilename, $origin);
+                //p($rawUrl,1);
+                $localFilename = iconv("gbk","utf-8", $localFilename);
+                $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzhome", 'hjzWebsite');
+                if ($res['code']=="OK"){
+                    p($res['url'].PHP_EOL.PHP_EOL);
+                }else{
+                    p($res);
+                }
+                usleep(800);
+            }
         }
     }
 
-    public function actionZw(){
-//        $urlen = "/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg";
-//        $decode = urldecode("%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg");
-//        $decode = urldecode("/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg");
-//        $decode = iconv("utf-8","gbk", $decode);
-//        $decode = mb_strpos($urlen, '%');
-//        p($decode,1);
+    /**
+     * 获取页面内容并替换其中图片内容
+     * @param string $pagePath 页面绝对路径
+     * @throws \yii\db\Exception
+     */
+    public function actionWebPageLink($pagePath=''){
+
         $wtRes=$this->upload("/images/upload/Image/%E5%85%A8%E6%99%AF%E6%95%88%E6%9E%9C%E8%AF%A6%E7%BB%86%E9%A1%B5_03.jpg");
         p($wtRes,1);
         $res = Yii::$app->db->createCommand("select url from move_ali_fail_log where goods_id=9999")->queryScalar();

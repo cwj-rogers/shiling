@@ -55,7 +55,7 @@ function dump($var, $depth = 10, $highlight = false){
  * @param void $var
  * @author  wenjie
  */
-function p($var,$is_die=0)
+function p($var,$is_die=0,$is_gbk=0)
 {
     if (is_bool($var)) {
         var_dump($var);
@@ -66,6 +66,7 @@ function p($var,$is_die=0)
         if (!$is_cli){
             echo "<pre style='position:relative;z-index:1000;padding:10px;border-radius:5px;background:#F5F5F5;border:1px solid #aaa;font-size:14px;line-height:18px;opacity:0.9;'>" . print_r($var, true) . "</pre>";
         }else{
+            if($is_gbk) $var = iconv("utf-8","gbk",$var);
             echo print_r($var, true);
         }
     }

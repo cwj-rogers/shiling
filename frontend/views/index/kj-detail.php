@@ -129,7 +129,7 @@ use yii\helpers\Url;
             </div>
             <div class="kj-price-box">
                 <div class="pb-left text-muted">原价 ¥<?= $res['wg_market_price']?></div>
-                <div class="pb-right text-muted">底价 ¥9.9</div>
+                <div class="pb-right text-muted">最低价</div>
             </div>
         </div>
         <div class="kj-share">
