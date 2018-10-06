@@ -24558,6 +24558,8 @@ function codeimgRefresh() {
     var url = $('.met-form-codeimg').data('url');
     $('.met-form-codeimg').attr('src', url + '&random=' + Math.floor(Math.random() * 9999 + 1));
 }
+/*
+// 米拓后台模块
 $(document).ready(function () {
     if ($('#met-job-cv').length) {
         $(document).on('click', '.met-job-cvbtn', function () {
@@ -24585,6 +24587,7 @@ $(document).ready(function () {
         });
     }
 })
+*/
 $(document).ready(function () {
     if ($('.met-img-showbtn').length) {
         $(document).on('click', '.met-img-showbtn', function () {
@@ -27322,6 +27325,7 @@ var url = M['weburl'] + 'include/interface/uidata.php?lang=' + M['lang'],
 if (h.indexOf('preview=1') != - 1) {
     url = url + '&theme_preview=1'
 }
+/*
 $.ajax({
     type: 'POST',
     url: url,
@@ -27816,6 +27820,7 @@ $.ajax({
         }
     }
 });
+*/
 $(document).ready(function () {
     var userAgent = navigator.userAgent;
     var isIE = userAgent.indexOf('IE') > - 1;

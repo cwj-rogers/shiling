@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 class DemoController extends \yii\web\Controller
 {
-    public $layout = false;
+    public $layout = "hjz";
     public function actionIndex()
     {
         return $this->render('index');
