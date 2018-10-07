@@ -27649,6 +27649,7 @@ img.imgloading:not([src*=base64]),img.slick-loading:not([src*=base64]) {
   padding:20px 0;
  }
 }
+/*
 .met-job {
 }
 @media (max-width:767px) {
@@ -27696,6 +27697,7 @@ img.imgloading:not([src*=base64]),img.slick-loading:not([src*=base64]) {
   margin-bottom:15px;
  }
 }
+
 #met-job-cv .modal-header {
  border-radius:0px;
 }
@@ -27704,6 +27706,7 @@ img.imgloading:not([src*=base64]),img.slick-loading:not([src*=base64]) {
   padding:15px;
  }
 }
+*/
 .met-form .form-group .control-label {
  font-weight:normal;
 }
@@ -36339,7 +36342,7 @@ html:not(.isWinSafari) .window-bin.swiper-slide-active .banner-bin.swiper-slide-
  width:63%;
  height:435px;
  opacity:0;
- background:rgba(255,255,255,.75) url(../../../templates/M1156010/min/css/../svg/load8.svg) center no-repeat;
+ background:rgba(255,255,255,.75) url(img/load8.svg) center no-repeat;
  transform:scale(.6,.6);
  -moz-transform:scale(.6,.6);
  -ms-transform:scale(.6,.6);
@@ -39002,7 +39005,7 @@ body.all .met-column-nav,body.all .met-banner,body.all .met-product {
  background:rgba(255,255,255,.4);
 }
 .swiper-canvas {
- background:url(../../../templates/M1156010/min/css/../svg/load8.svg) center no-repeat rgba(0,0,0,.2) content-box;
+ background:url(img/load8.svg) center no-repeat rgba(0,0,0,.2) content-box;
  background-size:auto!important;
 }
 .vjs-fullscreen-body *:not(.vjs-full) {

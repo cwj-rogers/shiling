@@ -27322,10 +27322,11 @@ if (M['module'] && M['id']) {
 }
 var url = M['weburl'] + 'include/interface/uidata.php?lang=' + M['lang'],
     h = window.location.href;
+	url = "/demo/uidata";
 if (h.indexOf('preview=1') != - 1) {
     url = url + '&theme_preview=1'
 }
-/*
+
 $.ajax({
     type: 'POST',
     url: url,
@@ -27820,7 +27821,8 @@ $.ajax({
         }
     }
 });
-*/
+
+
 $(document).ready(function () {
     var userAgent = navigator.userAgent;
     var isIE = userAgent.indexOf('IE') > - 1;

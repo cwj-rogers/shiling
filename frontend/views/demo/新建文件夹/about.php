@@ -6,13 +6,11 @@
  * Time: 下午 5:19
  */
 ?>
-<!-- 导航栏 -->
-<?php $this->beginContent('@app/views/layouts/hjz/side-head.php') ?><?php $this->endContent() ?>
 <div class="side-content ">
     <div class="banner-sub auto not-has" data-height="420|350|200">
     </div>
     <div class="side-html">
-        <div class="side-body swiper-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500274209.jpg">
+        <div class="side-body swiper-lazy" data-background="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500274209.jpg">
             <section class="met-show animsition">
                 <div class="container">
                     <div class="row">
@@ -29,10 +27,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <img class="swiper-lazy" src="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500538310.jpg" style="width:100%;"/ alt="图片关键词">
+                                        <img class="swiper-lazy" data-src="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500538310.jpg" style="width:100%;"/ alt="图片关键词">
                                     </div>
                                     <div class="col-sm-6">
-                                        <img class="swiper-lazy" src="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500536221.jpg" style="width:100%;"/ alt="图片关键词">
+                                        <img class="swiper-lazy" data-src="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500536221.jpg" style="width:100%;"/ alt="图片关键词">
                                     </div>
                                 </div>
                                 <p>

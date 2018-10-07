@@ -6,33 +6,33 @@
  * Time: 下午 5:52
  */
 ?>
-<div class="side-head nav-open1">
-    <div class="side-logo">
-        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">
-            <img data-original="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">
-
-        </a>
-    </div>
-    <div class="sign-box">
-        <ul class="sign-ul swiper-nav">
-            <li class="sign-li active">
-                <a href="../news/"  title="全部">
-                    <b>全部</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a href="../news/news.php?lang=cn&class2=115"  title="公司新闻">
-                    <b>公司新闻</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a href="../news/news.php?lang=cn&class2=116"  title="行业资讯">
-                    <b>行业资讯</b>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+<!--<div class="side-head nav-open1">-->
+<!--    <div class="side-logo">-->
+<!--        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">-->
+<!--            <img data-original="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">-->
+<!---->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div class="sign-box">-->
+<!--        <ul class="sign-ul swiper-nav">-->
+<!--            <li class="sign-li active">-->
+<!--                <a href="../news/"  title="全部">-->
+<!--                    <b>全部</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a href="../news/news.php?lang=cn&class2=115"  title="公司新闻">-->
+<!--                    <b>公司新闻</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a href="../news/news.php?lang=cn&class2=116"  title="行业资讯">-->
+<!--                    <b>行业资讯</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="side-content ">
     <div class="banner-sub auto not-has" data-height="420|350|200">
     </div>

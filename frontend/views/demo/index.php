@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 ?>
+<!-- 导航栏 -->
+<?php $this->beginContent('@app/views/layouts/hjz/side-head.php') ?><?php $this->endContent() ?>
 <div class="window-box">
     <div class="window-cut">
         <div class="window-bin window-banner"

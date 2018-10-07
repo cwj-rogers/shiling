@@ -338,7 +338,9 @@ class FakeController extends \yii\console\Controller
     /**
      * 复制地址上传到顽兔
      * 坑点 1.因为控制台输入url内容编码为GBK,所以得转码为UTF8后再做urlencode
-     * @param string $url
+     * @param string $item
+     * @param int $type
+     * @return bool
      */
     public function actionUrlUpload($item="",$type=1){
         //可获取远程内容地址
@@ -371,38 +373,40 @@ class FakeController extends \yii\console\Controller
             }
         }elseif ($type==2){
             //处理绝对路径
-            $v = $item;
-            $spacePath = basename(dirname($v));
-            $rawUrl = dirname($v).'/'.rawurlencode(iconv("gbk","utf-8", basename($v)));
-            $origin = file_get_contents($rawUrl);
-            $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($v);
+            $fullRemoteUrl = $item;
+            $spacePath = basename(dirname($fullRemoteUrl));
+            //$rawUrl = dirname($fullRemoteUrl).'/'.rawurlencode(iconv("gbk","utf-8", basename($fullRemoteUrl)));
+            $origin = file_get_contents($fullRemoteUrl);
+            $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($fullRemoteUrl);
             file_put_contents($localFilename, $origin);
-            $localFilename = iconv("gbk","utf-8", $localFilename);
+//            $localFilename = iconv("gbk","utf-8", $localFilename);
             $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzhome", 'hjzWebsite/'.$spacePath);
             if ($res['code']=="OK"){
                 p($res['url']);
+                return $res['url'];
             }else{
-                p($res);
+                p($res,1);
             }
         }elseif ($type==3){
             // 处理相对路径的图片
-            $rootPath = "https://show.metinfo.cn/muban/M1156010/328/";
+            $rootPath = "https://show.metinfo.cn/muban/M1156010/328/case/";
             $basePath = $item;
             $spacePath = basename(dirname($basePath));
             $fullRemoteUrl = $rootPath.$basePath;
-            $rawUrl = dirname($fullRemoteUrl).'/'.rawurlencode(iconv("gbk","utf-8", basename($fullRemoteUrl)));
-            $origin = file_get_contents($rawUrl);
+//            $rawUrl = dirname($fullRemoteUrl).'/'.rawurlencode(iconv("gbk","utf-8", basename($fullRemoteUrl)));
+            $origin = file_get_contents($fullRemoteUrl);
             $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($fullRemoteUrl);
             file_put_contents($localFilename, $origin);
-
-            $localFilename = iconv("gbk","utf-8", $localFilename);
+//            $localFilename = iconv("gbk","utf-8", $localFilename);
             $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzhome", 'hjzWebsite/'.$spacePath);
             if ($res['code']=="OK"){
-                p($res['url']);
+//                p($res['url']);
+                return $res['url'];
             }else{
-                p($res);
+                p($res,1);
             }
         }elseif ($type==4){
+            //测试
             $str = "upload/thumb_src/125_100/1500452786.jpg,upload/thumb_src/125_100/1500449642.jpg,upload/thumb_src/125_100/1500451911.jpg,upload/thumb_src/125_100/1500456343.jpg";
             $arr = explode(',', $str);
             // 处理相对路径的图片
@@ -410,7 +414,6 @@ class FakeController extends \yii\console\Controller
                 $rootPath = "https://show.metinfo.cn/muban/M1156010/328/";
                 $basePath = $v;
                 $fullRemoteUrl = $rootPath.$basePath;
-//                $rawUrl = dirname($fullRemoteUrl).'/'.rawurlencode(iconv("gbk","utf-8", basename($fullRemoteUrl)));
                 $origin = file_get_contents($fullRemoteUrl);
                 $localFilename = "E:\phpStudy\PHPTutorial\WWW\hjz\htdocs\images\alishi5/".basename($fullRemoteUrl);
                 file_put_contents($localFilename, $origin);
@@ -419,8 +422,9 @@ class FakeController extends \yii\console\Controller
                 $res = $this->uploadAli->test_upload_file_c($localFilename, "hjzhome", 'hjzWebsite');
                 if ($res['code']=="OK"){
                     p($res['url'].PHP_EOL.PHP_EOL);
+//                    return $res['url'];
                 }else{
-                    p($res);
+                    p($res,1);
                 }
                 usleep(800);
             }
@@ -451,8 +455,41 @@ class FakeController extends \yii\console\Controller
         p($wtRes);
     }
 
-    public function actionReplaceFile(){
+    /**
+     * @param int $file
+     */
+    public function actionReplaceFile($file=""){
         $path = "E:/phpStudy/PHPTutorial/WWW/shiling/frontend/views/demo/";
-        $fileName = "case.php";
+        $fileName = "{$file}.php";
+        $fullName = $path.$fileName;
+        $content = file_get_contents($fullName);
+//        $pregRule = "/(data-background|data-src)=(\"|')(.*)(\"|')/U";
+        $pregRule = "/(data-background|data-original|data-src)=(\"|')(.*)(\"|')/U";
+
+        //查看需要替换的地址
+        preg_match_all($pregRule,$content,$matches);
+        p($matches);
+        $this->confirm("go on?",1);
+        $pregContent = $content;
+        foreach ($matches[3] as $k=>$v){
+            try{
+                if (strpos($v,'ttp') != false){
+                    $url = $this->runAction('url-upload',[$v,2]);
+                }else{
+                    $url = $this->runAction('url-upload',[$v,3]);
+                }
+                P($url.PHP_EOL.PHP_EOL);
+//                    $this->confirm("{$url} --- go on?",1);
+            }catch (\Exception $e){
+                p($e->getMessage(),1,1);
+            }
+            $v = str_replace('/','\/',$v); // '/' 转义,地址转义
+            $pregRule = "/({$v})/U"; //替换规则
+            $replcement = $url; //替换内容
+            $pregContent = preg_replace($pregRule, $replcement, $pregContent);
+            usleep(800);
+        }
+        p($pregContent);
+        file_put_contents($fullName, $pregContent);
     }
 }

@@ -6,37 +6,36 @@
  * Time: 下午 5:47
  */
 ?>
-<!-- 导航栏 -->
-<div class="side-head nav-open1">
-    <div class="side-logo">
-        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">
-            <img data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">
-        </a>
-    </div>
-    <div class="sign-box">
-        <ul class="sign-ul swiper-nav">
-            <li class="sign-li ">
-                <a data-href="../server/show.php?lang=cn&id=182"  title="APP开发">
-                    <b>APP开发</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a data-href="../server/show.php?lang=cn&id=181"  title="网站建设">
-                    <b>网站建设</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a data-href="../server/show.php?lang=cn&id=180"  title="平面设计">
-                    <b>平面设计</b>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
 
+<!--<div class="side-head nav-open1">-->
+<!--    <div class="side-logo">-->
+<!--        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">-->
+<!--            <img data-original="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div class="sign-box">-->
+<!--        <ul class="sign-ul swiper-nav">-->
+<!--            <li class="sign-li ">-->
+<!--                <a data-href="../server/show.php?lang=cn&id=182"  title="APP开发">-->
+<!--                    <b>APP开发</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a data-href="../server/show.php?lang=cn&id=181"  title="网站建设">-->
+<!--                    <b>网站建设</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a data-href="../server/show.php?lang=cn&id=180"  title="平面设计">-->
+<!--                    <b>平面设计</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="side-content show">
     <div class="side-html">
-        <div class="side-body swiper-lazy" data-hash="182" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500221986.jpg">
+        <div class="side-body swiper-lazy" data-hash="182" data-background="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500221986.jpg">
             <div class="show-slide">
                 <div class="container">
                     <div class="row">
@@ -61,7 +60,7 @@
             </div>
             <div class="window-next">SCROLL</div>
         </div>
-        <div class="side-body swiper-lazy" data-hash="181" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500272228.jpg">
+        <div class="side-body swiper-lazy" data-hash="181" data-background="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500272228.jpg">
             <div class="show-slide">
                 <div class="container">
                     <div class="row">
@@ -86,7 +85,7 @@
             </div>
             <div class="window-next">SCROLL</div>
         </div>
-        <div class="side-body swiper-lazy" data-hash="180" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500274209.jpg">
+        <div class="side-body swiper-lazy" data-hash="180" data-background="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500274209.jpg">
             <div class="show-slide">
                 <div class="container">
                     <div class="row">

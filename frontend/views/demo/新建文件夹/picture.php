@@ -6,44 +6,44 @@
  * Time: 下午 5:50
  */
 ?>
-<div class="side-head nav-open1">
-    <div class="side-logo">
-        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">
-            <img data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">
-
-        </a>
-    </div>
-    <div class="sign-box">
-        <ul class="sign-ul swiper-nav">
-            <li class="sign-li active">
-                <a href="../picture/"  title="全部">
-                    <b>全部</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a href="../picture/product.php?lang=cn&class2=111"  title="APP开发">
-                    <b>APP开发</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a href="../picture/product.php?lang=cn&class2=112"  title="网站建设">
-                    <b>网站建设</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a href="../picture/product.php?lang=cn&class2=113"  title="平面设计">
-                    <b>平面设计</b>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+<!--<div class="side-head nav-open1">-->
+<!--    <div class="side-logo">-->
+<!--        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">-->
+<!--            <img data-original="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">-->
+<!---->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div class="sign-box">-->
+<!--        <ul class="sign-ul swiper-nav">-->
+<!--            <li class="sign-li active">-->
+<!--                <a href="../picture/"  title="全部">-->
+<!--                    <b>全部</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a href="../picture/product.php?lang=cn&class2=111"  title="APP开发">-->
+<!--                    <b>APP开发</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a href="../picture/product.php?lang=cn&class2=112"  title="网站建设">-->
+<!--                    <b>网站建设</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="sign-li ">-->
+<!--                <a href="../picture/product.php?lang=cn&class2=113"  title="平面设计">-->
+<!--                    <b>平面设计</b>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="side-content ">
     <div class="banner-sub auto not-has" data-height="420|350|200">
 
     </div>
     <div class="side-html">
-        <div class="side-body swiper-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500274209.jpg">
+        <div class="side-body swiper-lazy" data-background="https://images.metinfo.cn/m/M1156010/328/upload/M1156010/328/201707/1500274209.jpg">
             <div class="met-product animsition type-0">
                 <div class="container">
                     <div class="row">
@@ -64,7 +64,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=69" title="手机钱包应用" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="手机钱包应用"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500524230.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500524230.jpg'>
                                     </font>
                                     <span>
                                                 <b>手机钱包应用</b>
@@ -76,7 +76,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=58" title="股市买卖应用" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="股市买卖应用"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500526781.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500526781.jpg'>
                                     </font>
                                     <span>
                                                 <b>股市买卖应用</b>
@@ -88,7 +88,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=54" title="音乐播放器" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="音乐播放器"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500528056.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500528056.jpg'>
                                     </font>
                                     <span>
                                                 <b>音乐播放器</b>
@@ -100,7 +100,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=55" title="桌面主题应用" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="桌面主题应用"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500528351215976.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500528351215976.jpg'>
                                     </font>
                                     <span>
                                                 <b>桌面主题应用</b>
@@ -112,7 +112,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=57" title="手机商城应用" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="手机商城应用"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500529467.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500529467.jpg'>
                                     </font>
                                     <span>
                                                 <b>手机商城应用</b>
@@ -124,7 +124,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=56" title="天气预报应用" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="天气预报应用"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500532598.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500532598.jpg'>
                                     </font>
                                     <span>
                                                 <b>天气预报应用</b>
@@ -136,7 +136,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=60" title="旅游查询应用" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="旅游查询应用"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500534162.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500534162.jpg'>
                                     </font>
                                     <span>
                                                 <b>旅游查询应用</b>
@@ -148,7 +148,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=61" title="地图指引工具" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="地图指引工具"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500535308.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500535308.jpg'>
                                     </font>
                                     <span>
                                                 <b>地图指引工具</b>
@@ -172,7 +172,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=63" title="品牌网站建设" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="品牌网站建设"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500536221.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500536221.jpg'>
                                     </font>
                                     <span>
                                                 <b>品牌网站建设</b>
@@ -184,7 +184,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=62" title="响应式建站" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="响应式建站"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500519919.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500519919.jpg'>
                                     </font>
                                     <span>
                                                 <b>响应式建站</b>
@@ -196,7 +196,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=53" title="商城购物建站" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="商城购物建站"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500538310.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500538310.jpg'>
                                     </font>
                                     <span>
                                                 <b>商城购物建站</b>
@@ -208,7 +208,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=64" title="精美网页设计" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="精美网页设计"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500517842.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500517842.jpg'>
                                     </font>
                                     <span>
                                                 <b>精美网页设计</b>
@@ -232,7 +232,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=65" title="UI扁平化设计" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="UI扁平化设计"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500539141.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500539141.jpg'>
                                     </font>
                                     <span>
                                                 <b>UI扁平化设计</b>
@@ -244,7 +244,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=66" title="名片设计" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="名片设计"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500522071.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500522071.jpg'>
                                     </font>
                                     <span>
                                                 <b>名片设计</b>
@@ -256,7 +256,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=67" title="画册设计" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="画册设计"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500539619.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500539619.jpg'>
                                     </font>
                                     <span>
                                                 <b>画册设计</b>
@@ -268,7 +268,7 @@
                                 <a href="../picture/showproduct.php?lang=cn&id=68" title="形象设计" target='_self'>
                                     <font>
                                         <img class="swiper-lazy"  alt="形象设计"
-                                             data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/543_390/1500540096.jpg'>
+                                             data-src='../upload/thumb_src/543_390/1500540096.jpg'>
                                     </font>
                                     <span>
                                                 <b>形象设计</b>

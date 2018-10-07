@@ -23,25 +23,25 @@ use yii\helpers\Url;
             <div class="side-nav">
                 <ul>
                     <li class="nav-first active">
-                        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="精彩首页">
+                        <a href="<?= Url::toRoute('index')?>" title="精彩首页">
                             <i class="fa fa-home"></i>
                             <b>精彩首页</b>
                         </a>
                     </li>
                     <li class="nav-first  ">
-                        <a href="/about/"  title="关于我们" data-alert="全部" >
+                        <a href="<?= Url::toRoute('about')?>"  title="关于我们" data-alert="全部" >
                             <i class="fa fa-home fa-pie-chart"></i>
                             <b>关于我们</b>
                         </a>
                     </li>
                     <li class="nav-first  ">
-                        <a href="/server/"  title="服务项目" data-alert="全部" >
+                        <a href="<?= Url::toRoute('server')?>"  title="服务项目" data-alert="全部" >
                             <i class="fa fa-home fa-coffee"></i>
                             <b>服务项目</b>
                         </a>
                     </li>
                     <li class="nav-first has ">
-                        <a href="/picture/"  title="产品中心" data-alert="全部" >
+                        <a href="<?= Url::toRoute('picture')?>"  title="产品中心" data-alert="全部" >
                             <i class="fa fa-home fa-camera"></i>
                             <b>产品中心</b>
                             <p>16</p>
@@ -73,7 +73,7 @@ use yii\helpers\Url;
                         </ul>
                     </li>
                     <li class="nav-first has ">
-                        <a href="news/"  title="新闻资讯" data-alert="全部" >
+                        <a href="<?= Url::toRoute('news')?>"  title="新闻资讯" data-alert="全部" >
                             <i class="fa fa-home fa-bell"></i>
                             <b>新闻资讯</b>
                             <p>8</p>
@@ -100,14 +100,14 @@ use yii\helpers\Url;
                         </ul>
                     </li>
                     <li class="nav-first  ">
-                        <a href="case/"  title="案例展示" data-alert="全部" >
+                        <a href="<?= Url::toRoute('case')?>"  title="案例展示" data-alert="全部" >
                             <i class="fa fa-home fa-flag"></i>
                             <b>案例展示</b>
                             <p>24</p>
                         </a>
                     </li>
                     <li class="nav-first  ">
-                        <a href="message/"  title="联系我们" data-alert="全部" >
+                        <a href="<?= Url::toRoute('message')?>"  title="联系我们" data-alert="全部" >
                             <i class="fa fa-home fa-book"></i>
                             <b>联系我们</b>
                         </a>
@@ -123,7 +123,7 @@ use yii\helpers\Url;
                     <i class="fa fa-qrcode" data-toggle="modal" data-target="#met-ewm-modal"></i>
                 </div>
                 <div class="social-box">
-                    <audio id="audio" src="templates/M1156010/min/music/bg.mp3" status="1"></audio>
+                    <audio id="audio" src="/static/demo/bg.mp3" status="1"></audio>
                     <canvas id="canvas" width="105" height="34"></canvas>
                     <a rel="nofollow" data-toggle="modal" data-target="#met-share-modal">
                         <i class="fa fa-share-alt"></i>
