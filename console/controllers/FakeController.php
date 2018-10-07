@@ -451,4 +451,8 @@ class FakeController extends \yii\console\Controller
         p($wtRes);
     }
 
+    public function actionReplaceFile(){
+        $path = "E:/phpStudy/PHPTutorial/WWW/shiling/frontend/views/demo/";
+        $fileName = "case.php";
+    }
 }
