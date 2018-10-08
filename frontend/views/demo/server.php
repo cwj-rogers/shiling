@@ -6,11 +6,47 @@
  * Time: 下午 5:47
  */
 ?>
+<head>
+    <title>服务项目-APP应用开发|网站建设|平面设计</title>
+    <meta name="renderer" content="webkit">
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="generator" content="MetInfo 5.3.19"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,179,179,1,M1156010" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="模板建站和纯手工建站的区别在于：模板是“成衣”，你只需要去服装店挑选，而所谓的纯手工建站是裁缝师傅给你定制。功能和稳定性模板+成熟的CMS管理后台大大优于“裁缝店”" />
+    <meta name="keywords" content="APP应用开发|网站建设|平面设计" />
+    <link href="https://show.metinfo.cn/muban/M1156010/328/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<div class="load-box">
+    <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g>
+            <circle cx="35" cy="16.6987298" r="11"></circle>
+            <circle cx="16.6987298" cy="35" r="11"></circle>
+            <circle cx="10" cy="60" r="11"></circle>
+            <circle cx="16.6987298" cy="85" r="11"></circle>
+            <circle cx="35" cy="103.30127" r="11"></circle>
+            <circle cx="60" cy="110" r="11"></circle>
+            <circle cx="85" cy="103.30127" r="11"></circle>
+            <circle cx="103.30127" cy="85" r="11"></circle>
+            <circle cx="110" cy="60" r="11"></circle>
+            <circle cx="103.30127" cy="35" r="11"></circle>
+            <circle cx="85" cy="16.6987298" r="11"></circle>
+            <circle cx="60" cy="10" r="11"></circle>
+        </g>
+    </svg>
+</div>
+
 <!-- 导航栏 -->
 <div class="side-head nav-open1">
     <div class="side-logo">
         <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">
-            <img data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">
+            <img src="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500552335.png" data-size="175_40" alt="APP应用开发|网站建设|平面设计" title="APP应用开发|网站建设|平面设计">
         </a>
     </div>
     <div class="sign-box">

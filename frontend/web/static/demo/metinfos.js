@@ -1,3 +1,4 @@
+/*
 var shop_js = document.getElementById('shop_js') || null;
 if (shop_js) {
     jsonurl = shop_js.getAttribute('data-jsonurl');
@@ -6,10 +7,21 @@ if (shop_js) {
     lang_emptycart = shop_js.getAttribute('data-lang_emptycart');
     shop_js.parentNode.removeChild(shop_js);
 }
+*/
 var canvaswidth = 600,
     canvasheight = 600,
     M = document.querySelector('meta[name="generator"]').getAttribute('data-variable'),
     D = M.split(',');
+console.log(D);
+/*
+0: "https://show.metinfo.cn/muban/M1156010/328/"
+1: "cn"
+2: "10001"
+3: ""
+4: "10001"
+5: "M1156010"
+M['tem'] "https://show.metinfo.cn/muban/M1156010/328/templates/M1156010"
+*/
 M = new Array();
 M['weburl'] = D[0];
 M['lang'] = D[1];
@@ -17,6 +29,7 @@ M['classnow'] = parseInt(D[2]);
 M['id'] = parseInt(D[3]);
 M['module'] = parseInt(D[4]);
 M['tem'] = D[0] + 'templates/' + D[5];
+M['hjz'] = window.location.host;
 var deviceType = /iPad/.test(navigator.userAgent) ? 't' : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? 'm' : 'd',
     is_ucbro = /UC/.test(navigator.userAgent);
 !function (a, b) {
@@ -24519,6 +24532,13 @@ $.components.register('matchHeight', {
         });
     }
 });
+
+
+/*
+*
+* 网站动画控制JS脚本
+*
+*/
 $(document).ready(function () {
     if ($('.met-form-validation').length) {
         $('.met-form-validation').formValidation({
@@ -24528,6 +24548,7 @@ $(document).ready(function () {
     $(document).on('keyup', '.met-form input[name=\'code\']', function () {
         $(this).val($(this).val().toUpperCase());
     });
+	/*
     $(document).on('change', '.input-group-file [type=file]', function () {
         var $this = $(this),
             $text = $(this).parents('.input-group-file').find('.form-control'),
@@ -24538,6 +24559,7 @@ $(document).ready(function () {
         value = value.substring(0, value.length - 2);
         $text.val(value);
     });
+	
     function message_fun() {
         $('.message-box .ftype_checkbox, .message-box .ftype_radio').each(function () {
             $(this).removeClass('mr10');
@@ -24553,11 +24575,14 @@ $(document).ready(function () {
     $(window).resize(function () {
         message_fun();
     });
+	*/
 })
+/*
 function codeimgRefresh() {
     var url = $('.met-form-codeimg').data('url');
     $('.met-form-codeimg').attr('src', url + '&random=' + Math.floor(Math.random() * 9999 + 1));
 }
+*/
 /*
 // 米拓后台模块
 $(document).ready(function () {
@@ -24812,6 +24837,9 @@ function pagespecial() {
     }, 10);
     if ($('#met-grid').length) MetAnimOnScroll();
 }
+/*
+* 模块化插件
+*/
 !function (a) {
     function b() {
     }
@@ -26847,6 +26875,11 @@ $.components.register('filterable', {
         return !$.cookie(key);
     };
 }));
+/*
+*
+* 网站动画控制JS脚本
+*
+*/
 $(document).ready(function () {
     if ($('.met-editor table').length) {
         $('.met-editor table').addClass('table table-bordered table-hover table-striped table-responsive');
@@ -27212,6 +27245,7 @@ function sonWidthSum(sonObj, sonNum) {
     }
     return parentObjW + sonNum;
 }
+
 $.fn.galleryLoad = function (dynamic) {
     $('body').addClass('met-white-lightGallery');
     if (dynamic) {
@@ -27268,9 +27302,9 @@ $(document).ready(function () {
             vhtml += '</video></div>';
             $(this).after(vhtml).remove();
         });
-        include(M['tem'] + '/min/widget/video-js/video-js.css');
+        include(M['hjz'] + '/static/demo/video-js.css');
         if (deviceType == 'd') {
-            include(M['tem'] + '/min/widget/video-js/video_hack.js', function () {
+            include(M['hjz'] + '/static/demo/video_hack.js', function () {
                 setTimeout(function () {
                     videoSizeRes('.metvideo');
                 }, 0)
@@ -27335,6 +27369,7 @@ $.ajax({
         var c = msg.config;
         if (c.met_online_type != 3) {
             include(M['weburl'] + 'public/css/online.css');
+			/**插件开始**/
             jQuery.migrateMute === void 0 && (jQuery.migrateMute = !0),
                 function (e, t, n) {
                     function r(n) {
@@ -27575,6 +27610,7 @@ $.ajax({
                             }
                         })
                 }(jQuery, window);
+			
             var t,
                 x,
                 y;
@@ -27609,6 +27645,7 @@ $.ajax({
                     })
                 }
             }) (jQuery);
+			/**插件结束**/
             var Floaters = {
                 delta: 0.08,
                 queue: null,
@@ -27841,7 +27878,7 @@ $(document).ready(function () {
             oldCur = $.cookie('currentTime') || 0,
             Curren = $('#audio').attr('src').replace(/[^\u4e00-\u9fa5\w]/g, ''),
             status = $.cookie('status') || $('#audio').attr('status'),
-            ctx = canvas.getContext('2d');
+            ctx = canvas.getContext('2d');console.log(Curren);
         step = Math.floor(1024 / metNum);
         status_func(status);
         $('#canvas').click(function () {
@@ -27934,7 +27971,8 @@ $(document).ready(function () {
             } catch (e) {
             }
         } else {
-            $.get(M['tem'] + '/min/txt/audio_' + Curren + '_' + M['lang'] + '.txt', function (Bata) {
+			var textUrl = "http://"+M['hjz'] + "/static/demo/audio_templatesM1156010minmusicbgmp3_cn.txt";
+            $.get(textUrl, function (Bata) {
                 var Bata = Bata.split('|'),
                     Data = [
                     ],
@@ -28080,7 +28118,7 @@ $(document).ready(function () {
             var map = new BMap.Map('map');
             map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);
             map.enableScrollWheelZoom();
-            var Icon = new BMap.Icon(M['tem'] + '/min/svg/point.svg" class="point_svg', new BMap.Size(28, 56));
+            var Icon = new BMap.Icon(M['hjz'] + '/static/demo/img/point.svg" class="point_svg', new BMap.Size(28, 56));
             var marker = new BMap.Marker(new BMap.Point(coo[0] * 1, coo[1] * 1), {
                 icon: Icon
             });
@@ -28144,6 +28182,7 @@ $(document).ready(function () {
             sign_func(0);
         }, 100);
     });
+	console.log(M['classnow']);
     if (M['classnow'] == 10001) {
         var hashNav = 'null';
         if (IE9) {
@@ -28755,6 +28794,7 @@ $(document).ready(function () {
         })
         if ($('#map').length > 0) coordinate_func();
     }
+	
     $(window).load(function () {
         if (!$('html').hasClass('isWinSafari')) {
             $('.load-box').addClass('active');
@@ -28769,6 +28809,7 @@ $(document).ready(function () {
             $('.load-box').remove();
         }
     });
+	
     window.setTimeout(function () {
         $('.load-box').addClass('active');
     }, 5000);

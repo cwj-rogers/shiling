@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+// 因为还没搞清楚模板的JS设计方式,放弃layout
 //$this->beginPage();
 ?>
 <!DOCTYPE HTML>

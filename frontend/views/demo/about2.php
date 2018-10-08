@@ -6,8 +6,76 @@
  * Time: 下午 5:19
  */
 ?>
-<!-- 导航栏 -->
-<?php $this->beginContent('@app/views/layouts/hjz/side-head.php') ?><?php $this->endContent() ?>
+<!DOCTYPE HTML>
+<html class="isMobile  ">
+<head>
+    <title>关于我们-APP应用开发|网站建设|平面设计</title>
+    <meta name="renderer" content="webkit">
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="generator" content="MetInfo 5.3.19"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,106,106,1,M1156010" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="Internet service technology, Limited by Share Ltd网络服务技术股份有限公司网络服务技术股份有限公司（Internet service technology, Limited by Share Ltd）成立于2017年7月，凭借拔尖的团队、优秀的业务能力，星如雨迅速成长为国内SEO的领军者。我们专注网络营销业务，助力您的企业腾飞。同时，我们还拥有一支健" />
+    <meta name="keywords" content="APP应用开发|网站建设|平面设计" />
+    <link href="https://show.metinfo.cn/muban/M1156010/328/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel='stylesheet' href='/static/demo/metinfos.css'>
+</head>
+<body class="  class-106">
+<div class="load-box">
+    <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g>
+            <circle cx="35" cy="16.6987298" r="11"></circle>
+            <circle cx="16.6987298" cy="35" r="11"></circle>
+            <circle cx="10" cy="60" r="11"></circle>
+            <circle cx="16.6987298" cy="85" r="11"></circle>
+            <circle cx="35" cy="103.30127" r="11"></circle>
+            <circle cx="60" cy="110" r="11"></circle>
+            <circle cx="85" cy="103.30127" r="11"></circle>
+            <circle cx="103.30127" cy="85" r="11"></circle>
+            <circle cx="110" cy="60" r="11"></circle>
+            <circle cx="103.30127" cy="35" r="11"></circle>
+            <circle cx="85" cy="16.6987298" r="11"></circle>
+            <circle cx="60" cy="10" r="11"></circle>
+        </g>
+    </svg>
+</div>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个
+        <strong>过时</strong>的浏览器。请
+        <a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。
+    </p>
+</div>
+<![endif]-->
+<div class="side-open">
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+</div>
+<!--  侧边栏  -->
+<?php $this->beginContent('@app/views/layouts/hjz/side-box.php') ?><?php $this->endContent() ?>
+<!--  导航栏  -->
+<div class="side-head nav-open1">
+    <div class="side-logo">
+        <a href="https://show.metinfo.cn/muban/M1156010/328/" title="APP应用开发|网站建设|平面设计">
+            <img data-original="http://hjzhome.image.alimmdn.com/首页图片/logo-mini.png" data-size="175_40" alt="荟家装-健康智慧整装" title="荟家装-健康智慧整装">
+            <img data-original="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/menu-R.gif" data-size="100" alt="" style="margin-left: 10px;vertical-align: bottom;">
+        </a>
+    </div>
+    <div class="sign-box">
+        <ul class="sign-ul swiper-nav">
+
+        </ul>
+    </div>
+</div>
+<!--  内容  -->
 <div class="side-content ">
     <div class="banner-sub auto not-has" data-height="420|350|200">
     </div>
@@ -62,5 +130,6 @@
     <div class="side-scroll swiper-scrollbar"></div>
 </div>
 
+<script src="/static/demo/metinfos.js"></script>
 </body>
 </html>
