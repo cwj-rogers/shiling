@@ -117,9 +117,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="banner-bin-h">
-                                            <span>互联网
-                                                <u>+</u>
-                                            </span>
+                                    <span>互联网
+                                        <u>+</u>
+                                    </span>
                                     <span>营销型建站</span>
                                 </div>
                                 <div class="banner-bin-i">
@@ -147,6 +147,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
+                        <div class="container">
+                            <div class="row">
+                                <div class="banner-bin-a">
+                                    <span>零</span>
+                                    <span>元</span>
+                                    <span>开</span>
+                                    <span>店</span>
+                                </div>
+                                <div class="banner-bin-b">
+                                    <span>GRAPHIC DESIGN</span>
+                                    <span>创意新思维
+                                                <br>尽在掌握
+                                            </span>
+                                    <span>广告策划</span>
+                                    <span>服务理念：提供售前、售中和售后的一条龙服务，
+                                                <br>全过程把满足客户需求作为企业活动的核心。
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
                         <div class="container">
                             <div class="row">

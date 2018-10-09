@@ -27354,9 +27354,8 @@ if (M['module'] && M['id']) {
         })
     }
 }
-var url = M['weburl'] + 'include/interface/uidata.php?lang=' + M['lang'],
+var url = "/demo/uidata",
     h = window.location.href;
-	url = "/demo/uidata";
 if (h.indexOf('preview=1') != - 1) {
     url = url + '&theme_preview=1'
 }
