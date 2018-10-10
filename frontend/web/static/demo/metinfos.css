@@ -39674,3 +39674,78 @@ html:not(.isMobile) *::-webkit-resizer {
 .pe-airplay:before {
  content:"\e67f"
 }
+
+/*hjzhomeCSS*/
+.window-bin .hjz-container1:before,.window-bin .hjz-container2:before,.window-bin .hjz-container3:before {
+ top:-50px;
+ bottom:-50px;
+}
+.window-bin .hjz-container1:before{
+	background:url('http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/gudong.png') no-repeat fixed center;
+	background-size: 100%;
+}
+.window-bin .hjz-container2:before{
+	background:url('http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/hezuo.png?t=1539151899000') no-repeat fixed center;
+	background-size: 100%;
+}
+.window-bin .hjz-container3:before{
+	background:url("http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/fulizi.png?t=1539151900000") no-repeat fixed center;
+	background-size: 100%;
+}
+
+.window-bin .hjz-container1>.row,.hjz-container2>.row,.hjz-container3>.row{
+	opacity:0;
+}
+/*媒体查询*/
+@media (max-width:1200px) {
+	.side-logo .hjz-slogen{opacity:0}
+}
+/*首页vr轮播图*/
+#section-A{box-sizing: border-box;display: flex;flex-direction: row-reverse;background: white;}
+    #section-A .section-A-body{box-sizing: border-box;width: 1180px;height: 480px;display: flex;flex-direction: row-reverse;}
+    #section-A .swiper-container {width: 100%;margin-left: auto;margin-right: auto;}
+    /* 缩略图 */
+    #section-A .gallery-thumbs {width: 213px;height: 100%;position:relative;box-sizing: border-box;display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-between;align-content: flex-start;}
+    #section-A .gallery-thumbs .swiper-pagination-bullet{box-sizing: border-box;width: 100px;height: 100px;border-radius: 0px;opacity: 1;margin: 3px;}
+    #section-A .gallery-thumbs .swiper-pagination-bullet-active{border: 2px #b1191a solid;}
+    #section-A .gallery-thumbs .swiper-pagination-bullet:first-child,.swiper-pagination-bullet:nth-child(2){margin-top: 0px;}
+
+    /* 内容页 */
+    #section-A .gallery-top {width: 925px;height: 100%; /*height: 480px;*/}
+    #section-A .swiper-slide {background-size: cover;background-position: center;}
+    #section-A .A-body-content{display: flex;flex-direction: row;}
+        /* 左侧文字说明 */
+        #section-A .A-body-content .bc-left{width: 30%;height: 480px;box-sizing: border-box;padding: 20px;display: flex;flex-direction: column;background-color: white}
+            #section-A .bc-left h3{height: 20%;width: 100%;font-weight: bold;font-size: 24px;margin:0;background: none;text-align:left; white-space:nowrap;word-wrap:break-word;overflow: hidden}
+                #section-A .bc-left h3 .small{display:block;color: grey;font-size: 10px;font-weight: lighter;padding: 0;opacity: 0.5;margin-top: 5px}
+            /*方案*/
+            #section-A .scheme-box{height:18%;width: 100%;display: flex;flex-direction: column;justify-content: space-between;align-items: flex-start;margin-top: 10px;font-size: 12px}
+                #section-A .scheme-box .scheme{width: 60%;height: 30px;border: 1px #b1191a solid;display: flex;flex-direction: row;justify-content: flex-start;margin: 0}
+                    #section-A .scheme .sch-title{width: 30%;line-height: 30px;text-align: center;color: #b1191a;}
+                    #section-A .scheme .sch-content{width: 70%;line-height: 30px;text-align: center;background-color: #b1191a;color: white;font-weight: bold}
+            /*列表*/
+            #section-A .bc-left ul{height:50%;width:100%;list-style-type: none;list-style-position: inside;padding: 20px 0;padding-top: 40px}
+                #section-A .bc-left ul li{list-style-type: none;padding: 5px 0;font-size: 18px}
+                #section-A .bc-left ul li:before{content: "●";color: #b1191a;margin-right: 10px;}
+            /*按钮*/
+            #section-A .bc-left .button-box{height: 13%;width: 100%;display: flex;flex-direction: row;justify-content: space-between}
+                #section-A .button-box button{background: none;border: 1px #b1191a solid;cursor: pointer;color: #b1191a;height: 100%;padding: 0 25px}
+                #section-A .button-box button a{color: #b1191a;width: 100%;height: 100%}
+        /* 右侧VR图 */
+        #section-A .A-body-content .bc-right{width: 70%;height: 480px;position: relative;}
+            #section-A .bc-right .vr-pic{width:100%;max-height: 480px;overflow: hidden;}
+                #section-A .bc-right .vr-pic img{width:100%;height: 480px;}
+            #section-A .bc-right .vr-icon{width: 80px;height: 80px;background: url("skin/default/images/vr2.png") no-repeat;background-size: 70%;position: absolute;left: 20px;top: 20px}
+
+    /* 主标题 */
+    #section-A .section-A-title{font-weight: 500;margin-top: 10px;margin-bottom: 20px;display: flex;flex-direction: column;justify-content: center;align-items: center;background: white;height: 80px;}
+        #section-A .section-A-title .title-box{display: flex;flex-direction: row;justify-content: center;align-items: center;}
+            #section-A .title-box .section-A-title-after, .section-A-title .section-A-title-before {display: inline-block;width: 57px;height: 1px;margin: 0 26px;background-color: #d8d8d8;vertical-align: middle;margin-top: 15px;}
+            #section-A .title-box .title-1{font-size: 31px;font-weight: 500;}
+        #section-A .title-2{font-size: 6px;font-weight: lighter;line-height: 32px;color: grey;}
+
+    /* 切页按钮 */
+    #section-A .swiper-button-next{position: absolute;top: 210px;right: 0;height: 80px;width: 40px;background-color: black;opacity: 0.3;}
+    #section-A .swiper-button-prev{position: absolute;top: 210px;left: 0;height: 80px;width: 40px;background-color: black;opacity: 0.3;}
+    #section-A .swiper-button-hidden{display: none}
+

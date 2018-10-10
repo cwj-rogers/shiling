@@ -28312,6 +28312,7 @@ $(document).ready(function () {
             }
         }
         function picture_func(O) {
+			/*
             if (O == 1) {
                 if ($('.picture-list').length > 0) {
                     M['picture'] = new Swiper('.picture-list', {
@@ -28367,6 +28368,7 @@ $(document).ready(function () {
                     M['picture'][i].destroy(false);
                 }
             }
+			*/
         }
         function video_func(O) {
             if (O == 1) {
@@ -28455,7 +28457,7 @@ $(document).ready(function () {
                     slideClass: 'case-li',
                     slidesPerView: IE9 ? 4 : 'auto',
                     observer: true,
-                    autoplay: 3500,
+                    autoplay: 35000000,
                     lazyLoading: true,
                     lazyLoadingClass: 'case-lazy',
                     lazyLoadingOnTransitionStart: true,
@@ -28812,4 +28814,90 @@ $(document).ready(function () {
     window.setTimeout(function () {
         $('.load-box').addClass('active');
     }, 5000);
+	
+	/* hjzJS */
+	/* VR轮播图 */
+	$(document).ready(function () {
+		var vrProduct = new Swiper('#container-box', {
+				
+			pagination: '.gallery-thumbs',
+			paginationClickable: true,
+			paginationBulletRender: function (swiper, index, className) {
+				var xiaotu = '';
+				switch (index){
+					case 0:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 1:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 2:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 3:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 4:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 5:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 6:
+						//xiaotu = '<div class="' + className + '" style="background-image:url(http://www.hjzhome.com/images/201802/goods_img/2443_P_1517793493219.jpg);background-size:100% 100%;"></div>';
+						break;
+					case 7:
+						//xiaotu = '<div class="' + className + '" style="background-image:url(http://www.vanlian.cn/images/new_product/shouy-white.png);background-size:100% 100%;"></div>';
+						break;
+				}
+				return xiaotu;
+			},
+			/*
+			paginationBulletRender: function (swiper, index, className) {
+				var xiaotu = '';
+				switch (index){
+					case 0:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 1:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 2:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 3:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 4:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 5:
+						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+						break;
+					case 6:
+						//xiaotu = '<div class="' + className + '" style="background-image:url(http://www.hjzhome.com/images/201802/goods_img/2443_P_1517793493219.jpg);background-size:100% 100%;"></div>';
+						break;
+					case 7:
+						//xiaotu = '<div class="' + className + '" style="background-image:url(http://www.vanlian.cn/images/new_product/shouy-white.png);background-size:100% 100%;"></div>';
+						break;
+				}
+				return xiaotu;
+			},
+			*/
+			/*
+			navigation: {
+				nextEl: '#section-A .swiper-button-next',
+				prevEl: '#section-A .swiper-button-prev',
+			},
+			*/
+			prevButton: '.swiper-button-prev',
+			nextButton: '.swiper-button-next',
+			initialSlide: 0,
+			effect: 'fade',
+			spaceBetween: 0,
+			loop: true, //环路,无缝模式
+			autoplay:false,
+			//loopedSlides: 5, //looped slides should be the same
+		});
+	})
 })

@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+use yii\helpers\Url;
 ?>
 <!DOCTYPE HTML>
 <html class="isMobile  ">
@@ -59,9 +60,9 @@
 <!--  导航栏  -->
 <div class="side-head nav-open1">
     <div class="side-logo">
-        <a href="/" title="APP应用开发|网站建设|平面设计">
+        <a href="<?= Url::toRoute('index')?>" title="APP应用开发|网站建设|平面设计">
             <img data-original="http://hjzhome.image.alimmdn.com/首页图片/logo-mini.png" data-size="175_40" alt="荟家装-健康智慧整装" title="荟家装-健康智慧整装">
-            <img data-original="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/menu-R.gif" data-size="100" alt="" style="margin-left: 10px;vertical-align: bottom;">
+            <img class="hjz-slogen" data-original="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/menu-R.gif" data-size="100" alt="">
         </a>
     </div>
     <div class="sign-box">
@@ -76,8 +77,8 @@
              data-title="首页">
             <div class="banner-box">
                 <div class="banner-cut">
-                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/%E8%83%8C%E6%99%AF%E5%9B%BE/3.jpg?t=1538977067000">
-                        <div class="container">
+                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/21.jpg">
+                        <div class="container  hjz-container1 ">
                             <div class="row">
                                 <div class="banner-bin-o">
                                     <p>
@@ -113,8 +114,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/%E8%83%8C%E6%99%AF%E5%9B%BE/17.jpg?t=1538977149000">
-                        <div class="container">
+                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
+                        <div class="container hjz-container2">
                             <div class="row">
                                 <div class="banner-bin-h">
                                     <span>互联网
@@ -147,8 +148,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
-                        <div class="container">
+                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/7.jpg">
+                        <div class="container hjz-container3">
                             <div class="row">
                                 <div class="banner-bin-a">
                                     <span>零</span>
@@ -170,28 +171,6 @@
                         </div>
                     </div>
 
-                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
-                        <div class="container">
-                            <div class="row">
-                                <div class="banner-bin-a">
-                                    <span>平</span>
-                                    <span>面</span>
-                                    <span>设</span>
-                                    <span>计</span>
-                                </div>
-                                <div class="banner-bin-b">
-                                    <span>GRAPHIC DESIGN</span>
-                                    <span>创意新思维
-                                                <br>尽在掌握
-                                            </span>
-                                    <span>广告策划</span>
-                                    <span>服务理念：提供售前、售中和售后的一条龙服务，
-                                                <br>全过程把满足客户需求作为企业活动的核心。
-                                            </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="banner-pager"></div>
             </div>
@@ -205,21 +184,19 @@
                 <div class="row">
                     <div class="about-left">
                         <h3>
-                            <font>Internet service technology, Limited by Share Ltd</font>
+                            <font>HJZHOME HEALTH WISDOM COMPLETE PLATFORM</font>
                             <span>
-                                        <u>网络服务</u>技术股份有限公司
-                                    </span>
+                                <u>荟家装</u>健康智慧整装平台
+                            </span>
                         </h3>
                         <ul>
                             <li>
                                 <strong>
-                                    <hr class="n5">
-                                    <hr class="n7">
-
-
+                                    <hr class="n1">
+                                    <hr class="n1">
                                 </strong>
-                                <font>位</font>
-                                <span>投资服务商</span>
+                                <font>个</font>
+                                <span>主营风格套餐</span>
                             </li>
                             <li>
                                 <strong>
@@ -227,33 +204,28 @@
                                     <hr class="n9">
                                     <hr class="n2">
                                     <hr class="n1">
-
-
                                 </strong>
                                 <font>套</font>
                                 <span>精品案例数</span>
                             </li>
                             <li>
                                 <strong>
-                                    <hr class="n9">
-
-
+                                    <hr class="n1">
+                                    <hr class="n1">
                                 </strong>
-                                <font>万</font>
-                                <span>总承诺资金</span>
+                                <font>个</font>
+                                <span>覆盖全国省份</span>
                             </li>
                             <li>
                                 <strong>
-                                    <hr class="n4">
+                                    <hr class="n1">
                                     <hr class="n3">
-
-
                                 </strong>
                                 <font>个</font>
-                                <span>全国分销商</span>
+                                <span>全国线下门店</span>
                             </li>
                         </ul>
-                        <p>网络服务技术股份有限公司（Internet service technology, Limited by Share Ltd）成立于2017年7月，凭借拔尖的团队、优秀的业务能力，星如雨迅速成长为国内SEO的领军者。我们专注网络营销业务，助力您的企业腾飞。同时，我们还拥有一支健全的建站团队，向外界承接APP应用开发/微网站/公众号策划营销等业务。</p>
+                        <p>深圳市荟家装科技有限公司（简称：荟家装），创立于2016年5月，总部位于中国佛山智慧新城，是一家专注于装修、建材、家居宅配的整体家装交易管理平台。荟家装以互联网渠道和金融杠杆助推F2C(工厂直接到消费者)模式迅速落地，打造国内领先的家居行业服务平台，在为客户带来更好家装体验的同时，积极推动整个家装行业“互联网+”的发展。</p>
                         <a class="click-box" href="about/" target='_self'>
                             <span>READ MORE</span>
                         </a>
@@ -262,13 +234,13 @@
                         <div class="about-list">
                             <ul class="about-ul">
                                 <li class="about-li">
-                                    <img class="about-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500195387.jpg'>
+                                    <img class="about-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/mentou.jpg?t=1539155056000'>
                                 </li>
                                 <li class="about-li">
-                                    <img class="about-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500450933.jpg'>
+                                    <img class="about-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/zhaoshang.jpg?t=1539155056000'>
                                 </li>
                                 <li class="about-li">
-                                    <img class="about-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500449642.jpg'>
+                                    <img class="about-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/neibu.jpg?t=1539155056000'>
                                 </li>
                             </ul>
                         </div>
@@ -282,408 +254,218 @@
             </div>
             <div class="window-next">SCROLL</div>
         </div>
-        <!--string(7) "product"
-string(7) "product"
-string(7) "product"
-string(7) "product"
--->
+
         <div class="window-bin swiper-lazy"
              data-hash="picture"
              data-title="产品"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/1500311094.jpg">
-            <div class="container picture-box">
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/%E8%83%8C%E6%99%AF%E5%9B%BE/14.jpg?t=1539163663000">
+            <div class="container">
                 <div class="row">
-                    <div class="picture-title">
-                        <h3>
-                            <u>推荐套餐</u> —— 铸造辉煌，唯有质量！
-                        </h3>
-                    </div>
-                    <div class="picture-nav">
-                        <p>
-                            <b data-href="picture/" data-id="107" title="产品中心-全部（双击跳转）" class="active">
-                                <span>&radic;</span>
-                                <span>全部</span>
-                            </b>
-                            <b data-href="picture/product.php?lang=cn&class2=111" data-id="111" title="APP开发（双击跳转）">
-                                <span>&radic;</span>
-                                <span>APP开发</span>
-                            </b>
-                            <b data-href="picture/product.php?lang=cn&class2=112" data-id="112" title="网站建设（双击跳转）">
-                                <span>&radic;</span>
-                                <span>网站建设</span>
-                            </b>
-                            <b data-href="picture/product.php?lang=cn&class2=113" data-id="113" title="平面设计（双击跳转）">
-                                <span>&radic;</span>
-                                <span>平面设计</span>
-                            </b>
-                        </p>
-                    </div>
-                    <div class="picture-cut">
-                        <div data-id="107" class="picture-list active">
-                            <ul class="picture-ul">
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=69" title="手机钱包应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500524230.jpg' alt="手机钱包应用">
+                    <!--  轮播图  -->
+                    <div id="section-A">
+                        <div class="swiper-container gallery-top" id="container-box">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="A-body-content">
+                                        <div class="bc-left">
+                                            <h3>阿尔卑斯-北欧整装 <span class="small">不足70m²按70m²计</span></h3>
+                                            <div class="scheme-box">
+                                                <div class="scheme">
+                                                    <div class="sch-title">方案</div>
+                                                    <div class="sch-content">1790/m²整装包</div>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li>原木色/灰色/纯白色</li>
+                                                <li>年轻 浪漫</li>
+                                                <li>小清新人群</li>
+                                            </ul>
+                                            <div class="button-box">
+                                                <button><a href="goods.php?id=2250">查看详情</a></button>
+                                                <button onclick="showOrHidden()">立即预定</button>
+                                            </div>
+                                        </div>
+                                        <div class="bc-right">
+                                            <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
+                                                <div class="vr-pic">
+                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="vr-icon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="A-body-content">
+                                        <div class="bc-left">
+                                            <h3>遇见北京-新中式整装 <span class="small">不足70m²按70m²计</span></h3>
+                                            <div class="scheme-box">
+                                                <div class="scheme">
+                                                    <div class="sch-title">方案</div>
+                                                    <div class="sch-content">1990/m²整装包</div>
+                                                </div>
 
-                                        </font>
-                                        <span>
-                                                    <b>手机钱包应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="手机钱包应用*upload/201707/1500524230.jpg|手机钱包应用*upload/201707/1500524427.jpg|手机钱包应用*upload/201707/1500524289.jpg">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=58" title="股市买卖应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500526781.jpg' alt="股市买卖应用">
+                                            </div>
+                                            <ul>
+                                                <li>红木色/灰色/白色</li>
+                                                <li>成熟 稳重</li>
+                                                <li>低调内涵人群</li>
+                                            </ul>
+                                            <div class="button-box">
+                                                <button><a href="goods.php?id=1980">查看详情</a></button>
+                                                <button onclick="showOrHidden()">立即预定</button>
+                                            </div>
+                                        </div>
+                                        <div class="bc-right">
+                                            <a href="https://www.jiasc.com/tour/76964a38f28db264">
+                                                <div class="vr-pic">
+                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="vr-icon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="A-body-content">
+                                        <div class="bc-left">
+                                            <h3>简单有爱-现代整装 <span class="small">不足70m²按70m²计</span></h3>
+                                            <div class="scheme-box">
+                                                <div class="scheme">
+                                                    <div class="sch-title">方案</div>
+                                                    <div class="sch-content">1690/m²整装包</div>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li>黑白灰/米白</li>
+                                                <li>简约 舒适</li>
+                                                <li>时尚快节奏人群</li>
+                                            </ul>
+                                            <div class="button-box">
+                                                <button><a href="goods.php?id=1902">查看详情</a></button>
+                                                <button onclick="showOrHidden()">立即预定</button>
+                                            </div>
+                                        </div>
+                                        <div class="bc-right">
+                                            <a href="https://www.jiasc.com/tour/ba88498e9537c410">
+                                                <div class="vr-pic">
+                                                    <img src="http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="vr-icon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="A-body-content">
+                                        <div class="bc-left">
+                                            <h3>巴黎印象-欧式整装 <span class="small">不足70m²按70m²计</span></h3>
+                                            <div class="scheme-box">
+                                                <div class="scheme">
+                                                    <div class="sch-title">方案</div>
+                                                    <div class="sch-content">2990/m²整装包</div>
+                                                </div>
 
-                                        </font>
-                                        <span>
-                                                    <b>股市买卖应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="股市买卖应用*upload/201707/1500526781.jpg|股市买卖应用*upload/201707/1500526809.jpg|股市买卖应用*upload/201707/1500527231.jpg">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=54" title="音乐播放器" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500528056.jpg' alt="音乐播放器">
+                                            </div>
+                                            <ul>
+                                                <li>原石色/米色/暖色</li>
+                                                <li>高档 优雅</li>
+                                                <li>高端奢华人群</li>
+                                            </ul>
+                                            <div class="button-box">
+                                                <button><a href="goods.php?id=2443">查看详情</a></button>
+                                                <button onclick="showOrHidden()">立即预定</button>
+                                            </div>
+                                        </div>
+                                        <div class="bc-right">
+                                            <a href="https://www.jiasc.com/tour/4911d248e8fb7f40">
+                                                <div class="vr-pic">
+                                                    <img src="http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="vr-icon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="A-body-content">
+                                        <div class="bc-left">
+                                            <h3>田纳西州-美式乡村 <span class="small">不足70m²按70m²计</span></h3>
+                                            <div class="scheme-box">
+                                                <div class="scheme">
+                                                    <div class="sch-title">方案</div>
+                                                    <div class="sch-content">2490/m²整装包</div>
+                                                </div>
 
-                                        </font>
-                                        <span>
-                                                    <b>音乐播放器</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="音乐播放器*upload/201707/1500528056.jpg|音乐播放器*upload/201707/1500527565.jpg|音乐播放器*upload/201707/1500528042.jpg">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=55" title="桌面主题应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500528351215976.jpg' alt="桌面主题应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>桌面主题应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="桌面主题应用*upload/201707/1500528351215976.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=57" title="手机商城应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500529467.jpg' alt="手机商城应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>手机商城应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="手机商城应用*upload/201707/1500529467.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=56" title="天气预报应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500532598.jpg' alt="天气预报应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>天气预报应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="天气预报应用*upload/201707/1500532598.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=60" title="旅游查询应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500534162.jpg' alt="旅游查询应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>旅游查询应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="旅游查询应用*upload/201707/1500534162.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=61" title="地图指引工具" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500535308.jpg' alt="地图指引工具">
-
-                                        </font>
-                                        <span>
-                                                    <b>地图指引工具</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="地图指引工具*upload/201707/1500535308.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=63" title="品牌网站建设" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500536221.jpg' alt="品牌网站建设">
-
-                                        </font>
-                                        <span>
-                                                    <b>品牌网站建设</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="品牌网站建设*upload/201707/1500536221.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=62" title="响应式建站" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500519919.jpg' alt="响应式建站">
-
-                                        </font>
-                                        <span>
-                                                    <b>响应式建站</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="响应式建站*upload/201707/1500519919.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=53" title="商城购物建站" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500538310.jpg' alt="商城购物建站">
-
-                                        </font>
-                                        <span>
-                                                    <b>商城购物建站</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="商城购物建站*upload/201707/1500538310.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=64" title="精美网页设计" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500517842.jpg' alt="精美网页设计">
-
-                                        </font>
-                                        <span>
-                                                    <b>精美网页设计</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="精美网页设计*upload/201707/1500517842.jpg|">+</p>
-                                </li>
-                            </ul>
+                                            </div>
+                                            <ul>
+                                                <li>木色/米黄色/天蓝色</li>
+                                                <li>自然 舒适</li>
+                                                <li>自由休闲人群</li>
+                                            </ul>
+                                            <div class="button-box">
+                                                <button><a href="goods.php?id=1678">查看详情</a></button>
+                                                <button onclick="showOrHidden()">立即预定</button>
+                                            </div>
+                                        </div>
+                                        <div class="bc-right">
+                                            <a href="https://www.jiasc.com/tour/e018ed48301bfc3c">
+                                                <div class="vr-pic">
+                                                    <img src="http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="vr-icon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="A-body-content">
+                                        <div class="bc-left">
+                                            <h3>阿尔卑斯-北欧整装 <span class="small">不足70m²按70m²计</span></h3>
+                                            <div class="scheme-box">
+                                                <div class="scheme">
+                                                    <div class="sch-title">方案</div>
+                                                    <div class="sch-content">1790/m²整装包</div>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li>原木色/灰色/纯白色</li>
+                                                <li>年轻 浪漫</li>
+                                                <li>年轻人群</li>
+                                            </ul>
+                                            <div class="button-box">
+                                                <button><a href="goods.php?id=2250">查看详情</a></button>
+                                                <button onclick="showOrHidden()">立即预定</button>
+                                            </div>
+                                        </div>
+                                        <div class="bc-right">
+                                            <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
+                                                <div class="vr-pic">
+                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="vr-icon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next swiper-button-white"></div>
+                            <div class="swiper-button-prev swiper-button-white"></div>
                         </div>
-                        <div data-id="111" class="picture-list ">
-                            <ul class="picture-ul">
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=69" title="手机钱包应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500524230.jpg' alt="手机钱包应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>手机钱包应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="手机钱包应用*upload/201707/1500524230.jpg|手机钱包应用*upload/201707/1500524427.jpg|手机钱包应用*upload/201707/1500524289.jpg">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=58" title="股市买卖应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500526781.jpg' alt="股市买卖应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>股市买卖应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="股市买卖应用*upload/201707/1500526781.jpg|股市买卖应用*upload/201707/1500526809.jpg|股市买卖应用*upload/201707/1500527231.jpg">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=54" title="音乐播放器" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500528056.jpg' alt="音乐播放器">
-
-                                        </font>
-                                        <span>
-                                                    <b>音乐播放器</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="音乐播放器*upload/201707/1500528056.jpg|音乐播放器*upload/201707/1500527565.jpg|音乐播放器*upload/201707/1500528042.jpg">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=55" title="桌面主题应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500528351215976.jpg' alt="桌面主题应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>桌面主题应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="桌面主题应用*upload/201707/1500528351215976.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=57" title="手机商城应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500529467.jpg' alt="手机商城应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>手机商城应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="手机商城应用*upload/201707/1500529467.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=56" title="天气预报应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500532598.jpg' alt="天气预报应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>天气预报应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="天气预报应用*upload/201707/1500532598.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=60" title="旅游查询应用" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500534162.jpg' alt="旅游查询应用">
-
-                                        </font>
-                                        <span>
-                                                    <b>旅游查询应用</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="旅游查询应用*upload/201707/1500534162.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=61" title="地图指引工具" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500535308.jpg' alt="地图指引工具">
-
-                                        </font>
-                                        <span>
-                                                    <b>地图指引工具</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="地图指引工具*upload/201707/1500535308.jpg|">+</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div data-id="112" class="picture-list ">
-                            <ul class="picture-ul">
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=63" title="品牌网站建设" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500536221.jpg' alt="品牌网站建设">
-
-                                        </font>
-                                        <span>
-                                                    <b>品牌网站建设</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="品牌网站建设*upload/201707/1500536221.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=62" title="响应式建站" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500519919.jpg' alt="响应式建站">
-
-                                        </font>
-                                        <span>
-                                                    <b>响应式建站</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="响应式建站*upload/201707/1500519919.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=53" title="商城购物建站" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500538310.jpg' alt="商城购物建站">
-
-                                        </font>
-                                        <span>
-                                                    <b>商城购物建站</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="商城购物建站*upload/201707/1500538310.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=64" title="精美网页设计" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500517842.jpg' alt="精美网页设计">
-
-                                        </font>
-                                        <span>
-                                                    <b>精美网页设计</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="精美网页设计*upload/201707/1500517842.jpg|">+</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div data-id="113" class="picture-list ">
-                            <ul class="picture-ul">
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=65" title="UI扁平化设计" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500539141.jpg' alt="UI扁平化设计">
-
-                                        </font>
-                                        <span>
-                                                    <b>UI扁平化设计</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="UI扁平化设计*upload/201707/1500539141.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=66" title="名片设计" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500522071.jpg' alt="名片设计">
-
-                                        </font>
-                                        <span>
-                                                    <b>名片设计</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="名片设计*upload/201707/1500522071.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=67" title="画册设计" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500539619.jpg' alt="画册设计">
-
-                                        </font>
-                                        <span>
-                                                    <b>画册设计</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="画册设计*upload/201707/1500539619.jpg|">+</p>
-                                </li>
-                                <li class="picture-li swiper-slide-active">
-                                    <a href="picture/showproduct.php?lang=cn&id=68" title="形象设计" target='_self'>
-                                        <font>
-                                            <img class="picture-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500540096.jpg' alt="形象设计">
-
-                                        </font>
-                                        <span>
-                                                    <b>形象设计</b>
-                                                </span>
-                                    </a>
-                                    <p class="met-img-showbtn" data-imglist="形象设计*upload/201707/1500540096.jpg|">+</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="picture-ctrl">
-                            <div class="ctrl-left"></div>
-                            <div class="ctrl-right"></div>
-                        </div>
+                        <!-- Add Pagination -->
+                        <div class="gallery-thumbs swiper-pagination"></div>
                     </div>
                 </div>
             </div>
             <div class="window-next">SCROLL</div>
         </div>
+
+
         <div class="window-bin swiper-lazy"
              data-hash="video"
              data-title="视频"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/1500362214.jpg">
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
             <div class="container video-box">
                 <div class="row">
                     <!--string(3) "img"
@@ -766,7 +548,7 @@ string(7) "product"
         <div class="window-bin swiper-lazy"
              data-hash="case"
              data-title="案例"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/1500381700.jpg">
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
             <div class="container case-box">
                 <div class="row">
                     <div class="case-left">
@@ -896,7 +678,7 @@ string(4) "news"
         <div class="window-bin swiper-lazy"
              data-hash="info"
              data-title="资讯"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/1500382427.jpg" >
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/6.jpg" >
             <div class="container info-box">
                 <div class="row">
                     <div class="info-left">
