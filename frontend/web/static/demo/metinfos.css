@@ -39675,22 +39675,22 @@ html:not(.isMobile) *::-webkit-resizer {
  content:"\e67f"
 }
 
-/*hjzhomeCSS*/
+/*hjzhomeCSS 荟家装*/
 .window-bin .hjz-container1:before,.window-bin .hjz-container2:before,.window-bin .hjz-container3:before {
  top:-50px;
  bottom:-50px;
 }
 .window-bin .hjz-container1:before{
-	background:url('http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/gudong.png') no-repeat fixed center;
-	background-size: 100%;
+	background:url('http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/gudong.png') no-repeat;
+	background-size: 100% 100%;
 }
 .window-bin .hjz-container2:before{
-	background:url('http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/hezuo.png?t=1539151899000') no-repeat fixed center;
-	background-size: 100%;
+	background:url('http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/hezuo.png?t=1539151899000') no-repeat;
+	background-size: 100% 100%;
 }
 .window-bin .hjz-container3:before{
-	background:url("http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/fulizi.png?t=1539151900000") no-repeat fixed center;
-	background-size: 100%;
+	background:url("http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/fulizi.png?t=1539151900000") no-repeat;
+	background-size: 100% 100%;
 }
 
 .window-bin .hjz-container1>.row,.hjz-container2>.row,.hjz-container3>.row{
@@ -39748,4 +39748,12 @@ html:not(.isMobile) *::-webkit-resizer {
     #section-A .swiper-button-next{position: absolute;top: 210px;right: 0;height: 80px;width: 40px;background-color: black;opacity: 0.3;}
     #section-A .swiper-button-prev{position: absolute;top: 210px;left: 0;height: 80px;width: 40px;background-color: black;opacity: 0.3;}
     #section-A .swiper-button-hidden{display: none}
+/*案例*/
+.hjz-case .case-left{width:35%}
+.hjz-case .case-left p{-webkit-line-clamp: 4;}
+.hjz-case .case-list ul li {width: .2%;}
+@media (max-width: 1599px){
+	.case-left p {height: 110px;}
+}
+
 

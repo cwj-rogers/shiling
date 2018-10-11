@@ -58,7 +58,7 @@ use yii\helpers\Url;
 <!--  侧边栏  -->
 <?php $this->beginContent('@app/views/layouts/hjz/side-box.php') ?><?php $this->endContent() ?>
 <!--  导航栏  -->
-<div class="side-head nav-open1">
+<div class="side-head nav-open1 active">
     <div class="side-logo">
         <a href="<?= Url::toRoute('index')?>" title="APP应用开发|网站建设|平面设计">
             <img data-original="http://hjzhome.image.alimmdn.com/首页图片/logo-mini.png" data-size="175_40" alt="荟家装-健康智慧整装" title="荟家装-健康智慧整装">
@@ -179,7 +179,7 @@ use yii\helpers\Url;
         <div class="window-bin swiper-lazy"
              data-hash="about"
              data-title="关于"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/1.jpg">
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
             <div class="container about-box">
                 <div class="row">
                     <div class="about-left">
@@ -468,8 +468,6 @@ use yii\helpers\Url;
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
             <div class="container video-box">
                 <div class="row">
-                    <!--string(3) "img"
--->
                     <div class="video-left active">
                         <div class="video-content video">
                             <img class="swiper-lazy" data-src=include/thumb.php?dir=upload/201707/1500518951.jpg&x=720&y=405>
@@ -549,13 +547,13 @@ use yii\helpers\Url;
              data-hash="case"
              data-title="案例"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
-            <div class="container case-box">
+            <div class="container case-box hjz-case">
                 <div class="row">
                     <div class="case-left">
                         <h3>
-                            <u>案例欣赏，</u>优质开发！
+                            <u>案例欣赏 </u>事实说话!
                         </h3>
-                        <p>凭借拔尖的团队、优秀的业务能力，星如雨迅速成长为国内SEO的领军者。我们专注网络营销业务，助力您的企业腾飞。同时，我们还拥有一支健全的建站团队，向外界承接APP应用开发/微网站/公众号策划营销等业务。</p>
+                        <p>凭借拔尖的团队、优秀的业务能力，荟家装迅速成长为国内整装市场的弄潮者。我们专注打造互联网+智慧整装平台，利用互联网对施工/主材/软装/核算/监督进行信息化管理，从根本上解决整个家装过程管控五续的通病。</p>
                         <a class="click-box" href="case/" target='_self'>
                             <span>READ MORE</span>
                         </a>
@@ -564,102 +562,19 @@ use yii\helpers\Url;
                         <div class="case-list">
                             <ul class="case-ul">
                                 <li class="case-li case-null swiper-slide-active"></li>
+                                <?php foreach ($case as $k=>$v):?>
                                 <li class="case-li">
-                                            <span>
-                                                <a href="case/showimg.php?lang=cn&id=75" title="多功能应用开发" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500542224.jpg' alt="多功能应用开发">
-                                                    <font>多功能应用开发</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="多功能应用开发*upload/201707/1500542224.jpg|"></p>
-                                            </span>
+                                    <?php foreach ($v as $vv):?>
                                     <span>
-                                                <a href="case/showimg.php?lang=cn&id=76" title="超级音乐播放器" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500543975.jpg' alt="超级音乐播放器">
-                                                    <font>超级音乐播放器</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="超级音乐播放器*upload/201707/1500543975.jpg|"></p>
-                                            </span>
+                                        <a href="<?= Url::toRoute(['case','id'=>$vv['goods_id']])?>" title="<?= $vv['goods_name']?>" target='_blank'>
+                                            <img class="case-lazy" data-src='<?= $vv['goods_thumb']?>' alt="<?= $vv['goods_name']?>">
+                                            <font><?= $vv['goods_name']?></font>
+                                        </a>
+                                        <p class="fa fa-search met-img-showbtn" data-imglist="<?= $vv['goods_name']?>*upload/201707/1500542224.jpg|"></p>
+                                    </span>
+                                    <?php endforeach;?>
                                 </li>
-                                <li class="case-li">
-                                            <span>
-                                                <a href="case/showimg.php?lang=cn&id=78" title="万能日历" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500543758.jpg' alt="万能日历">
-                                                    <font>万能日历</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="万能日历*upload/201707/1500543758.jpg|"></p>
-                                            </span>
-                                    <span>
-                                                <a href="case/showimg.php?lang=cn&id=72" title="数据监控应用" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500543455.jpg' alt="数据监控应用">
-                                                    <font>数据监控应用</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="数据监控应用*upload/201707/1500543455.jpg|"></p>
-                                            </span>
-                                </li>
-                                <li class="case-li">
-                                            <span>
-                                                <a href="case/showimg.php?lang=cn&id=77" title="网速检查器" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500543793.jpg' alt="网速检查器">
-                                                    <font>网速检查器</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="网速检查器*upload/201707/1500543793.jpg|"></p>
-                                            </span>
-                                    <span>
-                                                <a href="case/showimg.php?lang=cn&id=79" title="人肉搜索" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500544104.jpg' alt="人肉搜索">
-                                                    <font>人肉搜索</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="人肉搜索*upload/201707/1500544104.jpg|"></p>
-                                            </span>
-                                </li>
-                                <li class="case-li">
-                                            <span>
-                                                <a href="case/showimg.php?lang=cn&id=87" title="音乐播放器" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500544083.jpg' alt="音乐播放器">
-                                                    <font>音乐播放器</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="音乐播放器*upload/201707/1500544083.jpg|"></p>
-                                            </span>
-                                    <span>
-                                                <a href="case/showimg.php?lang=cn&id=83" title="定时提醒应用" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500544394.jpg' alt="定时提醒应用">
-                                                    <font>定时提醒应用</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="定时提醒应用*upload/201707/1500544394.jpg|"></p>
-                                            </span>
-                                </li>
-                                <li class="case-li">
-                                            <span>
-                                                <a href="case/showimg.php?lang=cn&id=84" title="远程聊天工具" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500545194.jpg' alt="远程聊天工具">
-                                                    <font>远程聊天工具</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="远程聊天工具*upload/201707/1500545194.jpg|"></p>
-                                            </span>
-                                    <span>
-                                                <a href="case/showimg.php?lang=cn&id=86" title="用户界面设计" target='_self'>
-                                                    <img class="case-lazy" data-src='upload/thumb_src/540_390/1500544512.jpg' alt="用户界面设计">
-                                                    <font>用户界面设计</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="用户界面设计*upload/201707/1500544512.jpg|"></p>
-                                            </span>
-                                </li>
-                                <li class="case-li">
-                                            <span>
-                                                <a href="case/showimg.php?lang=cn&id=85" title="画册封面" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500544385.jpg' alt="画册封面">
-                                                    <font>画册封面</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="画册封面*upload/201707/1500544385.jpg|"></p>
-                                            </span>
-                                    <span>
-                                                <a href="case/showimg.php?lang=cn&id=82" title="时间轴介绍" target='_self'>
-                                                    <img class="case-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500544819.jpg' alt="时间轴介绍">
-                                                    <font>时间轴介绍</font>
-                                                </a>
-                                                <p class="fa fa-search met-img-showbtn" data-imglist="时间轴介绍*upload/201707/1500544819.jpg|"></p>
-                                            </span>
-                                </li>
+                                <?php endforeach;?>
                             </ul>
                         </div>
                     </div>
