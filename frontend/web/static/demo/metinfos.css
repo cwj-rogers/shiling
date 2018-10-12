@@ -39676,6 +39676,7 @@ html:not(.isMobile) *::-webkit-resizer {
 }
 
 /*hjzhomeCSS 荟家装*/
+/*首页大轮播图小白板*/
 .window-bin .hjz-container1:before,.window-bin .hjz-container2:before,.window-bin .hjz-container3:before {
  top:-50px;
  bottom:-50px;
@@ -39692,10 +39693,37 @@ html:not(.isMobile) *::-webkit-resizer {
 	background:url("http://hjzhome.image.alimmdn.com/hjzWebsite/%E9%A6%96%E9%A1%B5%E5%9B%BE/fulizi.png?t=1539151900000") no-repeat;
 	background-size: 100% 100%;
 }
-
 .window-bin .hjz-container1>.row,.hjz-container2>.row,.hjz-container3>.row{
 	opacity:0;
 }
+/*首页改为品牌用色*/
+.sign-box>ul>li>a:before{background:#b1191a}
+.side-open hr{background:#b1191a}
+.h1 u, .h2 u, .h3 u, .h4 u, .h5 u, .h6 u, h1 u, h2 u, h3 u, h4 u, h5 u, h6 u {color:#b1191a}
+.video-text h3{color:black;font-size:24px;}
+.message-subpage button[type=submit] {background:#b1191a}
+.video-text ul li:before {background:#b1191a}
+.video-right {border-color:#b1191a}
+.about-left h3 span u, .contact-sub .p em {color:#b1191a}
+.window-bin.swiper-slide-active .about-right{border-color:#b1191a}
+.case-left h3 u {color:#b1191a}
+.window-bin.swiper-slide-active .case-right{border-color:#b1191a}
+.ctrl-left:before {background:#b1191a}
+.ctrl-left:after {background:#b1191a}
+.ctrl-right:before {background:#b1191a}
+.ctrl-right:after {background:#b1191a}
+#map {border: 4px solid #b1191a;}
+.contact-right h1 {color:#b1191a}
+.contact-right dl dd strong {color:#b1191a}
+.video-right:before {border-top: 2px solid #b1191a;}
+.video-right:after {border-top: 2px solid #b1191a;}
+.case-list ul li span a font:before, .img-li span a font:before{background:#b1191a}
+.case-list ul li span p, .img-li span p{border:2px solid #b1191a;}
+.case-list ul li span p:hover, .img-li span p:hover {background: #b1191a;}
+.window-bin.swiper-slide-active .case-right:before, .window-bin.swiper-slide-active .case-right:after{background-color: #b1191a;}
+.click-box:hover span {color: #b1191a;}
+.sign-box>ul>li>a:hover>b {color: #b1191a;}
+.side-content:not(.show) .side-body:last-child:before{background:#b1191a}
 /*媒体查询*/
 @media (max-width:1200px) {
 	.side-logo .hjz-slogen{opacity:0}
@@ -39735,7 +39763,7 @@ html:not(.isMobile) *::-webkit-resizer {
         #section-A .A-body-content .bc-right{width: 70%;height: 480px;position: relative;}
             #section-A .bc-right .vr-pic{width:100%;max-height: 480px;overflow: hidden;}
                 #section-A .bc-right .vr-pic img{width:100%;height: 480px;}
-            #section-A .bc-right .vr-icon{width: 80px;height: 80px;background: url("skin/default/images/vr2.png") no-repeat;background-size: 70%;position: absolute;left: 20px;top: 20px}
+            #section-A .bc-right .vr-icon{width: 80px;height: 80px;background: url("http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/vr2.png") no-repeat;background-size: 70%;position: absolute;left: 20px;top: 20px}
 
     /* 主标题 */
     #section-A .section-A-title{font-weight: 500;margin-top: 10px;margin-bottom: 20px;display: flex;flex-direction: column;justify-content: center;align-items: center;background: white;height: 80px;}
@@ -39755,5 +39783,95 @@ html:not(.isMobile) *::-webkit-resizer {
 @media (max-width: 1599px){
 	.case-left p {height: 110px;}
 }
+/*免费设计*/
+.video-content.video:before{display:none}
+.video-content.video:after{display:none}
+.video-content .message-subpage .ftype_input {width: 100%;}
+.video-content .message-subpage .ftype_input div{display: flex;flex-direction: row;justify-content: flex-start}
+.video-content .message-subpage .ftype_input .label{color: grey;min-width:100px;}
+.video-content .message-subpage .ftype_input .label_start{color: #b1191a;font-weight: bold}
+.video-content .message-subpage option{background:white}
+.message-subpage h3 {padding:5px 0 5px 0;font-size:24px;margin-top:0}
+.message-subpage h3 u{font-size:48px;}
+.video-text ul{font-size:18px}
+.window-bin.swiper-slide-active .video-text p{font-size:14px;color:gray}
+.video-text ul li span{color:#b1191a;font-weight:bold;margin:0 5px;}
+
+/*公司简介详情*/
+.main-content h1 {color: #b1191a;padding: 20px 0 12px 0;margin-bottom:0px}
+.main-content h1 .title-c {border-left: 4px solid #b1191a;padding-left: 15px;font-size: 24px;margin-right: 20px;}
+.main-content h1 .title-d {font-size: 18px;}
+.main-content .content-border {
+    border-top: 1px solid #e8e8e8;
+}
+.profile {
+    font-size: 14px;
+    color: #666;
+    padding-top: 15px;
+    line-height: 2em;
+}
+.profile p{
+	color: #666;
+	font-size: 14px;
+}
+.profile .profile-text {
+    padding: 20px;
+}
+.profile .profile-text span {
+    display: block;
+    text-indent: 30px;
+    margin-bottom: 20px;
+}
+.profile .company-img {
+    width: 100%;
+}
+.profile .mission {
+    padding: 20px;
+}
+.profile .product {
+    display: inline-block;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+.profile .honour {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 20px;
+    position: relative;
+}
+.main-content h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.profile .mission p {
+    text-indent: 30px;
+    margin-bottom: 10px;
+}
+.profile .product .product-item {
+    display: block;
+    text-indent: 30px;
+    line-height: 2.5em;
+}
+.profile .honour .honour-item {
+    display: block;
+    text-indent: 30px;
+    line-height: 2.5em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

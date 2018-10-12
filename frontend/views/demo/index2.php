@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+use kartik\form\ActiveForm;
+use yii\helpers\Html;
 ?>
 <!DOCTYPE HTML>
 <html class="isMobile  ">
@@ -17,9 +19,9 @@ use yii\helpers\Url;
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="模板建站和纯手工建站的区别在于：模板是“成衣”，你只需要去服装店挑选，而所谓的纯手工建站是裁缝师傅给你定制。功能和稳定性模板+成熟的CMS管理后台大大优于“裁缝店”" />
-    <meta name="keywords" content="APP应用开发|网站建设|平面设计" />
-    <link href="https://show.metinfo.cn/muban/M1156010/328/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="description" content="荟家装-让健康时尚的标准化家装走进千家万户，让家装交易更透明，更公平，更省钱。荟家装是一家致力于整体家装设计研发及交易管理服务平台，通过设计力量及供应链集采管理，让整体家装产品作品化加互联网全渠道营销为具备落地能力的小微装企及优秀项目经理，设计师输送业务订单。" />
+    <meta name="keywords" content="荟家装|健康智慧整装|免费设计" />
+    <link href="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png" rel="shortcut icon" type="image/x-icon" />
     <link rel='stylesheet' href='/static/demo/metinfos.css'>
 </head>
 <body class="100011">
@@ -60,7 +62,7 @@ use yii\helpers\Url;
 <!--  导航栏  -->
 <div class="side-head nav-open1 active">
     <div class="side-logo">
-        <a href="<?= Url::toRoute('index')?>" title="APP应用开发|网站建设|平面设计">
+        <a href="<?= Url::toRoute('index')?>" title="荟家装|健康智慧整装|免费设计">
             <img data-original="http://hjzhome.image.alimmdn.com/首页图片/logo-mini.png" data-size="175_40" alt="荟家装-健康智慧整装" title="荟家装-健康智慧整装">
             <img class="hjz-slogen" data-original="http://hjzhome.image.alimmdn.com/%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/menu-R.gif" data-size="100" alt="">
         </a>
@@ -176,6 +178,98 @@ use yii\helpers\Url;
             </div>
             <div class="window-next">SCROLL</div>
         </div>
+
+        <div class="window-bin swiper-lazy"
+             data-hash="video"
+             data-title="免费设计"
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
+            <div class="container video-box">
+                <div class="row">
+                    <div class="video-left active">
+                        <div class="video-content video">
+                            <div class="message-subpage">
+                                <h3>
+                                    <u>免费设计 </u>装修第一步免费全景效果图看家
+                                </h3>
+                                <form method="post" class="met-form met-form-validation fv-form fv-form-bootstrap" action="<?=Url::toRoute(['free'])?>" novalidate="novalidate"><button type="submit" class="fv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+                                    <input type="hidden" name="lang" value="cn">
+                                    <div class="form-group ftype_input">
+                                        <div>
+                                            <label for="" class="label"><em class="label_start">* </em>所在城市：</label>
+                                            <!--下拉列表-->
+                                            <?=Html::dropDownList('province',null,[],['class'=>'form-control apply-prov','id'=>"hjz-province"])?>
+                                            <?=Html::dropDownList('city',null,[],['class'=>'form-control apply-city','id'=>"hjz-city"])?>
+                                        </div>
+                                        <small class="help-block" data-fv-validator="notEmpty" data-fv-for="para115" data-fv-result="NOT_VALIDATED" style="display: none;">不能为空</small>
+                                    </div>
+                                    <div class="form-group ftype_input">
+                                        <div>
+                                            <label for="" class="label"><em class="label_start">* </em>房屋面积：</label>
+                                            <input name="area" class="form-control" type="text" placeholder="房屋面积 " data-fv-notempty="true" data-fv-message="不能为空" data-fv-field="para115">
+                                        </div>
+                                        <small class="help-block" data-fv-validator="notEmpty" data-fv-for="para115" data-fv-result="NOT_VALIDATED" style="display: none;">不能为空</small>
+                                    </div>
+                                    <div class="form-group ftype_input">
+                                        <div>
+                                            <label for="" class="label"><em class="label_start">* </em>姓名：</label>
+                                            <input name="name" class="form-control" type="text" placeholder="姓名 " data-fv-notempty="true" data-fv-message="不能为空" data-fv-field="para115">
+                                        </div>
+                                        <small class="help-block" data-fv-validator="notEmpty" data-fv-for="para115" data-fv-result="NOT_VALIDATED" style="display: none;">不能为空</small>
+                                    </div>
+                                    <div class="form-group ftype_input">
+                                        <div>
+                                            <label for="" class="label"><em class="label_start">* </em>手机号：</label>
+                                            <input name="phone" class="form-control" type="text" placeholder="电话 " data-fv-notempty="true" data-fv-message="不能为空" data-fv-field="para116">
+                                        </div>
+                                        <small class="help-block" data-fv-validator="notEmpty" data-fv-for="para116" data-fv-result="NOT_VALIDATED" style="display: none;">不能为空</small>
+                                    </div>
+                                    <div class="submint">
+                                        <button type="submit" class="btn btn-primary btn-block btn-squared more-box"><span>提 交</span></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="video-text">
+                            <h3> 获取新家装修预算</h3>
+                            <ul>
+                                <li>
+                                    <b>材料费</b><span class="offer1">28888</span> <i>元</i>
+                                </li>
+                                <li>
+                                    <b>人工费</b><span class="offer2">12222</span> <i>元</i>
+                                </li>
+                                <li>
+                                    <b>设计费</b><span class="offer3">3888</span> <i>元</i>
+                                </li>
+                                <li>
+                                    <b>质检费</b><span class="offer4">2333</span> <i>元</i>
+                                </li>
+                            </ul>
+                            <p> 装修预算数据由 <span>荟家装健康智慧整装</span> 平台历史服务上千万业主装修数据、全国各个城市线下门店合同成交金额经过大数据实时分析计算。</p>
+                            <a class="click-box small" href="video/showimg.php?lang=cn&id=89" title=" 什么是响应式？" target='_self'>
+                                <span>READ MORE</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="video-right">
+                        <div class="video-list" data-autoplay="1">
+                            <ol class="video-ol">
+                                <?php foreach ($videores as $k=>$v):?>
+                                    <li class="video-li active" title=" <?= $v['goods_name']?>">
+                                        <img class="video-lazy" data-src='<?= 'http://www.hjzhome.com/'.$v['goods_thumb']?>' alt="<?= $v['goods_name']?>">
+                                        <span>
+                                        <a href="<?= Url::toRoute(['demo/picture','id'=>$v['goods_id']])?>" title="<?= $v['goods_name']?>" target='_self'> <?= $v['goods_name']?></a>
+                                    </span>
+                                    </li>
+                                <?php endforeach;?>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="window-next">SCROLL</div>
+        </div>
+
         <div class="window-bin swiper-lazy"
              data-hash="about"
              data-title="关于"
@@ -463,87 +557,6 @@ use yii\helpers\Url;
 
 
         <div class="window-bin swiper-lazy"
-             data-hash="video"
-             data-title="视频"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
-            <div class="container video-box">
-                <div class="row">
-                    <div class="video-left active">
-                        <div class="video-content video">
-                            <img class="swiper-lazy" data-src=include/thumb.php?dir=upload/201707/1500518951.jpg&x=720&y=405>
-                            <video loop controls src=http://www.metinfo.cn/templates/metinfo2016/min/video/met-index-mb.mp4></video>
-                        </div>
-                        <div class="video-text">
-                            <h3> 什么是响应式？</h3>
-                            <ul>
-                                <li>
-                                    <b>发布</b>2017-08-01
-                                </li>
-                                <li>
-                                    <b>类型</b>MP4视频
-                                </li>
-                                <li>
-                                    <b>来源</b>METINFO
-                                </li>
-                                <li>
-                                    <b>语言</b>英语（中文翻译）
-                                </li>
-                            </ul>
-                            <p> 页面的布局方式应当根据用户所处的设备环境（系统平台，屏幕尺寸，屏幕方向）进行正确的响应布局调整，无论用户使用的是笔记本还是手机或者平板，我们的网站页面都能够自动切换分辨率，图片大小尺寸以及相关的脚本功能，响应式Web设计的目的就是为了：只需一个网站前台源码，却能兼容多个终端，而不是为了每个终端去单独设计网站前台。</p>
-                            <a class="click-box small" href="video/showimg.php?lang=cn&id=89" title=" 什么是响应式？" target='_self'>
-                                <span>READ MORE</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="video-right">
-                        <div class="video-list" data-autoplay="1">
-                            <ol class="video-ol">
-                                <li class="video-li active" title=" 什么是响应式？">
-                                    <font data-video="&lt;video loop controls src=http://www.metinfo.cn/templates/metinfo2016/min/video/met-index-mb.mp4&gt;&lt;/video&gt;" data-type="video" data-para="&lt;li&gt;&lt;b&gt;发布&lt;/b&gt;2017-08-01&lt;/li&gt;&lt;li&gt;&lt;b&gt;类型&lt;/b&gt;MP4视频&lt;/li&gt;&lt;li&gt;&lt;b&gt;来源&lt;/b&gt;METINFO&lt;/li&gt;&lt;li&gt;&lt;b&gt;语言&lt;/b&gt;英语（中文翻译）&lt;/li&gt;" data-desc=" 页面的布局方式应当根据用户所处的设备环境（系统平台，屏幕尺寸，屏幕方向）进行正确的响应布局调整，无论用户使用的是笔记本还是手机或者平板，我们的网站页面都能够自动切换分辨率，图片大小尺寸以及相关的脚本功能，响应式Web设计的目的就是为了：只需一个网站前台源码，却能兼容多个终端，而不是为了每个终端去单独设计网站前台。">
-                                        <img class="video-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500518951.jpg' alt=" 什么是响应式？">
-
-                                    </font>
-                                    <span>
-                                                <a href="video/showimg.php?lang=cn&id=89" title=" 什么是响应式？" target='_self'> 什么是响应式？</a>
-                                            </span>
-                                </li>
-                                <li class="video-li " title="教你开发应用！">
-                                    <font data-video="&lt;video loop controls src=http://show.metinfo.cn/muban/M1601005/323/upload/video/201611/1479465515483375.mp4&gt;&lt;/video&gt;" data-type="video" data-para="&lt;li&gt;&lt;b&gt;发布&lt;/b&gt;2017-05-26&lt;/li&gt;&lt;li&gt;&lt;b&gt;类型&lt;/b&gt;MP4视频&lt;/li&gt;&lt;li&gt;&lt;b&gt;来源&lt;/b&gt;METINFO&lt;/li&gt;&lt;li&gt;&lt;b&gt;语言&lt;/b&gt;英文（中文翻译）&lt;/li&gt;" data-desc="不论是ios还是android的应用开发，其实都遵循着一定的开发流程，只有如此才能使开发过程有章可循而不是一团乱。开发App对于一些没有学过编程语言的人来说确实比较困难，但是现在有款软件可以帮助您快速进行App的开发。">
-                                        <img class="video-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500527565.jpg' alt="教你开发应用！">
-
-                                    </font>
-                                    <span>
-                                                <a href="video/showimg.php?lang=cn&id=91" title="教你开发应用！" target='_self'>教你开发应用！</a>
-                                            </span>
-                                </li>
-                                <li class="video-li " title="做网站有什么用？">
-                                    <font data-video="&lt;video loop controls src=http://show.metinfo.cn/muban/M1156004/305/upload/video/video.mp4&gt;&lt;/video&gt;" data-type="video" data-para="&lt;li&gt;&lt;b&gt;发布&lt;/b&gt;2017-06-09&lt;/li&gt;&lt;li&gt;&lt;b&gt;类型&lt;/b&gt;MP4视频&lt;/li&gt;&lt;li&gt;&lt;b&gt;来源&lt;/b&gt;METINFO&lt;/li&gt;&lt;li&gt;&lt;b&gt;语言&lt;/b&gt;英文（中文字幕）&lt;/li&gt;" data-desc="拥有企业自己的域名，建立企业自己的网站，树立企业在科技信息时代的完美形象。作为第四媒体的互联网，其特点就是可以跨越时空，正常情况下， 网站无时无刻 不在工作通过企业的网站，用户可以跨越时空了解企业，利用多媒体技术，企业可以 向用户展示产品、技术、经营理念、企业文化、企业形象，树立现代企业形象，增值 企业无形资产。">
-                                        <img class="video-lazy" data-src='upload/thumb_src/288_162/1500529467.jpg' alt="做网站有什么用？">
-
-                                    </font>
-                                    <span>
-                                                <a href="video/showimg.php?lang=cn&id=88" title="做网站有什么用？" target='_self'>做网站有什么用？</a>
-                                            </span>
-                                </li>
-                                <li class="video-li " title="PS的技巧">
-                                    <font data-video="&lt;video loop controls src=http://show.metinfo.cn/muban/M1601005/317/upload/video/201703/1489374489335131.mp4&gt;&lt;/video&gt;" data-type="video" data-para="&lt;li&gt;&lt;b&gt;发布&lt;/b&gt;2017-05-22&lt;/li&gt;&lt;li&gt;&lt;b&gt;类型&lt;/b&gt;MP4视频&lt;/li&gt;&lt;li&gt;&lt;b&gt;来源&lt;/b&gt;METINFO&lt;/li&gt;&lt;li&gt;&lt;b&gt;语言&lt;/b&gt;英文（中文字幕）&lt;/li&gt;" data-desc="PS爱好者教程自学网提供Ps教程,PhotoShop教程,ps实例教程,PS抠图教程,ps调色教程,Ps基础入门教程,文字特效,Ps视频教程,让您轻松快乐的学会Adobe公司的Ps照片处理软件。">
-                                        <img class="video-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500522040.jpg' alt="PS的技巧">
-
-                                    </font>
-                                    <span>
-                                                <a href="video/showimg.php?lang=cn&id=90" title="PS的技巧" target='_self'>PS的技巧</a>
-                                            </span>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="window-next">SCROLL</div>
-        </div>
-        <!--string(3) "img"
--->
-        <div class="window-bin swiper-lazy"
              data-hash="case"
              data-title="案例"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
@@ -601,7 +614,6 @@ string(4) "news"
                             <div class="info-img">
                                 <a href="news/shownews.php?lang=cn&id=57" title="是时候改变你对微服务的认知了！" target='_self'>
                                     <img class="swiper-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500454853.jpg'>
-
                                 </a>
                             </div>
                             <div class="info-text">
@@ -835,32 +847,32 @@ string(4) "news"
         <div class="window-bin swiper-lazy"
              data-hash="contact"
              data-title="联系"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/1500534922.jpg" >
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/12.jpg" >
             <div class="container contact-box">
                 <div class="row">
-                    <div class="contact-left" id="map" coordinate="121.45184,31.383667"></div>
+                    <div class="contact-left" id="map" coordinate="113.063379,23.013639"></div>
                     <div class="contact-right">
                         <div class="contact-cut">
                             <div class="contact-bin">
                                 <h2>全国统一服务热线：</h2>
-                                <h1>400-000-0000</h1>
+                                <h1>400-6966-398</h1>
                                 <p>
                                     <em class="fa fa-cloud-download"></em>
-                                    <span>广东省揭阳市老城区河南北路电子商务产业园2楼</span>
+                                    <span>广东省佛山市禅城区季华路智慧新城T15栋10楼</span>
                                 </p>
                                 <p>
                                     <em class="fa fa-tty"></em>
-                                    <span>(010)8000000 / (+86) 13700000000</span>
+                                    <span>400-6966-398 / (+86) 13700000000</span>
                                 </p>
                                 <p>
                                     <em class="fa fa-envelope"></em>
-                                    <span>test@metinfo.cn</span>
+                                    <span>001@hjzhome.com</span>
                                 </p>
                             </div>
                             <div class="contact-bin">
                                 <dl>
                                     <dt>
-                                        <img class="swiper-lazy" data-size="120_120" data-src="http://hjzhome.image.alimmdn.com/hjzWebsite/1422258610.jpg">
+                                        <img class="swiper-lazy" data-size="120_120" data-src="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/微信服务号.jpg">
 
                                     </dt>
                                     <dd>
@@ -871,18 +883,15 @@ string(4) "news"
                                             <em class="fa fa-mobile"></em>
                                         </strong>
                                         <span>
-					  拿起手机扫描二维码，即可时刻关注我们！&nbsp;
-
-                                                    <br>
-					  公主号名称：
-                                                    <u>热门电影资讯网</u>&nbsp;
-                                                    <br>
-					  微信号：
-                                                    <u>Met_M1156010</u>&nbsp;
-                                                </span>
+					                        拿起手机扫描二维码，即可时刻关注我们！&nbsp;
+                                            <br>
+					                        公众号名称：<u>荟家装健康智慧整装</u>&nbsp;
+                                             <br>
+                                            微信号：<u>hjzhome88</u>&nbsp;
+                                            </span>
                                     </dd>
                                 </dl>
-                                <a class="click-box" href="message/" target='_self'>
+                                <a class="click-box" href="<?= Url::toRoute(['message'])?>" target='_self'>
                                     <span>READ MORE</span>
                                 </a>
                             </div>

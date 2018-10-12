@@ -61,8 +61,8 @@ body{ background: #30333F; font-family: '微软雅黑'; color: #fff; font-size: 
      	};
      }, 1000);
   window.stop = function (){
-         console.log(111);
-            clearInterval(interval);
+         //console.log(111);
+         clearInterval(interval);
  }
  })();
 </script>

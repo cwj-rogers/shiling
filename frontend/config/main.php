@@ -78,9 +78,9 @@ return [
         ],
         'db_hjz' => [
             'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=gz-cdb-ecmy83dx.sql.tencentcdb.com;port=62387;dbname=bdm314524321_db',
+            'dsn'         => 'mysql:host=127.0.0.1;port=3306;dbname=bdm314524321_db',
             'username'    => 'root',
-            'password'    => 'hjzhome888'
+            'password'    => 'root'
         ],
     ],
     'params' => $params,

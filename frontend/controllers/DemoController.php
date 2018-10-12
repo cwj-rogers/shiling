@@ -21,8 +21,11 @@ class DemoController extends \yii\web\Controller
             $newRes[$i][] = array_shift($res);
             if(!empty($res)) $newRes[$i][] = array_shift($res);
         }
-        //p($newRes,1);
-        return $this->render('index2',['case'=>$newRes]);
+        $sql = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img ' .
+            'FROM ecs_goods AS g WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
+            'g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432) ORDER BY g.sort_order, g.goods_id DESC LIMIT 6';
+        $videores = Yii::$app->db_hjz->createCommand($sql)->queryAll();
+        return $this->render('index2',['case'=>$newRes,'videores'=>$videores]);
     }
 
     public function actionAbout(){
@@ -68,13 +71,33 @@ class DemoController extends \yii\web\Controller
         $arr = ["config"=>["met_online_type"=>"3", "met_stat"=>"0"]];
         echo json_encode($arr);
     }
+
+    // 获取文件
     public function actionFile($name){
         if ($name=="bgmp3_cn"){
             $path = Yii::$app->basePath."/web/static/demo/audio_templatesM1156010minmusicbgmp3_cn.txt";
             $content = file_get_contents($path);
             echo $content;die;
-        }elseif (1){
+        }
+    }
 
+    // 地址二级联动
+    public function actionRegion($url){
+        if (Yii::$app->request->isAjax){
+            $res = file_get_contents($url);
+            echo $res;die;
+        }
+    }
+
+    // 提交免费设计
+    public function actionFree(){
+        if (Yii::$app->request->isPost){
+            if (!empty($_POST)){
+                $data = "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}，姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL;
+                $file = Yii::getAlias("@app/views/demo/info.txt");
+                file_put_contents($file,$data,FILE_APPEND);
+                return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>'index#video']);
+            }
         }
     }
 }
