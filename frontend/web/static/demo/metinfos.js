@@ -27877,7 +27877,7 @@ $(document).ready(function () {
             oldCur = $.cookie('currentTime') || 0,
             Curren = $('#audio').attr('src').replace(/[^\u4e00-\u9fa5\w]/g, ''),
             status = $.cookie('status') || $('#audio').attr('status'),
-            ctx = canvas.getContext('2d');console.log(Curren);
+            ctx = canvas.getContext('2d');
         step = Math.floor(1024 / metNum);
         status_func(status);
         $('#canvas').click(function () {
@@ -28181,7 +28181,7 @@ $(document).ready(function () {
             sign_func(0);
         }, 100);
     });
-	console.log(M['classnow']);
+	
     if (M['classnow'] == 10001) {
         var hashNav = 'null';
         if (IE9) {
@@ -28865,7 +28865,7 @@ $(document).ready(function () {
 	/*省份城市二级联动*/
 	var region=function(){};
 	region.response = function(result){
-	  console.log(result);
+	  
 	  var sel = document.getElementById(result.target);
 	  sel.length = 1;
 	  sel.selectedIndex = 0;
@@ -28892,7 +28892,6 @@ $(document).ready(function () {
 	region.loadProvinces = function(county,classname){
 		var url = "http://www.hjzhome.com/region.php?type=1&target=hjz-province&parent="+county+"&1539314969773773";
 		$.getJSON('http://'+location.host+'/demo/region',{url:url},function(data){
-			console.log(data);
 			region.response(data);
 		})
 	}
@@ -28909,7 +28908,7 @@ $(document).ready(function () {
 	
 	$(document).ready(function(){
 		//弹窗获取地区列表
-		region.loadProvinces(1,"hjz-province");console.log(1);
+		region.loadProvinces(1,"hjz-province");
 		region.loadCities(6,"hjz-city");
 		$('#hjz-province').change(function () {
 			var selectid = $(this).val();
@@ -28925,11 +28924,34 @@ $(document).ready(function () {
 		},1500);
 		//预估报价动画效果
 		setInterval(function(){
-			console.log(123);
 			$('.offer1').text(Math.round(Math.random()*80000 + 20000));
 			$('.offer2').text(Math.round(Math.random()*10000 + 10000));
 			$('.offer3').text(Math.round(Math.random()*6000 + 2000));
 			$('.offer4').text(Math.round(Math.random()*3500 + 500));
 		},500);
-	})
+	});
+	
+	/* 公司简介轮播 */
+	$(document).ready(function(){
+		var company_profile = new Swiper('.company-container', {
+            autoplay: 3000,
+			pagination: '.B-pagination',
+			paginationClickable: true,
+            loop:true
+        });
+	});
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+

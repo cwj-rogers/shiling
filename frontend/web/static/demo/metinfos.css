@@ -39798,70 +39798,47 @@ html:not(.isMobile) *::-webkit-resizer {
 .video-text ul li span{color:#b1191a;font-weight:bold;margin:0 5px;}
 
 /*公司简介详情*/
-.main-content h1 {color: #b1191a;padding: 20px 0 12px 0;margin-bottom:0px}
+.side-content .main-content .b {display: block;font-size: 28px;color: rgba(0,0,0,.9);font-family: Times;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;margin: 0;line-height: 1.2;}
+.side-content .main-content .p {display: block;font-size: 44px;color: #000;line-height: 1.2;}
+.side-content .main-content .p em {font-size: 54px;color: #b1191a;padding-right: 4px;font-style: normal;}
+.main-content h1 {color: #b1191a;padding: 0px 0 12px 0;margin-bottom:0px}
 .main-content h1 .title-c {border-left: 4px solid #b1191a;padding-left: 15px;font-size: 24px;margin-right: 20px;}
 .main-content h1 .title-d {font-size: 18px;}
-.main-content .content-border {
-    border-top: 1px solid #e8e8e8;
-}
-.profile {
-    font-size: 14px;
-    color: #666;
-    padding-top: 15px;
-    line-height: 2em;
-}
-.profile p{
-	color: #666;
-	font-size: 14px;
-}
-.profile .profile-text {
-    padding: 20px;
-}
-.profile .profile-text span {
-    display: block;
-    text-indent: 30px;
-    margin-bottom: 20px;
-}
-.profile .company-img {
-    width: 100%;
-}
-.profile .mission {
-    padding: 20px;
-}
-.profile .product {
-    display: inline-block;
-    margin-top: 20px;
-    padding-left: 20px;
-}
-.profile .honour {
-    display: inline-block;
-    width: 100%;
-    margin-top: 20px;
-    padding-left: 20px;
-    position: relative;
-}
-.main-content h2 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.profile .mission p {
-    text-indent: 30px;
-    margin-bottom: 10px;
-}
-.profile .product .product-item {
-    display: block;
-    text-indent: 30px;
-    line-height: 2.5em;
-}
-.profile .honour .honour-item {
-    display: block;
-    text-indent: 30px;
-    line-height: 2.5em;
-}
+.main-content .content-border {border-top: 1px solid #e8e8e8;}
+.profile {font-size: 14px;color: #666;padding-top: 15px;line-height: 2em;}
+.profile p{color: #666;font-size: 14px;}
+.profile .profile-text {padding: 20px;}
+.profile .profile-text span {display: block;text-indent: 30px;margin-bottom: 20px;}
+.profile .company-img {width: 100%;}
+.profile .mission {padding: 20px;}
+.profile .product {display: inline-block;margin-top: 20px;padding-left: 20px;}
+.profile .honour {display: inline-block;width: 100%;margin-top: 20px;padding-left: 20px;position: relative;}
+.main-content h2 {font-size: 16px;font-weight: bold;margin-bottom: 20px;}
+.profile .mission p {text-indent: 30px;margin-bottom: 10px;}
+.profile .product .product-item {display: block;text-indent: 30px;line-height: 2.5em;}
+.profile .honour .honour-item {display: block;text-indent: 30px;line-height: 2.5em;}
+.profile .contact-info {display: inline-block;width: 100%;margin-top: 20px;padding-left: 20px;position: relative;}
+.swiper-box{position: absolute;left: 500px;top: 18px;width: 500px}
+.company-container {width: 100%;height: 100%;padding: 0 80px}
+.company-container .swiper-slide {text-align: center;font-size: 18px;background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+.company-container .swiper-slide img{width: 100%;height: 100%}
+.company-container .swiper-pagination-bullet-active{background-color: white}
 
+/*底部foot*/
+footer{display:flex;flex-direction: column;justify-content: flex-start;align-items:center}
+.foot-nav {width: fit-content;display: inline-block;}
+.foot-content{display: flex;flex-direction: row;justify-content: space-between;min-width: 500px;margin-top: 20px}
+.foot-content .footer_new_ga{display: flex;flex-direction: column;justify-content: center;}
+.foot-content .footer-qr-code{;display: flex;flex-direction: row;justify-content: flex-end;margin-left: 10px}
+.foot-content .footer-qr-code .footer-weixin-code{margin-left: 15px}
+.foot-content .footer-qr-code img{width: 75px;height: 75px;}
 
-
+/*侧边栏*/
+.nav-first>a:before{background: #b1191a;}
+body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:hover>.nav-first.active:hover>a>p {
+    color: #b1191a;
+    background: rgba(255,255,255,.8);
+}
 
 
 

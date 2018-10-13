@@ -117,7 +117,7 @@ use yii\helpers\Url;
                 <div class="side-phone">
                     <p>
                         <b>Call me :</b>
-                        <a href="tel:400-000-0000">400-000-0000</a>
+                        <a href="tel:400-000-0000">400-6966-398</a>
                     </p>
                     <i class="fa fa-qrcode" data-toggle="modal" data-target="#met-ewm-modal"></i>
                 </div>
@@ -134,7 +134,7 @@ use yii\helpers\Url;
                         <i class="fa fa-weibo"></i>
                     </a>
                 </div>
-                <div class="side-text">Copyright © 2017 电影快讯</div>
+                <div class="side-text">Copyright © 2018 荟家装健康智慧整装</div>
             </div>
         </div>
     </div>
@@ -148,7 +148,7 @@ use yii\helpers\Url;
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <img data-size="380_380" data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/201501/1422258610.jpg" alt="服务项目-APP应用开发|网站建设|平面设计">
+                <img data-size="380_380" data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/官网二维码.png" alt="荟家装健康智慧整装">
             </div>
         </div>
     </div>

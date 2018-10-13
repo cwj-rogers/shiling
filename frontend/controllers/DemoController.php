@@ -29,6 +29,18 @@ class DemoController extends \yii\web\Controller
     }
 
     public function actionAbout(){
+        if (Yii::$app->request->isPost){
+            if (!empty($_POST)){
+                $info = Yii::$app->request->post();
+                $data = date("Y-m-d H:i:s").PHP_EOL.
+                    "姓名：{$info['para115']}  电话：{$info['para116']}  邮箱：{$info['para117']}".PHP_EOL.
+                    "内容：{$info['para118']}".PHP_EOL.PHP_EOL;
+
+                $file = Yii::getAlias("@app/views/demo/contact.txt");
+                file_put_contents($file,$data,FILE_APPEND);
+                return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>Yii::$app->request->referrer]);
+            }
+        }
         return $this->render('about2');
     }
 
@@ -60,8 +72,22 @@ class DemoController extends \yii\web\Controller
 
     }
 
+    /**
+     * 查看留言
+     * @return string
+     */
     public function actionMessage(){
-        return $this->render('message2');
+        if ($pwd = Yii::$app->request->get('password',null)){
+            if ($pwd=="hjzhome888"){
+                $file = Yii::getAlias("@app/views/demo/contact.txt");
+                $info = file_get_contents($file);
+                return $this->render('message2',['info'=>$info,'checkout'=>1]);
+            }else{
+                return $this->render('@app/views/public/error',['message'=>'密码错误','waitSecond'=>3,'jumpUrl'=>'message']);
+            }
+        }else{
+            return $this->render('message2',['info'=>'','checkout'=>0]);
+        }
     }
 
     /**
