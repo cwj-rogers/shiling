@@ -6,18 +6,18 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => env('FRONTEND_COOKIE_VALIDATION_KEY'),
         ],
-        'db' => [
-            'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=127.0.0.1;port=3306;dbname=yii2admin',
-            'username'    => 'root',
-            'password'    => 'root'
-        ],
 //        'db' => [
 //            'class'       => 'yii\db\Connection',
-//            'dsn'         => 'mysql:host=gz-cdb-ecmy83dx.sql.tencentcdb.com;port=62387;dbname=yii2admin',
+//            'dsn'         => 'mysql:host=127.0.0.1;port=3306;dbname=yii2admin',
 //            'username'    => 'root',
-//            'password'    => 'hjzhome888'
+//            'password'    => false
 //        ],
+        'db' => [
+            'class'       => 'yii\db\Connection',
+            'dsn'         => 'mysql:host=gz-cdb-ecmy83dx.sql.tencentcdb.com;port=62387;dbname=yii2admin',
+            'username'    => 'root',
+            'password'    => 'hjzhome888'
+        ],
     ],
 ];
 

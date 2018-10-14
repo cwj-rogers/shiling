@@ -21,11 +21,18 @@ class DemoController extends \yii\web\Controller
             $newRes[$i][] = array_shift($res);
             if(!empty($res)) $newRes[$i][] = array_shift($res);
         }
+        //免费设计
         $sql = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img ' .
             'FROM ecs_goods AS g WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
             'g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432) ORDER BY g.sort_order, g.goods_id DESC LIMIT 6';
         $videores = Yii::$app->db_hjz->createCommand($sql)->queryAll();
-        return $this->render('index2',['case'=>$newRes,'videores'=>$videores]);
+        //VR方案
+        $sql = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img ' .
+            'FROM ecs_goods AS g WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
+            'g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) ORDER BY g.sort_order, g.goods_id DESC';
+        $vrres = Yii::$app->db_bw->createCommand($sql)->queryAll();
+        //p($vrres,1);
+        return $this->render('index2',['case'=>$newRes,'videores'=>$videores,'vr'=>$vrres]);
     }
 
     public function actionAbout(){

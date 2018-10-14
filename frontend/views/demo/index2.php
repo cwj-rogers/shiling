@@ -359,6 +359,7 @@ use yii\helpers\Html;
                     <div id="section-A">
                         <div class="swiper-container gallery-top" id="container-box">
                             <div class="swiper-wrapper">
+                                <?php foreach ($vr as $k=>$v):?>
                                 <div class="swiper-slide">
                                     <div class="A-body-content">
                                         <div class="bc-left">
@@ -382,13 +383,14 @@ use yii\helpers\Html;
                                         <div class="bc-right">
                                             <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
                                                 <div class="vr-pic">
-                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg" alt="">
+                                                    <img src="<?= $v['goods_img']?>" alt="">
                                                 </div>
                                             </a>
                                             <div class="vr-icon"></div>
                                         </div>
                                     </div>
                                 </div>
+                                <?php endforeach;?>
                                 <div class="swiper-slide">
                                     <div class="A-body-content">
                                         <div class="bc-left">
