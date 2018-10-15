@@ -39748,7 +39748,7 @@ html:not(.isMobile) *::-webkit-resizer {
                 #section-A .bc-left h3 .small{display:block;color: grey;font-size: 10px;font-weight: lighter;padding: 0;opacity: 0.5;margin-top: 5px}
             /*方案*/
             #section-A .scheme-box{height:18%;width: 100%;display: flex;flex-direction: column;justify-content: space-between;align-items: flex-start;margin-top: 10px;font-size: 12px}
-                #section-A .scheme-box .scheme{width: 60%;height: 30px;border: 1px #b1191a solid;display: flex;flex-direction: row;justify-content: flex-start;margin: 0}
+                #section-A .scheme-box .scheme{width: 73%;height: 30px;border: 1px #b1191a solid;display: flex;flex-direction: row;justify-content: flex-start;margin: 0}
                     #section-A .scheme .sch-title{width: 30%;line-height: 30px;text-align: center;color: #b1191a;}
                     #section-A .scheme .sch-content{width: 70%;line-height: 30px;text-align: center;background-color: #b1191a;color: white;font-weight: bold}
             /*列表*/

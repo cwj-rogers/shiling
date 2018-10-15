@@ -360,14 +360,14 @@ use yii\helpers\Html;
                         <div class="swiper-container gallery-top" id="container-box">
                             <div class="swiper-wrapper">
                                 <?php foreach ($vr as $k=>$v):?>
-                                <div class="swiper-slide">
+                                <div class="swiper-slide" thumb_data="<?= $v['goods_thumb']?>">
                                     <div class="A-body-content">
                                         <div class="bc-left">
-                                            <h3>阿尔卑斯-北欧整装 <span class="small">不足70m²按70m²计</span></h3>
+                                            <h3><?= $v['goods_name']?> <span class="small">不足70m²按70m²计</span></h3>
                                             <div class="scheme-box">
                                                 <div class="scheme">
                                                     <div class="sch-title">方案</div>
-                                                    <div class="sch-content">1790/m²整装包</div>
+                                                    <div class="sch-content"><?= $v['market_price']?>/m²整装包</div>
                                                 </div>
                                             </div>
                                             <ul>
@@ -377,13 +377,13 @@ use yii\helpers\Html;
                                             </ul>
                                             <div class="button-box">
                                                 <button><a href="goods.php?id=2250">查看详情</a></button>
-                                                <button onclick="showOrHidden()">立即预定</button>
+                                                <button><a href="http://wx.hjz.com/demo#video" target="_self">立即预定</a></button>
                                             </div>
                                         </div>
                                         <div class="bc-right">
                                             <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
                                                 <div class="vr-pic">
-                                                    <img src="<?= $v['goods_img']?>" alt="">
+                                                    <img src="<?= $v['img_url']?>" alt="">
                                                 </div>
                                             </a>
                                             <div class="vr-icon"></div>
@@ -391,159 +391,159 @@ use yii\helpers\Html;
                                     </div>
                                 </div>
                                 <?php endforeach;?>
-                                <div class="swiper-slide">
-                                    <div class="A-body-content">
-                                        <div class="bc-left">
-                                            <h3>遇见北京-新中式整装 <span class="small">不足70m²按70m²计</span></h3>
-                                            <div class="scheme-box">
-                                                <div class="scheme">
-                                                    <div class="sch-title">方案</div>
-                                                    <div class="sch-content">1990/m²整装包</div>
-                                                </div>
-
-                                            </div>
-                                            <ul>
-                                                <li>红木色/灰色/白色</li>
-                                                <li>成熟 稳重</li>
-                                                <li>低调内涵人群</li>
-                                            </ul>
-                                            <div class="button-box">
-                                                <button><a href="goods.php?id=1980">查看详情</a></button>
-                                                <button onclick="showOrHidden()">立即预定</button>
-                                            </div>
-                                        </div>
-                                        <div class="bc-right">
-                                            <a href="https://www.jiasc.com/tour/76964a38f28db264">
-                                                <div class="vr-pic">
-                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg" alt="">
-                                                </div>
-                                            </a>
-                                            <div class="vr-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="A-body-content">
-                                        <div class="bc-left">
-                                            <h3>简单有爱-现代整装 <span class="small">不足70m²按70m²计</span></h3>
-                                            <div class="scheme-box">
-                                                <div class="scheme">
-                                                    <div class="sch-title">方案</div>
-                                                    <div class="sch-content">1690/m²整装包</div>
-                                                </div>
-                                            </div>
-                                            <ul>
-                                                <li>黑白灰/米白</li>
-                                                <li>简约 舒适</li>
-                                                <li>时尚快节奏人群</li>
-                                            </ul>
-                                            <div class="button-box">
-                                                <button><a href="goods.php?id=1902">查看详情</a></button>
-                                                <button onclick="showOrHidden()">立即预定</button>
-                                            </div>
-                                        </div>
-                                        <div class="bc-right">
-                                            <a href="https://www.jiasc.com/tour/ba88498e9537c410">
-                                                <div class="vr-pic">
-                                                    <img src="http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg" alt="">
-                                                </div>
-                                            </a>
-                                            <div class="vr-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="A-body-content">
-                                        <div class="bc-left">
-                                            <h3>巴黎印象-欧式整装 <span class="small">不足70m²按70m²计</span></h3>
-                                            <div class="scheme-box">
-                                                <div class="scheme">
-                                                    <div class="sch-title">方案</div>
-                                                    <div class="sch-content">2990/m²整装包</div>
-                                                </div>
-
-                                            </div>
-                                            <ul>
-                                                <li>原石色/米色/暖色</li>
-                                                <li>高档 优雅</li>
-                                                <li>高端奢华人群</li>
-                                            </ul>
-                                            <div class="button-box">
-                                                <button><a href="goods.php?id=2443">查看详情</a></button>
-                                                <button onclick="showOrHidden()">立即预定</button>
-                                            </div>
-                                        </div>
-                                        <div class="bc-right">
-                                            <a href="https://www.jiasc.com/tour/4911d248e8fb7f40">
-                                                <div class="vr-pic">
-                                                    <img src="http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg" alt="">
-                                                </div>
-                                            </a>
-                                            <div class="vr-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="A-body-content">
-                                        <div class="bc-left">
-                                            <h3>田纳西州-美式乡村 <span class="small">不足70m²按70m²计</span></h3>
-                                            <div class="scheme-box">
-                                                <div class="scheme">
-                                                    <div class="sch-title">方案</div>
-                                                    <div class="sch-content">2490/m²整装包</div>
-                                                </div>
-
-                                            </div>
-                                            <ul>
-                                                <li>木色/米黄色/天蓝色</li>
-                                                <li>自然 舒适</li>
-                                                <li>自由休闲人群</li>
-                                            </ul>
-                                            <div class="button-box">
-                                                <button><a href="goods.php?id=1678">查看详情</a></button>
-                                                <button onclick="showOrHidden()">立即预定</button>
-                                            </div>
-                                        </div>
-                                        <div class="bc-right">
-                                            <a href="https://www.jiasc.com/tour/e018ed48301bfc3c">
-                                                <div class="vr-pic">
-                                                    <img src="http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg" alt="">
-                                                </div>
-                                            </a>
-                                            <div class="vr-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="A-body-content">
-                                        <div class="bc-left">
-                                            <h3>阿尔卑斯-北欧整装 <span class="small">不足70m²按70m²计</span></h3>
-                                            <div class="scheme-box">
-                                                <div class="scheme">
-                                                    <div class="sch-title">方案</div>
-                                                    <div class="sch-content">1790/m²整装包</div>
-                                                </div>
-                                            </div>
-                                            <ul>
-                                                <li>原木色/灰色/纯白色</li>
-                                                <li>年轻 浪漫</li>
-                                                <li>年轻人群</li>
-                                            </ul>
-                                            <div class="button-box">
-                                                <button><a href="goods.php?id=2250">查看详情</a></button>
-                                                <button onclick="showOrHidden()">立即预定</button>
-                                            </div>
-                                        </div>
-                                        <div class="bc-right">
-                                            <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
-                                                <div class="vr-pic">
-                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg" alt="">
-                                                </div>
-                                            </a>
-                                            <div class="vr-icon"></div>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="swiper-slide">-->
+<!--                                    <div class="A-body-content">-->
+<!--                                        <div class="bc-left">-->
+<!--                                            <h3>遇见北京-新中式整装 <span class="small">不足70m²按70m²计</span></h3>-->
+<!--                                            <div class="scheme-box">-->
+<!--                                                <div class="scheme">-->
+<!--                                                    <div class="sch-title">方案</div>-->
+<!--                                                    <div class="sch-content">1990/m²整装包</div>-->
+<!--                                                </div>-->
+<!---->
+<!--                                            </div>-->
+<!--                                            <ul>-->
+<!--                                                <li>红木色/灰色/白色</li>-->
+<!--                                                <li>成熟 稳重</li>-->
+<!--                                                <li>低调内涵人群</li>-->
+<!--                                            </ul>-->
+<!--                                            <div class="button-box">-->
+<!--                                                <button><a href="goods.php?id=1980">查看详情</a></button>-->
+<!--                                                <button onclick="showOrHidden()">立即预定</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="bc-right">-->
+<!--                                            <a href="https://www.jiasc.com/tour/76964a38f28db264">-->
+<!--                                                <div class="vr-pic">-->
+<!--                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <div class="vr-icon"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="swiper-slide">-->
+<!--                                    <div class="A-body-content">-->
+<!--                                        <div class="bc-left">-->
+<!--                                            <h3>简单有爱-现代整装 <span class="small">不足70m²按70m²计</span></h3>-->
+<!--                                            <div class="scheme-box">-->
+<!--                                                <div class="scheme">-->
+<!--                                                    <div class="sch-title">方案</div>-->
+<!--                                                    <div class="sch-content">1690/m²整装包</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <ul>-->
+<!--                                                <li>黑白灰/米白</li>-->
+<!--                                                <li>简约 舒适</li>-->
+<!--                                                <li>时尚快节奏人群</li>-->
+<!--                                            </ul>-->
+<!--                                            <div class="button-box">-->
+<!--                                                <button><a href="goods.php?id=1902">查看详情</a></button>-->
+<!--                                                <button onclick="showOrHidden()">立即预定</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="bc-right">-->
+<!--                                            <a href="https://www.jiasc.com/tour/ba88498e9537c410">-->
+<!--                                                <div class="vr-pic">-->
+<!--                                                    <img src="http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <div class="vr-icon"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="swiper-slide">-->
+<!--                                    <div class="A-body-content">-->
+<!--                                        <div class="bc-left">-->
+<!--                                            <h3>巴黎印象-欧式整装 <span class="small">不足70m²按70m²计</span></h3>-->
+<!--                                            <div class="scheme-box">-->
+<!--                                                <div class="scheme">-->
+<!--                                                    <div class="sch-title">方案</div>-->
+<!--                                                    <div class="sch-content">2990/m²整装包</div>-->
+<!--                                                </div>-->
+<!---->
+<!--                                            </div>-->
+<!--                                            <ul>-->
+<!--                                                <li>原石色/米色/暖色</li>-->
+<!--                                                <li>高档 优雅</li>-->
+<!--                                                <li>高端奢华人群</li>-->
+<!--                                            </ul>-->
+<!--                                            <div class="button-box">-->
+<!--                                                <button><a href="goods.php?id=2443">查看详情</a></button>-->
+<!--                                                <button onclick="showOrHidden()">立即预定</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="bc-right">-->
+<!--                                            <a href="https://www.jiasc.com/tour/4911d248e8fb7f40">-->
+<!--                                                <div class="vr-pic">-->
+<!--                                                    <img src="http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <div class="vr-icon"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="swiper-slide">-->
+<!--                                    <div class="A-body-content">-->
+<!--                                        <div class="bc-left">-->
+<!--                                            <h3>田纳西州-美式乡村 <span class="small">不足70m²按70m²计</span></h3>-->
+<!--                                            <div class="scheme-box">-->
+<!--                                                <div class="scheme">-->
+<!--                                                    <div class="sch-title">方案</div>-->
+<!--                                                    <div class="sch-content">2490/m²整装包</div>-->
+<!--                                                </div>-->
+<!---->
+<!--                                            </div>-->
+<!--                                            <ul>-->
+<!--                                                <li>木色/米黄色/天蓝色</li>-->
+<!--                                                <li>自然 舒适</li>-->
+<!--                                                <li>自由休闲人群</li>-->
+<!--                                            </ul>-->
+<!--                                            <div class="button-box">-->
+<!--                                                <button><a href="goods.php?id=1678">查看详情</a></button>-->
+<!--                                                <button onclick="showOrHidden()">立即预定</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="bc-right">-->
+<!--                                            <a href="https://www.jiasc.com/tour/e018ed48301bfc3c">-->
+<!--                                                <div class="vr-pic">-->
+<!--                                                    <img src="http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <div class="vr-icon"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="swiper-slide">-->
+<!--                                    <div class="A-body-content">-->
+<!--                                        <div class="bc-left">-->
+<!--                                            <h3>阿尔卑斯-北欧整装 <span class="small">不足70m²按70m²计</span></h3>-->
+<!--                                            <div class="scheme-box">-->
+<!--                                                <div class="scheme">-->
+<!--                                                    <div class="sch-title">方案</div>-->
+<!--                                                    <div class="sch-content">1790/m²整装包</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <ul>-->
+<!--                                                <li>原木色/灰色/纯白色</li>-->
+<!--                                                <li>年轻 浪漫</li>-->
+<!--                                                <li>年轻人群</li>-->
+<!--                                            </ul>-->
+<!--                                            <div class="button-box">-->
+<!--                                                <button><a href="goods.php?id=2250">查看详情</a></button>-->
+<!--                                                <button onclick="showOrHidden()">立即预定</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="bc-right">-->
+<!--                                            <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">-->
+<!--                                                <div class="vr-pic">-->
+<!--                                                    <img src="http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+<!--                                            <div class="vr-icon"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             <!-- Add Arrows -->
                             <div class="swiper-button-next swiper-button-white"></div>
@@ -919,34 +919,37 @@ string(4) "news"
             pagination: '.gallery-thumbs',
             paginationClickable: true,
             paginationBulletRender: function (swiper, index, className) {
-                var xiaotu = '';
-                switch (index){
-                    case 0:
-                        xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-                        break;
-                    case 1:
-                        xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-                        break;
-                    case 2:
-                        xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-                        break;
-                    case 3:
-                        xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-                        break;
-                    case 4:
-                        xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-                        break;
-                    case 5:
-                        xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-                        break;
-                    case 6:
-                        //xiaotu = '<div class="' + className + '" style="background-image:url(http://www.hjzhome.com/images/201802/goods_img/2443_P_1517793493219.jpg);background-size:100% 100%;"></div>';
-                        break;
-                    case 7:
-                        //xiaotu = '<div class="' + className + '" style="background-image:url(http://www.vanlian.cn/images/new_product/shouy-white.png);background-size:100% 100%;"></div>';
-                        break;
-                }
-                return xiaotu;
+                var thumb,url;
+                // switch (index){
+                console.log($("#container-box>.swiper-slide:eq("+0+")").attr("thumb_data"));
+                url = $("#container-box>.swiper-slide:eq("+index+")").attr("thumb_data");
+                thumb = '<div class="' + className + '" style="background-image:url(' + url + ');background-size:100% 100%;"></div>';
+                //console.log(url,thumb);
+                //     case 0:
+                //         break;
+                //     case 1:
+                //         xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+                //         break;
+                //     case 2:
+                //         xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+                //         break;
+                //     case 3:
+                //         xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+                //         break;
+                //     case 4:
+                //         xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+                //         break;
+                //     case 5:
+                //         xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
+                //         break;
+                //     case 6:
+                //         //xiaotu = '<div class="' + className + '" style="background-image:url(http://www.hjzhome.com/images/201802/goods_img/2443_P_1517793493219.jpg);background-size:100% 100%;"></div>';
+                //         break;
+                //     case 7:
+                //         //xiaotu = '<div class="' + className + '" style="background-image:url(http://www.vanlian.cn/images/new_product/shouy-white.png);background-size:100% 100%;"></div>';
+                //         break;
+                // }
+                return thumb;
             },
             prevButton: '.swiper-button-prev',
             nextButton: '.swiper-button-next',

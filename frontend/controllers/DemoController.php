@@ -27,11 +27,13 @@ class DemoController extends \yii\web\Controller
             'g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432) ORDER BY g.sort_order, g.goods_id DESC LIMIT 6';
         $videores = Yii::$app->db_hjz->createCommand($sql)->queryAll();
         //VR方案
-        $sql = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img ' .
-            'FROM ecs_goods AS g WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND '.
-            'g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) ORDER BY g.sort_order, g.goods_id DESC';
-        $vrres = Yii::$app->db_bw->createCommand($sql)->queryAll();
-        //p($vrres,1);
+        $sql1 = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img, g.market_price, gal.img_url, gal.img_id ' .
+                'FROM ecs_goods AS g LEFT JOIN ecs_goods_gallery as gal on g.goods_id=gal.goods_id '.
+                'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) '.
+                'ORDER BY gal.img_id desc';
+        $sql2 = "SELECT * FROM ($sql1) as ggal GROUP BY  ggal.goods_name";
+        $vrres = Yii::$app->db_bw->createCommand($sql2)->queryAll();
+//        p($vrres,1);
         return $this->render('index2',['case'=>$newRes,'videores'=>$videores,'vr'=>$vrres]);
     }
 
