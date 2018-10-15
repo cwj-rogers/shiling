@@ -359,10 +359,10 @@ class YhtController extends \yii\web\Controller
         if (!empty($contractInfo)){
             if ($contractInfo['cont_has_bind']==2){
                 //锁定的合同, 需要访问权限判断, 只有创建人和签署人能看到合同内容
-                $exist = Yii::$app->db->createCommand("select * from yii2_wx_yht_contract_signer where contract_id={$contractId} and user_id={$userId}")->queryOne();
-                if (empty($exist)){
-                    return $this->render('fail',['msg'=>"抱歉! 40012非合同签署双方不能查看合同"]);
-                }
+//                $exist = Yii::$app->db->createCommand("select * from yii2_wx_yht_contract_signer where contract_id={$contractId} and user_id={$userId}")->queryOne();
+//                if (empty($exist)){
+//                    return $this->render('fail',['msg'=>"抱歉! 40012非合同签署双方不能查看合同"]);
+//                }
             }elseif ($contractInfo['cont_has_bind']==0){
                 //非合同创建人访问,则合同视为已使用
                 if ($contractInfo->cont_owner_signerId != $signerId){

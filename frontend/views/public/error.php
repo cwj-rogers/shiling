@@ -51,7 +51,7 @@ body{ background: #290C0C; font-family: '微软雅黑'; color: #fff; font-size: 
 <div>
     <a id="href" id="btn-now" href="<?php echo($jumpUrl); ?>">立即跳转</a> 
     <button id="btn-stop" type="button" onclick="stop()">停止跳转</button> 
-    <a id="href" id="btn-now" href="<?= Url::toRoute(['login/logout']); ?>">重新登录</a>
+<!--    <a id="href" id="btn-now" href="--><?//= Url::toRoute(['login/logout']); ?><!--">重新登录</a>-->
 </div>
 </div>
 <script type="text/javascript">
@@ -65,7 +65,6 @@ body{ background: #290C0C; font-family: '微软雅黑'; color: #fff; font-size: 
      	};
      }, 1000);
   window.stop = function (){
-         console.log(111);
             clearInterval(interval);
  }
  })();
