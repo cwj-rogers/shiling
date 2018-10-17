@@ -225,7 +225,7 @@ use yii\helpers\Html;
                                 </li>
                             </ul>
                             <p> 装修预算数据由 <span>荟家装健康智慧整装</span> 平台历史服务上千万业主装修数据、全国各个城市线下门店合同成交金额经过大数据实时分析计算。</p>
-                            <a class="click-box small" href="video/showimg.php?lang=cn&id=89" title=" 什么是响应式？" target='_self'>
+                            <a class="click-box small" href="<?= Url::toRoute(['page','id'=>16])?>" title="免费设计报价" target='_self'>
                                 <span>READ MORE</span>
                             </a>
                         </div>

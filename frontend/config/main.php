@@ -76,12 +76,14 @@ return [
             'rules' => [
             ],
         ],
+        //阿里
         'db_hjz' => [
             'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=gz-cdb-ecmy83dx.sql.tencentcdb.com;port=62387;dbname=bdm314524321_db',
-            'username'    => 'root',
-            'password'    => 'hjzhome888'
+            'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=bdm314524321_db',
+            'username'    => 'hjzhome',
+            'password'    => 'Hjzhome888'
         ],
+        //搬瓦
         'db_bw' => [
             'class'       => 'yii\db\Connection',
             'dsn'         => 'mysql:host=95.169.30.158;port=3306;dbname=bdm314524321_db',
