@@ -19463,25 +19463,25 @@ $.components.register('ladda', {
         }
     }
 }),
-    $.components.register('laddaProgress', {
-        mode: 'init',
-        defaults: {
-            init: function (instance) {
-                var progress = 0,
-                    interval = setInterval(function () {
-                        progress = Math.min(progress + 0.1 * Math.random(), 1),
-                            instance.setProgress(progress),
-                        1 === progress && (instance.stop(), clearInterval(interval))
-                    }, 200)
-            }
-        },
-        init: function () {
-            if ('undefined' != typeof Ladda) {
-                var defaults = $.components.getDefaults('laddaProgress');
-                Ladda.bind('[data-plugin="laddaProgress"]', defaults)
-            }
-        }
-    });
+$.components.register('laddaProgress', {
+	mode: 'init',
+	defaults: {
+		init: function (instance) {
+			var progress = 0,
+				interval = setInterval(function () {
+					progress = Math.min(progress + 0.1 * Math.random(), 1),
+						instance.setProgress(progress),
+					1 === progress && (instance.stop(), clearInterval(interval))
+				}, 200)
+		}
+	},
+	init: function () {
+		if ('undefined' != typeof Ladda) {
+			var defaults = $.components.getDefaults('laddaProgress');
+			Ladda.bind('[data-plugin="laddaProgress"]', defaults)
+		}
+	}
+});
 if (typeof Tablesaw === 'undefined') {
     Tablesaw = {
         i18n: {
@@ -28110,19 +28110,30 @@ $(document).ready(function () {
     function coordinate_func() {
         var script = document.createElement('script'),
             coordinate = $('#map').attr('coordinate') || '105,25';
-        script.src = '//api.map.baidu.com/api?v=2.0&ak=aL2Gwp389Kxj3bFhSMq7cf9w&callback=map_func';
+        script.src = '//api.map.baidu.com/api?v=2.0&ak=gnFREoDcGvimV2KZOmSPIy1fNPE5IgdH&callback=map_func';
         document.body.appendChild(script);
         map_func = function () {
             var coo = coordinate && coordinate.split(',');
-            var map = new BMap.Map('map');
-            map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);
-            map.enableScrollWheelZoom();
+            var map = new BMap.Map('map');//地图渲染标签
+            map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);//地图中心
+            map.enableScrollWheelZoom();//禁止缩放地图
             var Icon = new BMap.Icon(M['tem'] + "/min/svg/point.svg\" class=\"point_svg", new BMap.Size(28, 56));
-            var marker = new BMap.Marker(new BMap.Point(coo[0] * 1, coo[1] * 1), {
-                icon: Icon
+            
+			
+			var sContent =
+	"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>天安门</h4>" + 
+	"<img style='float:right;margin:4px' id='imgDemo' src='http://image.hjzhome.com/images/201710/thumb_img/2564_thumb_G_1508356301356.jpg' width='139' height='104' title='天安门'/>" + 
+	"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...</p>" + 
+	"</div>";
+			var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+			var marker = new BMap.Marker(new BMap.Point(coo[0] * 1, coo[1] * 1), {
+                //icon: Icon,
+				//openInfoWindow:infoWindow
             });
             marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+			//marker.openInfoWindow(infoWindow);
             map.addOverlay(marker);
+			//marker.openInfoWindow(infoWindow);
         }
     }
     $('.window-bin').each(function (index, element) {

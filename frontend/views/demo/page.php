@@ -28,6 +28,24 @@ use yii\helpers\Url;
     <link rel='stylesheet' href='/static/demo/metinfos.css'>
 </head>
 <body class="  class-25">
+<div class="load-box">
+    <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g>
+            <circle cx="35" cy="16.6987298" r="11"></circle>
+            <circle cx="16.6987298" cy="35" r="11"></circle>
+            <circle cx="10" cy="60" r="11"></circle>
+            <circle cx="16.6987298" cy="85" r="11"></circle>
+            <circle cx="35" cy="103.30127" r="11"></circle>
+            <circle cx="60" cy="110" r="11"></circle>
+            <circle cx="85" cy="103.30127" r="11"></circle>
+            <circle cx="103.30127" cy="85" r="11"></circle>
+            <circle cx="110" cy="60" r="11"></circle>
+            <circle cx="103.30127" cy="35" r="11"></circle>
+            <circle cx="85" cy="16.6987298" r="11"></circle>
+            <circle cx="60" cy="10" r="11"></circle>
+        </g>
+    </svg>
+</div>
 <!--[if lte IE 8]>
 <div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
     <p class="browserupgrade font-size-18">你正在使用一个
@@ -53,11 +71,6 @@ use yii\helpers\Url;
             <li class="sign-li active">
                 <a href="<?= Url::toRoute(['demo/about'])?>"  title="全部">
                     <b>全部</b>
-                </a>
-            </li>
-            <li class="sign-li ">
-                <a href="<?= Url::toRoute(['demo/message'])?>"  title="查看留言">
-                    <b>查看留言</b>
                 </a>
             </li>
         </ul>

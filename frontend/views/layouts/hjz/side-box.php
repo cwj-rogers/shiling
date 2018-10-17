@@ -1,6 +1,24 @@
 <?php
 use yii\helpers\Url;
 ?>
+<div class="load-box">
+    <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g>
+            <circle cx="35" cy="16.6987298" r="13"></circle>
+            <circle cx="16.6987298" cy="35" r="13"></circle>
+            <circle cx="10" cy="60" r="13"></circle>
+            <circle cx="16.6987298" cy="85" r="13"></circle>
+            <circle cx="35" cy="103.30127" r="13"></circle>
+            <circle cx="60" cy="110" r="13"></circle>
+            <circle cx="85" cy="103.30127" r="13"></circle>
+            <circle cx="103.30127" cy="85" r="13"></circle>
+            <circle cx="110" cy="60" r="13"></circle>
+            <circle cx="103.30127" cy="35" r="13"></circle>
+            <circle cx="85" cy="16.6987298" r="13"></circle>
+            <circle cx="60" cy="10" r="13"></circle>
+        </g>
+    </svg>
+</div>
 <div class="side-box">
     <div class="side-cut">
         <div class="side-shadow"></div>
@@ -27,16 +45,17 @@ use yii\helpers\Url;
                             <b>精彩首页</b>
                         </a>
                     </li>
+
+                    <li class="nav-first  ">
+                        <a href="<?= Url::toRoute('video')?>"  title="服务项目" data-alert="全部" >
+                            <i class="fa fa-home fa-coffee"></i>
+                            <b>免费设计</b>
+                        </a>
+                    </li>
                     <li class="nav-first  ">
                         <a href="<?= Url::toRoute('about')?>"  title="关于我们" data-alert="全部" >
                             <i class="fa fa-home fa-pie-chart"></i>
                             <b>关于我们</b>
-                        </a>
-                    </li>
-                    <li class="nav-first  ">
-                        <a href="<?= Url::toRoute('server')?>"  title="服务项目" data-alert="全部" >
-                            <i class="fa fa-home fa-coffee"></i>
-                            <b>服务项目</b>
                         </a>
                     </li>
                     <li class="nav-first has ">
@@ -71,6 +90,13 @@ use yii\helpers\Url;
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-first  ">
+                        <a href="<?= Url::toRoute('case')?>"  title="案例展示" data-alert="全部" >
+                            <i class="fa fa-home fa-flag"></i>
+                            <b>案例展示</b>
+                            <p>24</p>
+                        </a>
+                    </li>
                     <li class="nav-first has ">
                         <a href="<?= Url::toRoute('news')?>"  title="新闻资讯" data-alert="全部" >
                             <i class="fa fa-home fa-bell"></i>
@@ -98,15 +124,9 @@ use yii\helpers\Url;
                             </li>
                         </ul>
                     </li>
+
                     <li class="nav-first  ">
-                        <a href="<?= Url::toRoute('case')?>"  title="案例展示" data-alert="全部" >
-                            <i class="fa fa-home fa-flag"></i>
-                            <b>案例展示</b>
-                            <p>24</p>
-                        </a>
-                    </li>
-                    <li class="nav-first  ">
-                        <a href="<?= Url::toRoute('message')?>"  title="联系我们" data-alert="全部" >
+                        <a href="<?= Url::toRoute('about')?>"  title="联系我们" data-alert="全部" >
                             <i class="fa fa-home fa-book"></i>
                             <b>联系我们</b>
                         </a>
