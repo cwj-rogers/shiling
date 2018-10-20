@@ -202,5 +202,13 @@ class FuncHelper
             echo implode("\n",$data);
         }
     }
-    
+
+    /**
+     * 获取合同编号  主体+合同(缩写)+类型+日期+地区+顺序号
+*/
+    public static function getContractCode($landmark,$num){
+        $order = $num + 1;
+        $contractCode = 'HJZ-HT-XM-'.date("Ymd").'-'.$landmark.'-'.$order;
+        return $contractCode;
+    }
 }

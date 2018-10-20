@@ -13,7 +13,7 @@ class ArticleController extends Controller
 
     public function actionIndex()
     {
-        //phpinfo();
+        phpinfo();
         return $this->render('index');
     }
     

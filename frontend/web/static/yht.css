@@ -1,0 +1,163 @@
+/* 移动端定义字体的代码 */
+body{font-family:Helvetica,Microsoft Yahei;background-color: lightgray}
+/*去掉系统中元素被触摸时产生的半透明灰色遮罩*/
+a,button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);}
+/*传统的base.css*/
+html{font-size:10px;background:white;color:black;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:0;}
+address,caption, cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+ol,ul {list-style:none;}
+capation,th{text-align:inherit;}
+/*h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}*/
+q:before, q:after{content:'';}
+abbr,acronym{border:0;}
+a{text-decoration:none;}
+/* 统一上标和下标 */
+sub,sup {font-size:75%;line-height:0;position:relative;vertical-align:baseline;}
+sup{top:-0.5em;}sub{bottom:-0.25em;}
+/*定位*/
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}* html .clearfix{height:1%;}.clearfix{display:block;}
+.hide{display:none!important;} .show{display:block;}
+
+.icon {width: 1em; height: 1em;vertical-align: -0.15em;fill: currentColor;overflow: hidden;}
+
+/*全局*/
+.weui-cells .weui-cell .weui-cell__hd .sm{font-size: 14px}
+.weui-cells .weui-cell .weui-cell__hd .xs{font-size: 12px}
+/*首页样式*/
+#container{height: 100%;max-width: 768px;position: relative;z-index: 888;margin: 0 auto;background-color: white;}
+.weui-footer{max-width: 768px;z-index: 1;margin: 0 auto;}
+    .cont_header{position: relative;width: 100%;padding: 20px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
+    .cont_header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
+    .cont_header::after{content: " ";position: absolute;left: 0;bottom: 0;right: 0;height: 1px;border-top: 1px solid #E5E5E5;color: #E5E5E5;}
+/*云合同模板页*/
+#sectionA{}
+    #sectionA header{width: 100%;padding: 20px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
+    #sectionA header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
+    #sectionA .weui-grid{width:50%}
+    #sectionA .weui-grid .weui-grid-icon{text-align: center}
+        #sectionA .weui-grid .weui-grid-icon .icon{font-size: 88px}
+        #sectionA .weui-grid .weui-grid__label{margin-top: 10px;color: grey}
+
+/*查看合同详情和创建合同*/
+#sectionB{}
+    /*详情页iframe*/
+    /*签约按钮*/
+    #sectionB .sign{position: fixed;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
+        #sectionB .sign .weui-flex__item{text-align: center;line-height: 50px;color: white}
+        #sectionB .sign .weui-flex__item+.weui-flex__item{flex: 2}
+        #sectionB .sign .icon{font-size: 38px;display: block;margin-top: 5px;color: white}
+    /*下载按钮*/
+    #sectionB #download{position: fixed;width: 140px;height: 50px;background: #4280FF;right: 10px;top: 30px;border-radius: 25px;padding: 0 15px;box-sizing: border-box}
+        #sectionB #download .weui-flex__item{text-align: center;line-height: 50px;color: white}
+        #sectionB #download .weui-flex__item+.weui-flex__item{flex: 2}
+        #sectionB #download .icon{font-size: 38px;display: block;margin-top: 5px;color: white}
+    /*web端控制页面宽度*/
+    #sectionB .weui-popup__modal div{max-width: 700px;margin: 0 auto;box-sizing: border-box}
+    /*选择角色*/
+    #sectionB .register-step{height: 300px}
+        #sectionB .register-step .weui-popup__modal{height: 400px;}
+            #sectionB #register .weui-popup__modal div{text-align: center;box-sizing: border-box;padding: 15px 35px;}
+            #sectionB #register .weui-popup__modal .top{color: #4280FF;font-size: 14px;margin-top: 10px}
+            #sectionB #register .bottom div{background: #4280FF;border-radius: 30px;margin-bottom: 20px;color: white;display: flex;flex-direction: row;align-items: center;justify-content: center}
+            #sectionB #register .bottom .icon{font-size: 32px;color: white}
+            #sectionB #register .bottom span{margin-left: 20px;}
+    /*个人*/
+    #sectionB #personal .form-personal{width: 100%;height: auto}
+    #sectionB #personal .weui-popup__modal{background: white}
+    #sectionB #personal .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white;font-weight: bold}
+    #sectionB #personal hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
+        #sectionB #personal .bottom .weui-label{color: #4280FF;font-size: 14px}
+        #sectionB #personal .bottom .weui-btn_default{color: white;border: #4280FF 1px solid;background-color: #4280FF;font-weight: bold;margin-top: 15px}
+    /*公司*/
+    #sectionB #company .weui-popup__modal{background: white}
+    #sectionB #company .top{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;background: white;font-weight: bold}
+    #sectionB #company hr{color: #4280FF;background-color: #4280FF;height: 1px;border:none}
+        #sectionB #company .bottom .weui-label{color: #4280FF;font-size: 14px}
+        #sectionB #company .bottom .weui-btn_default{color: white;border: #4280FF 1px solid;background-color: #4280FF;font-weight: bold;margin-top: 15px}
+    /*签名页*/
+    #sectionB #signature{background-color: white}
+    #sectionB #signature #signature-box{height: 300px;width: 100%;}
+        #sectionB #signature .head{padding: 15px 15px;text-align: center;color: #4280FF;font-size: 18px;font-weight: bold}
+        #sectionB #signature hr{color: #4280FF;background-color: #4280FF;height: 1px;border: none;}
+        #sectionB #signature .body p{text-align: center;font-size: 12px;color: grey;font-weight: normal;margin-bottom: 10px}
+        #sectionB #signature .body .image{margin:10px 0;margin-top: 15px;text-align: center;position: relative}
+        #sectionB #signature .body .image img{height: 100px}
+        #sectionB #signature .body .image .show-gallery{position: absolute;top:0px;right: 13px;font-size: 12px;color: #4280FF;padding: 6px 10px;}
+        #sectionB #signature .body .go-verify{text-align: center;padding: 0 50px}
+        #sectionB #signature .body .go-verify button{background-color: #4280FF;color: white}
+    /*验证码弹窗*/
+    .weui-dialog .weui-prompt-text{padding: 0 40px;}
+    .weui-dialog .weui-prompt-text a{color: #4280FF;border: 1px solid #4280FF;border-radius: 24px;font-size: 16px;}
+    .weui-dialog .weui-prompt-text .weui-btn_disabled{color:grey;border: 1px solid grey;}
+    .weui-dialog .weui-dialog__bd .weui-cell_warn{margin-top: 10px;font-size: 12px}
+    .weui-dialog .weui-dialog__bd .weui-input{margin-top: 3px}
+    /*印模画框*/
+    .weui-gallery .frame{box-sizing: border-box;height: 100%;width: 100%;border:30px solid rgba(0,0,0,1);border-width: 80px 0px 80px 0px;display: flex;flex-direction: row;justify-content: center;align-items: center;background-color: white}
+    .weui-gallery .frame img{width: 300px}
+    .weui-gallery .weui-gallery__opr i{font-size: 38px;color: white;}
+
+/*合同列表*/
+#sectionD{height: 100%;width: 100%}
+    #sectionD header{width: 100%;padding: 20px;padding-bottom: 0px;box-sizing: border-box;display: flex;flex-direction: column;justify-content: center;align-items: center}
+    #sectionD header p{width: 100%;color: #4280FF;text-align: center;font-size: 24px;}
+    #sectionD #super-admin .weui-popup__modal{display: flex;flex-direction: column;justify-content: center;align-items: center}
+    #sectionD #super-admin .top{padding: 50px 0;padding-bottom: 30px}
+    #sectionD #super-admin .top p{text-align: center;font-size: 24px;color: gray;padding: 5px 0;}
+    #sectionD #super-admin .top p+p{text-align: center;font-size: 14px;color: gray}
+    #sectionD #super-admin .bottom{margin-bottom: 150px}
+    #sectionD #super-admin .bottom button{padding: 0 50px}
+
+    #sectionD .weui-panel .weui-media-box__hd{display: flex;flex-direction: row;align-items: center;justify-content: center}
+    #sectionD .weui-panel .weui-media-box__hd .icon{font-size: 60px}
+    #sectionD .weui-media-box__bd .box__bd-top{display: flex;flex-direction: row;justify-content: space-between}
+    #sectionD .weui-media-box__bd .box__bd-top h4{max-width: 170px;overflow: hidden}
+    #sectionD .weui-media-box__bd .box__bd-top span{font-size: 12px;color: grey;float: right;line-height: 27px;margin-right: 10px}
+    #sectionD .weui-media-box__bd .box__bd-bottom{display: flex;flex-direction: row;justify-content: space-between}
+    #sectionD .weui-media-box__bd .box__bd-bottom p{line-height: 27px}
+    #sectionD .weui-media-box__bd .box__bd-bottom span{font-size: 12px;color: grey;float: right;line-height: 27px;margin-right: 10px}
+    #sectionD .weui-panel .box__bd-bottom .status0{float: right;margin-right: 10px}
+    #sectionD .weui-panel .box__bd-bottom .status1{float: right;margin-right: 10px;color: #4280FF}
+    #sectionD .weui-panel .arrows{flex: 0.1;color: grey}
+
+    #sectionD #administrator{position: absolute;top: 20px;right: 15px;width: 80px;height: 80px}
+    #sectionD #administrator .temp{width: 100%;height: 100%;background-color: rgba(66,128,255,0.7);color: white;display: flex;flex-direction: column;justify-content: center;border-radius: 40px;box-sizing: border-box;border: #4280FF 2px solid;}
+    #sectionD #administrator .temp span{text-align: center}
+
+/*云合同web登录*/
+#container .weui-msg__icon-area img{width: 100%}
+/*云合同用户注册*/
+#register{}
+    #register #tab1 .weui-cells__tips{text-align: center}
+    #register #tab2 .weui-cells__tips{text-align: center}
+    #register .tmp-submit a{width: 100%}
+    #register .weui-gallery span{color: white;text-align: center;padding-top: 50px;background-size: initial}
+    #register .weui-gallery .weui-gallery__opr img{width: 80px}
+    /*条款*/
+    #explain{z-index: 888;}
+    #explain .weui-popup__modal{padding: 0 15px;box-sizing: border-box;width: 100%;background-color: white}
+    #explain .weui-popup__modal h3{margin: 5px 0;margin-top: 15px}
+    #explain .weui-popup__modal p{margin-bottom: 5px;font-size: 12px}
+    #explain .weui-popup__modal ul{margin-bottom: 5px;padding-left: 15px;font-size: 12px;}
+    #explain .weui-popup__modal .text-item{text-indent:2em;}
+    #explain .weui-check__label {flex-direction: row;justify-content: center;align-items: center}
+    #explain .weui-check__label .weui-cell__bd{font-size: 12px;flex: none}
+    #explain .weui-cell .weui-btn{width: 100%;margin: 15px 0;}
+
+/*合同模板表单填写*/
+.tmp-form{padding-bottom: 100px;}
+.tmp-form .tmp-submit{background-color: white}
+.tmp-form .weui-cells__tips{padding-bottom: 10px;background-color: white}
+/*absolute 是为了兼容电脑端防止错位*/
+.cont_header .cont-demo{position: absolute;top:60px;right: 10px;background-color: #4280FF;border-radius: 23px;padding: 0 10px;font-size: 16px;z-index: 888}
+.cont_header .cont-demo i{color: white;font-size: 18px;font-weight: bold;margin-right: 5px}
+.tmp-form .weui-cells .weui-cell .weui-cell__hd p{max-width: 160px;overflow: hidden;white-space: nowrap}
+
+/*合同demo*/
+#contract-demo{position: relative;width: 100%}
+#contract-demo .go-back{width: 100%;position: fixed;bottom: 20px;display: flex;flex-direction: row;justify-content: center;align-items: center}
+#contract-demo .go-back a{background-color: #4280FF;color: white;width: 90%;}

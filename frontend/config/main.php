@@ -21,6 +21,13 @@ return [
         ],
     ],
     'components' => [
+        // overtrue 微信SDK
+        'wechat' => [
+            'class' => 'maxwen\easywechat\Wechat',
+            // 'userOptions' => []  # user identity class params
+            // 'sessionParam' => '' # wechat user info will be stored in session under this key
+            // 'returnUrlParam' => '' # returnUrl param stored in session
+        ],
         'user' => [
             'identityClass' => 'frontend\models\User',
             'enableAutoLogin' => true,
@@ -33,23 +40,56 @@ return [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
+                'file' => [
+                    //文件方式存储日志操作对应操作对象
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['info','error'],
+                    'logVars' => [],
                 ],
+                /* 使用数据库存储日志 */
+                'db' => [
+                    //数据库存储日志对象
+                    'class' => 'yii\log\DbTarget',
+                    //同上
+                    'levels' => ['error', 'warning'],
+                    'logVars' => ['_SESSION'],
+                ]
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'public/404',
+            'errorAction' => 'public/error',
         ],
-
+        'session' => [
+            'class' => 'yii\web\Session'
+        ],
+        'cache' => [
+            'class' => 'yii\redis\Cache',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+            ]
+        ],
         'urlManager' => [
             'enablePrettyUrl' => env('FRONTEND_PRETTY_URL', true),
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-
+        //阿里
+        'db_hjz' => [
+            'class'       => 'yii\db\Connection',
+            'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=bdm314524321_db',
+            'username'    => 'hjzhome',
+            'password'    => 'Hjzhome888'
+        ],
+        //搬瓦
+        'db_bw' => [
+            'class'       => 'yii\db\Connection',
+            'dsn'         => 'mysql:host=95.169.30.158;port=3306;dbname=bdm314524321_db',
+            'username'    => 'root',
+            'password'    => 'root'
+        ],
     ],
     'params' => $params,
 ];

@@ -1,8 +1,8 @@
 <?php
 /* ===========================以下为本页配置信息================================= */
 /* 页面基本属性 */
-$this->title = '测试标题';
-$this->params['title_sub'] = '测试标题的子标题或提示信息';
+$this->title = '荟家装';
+$this->params['title_sub'] = '荟家装活动管理后台';
 
 /* 渲染其他文件 */
 //echo $this->renderFile('@app/views/public/login.php');
@@ -12,9 +12,9 @@ $this->params['title_sub'] = '测试标题的子标题或提示信息';
 
 ?>
 
-<div class="note note-info">
-    <p> Dark mega menu style. 这里是提示信息 </p>
-</div>
+<!--<div class="note note-info">-->
+<!--    <p> Dark mega menu style. 这里是提示信息 </p>-->
+<!--</div>-->
 
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

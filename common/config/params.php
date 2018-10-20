@@ -32,8 +32,15 @@ return [
         /* 图片上传配置 */
         'imageRoot'            => Yii::getAlias("@storage/web"), //图片path前缀
         //'imageRoot'            => Yii::getAlias("@base/web/storage"), //图片path前缀，服务器解析到/web/目录时，上传到这里
-        'imageUrlPrefix'       => Yii::getAlias('@storageUrl'), //图片url前缀
-        'imagePathFormat'      => '/image/{yyyy}{mm}/editor{time}{rand:6}',
+//        'imageUrlPrefix'       => Yii::getAlias('@storageUrl'), //图片url前缀(前端返回用)
+        'imageUrlPrefix'       => "http://ueditor.image.alimmdn.com",
+        'imagePathFormat'      => '/image/{yyyy}{mm}/editor{time}{rand:6}',// 图片保存路径
+
+        /*在线图片路径*/
+        'imageManagerListSize' => 20,
+//        'imageManagerUrlPrefix' => Yii::getAlias('@storageUrl').'/image',//图片访问路径前缀
+        "imageManagerUrlPrefix"     => "http://ueditor.image.alimmdn.com",//第三方图片库
+//        'imageManagerListPath' => Yii::getAlias("@storage/web/image"),//指定要列出图片的目录
 
         /* 文件上传配置 */
         'fileRoot'             => Yii::getAlias("@storage/web"), //文件path前缀
@@ -48,10 +55,15 @@ return [
         'videoPathFormat'      => '/video/{yyyy}{mm}/editor{time}{rand:6}',
 
         /* 涂鸦图片上传配置项 */
-        'scrawlRoot'           => Yii::getAlias("@storage/web"),
-        //'scrawlRoot'           => Yii::getAlias("@base/web/storage"), // 服务器解析到/web/目录时，上传到这里
+        'scrawlRoot'           => Yii::getAlias("@storage/web"),// 服务器解析到/web/目录时，上传到这里
         "scrawlUrlPrefix"      => Yii::getAlias('@storageUrl'),
         'scrawlPathFormat'     => '/image/{yyyy}{mm}/editor{time}{rand:6}',
+
+        /* 远程采集 */
+        'pathRoot'             => Yii::getAlias("@storage/web"),//绝对路径(保存用)
+//        "catcherUrlPrefix"     => Yii::getAlias('@storageUrl'),//相对路径
+        "catcherUrlPrefix"     => "http://ueditor.image.alimmdn.com",
+        "catcherPathFormat"    => "/image/{yyyy}{mm}/catcher{time}{rand:6}",
     ],
 
     /* 多语言配置 */

@@ -15,7 +15,7 @@ $context = $this->context;
 $route = $context->action->getUniqueId()?:$context->getUniqueId().'/'.$context->defaultAction;
 $allMenu = Menu::getMenus($route); // 获取后台栏目
 $breadcrumbs = Menu::getBreadcrumbs($route); // 面包屑导航
-//dump($this);exit;
+//p($allMenu);
 
 $this->beginPage();
 ?>
@@ -172,8 +172,8 @@ $this->beginPage();
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL 设置界面 -->
-                    <?php $this->beginContent('@app/views/layouts/public/setting.php') ?>
-                    <?php $this->endContent() ?>
+<!--                    --><?php //$this->beginContent('@app/views/layouts/public/setting.php') ?>
+<!--                    --><?php //$this->endContent() ?>
                     <!-- END THEME PANEL -->
                     <!-- BEGIN PAGE BAR 快速导航 -->
                     <div class="page-bar">

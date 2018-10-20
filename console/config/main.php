@@ -20,6 +20,27 @@ return [
                 ],
             ],
         ],
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'providers' => [
+                'app\tests\unit\faker\providers\Book',
+            ],
+        ],
+        'dbloc' => [
+            'class'       => 'yii\db\Connection',
+            'dsn'         => 'mysql:host=localhost;port=3306;dbname=bdm314524321_db',
+            'username'    => 'root',
+            'password'    => 'root',
+            'charset'     => 'utf8',
+            'tablePrefix' => 'ecs_',
+        ],
+        //阿里
+        'db_hjz' => [
+            'class'       => 'yii\db\Connection',
+            'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=bdm314524321_db',
+            'username'    => 'hjzhome',
+            'password'    => 'Hjzhome888'
+        ]
     ],
     'controllerMap' => [
         'migrate' => [

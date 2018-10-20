@@ -31,7 +31,8 @@
         "kucha/ueditor": "*",
         "yiisoft/yii2-httpclient": "^2.0",
         "e282486518/yii2-console-migration": "*",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "maxwen/yii2-easy-wechat": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -43,8 +44,8 @@
     },
     "config": {
         "process-timeout": 1800,
-	"github-oauth": {
-          "github.com": "2bc77b89b31c010a36420a6f9e821007b3b650f0"
+        "github-oauth": {
+
         }
     },
     "extra": {
