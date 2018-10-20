@@ -24788,6 +24788,7 @@ $(document).ready(function () {
         $('.news-headlines .swiper-button-white').remove();
     }
 })
+/** case案例翻页事件开始 **/
 $(document).ready(function () {
     if ($('.met-page-ajax').length) {
         if ($('.met_pager a').length == 1) $('.met_pager').addClass('hide');
@@ -24807,20 +24808,44 @@ function metpageajax() {
         pageul = $('.met-page-ajax');
     window.pagemax = $('.met_pager a').length - 1;
     window.page = pagebtn.data('page');
-    if (window.pagemax <= window.page) pagebtn.addClass('hide');
+    //if (window.pagemax <= window.page) pagebtn.addClass('hide');
     pagebtn.click(function () {
         var dom = $(this);
         page++;
         $.ajax({
-            url: dom.data('url').replace('/.php?', '/index.php?') + '&page=' + page,
+            url: dom.data('url') + '?page=' + page,
             type: 'POST',
+            dataType:'json',
             success: function (data) {
-                pageul.append(data);
-                pagespecial();
-                if (pagemax <= page) dom.addClass('hide');
+                console.log(data.code);
+				if(data.code == '200'){
+					var html = renderCase(data.obj,dom.data('url2'));
+					pageul.append(html);
+					pagespecial();
+					//if (pagemax <= page) dom.addClass('hide');
+				}else{
+					dom.addClass('hide')
+				}
             }
         });
     });
+}
+function renderCase(data,url){
+    var html = "";
+    $.each(data,function($k,$v){
+        var tmp =
+            '<li class="img-li">'+
+                '<span>'+
+                    '<a href="' + url + '?goods_id=' + $v.goods_id + '" title="' + $v.goods_name + '" target="_blank">'+
+                        '<img class="swiper-lazy" data-src="' + $v.goods_thumb + '" alt="' + $v.goods_name + '">'+
+                        '<font>' + $v.goods_name + '</font>'+
+                    '</a>'+
+                    '<p class="fa fa-search met-img-showbtn" data-imglist="' + $v.goods_name + '"></p>'+
+                '</span>'+
+            '</li>';
+        html += tmp;
+    });
+    return html;
 }
 function pagespecial() {
     setTimeout(function () {
@@ -24837,6 +24862,8 @@ function pagespecial() {
     }, 10);
     if ($('#met-grid').length) MetAnimOnScroll();
 }
+/** case案例翻页事件结束 **/
+
 /*
 * 模块化插件
 */
@@ -28118,7 +28145,6 @@ $(document).ready(function () {
             map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);//地图中心
             map.enableScrollWheelZoom();//禁止缩放地图
             var Icon = new BMap.Icon(M['tem'] + "/min/svg/point.svg\" class=\"point_svg", new BMap.Size(28, 56));
-            
 			
 			var sContent =
 	"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>天安门</h4>" + 
@@ -28827,120 +28853,6 @@ $(document).ready(function () {
     }, 5000);
 	
 	/* hjzJS */
-	/* VR轮播图 */
-	$(document).ready(function () {
-		var vrProduct = new Swiper('#container-box', {
-			pagination: '.gallery-thumbs',
-			paginationClickable: true,
-			paginationBulletRender: function (swiper, index, className) {
-				var xiaotu = '';
-				switch (index){
-					case 0:
-						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-						break;
-					case 1:
-						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%81%87%E8%A7%81%E5%8C%97%E4%BA%AC-%E6%96%B0%E4%B8%AD%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-						break;
-					case 2:
-						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%AE%80%E5%8D%95%E6%9C%89%E7%88%B1-%E7%8E%B0%E4%BB%A3%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-						break;
-					case 3:
-						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E5%B7%B4%E9%BB%8E%E5%8D%B0%E8%B1%A1-%E6%AC%A7%E5%BC%8F%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-						break;
-					case 4:
-						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E7%94%B0%E7%BA%B3%E8%A5%BF%E5%B7%9E-%E7%BE%8E%E5%BC%8F%E4%B9%A1%E6%9D%91.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-						break;
-					case 5:
-						xiaotu = '<div class="' + className + '" style="background-image:url(http://hjzhome.image.alimmdn.com/%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l?spm=a312x.7755591.0.0.5f3d4e08wKSGfB&file=%E9%98%BF%E5%B0%94%E5%8D%91%E6%96%AF-%E5%8C%97%E6%AC%A7%E6%95%B4%E8%A3%85.jpg@100w_100h_1l);background-size:100% 100%;"></div>';
-						break;
-					case 6:
-						//xiaotu = '<div class="' + className + '" style="background-image:url(http://www.hjzhome.com/images/201802/goods_img/2443_P_1517793493219.jpg);background-size:100% 100%;"></div>';
-						break;
-					case 7:
-						//xiaotu = '<div class="' + className + '" style="background-image:url(http://www.vanlian.cn/images/new_product/shouy-white.png);background-size:100% 100%;"></div>';
-						break;
-				}
-				return xiaotu;
-			},
-			prevButton: '.swiper-button-prev',
-			nextButton: '.swiper-button-next',
-			initialSlide: 0,
-			effect: 'fade',
-			spaceBetween: 0,
-			loop: true, //环路,无缝模式
-			autoplay:false,
-		});
-	});
-	
-	
-	/*省份城市二级联动*/
-	var region=function(){};
-	region.response = function(result){
-	  
-	  var sel = document.getElementById(result.target);
-	  sel.length = 1;
-	  sel.selectedIndex = 0;
-	  sel.style.display = (result.regions.length == 0 && result.type + 0 == 3) ? "none" : '';
-
-	  if (document.all){
-		sel.fireEvent("onchange");
-	  }
-	  else{
-		var evt = document.createEvent("HTMLEvents");
-		evt.initEvent('change', true, true);
-		sel.dispatchEvent(evt);
-	  }
-	  if (result.regions){
-		for (i = 0; i < result.regions.length; i ++ )
-		{
-		  var opt = document.createElement("OPTION");
-		  opt.value = result.regions[i].region_id;
-		  opt.text  = result.regions[i].region_name;
-		  sel.options.add(opt);
-		}
-	  }
-	}
-	region.loadProvinces = function(county,classname){
-		var url = "http://www.hjzhome.com/region.php?type=1&target=hjz-province&parent="+county+"&1539314969773773";
-		$.getJSON('http://'+location.host+'/demo/region',{url:url},function(data){
-			region.response(data);
-		})
-	}
-	region.loadCities = function(provinces,classname){
-		var url = "http://www.hjzhome.com/region.php?type=2&target=hjz-city&parent="+provinces+"&1539314969774774";
-		$.getJSON('http://'+location.host+'/demo/region',{url:url},function(data){
-			region.response(data);
-		})
-	}
-	region.changed = function(obj,selName){
-	  var parent = obj.options[obj.selectedIndex].value;console.log(parent);
-	  region.loadCities(parent,"hjz-city");
-	}
-	
-	$(document).ready(function(){
-		//弹窗获取地区列表
-		region.loadProvinces(1,"hjz-province");
-		region.loadCities(6,"hjz-city");
-		$('#hjz-province').change(function () {
-			var selectid = $(this).val();
-			if(selectid>0){
-				var obj = document.getElementById("hjz-province");
-				region.changed(obj,"hjz-city");
-			}
-		});
-		//默认选中地区
-		setTimeout(function () {
-			$("#hjz-province option[value='6']").prop("selected","selected");
-			$("#hjz-city option[value='80']").prop("selected","selected");
-		},1500);
-		//预估报价动画效果
-		setInterval(function(){
-			$('.offer1').text(Math.round(Math.random()*80000 + 20000));
-			$('.offer2').text(Math.round(Math.random()*10000 + 10000));
-			$('.offer3').text(Math.round(Math.random()*6000 + 2000));
-			$('.offer4').text(Math.round(Math.random()*3500 + 500));
-		},500);
-	});
 	
 	/* 公司简介轮播 */
 	$(document).ready(function(){

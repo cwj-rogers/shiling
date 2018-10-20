@@ -1,38 +1,45 @@
-<p style="text-align: center"><img src="/images/upload/Image/0元图(3).jpg" width="750" height="563" alt="" /></p>
-<p style="text-align: center">&nbsp;</p>
-<p style="text-align: center"><img src="/images/upload/Image/999(4).jpg" width="750" height="563" alt="" /></p>
-<p style="text-align: center">&nbsp;</p>
-<p style="text-align: center"><img src="/images/upload/Image/企业图(2).jpg" width="750" height="563" alt="" /></p>
-<p style="text-align: center"><img src="/images/upload/Image/五大业务.jpg" width="790" height="280" alt="" /><br />
-    <a href="http://www.hjzhome.com/goods.php?id=302"><img src="/images/upload/Image/468主材包.jpg" width="395" height="103" alt="" /></a><a href="http://www.hjzhome.com/category.php?id=981"><img src="/images/upload/Image/意大利橱柜(9).jpg" width="395" height="103" alt="" /></a><br />
-    <a href="http://www.hjzhome.com/category.php?id=984"><img src="/images/upload/Image/全屋定制.jpg" width="297" height="124" alt="" /></a><a href="http://www.hjzhome.com/category.php?id=983"><img src="/images/upload/Image/旧房翻新.jpg" width="196" height="124" alt="" /></a><a href="http://www.hjzhome.com/category.php?id=39"><img src="/images/upload/Image/负离子健康整装.jpg" width="297" height="124" alt="" /></a><img src="/images/upload/Image/1(181).jpg" width="100%" alt="" /><img src="/images/upload/Image/2(178).jpg" width="100%" alt="" /><img src="/images/upload/Image/3(165).jpg" width="100%" alt="" /><img src="/images/upload/Image/4(172).jpg" width="100%" alt="" /><img src="/images/upload/Image/阿尔卑斯(4)(1).jpg" width="100%" alt="" /><img alt="" width="100%" src="/images/upload/Image/aerbeisibeiou/6.jpg" /><img src="/images/upload/Image/7(167).jpg" width="100%" alt="" /><img src="/images/upload/Image/8(159).jpg" width="100%" alt="" /><a href="http://www.hjzhome.com/goods.php?id=2025"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/80(1).jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=2026"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/81(1).jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=2252"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/82(1).jpg" /></a> <img src="/images/upload/Image/9(158).jpg" width="100%" alt="" /><img src="/images/upload/Image/10(167).jpg" width="100%" alt="" /><a href="http://www.hjzhome.com/goods.php?id=2033"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/101.jpg" /> </a><a href="http://www.hjzhome.com/goods.php?id=2030"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/102.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=1622"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/103.jpg" /></a> <img src="/images/upload/Image/11(167).jpg" width="100%" alt="" /><img src="/images/upload/Image/12(147).jpg" width="100%" alt="" /><img src="/images/upload/Image/13(148).jpg" width="100%" alt="" /><a href="http://www.hjzhome.com/goods.php?id=1620"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/131.jpg" /></a><a href="http://www.hjzhome.com/goods.php?id=1630"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/132.jpg" /></a><a href="http://www.hjzhome.com/goods.php?id=2031"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/133.jpg" /></a><img src="/images/upload/Image/14(143).jpg" width="100%" alt="" /><img src="/images/upload/Image/15(68).jpg" width="100%" alt="" /><a href="http://www.hjzhome.com/goods.php?id=1630"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/151.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=1620"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/152.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=2251"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/153.jpg" /></a> <img src="/images/upload/Image/16(58).jpg" width="100%" alt="" /><img src="/images/upload/Image/17(40).jpg" width="100%" alt="" /><a href="http://www.hjzhome.com/goods.php?id=1517"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/171.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=1518"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/172.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=1514"><img alt="" width="30%" style="margin-left: 1%; margin-right: 1%" src="/images/upload/Image/173.jpg" /></a> <img src="/images/upload/Image/18(29).jpg" width="100%" alt="" /><img src="/images/upload/Image/19(19).jpg" width="100%" alt="" /><img alt="" width="100%" src="/images/upload/Image/aerbeisibeiou/20.jpg" /> <a href="https://www.jiasc.com/tour/e3de71b2e2579d1e"><img width="750" src="/images/upload/Image/88(5).jpg" height="640" alt="" /></a></p>
-<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
-</table>
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tbody>
-    <tr>
-        <td height="50">&nbsp;</td>
-    </tr>
-    <tr>
-        <td height="30">&nbsp;</td>
-    </tr>
-    <tr>
-        <td style="text-align: center;"><a href="https://www.jiasc.com/tour/e3de71b2e2579d1e"><img src="/images/upload/Image/全景效果详细页_07.gif" style="text-align: center;" alt="" width="123" height="44" /></a></td>
-    </tr>
-    <tr>
-        <td height="30">&nbsp;</td>
-    </tr>
-    <tr>
-        <td>
-            <p style="text-align: center;"><iframe src="https://www.jiasc.com/tour/e3de71b2e2579d1e" width="95%" height="600" scrolling="no" frameborder="0"></iframe></p>
-        </td>
-    </tr>
-    <tr>
-        <td height="50">&nbsp;</td>
-    </tr>
-    <tr>
-        <td height="30">&nbsp;</td>
-    </tr>
-    </tbody>
-</table>
-<div style="width: 100%; text-align: center; background-color: #fff"><a href="http://www.hjzhome.com/goods.php?id=1678"><img alt="" width="16%" style="margin: 1%" src="/images/upload/Image/meishi/17.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=1980"><img alt="" width="16%" style="margin: 1%" src="/images/upload/Image/meishi/18.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=1902"><img alt="" width="16%" style="margin: 1%" src="/images/upload/Image/meishi/19.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=2250"><img alt="" width="16%" style="margin: 1%" src="/images/upload/Image/meishi/20.jpg" /></a> <a href="http://www.hjzhome.com/goods.php?id=2443"><img alt="" width="16%" style="margin: 1%" src="/images/upload/Image/meishi/21.jpg" /></a></div>
+<div class="yezhu-detail-theme">
+    <h1 class="ect">装修完成后水电改造怎么验收</h1>
+    <p class="yezhu-detail-info ect">
+        <span>时间 : 2018-09-29 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </p>
+    <div class="yezhu-zxcs-content">
+        <p>
+            <span>家庭装修中的
+                <a target="_blank">水电改造</a>
+                是项隐蔽工程，一旦完工投入使
+用后出现问题很难返修，并且会造成很大的损失。所以在水电改造完成后必须对工程进行仔细验收，为以后的生活作保障。水电改造怎么验收
+也是困扰很多家庭的一大难题。
+            </span>
+        </p>
+        <p>
+            <span>1、首先是水电改造怎么验收的水路改造部分。在对水路验收时，首先要做打压实验
+。这个操作不能只凭肉眼观察，一定要用专业的设备进行仔细检查。通常使用打压泵，保证压力增加时，水管不漏水。具体操作是在打压之前
+关闭总阀门，将需要打压管路的出口封闭，只留一个进口。进口处安装打压机，压入6-8个大气压30分钟以上。观察压力表下降幅度不超过1个
+大气压。阀门及所有接头无漏水。</span>
+        </p>
+        <p>
+            <span>
+                <img src="//pic.to8to.com/attch/day_180926/20180926_37967fc3d39828caa33a
+VshZ1IgokVZB.jpg??" title="水电改造怎么验收" border="0" hspace="0" vspace="0" ALT="水电改造怎么验收"/>2、水路验收时要对
+冷热水管间距进行检查。保证管径间距在15mm，误差在0.1mm。对燃气管和水管的距离也要进行检查。如果燃气管被压在水管下面容易发生水
+管渗漏或燃气泄漏，发生安全事故。
+            </span>
+        </p>
+        <p>
+            <span>3、接下来是水电怎么改造的电路部分。要检查电路材料是否符合标准。一些
+                <a target="_blank">装修公司</a>会偷工减料，使用不好的电线，这样会留下很大的安全隐患。电源线一定不能用多股线，多股线散热差，单
+芯带负荷能力弱，容易氧化，一旦氧化会发生断芯。同时在电源管道方面不能省钱，尤其是埋墙管道，如果处理不好，想返修也很难。
+            </span>
+        </p>
+        <p>
+            <span>4、水管和电线不能安装在同一个槽中。如果水管漏水，水容易导电，容易造成安全事故。</span>
+        </p>
+        <p>
+            <span>水电改
+造怎么验收困扰着许多家庭。在拥有新房的高兴之余，也要花更多的心思在装修方面。水电改造关系到房屋居住的舒适度与安全性。以上关于
+水电改造怎么验收的内容希望对大家有帮助。</span>
+        </p>
+
+    </div>
+</div>

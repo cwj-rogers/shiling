@@ -39726,9 +39726,40 @@ html:not(.isMobile) *::-webkit-resizer {
 .side-content:not(.show) .side-body:last-child:before{background:#b1191a}
 .banner-pager .swiper-pagination-bullet-active, .banner-pager .swiper-pagination-bullet:hover {background: #b1191a;}
 .banner-pager .swiper-pagination-bullet-active:before, .banner-pager .swiper-pagination-bullet:hover:before{border: 0px solid #b1191a;}
+.product-li-first h1 {color: #b1191a;}
+.picture-list ul li p, .product-li p{border: 2px solid #b1191a;}
+.picture-list ul li a span b:before, .product-li a span b:before{background: #b1191a;}
+.product-text span.t i, .widget-body p i, .met-download .met-download-list small i, .met-shownews .info span i {color: #b1191a;}
+.nav-tabs>li.active {border-bottom-color: #b1191a;}
+.side-scroll .swiper-scrollbar-drag {background: #b1191a!important;border-radius: 0!important;}
+.picture-list ul li:hover p:hover, .product-li:hover p:hover {background: #b1191a;}
+.nav-first>u:before,.nav-first>u:after {background: #b1191a;}
+.nav-second>a:before {background: #b1191a;}
+.social-box a:hover{background: #b1191a;}
+.close span {color: #b1191a;}
+.modal-content {background: #b1191a;border: 2px solid #b1191a;}
+.video-list ol li span a:hover {color:#b1191a;}
+.info-text h3 a, .news-text h3 a{color:#b1191a;}
+.info-text ul li i, .news-text ul li i{color:#b1191a;}
+.info-text em a:before, .news-text em a:before{color:#b1191a;}
+.info-img a, .news-img a{border: 2px solid #b1191a;}
+.sidenews-lists p:before {background: #b1191a;}
+.met_pager a.Ahover {background: #b1191a;}
+.met_pager a:hover, .met_pager span:hover{background: #b1191a!important;}
+.info-text em a:before, .news-text em a:before {background: #b1191a;}
+a:focus, a:hover {color: #b1191a;}
+.pager li>a:focus, .pager li>a:hover {border-color: #b1191a;color: #b1191a;}
+.sidenews-lists h3 span {border-bottom: 1px solid #b1191a;}
+.info-right h3 u {color: #b1191a;}
+.info-nav p b span:first-child {border: 1px solid #b1191a;}
+.info-list ul li p b:before {background: #b1191a;}
+.info-text em a:hover, .news-text em a:hover{color: #b1191a;}
+.info-nav p b.active span:first-child{color: #b1191a;}
+.info-list ul li p:hover a{color: #b1191a;}
+.window-next:hover:before, .window-next:hover:after {background: #b1191a;}
 /*媒体查询*/
 @media (max-width:1200px) {
-	.side-logo .hjz-slogen{opacity:0}
+	#hjz-gif{opacity:0}
 }
 /*首页vr轮播图*/
 #section-A{box-sizing: border-box;display: flex;flex-direction: row-reverse;background: white;}

@@ -7,22 +7,9 @@ use yii\helpers\Html;
 <!DOCTYPE HTML>
 <html class="isMobile  ">
 <head>
-    <title>APP应用开发|网站建设|平面设计-APP应用开发|网站建设|平面设计</title>
-    <meta name="renderer" content="webkit">
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="generator" content="MetInfo 5.3.19"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,10001,,10001,M1156010" />
-    <meta name="format-detection" content="email=no" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="full-screen" content="yes">
-    <meta name="x5-fullscreen" content="true">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="荟家装-让健康时尚的标准化家装走进千家万户，让家装交易更透明，更公平，更省钱。荟家装是一家致力于整体家装设计研发及交易管理服务平台，通过设计力量及供应链集采管理，让整体家装产品作品化加互联网全渠道营销为具备落地能力的小微装企及优秀项目经理，设计师输送业务订单。" />
-    <meta name="keywords" content="荟家装|健康智慧整装|免费设计" />
-    <link href="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png" rel="shortcut icon" type="image/x-icon" />
-    <link rel='stylesheet' href='/static/demo/metinfos.css'>
+    <!--  头部文件  -->
+    <?php $this->beginContent('@app/views/layouts/hjz/side-head.php') ?><?php $this->endContent() ?>
+    <meta name="generator" content="hjzhome"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,10001,,10001,M1156010" />
 </head>
 <body class="100011">
 
@@ -151,7 +138,6 @@ use yii\helpers\Html;
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="banner-pager"></div>
             </div>
@@ -341,36 +327,36 @@ use yii\helpers\Html;
                         <div class="swiper-container gallery-top" id="container-box">
                             <div class="swiper-wrapper">
                                 <?php foreach ($vr as $k=>$v):?>
-                                <div class="swiper-slide" data-thumb="<?= $v['goods_img']?>">
-                                    <div class="A-body-content">
-                                        <div class="bc-left">
-                                            <h3><?= $v['goods_name']?> <span class="small">不足70m²按70m²计</span></h3>
-                                            <div class="scheme-box">
-                                                <div class="scheme">
-                                                    <div class="sch-title">方案</div>
-                                                    <div class="sch-content"><?= $v['market_price']?>/m²整装包</div>
+                                    <div class="swiper-slide" data-thumb="<?= $v['goods_img']?>">
+                                        <div class="A-body-content">
+                                            <div class="bc-left">
+                                                <h3><?= $v['goods_name']?> <span class="small">不足70m²按70m²计</span></h3>
+                                                <div class="scheme-box">
+                                                    <div class="scheme">
+                                                        <div class="sch-title">方案</div>
+                                                        <div class="sch-content"><?= $v['market_price']?>/m²整装包</div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li>原木色/灰色/纯白色</li>
+                                                    <li>年轻 浪漫</li>
+                                                    <li>小清新人群</li>
+                                                </ul>
+                                                <div class="button-box">
+                                                    <button><a href="<?= Url::toRoute(['demo/picture'])?>" target="_blank">查看更多</a></button>
+                                                    <button><a href="<?= Url::toRoute(['demo/goods','goods_id'=>$v['goods_id']])?>" title="查看详情" target="_blank">产品详情</a></button>
                                                 </div>
                                             </div>
-                                            <ul>
-                                                <li>原木色/灰色/纯白色</li>
-                                                <li>年轻 浪漫</li>
-                                                <li>小清新人群</li>
-                                            </ul>
-                                            <div class="button-box">
-                                                <button><a href="goods.php?id=2250">查看详情</a></button>
-                                                <button><a data-hash="video" title="免费设计">立即预定</a></button>
+                                            <div class="bc-right">
+                                                <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
+                                                    <div class="vr-pic">
+                                                        <img src="<?= $v['img_url']?>" alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="vr-icon"></div>
                                             </div>
-                                        </div>
-                                        <div class="bc-right">
-                                            <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
-                                                <div class="vr-pic">
-                                                    <img src="<?= $v['img_url']?>" alt="">
-                                                </div>
-                                            </a>
-                                            <div class="vr-icon"></div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php endforeach;?>
                             </div>
                             <!-- Add Arrows -->
@@ -429,10 +415,8 @@ use yii\helpers\Html;
             </div>
             <div class="window-next">SCROLL</div>
         </div>
-        <!--string(4) "news"
-string(4) "news"
-string(4) "news"
--->
+
+        <!--   新闻资讯  -->
         <div class="window-bin swiper-lazy"
              data-hash="info"
              data-title="资讯"
@@ -440,240 +424,88 @@ string(4) "news"
             <div class="container info-box">
                 <div class="row">
                     <div class="info-left">
-                        <div data-id="108" class="info-first info-ease active">
-                            <div class="info-img">
-                                <a href="news/shownews.php?lang=cn&id=57" title="是时候改变你对微服务的认知了！" target='_self'>
-                                    <img class="swiper-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500454853.jpg'>
-                                </a>
+                        <?php foreach ($article as $k=>$v):?>
+                            <div data-id="<?= $k?>" class="info-first info-ease <?= $k?:'active'?>">
+                                <div class="info-img">
+                                    <a href="<?= Url::toRoute(['shownews','artid'=>$v[0]['article_id']])?>" title="<?= $v[0]['title']?>" target='_blank'>
+                                        <img class="swiper-lazy" data-src='<?= $v[0]['file_url']?>'>
+                                    </a>
+                                </div>
+                                <div class="info-text">
+                                    <h3>
+                                        <a href="<?= Url::toRoute(['shownews','artid'=>$v[0]['article_id']])?>" title="<?= $v[0]['title']?>" target='_blank'><?= $v[0]['title']?></a>
+                                    </h3>
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-clock-o"></i>
+                                            <b><?= date("Y-m-d H:i:s",$v[0]['add_time'])?></b>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-user-plus"></i>
+                                            <b><?= $v[0]['author']?></b>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-eye"></i>
+                                            <b><?= $v[0]['click']?></b>
+                                        </li>
+                                    </ul>
+                                    <p style="text-indent:2em;"><?= $v[0]['content']?></p>
+                                    <em>
+                                        <b>标签：</b>
+                                        <a href="<?= Url::toRoute(['news'])?>" title="装修课堂" target='_blank'>荟家装学问课堂</a>
+                                        <a href="<?= Url::toRoute(['news','type'=>89])?>" title="装修课堂" target='_blank'>新家宝典</a>
+                                        <a href="<?= Url::toRoute(['news','type'=>88])?>" title="装修课堂" target='_blank'>家装攻略</a>
+                                    </em>
+                                    <a class="click-box" href="<?= Url::toRoute(['news'])?>" target='_blank'>
+                                        <span>READ MORE</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="info-text">
-                                <h3>
-                                    <a href="news/shownews.php?lang=cn&id=57" title="是时候改变你对微服务的认知了！" target='_self'>是时候改变你对微服务的认知了！</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="fa fa-clock-o"></i>
-                                        <b>2017-07-20</b>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-user-plus"></i>
-                                        <b>Metinfo</b>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-eye"></i>
-                                        <b>11643</b>
-                                    </li>
-                                </ul>
-                                <p>大部分时候，微服务都是建立在一种基于请求和响应的协议之上。比如，REST等。这种方式是自然的。我们只需要调用另外一个模块就是了，然后等待响应返回，然后继续。这样的方式确实也满足了我们的很多的场景：用户通过点击页面的一个按钮然后希望发生一些事情。但是，当我们开始接触许多独立的service的时候，事情就发生改变了。随着service数量急速的增长。</p>
-                                <em>
-                                    <b>标签：</b>
-                                    <a href="search/?searchword=微服务" title="微服务" target='_self'>微服务</a>
-                                    <a href="search/?searchword=请求和响应" title="请求和响应" target='_self'>请求和响应</a>
-                                    <a href="search/?searchword=事件流" title="事件流" target='_self'>事件流</a>
-                                    <a href="search/?searchword=异步机制" title="异步机制" target='_self'>异步机制</a>
-                                </em>
-                                <a class="click-box" href="news/shownews.php?lang=cn&id=57" target='_self'>
-                                    <span>READ MORE</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div data-id="115" class="info-first info-ease ">
-                            <div class="info-img">
-                                <a href="news/shownews.php?lang=cn&id=55" title="如何成为一个优秀的工程师？“看到问题也不要去问别人，就把它Fix。”" target='_self'>
-                                    <img class="swiper-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/390_543/1500450968.jpg'>
-
-                                </a>
-                            </div>
-                            <div class="info-text">
-                                <h3>
-                                    <a href="news/shownews.php?lang=cn&id=55" title="如何成为一个优秀的工程师？“看到问题也不要去问别人，就把它Fix。”" target='_self'>如何成为一个优秀的工程师？“看到问题也不要去问别人，就把它Fix。”</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="fa fa-clock-o"></i>
-                                        <b>2017-07-20</b>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-user-plus"></i>
-                                        <b>Metinfo</b>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-eye"></i>
-                                        <b>1081</b>
-                                    </li>
-                                </ul>
-                                <p>一位工程师，如何才能称得上优秀？除了写得一手好Code，什么样的工作态度和方法才是一个优秀工程师的必备？7月11日，陆奇出席百度内部Engineering Leadership Talk。作为计算机科学博士及优秀的管理者，他提出的五点要求，对每一位百度工程师都适用。“我们一定要有一个坚定不移的深刻的理念，相信整个世界终究是为技术所驱动的。”“有没有其他人已经解决这个问题？然后你可以把你的时间放在更</p>
-                                <em>
-                                    <b>标签：</b>
-                                    <a href="search/?searchword=许诚毅" title="许诚毅" target='_self'>许诚毅</a>
-                                    <a href="search/?searchword=江志强" title="江志强" target='_self'>江志强</a>
-                                    <a href="search/?searchword=万物有灵且美" title="万物有灵且美" target='_self'>万物有灵且美</a>
-                                    <a href="search/?searchword=鬼怪" title="鬼怪" target='_self'>鬼怪</a>
-                                </em>
-                                <a class="click-box" href="news/shownews.php?lang=cn&id=55" target='_self'>
-                                    <span>READ MORE</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div data-id="116" class="info-first info-ease ">
-                            <div class="info-img">
-                                <a href="news/shownews.php?lang=cn&id=57" title="是时候改变你对微服务的认知了！" target='_self'>
-                                    <img class="swiper-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500454853.jpg'>
-
-                                </a>
-                            </div>
-                            <div class="info-text">
-                                <h3>
-                                    <a href="news/shownews.php?lang=cn&id=57" title="是时候改变你对微服务的认知了！" target='_self'>是时候改变你对微服务的认知了！</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="fa fa-clock-o"></i>
-                                        <b>2017-07-20</b>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-user-plus"></i>
-                                        <b>Metinfo</b>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-eye"></i>
-                                        <b>11643</b>
-                                    </li>
-                                </ul>
-                                <p>大部分时候，微服务都是建立在一种基于请求和响应的协议之上。比如，REST等。这种方式是自然的。我们只需要调用另外一个模块就是了，然后等待响应返回，然后继续。这样的方式确实也满足了我们的很多的场景：用户通过点击页面的一个按钮然后希望发生一些事情。但是，当我们开始接触许多独立的service的时候，事情就发生改变了。随着service数量急速的增长。</p>
-                                <em>
-                                    <b>标签：</b>
-                                    <a href="search/?searchword=微服务" title="微服务" target='_self'>微服务</a>
-                                    <a href="search/?searchword=请求和响应" title="请求和响应" target='_self'>请求和响应</a>
-                                    <a href="search/?searchword=事件流" title="事件流" target='_self'>事件流</a>
-                                    <a href="search/?searchword=异步机制" title="异步机制" target='_self'>异步机制</a>
-                                </em>
-                                <a class="click-box" href="news/shownews.php?lang=cn&id=57" target='_self'>
-                                    <span>READ MORE</span>
-                                </a>
-                            </div>
-                        </div>
+                        <?php endforeach;?>
                     </div>
                     <div class="info-right">
                         <h3>
-                            <u>新闻资讯 · </u>让营销变得简单
+                            <u>装修资讯 · </u>让生活更简单
                         </h3>
                         <div class="info-nav">
                             <p>
-                                <b data-href="news/" data-id="108" title="新闻资讯-全部（双击跳转）" class="active">
+                                <b data-href="<?= Url::toRoute(['news'])?>" data-id="<?= $artType[0]?>" title="装修资讯-全部（双击跳转）" class="active">
                                     <span>&radic;</span>
                                     <span>全部</span>
                                 </b>
-                                <b data-href="news/news.php?lang=cn&class2=115" data-id="115" title="公司新闻（双击跳转）">
+                                <b data-href="<?= Url::toRoute(['news','type'=>89])?>" data-id="<?= $artType[1]?>" title="新家宝典（双击跳转）">
                                     <span>&radic;</span>
-                                    <span>公司新闻</span>
+                                    <span>新家宝典</span>
                                 </b>
-                                <b data-href="news/news.php?lang=cn&class2=116" data-id="116" title="行业资讯（双击跳转）">
+                                <b data-href="<?= Url::toRoute(['news','type'=>88])?>" data-id="<?= $artType[2]?>" title="家装攻略（双击跳转）">
                                     <span>&radic;</span>
-                                    <span>行业资讯</span>
+                                    <span>家装攻略</span>
                                 </b>
                             </p>
                         </div>
                         <div class="info-cut">
-                            <div data-id="108" class="info-list info-ease active">
-                                <ul class="info-ul">
-                                    <li class="info-li swiper-slide-active">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500450968.jpg' alt="如何成为一个优秀的工程师？“看到问题也不要去问别人，就把它Fix。”">
-                                            <a href="news/shownews.php?lang=cn&id=55" title="如何成为一个优秀的工程师？“看到问题也不要去问别人，就把它Fix。”" target='_self'>如何成为一个优秀的工程师？“看到问题也不要去问别人，就把它Fix。”</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500449642.jpg' alt="精选！15 个必备的 VSCode 插件（前端类）">
-                                            <a href="news/shownews.php?lang=cn&id=52" title="精选！15 个必备的 VSCode 插件（前端类）" target='_self'>精选！15 个必备的 VSCode 插件（前端类）</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                    <li class="info-li">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500452786.jpg' alt="Zdal分库分表：支付宝是如何在分布式环境下完爆数据库压力的？">
-                                            <a href="news/shownews.php?lang=cn&id=56" title="Zdal分库分表：支付宝是如何在分布式环境下完爆数据库压力的？" target='_self'>Zdal分库分表：支付宝是如何在分布式环境下完爆数据库压力的？</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500451877.jpg' alt="ECMAScript 8都发布了，你还没有用上ECMAScript 6？">
-                                            <a href="news/shownews.php?lang=cn&id=53" title="ECMAScript 8都发布了，你还没有用上ECMAScript 6？" target='_self'>ECMAScript 8都发布了，你还没有用上ECMAScript 6？</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                    <li class="info-li">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500451911.jpg' alt="Web 安全 PHP 代码审查之常规漏洞">
-                                            <a href="news/shownews.php?lang=cn&id=59" title="Web 安全 PHP 代码审查之常规漏洞" target='_self'>Web 安全 PHP 代码审查之常规漏洞</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500456343.jpg' alt="数据源、storm应用、结果集。storm应用从数据源读取数据">
-                                            <a href="news/shownews.php?lang=cn&id=58" title="数据源、storm应用、结果集。storm应用从数据源读取数据" target='_self'>数据源、storm应用、结果集。storm应用从数据源读取数据</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                    <li class="info-li">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500456906.jpg' alt="在美团点评当工程师的第一年总结，慢慢融入团队后，会迎来一个成长期。">
-                                            <a href="news/shownews.php?lang=cn&id=54" title="在美团点评当工程师的第一年总结，慢慢融入团队后，会迎来一个成长期。" target='_self'>在美团点评当工程师的第一年总结，慢慢融入团队后，会迎来一个成长期。</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div data-id="115" class="info-list info-ease ">
-                                <ul class="info-ul">
-                                    <li class="info-li ">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500452786.jpg' alt="Zdal分库分表：支付宝是如何在分布式环境下完爆数据库压力的？">
-                                            <a href="news/shownews.php?lang=cn&id=56" title="Zdal分库分表：支付宝是如何在分布式环境下完爆数据库压力的？" target='_self'>Zdal分库分表：支付宝是如何在分布式环境下完爆数据库压力的？</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500451877.jpg' alt="ECMAScript 8都发布了，你还没有用上ECMAScript 6？">
-                                            <a href="news/shownews.php?lang=cn&id=53" title="ECMAScript 8都发布了，你还没有用上ECMAScript 6？" target='_self'>ECMAScript 8都发布了，你还没有用上ECMAScript 6？</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                    <li class="info-li">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500456906.jpg' alt="在美团点评当工程师的第一年总结，慢慢融入团队后，会迎来一个成长期。">
-                                            <a href="news/shownews.php?lang=cn&id=54" title="在美团点评当工程师的第一年总结，慢慢融入团队后，会迎来一个成长期。" target='_self'>在美团点评当工程师的第一年总结，慢慢融入团队后，会迎来一个成长期。</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div data-id="116" class="info-list info-ease ">
-                                <ul class="info-ul">
-                                    <li class="info-li ">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500449642.jpg' alt="精选！15 个必备的 VSCode 插件（前端类）">
-                                            <a href="news/shownews.php?lang=cn&id=52" title="精选！15 个必备的 VSCode 插件（前端类）" target='_self'>精选！15 个必备的 VSCode 插件（前端类）</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500451911.jpg' alt="Web 安全 PHP 代码审查之常规漏洞">
-                                            <a href="news/shownews.php?lang=cn&id=59" title="Web 安全 PHP 代码审查之常规漏洞" target='_self'>Web 安全 PHP 代码审查之常规漏洞</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                    <li class="info-li">
-                                        <p>
-                                            <img class="info-lazy" data-src='http://hjzhome.image.alimmdn.com/hjzWebsite/1500456343.jpg' alt="数据源、storm应用、结果集。storm应用从数据源读取数据">
-                                            <a href="news/shownews.php?lang=cn&id=58" title="数据源、storm应用、结果集。storm应用从数据源读取数据" target='_self'>数据源、storm应用、结果集。storm应用从数据源读取数据</a>
-                                            <b>2017-07-20</b>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
+                            <?php foreach ($article as $k=>$v):?>
+                                <div data-id="<?= $k?>" class="info-list info-ease <?= $k?:'active'?>">
+                                    <ul class="info-ul">
+                                        <?php foreach ($v as $kk=>$vv):?>
+                                            <li class="info-li swiper-slide-active">
+                                                <p>
+                                                    <img class="info-lazy" data-src="<?= $vv['file_url']?>" alt="<?= $vv['title']?>">
+                                                    <a href="<?= Url::toRoute(['shownews','artid'=>$vv['article_id']])?>" title="<?= $vv['title']?>" target='_blank'><?= $vv['title']?></a>
+                                                    <b><?= date("Y-m-d",$vv['add_time'])?></b>
+                                                </p>
+                                            </li>
+                                        <?php endforeach;?>
+                                    </ul>
+                                </div>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="window-next">SCROLL</div>
         </div>
+
         <div class="window-bin swiper-lazy"
              data-hash="contact"
              data-title="联系"

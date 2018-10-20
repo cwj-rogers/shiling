@@ -10,22 +10,9 @@ use yii\helpers\Url;
 <!DOCTYPE HTML>
 <html class="isMobile  ">
 <head>
-    <title>联系我们-APP应用开发|网站建设|平面设计</title>
-    <meta name="renderer" content="webkit">
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="generator" content="MetInfo 5.3.19"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,25,,7,M1156010" />
-    <meta name="format-detection" content="email=no" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="full-screen" content="yes">
-    <meta name="x5-fullscreen" content="true">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="模板建站和纯手工建站的区别在于：模板是“成衣”，你只需要去服装店挑选，而所谓的纯手工建站是裁缝师傅给你定制。功能和稳定性模板+成熟的CMS管理后台大大优于“裁缝店”" />
-    <meta name="keywords" content="APP应用开发|网站建设|平面设计" />
-    <link href="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png" rel="shortcut icon" type="image/x-icon" />
-    <link rel='stylesheet' href='/static/demo/metinfos.css'>
+    <!--  头部文件  -->
+    <?php $this->beginContent('@app/views/layouts/hjz/side-head.php') ?><?php $this->endContent() ?>
+    <meta name="generator" content="hjzhome"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,25,,7,M1156010" />
 </head>
 <body class="class-25">
 <style>

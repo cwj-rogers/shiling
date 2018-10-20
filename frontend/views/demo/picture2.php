@@ -10,22 +10,9 @@ use yii\helpers\Url;
 <!DOCTYPE HTML>
 <html class="isMobile  ">
 <head>
-    <title>产品中心-APP应用开发|网站建设|平面设计</title>
-    <meta name="renderer" content="webkit">
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <!--  头部文件  -->
+    <?php $this->beginContent('@app/views/layouts/hjz/side-head.php') ?><?php $this->endContent() ?>
     <meta name="generator" content="MetInfo 5.3.19"  data-variable="https://show.metinfo.cn/muban/M1156010/328/,cn,107,,3,M1156010" />
-    <meta name="format-detection" content="email=no" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="full-screen" content="yes">
-    <meta name="x5-fullscreen" content="true">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="APP技术原本是对软件进行加速运算或进行大型科学运算的技术，基于Paas开发平台开发出的APP，直接部署在云环境上，形成一种租用云服务的模式。" />
-    <meta name="keywords" content="APP应用开发|网站建设|平面设计" />
-    <link href="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png" rel="shortcut icon" type="image/x-icon" />
-    <link rel='stylesheet' href='/static/demo/metinfos.css'>
 </head>
 <body class="  class-107">
 <!--[if lte IE 8]>
@@ -51,7 +38,7 @@ use yii\helpers\Url;
     <div class="sign-box">
         <ul class="sign-ul swiper-nav">
             <li class="sign-li active">
-                <a href="../picture/"  title="全部">
+                <a href="javascript:;"  title="全部">
                     <b>全部</b>
                 </a>
             </li>
@@ -86,7 +73,8 @@ use yii\helpers\Url;
                             <li class="product-li margin-bottom-0"></li>
                             <li class="product-li-first shown">
                                 <h1>~ 负离子健康整装套餐 ~</h1>
-                                <p>APP软件开发指的是手机应用软件的开发与服务。这里的APP指的是应用程序application的意思。APP技术原本是对软件进行加速运算或进行大型科学运算的技术，基于Paas开发平台开发出的APP，直接部署在云环境上，为企业进行集成，形成一种租用云服务的模式。同时，APP技术还可以应用于移动互联网中。在移动时代的大背景下，个人应用率先走进云时代。</p>
+                                <p style="color: gray">自然界负离子3大功效 1.除甲醛（除甲醛除苯效果高达90%以上，让装修头号杀手无处匿藏！）2.祛异味（消除洗手间不适异味，减少细菌滋生，让空气充满清新！）3.净化空气（快速吸收和强效清除二手烟，厨房烟雾污染，呵护全家健康！） 足不出户，坐享负离子健康生活。</p>
+                                <p style="color: gray">平台保证材料采用天然矿物原料，可持续产生大量负离子，释放空气当中可有效降解空气的各种有毒物质，形成纯净空气</p>
 <!--                                <span class="btn-default">-->
 <!--                                    <a class="click-box" title="APP开发" href="../picture/product.php?lang=cn&class2=111">-->
 <!--                                        <span>READ MORE</span>-->
@@ -95,7 +83,7 @@ use yii\helpers\Url;
                             </li>
                             <?php foreach ($vrres as $k=>$v):?>
                             <li class=" product-li shown">
-                                <a href="<?= Url::toRoute(['page','tmp'=>'good','id'=>$v['goods_id']])?>" title="<?= $v['goods_name']?>" target='_self'>
+                                <a href="<?= Url::toRoute(['goods','goods_id'=>$v['goods_id']])?>" title="<?= $v['goods_name']?>" target='_blank'>
                                     <font>
                                         <img class="swiper-lazy"  alt="<?= $v['goods_name']?>" data-src='<?= $v['goods_img']?>'>
                                     </font>

@@ -59,7 +59,7 @@ use yii\helpers\Url;
                         </a>
                     </li>
                     <li class="nav-first has ">
-                        <a href="<?= Url::toRoute('picture')?>"  title="产品中心" data-alert="全部" >
+                        <a href="<?= Url::toRoute('picture')?>"  title="产品中心" data-alert="全部">
                             <i class="fa fa-home fa-camera"></i>
                             <b>产品中心</b>
                             <p>16</p>
@@ -69,23 +69,23 @@ use yii\helpers\Url;
                         <ul>
                             <dl>
                                 <dt>
-                                    <img width="400" data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500551146.jpg">
+                                    <img width="400" data-original="http://hjzimage.image.alimmdn.com/hjz/3/%E9%BB%91%E7%99%BD%E7%81%B0%E5%A4%B4%E5%9B%BE.png@1e_1c_400w_216h">
                                 </dt>
-                                <dd>APP技术原本是对软件进行加速运算或进行大型科学运算的技术，基于Paas开发平台开发出的APP，直接部署在云环境上，形成一种租用云服务的模式。</dd>
+                                <dd>荟家装-健康智慧整装，隆重推出多款负离子健康套餐，囊括北欧简约，新中式，欧式轻奢，地中海风格，美式田园，宜家简约等多种装修风格。</dd>
                             </dl>
                             <li class="nav-second">
-                                <a href="picture/product.php?lang=cn&class2=111"  title="APP开发" data-alert="全部">
-                                    <b>APP开发</b>
+                                <a href="<?= Url::toRoute(['demo/goods','goods_id'=>3434])?>"  title="东方元素" data-alert="全部" target="_blank">
+                                    <b>东方元素</b>
                                 </a>
                             </li>
                             <li class="nav-second">
-                                <a href="picture/product.php?lang=cn&class2=112"  title="网站建设" data-alert="全部">
-                                    <b>网站建设</b>
+                                <a href="<?= Url::toRoute(['demo/goods','goods_id'=>3435])?>"  title="纳维亚北欧" data-alert="全部" target="_blank">
+                                    <b>纳维亚北欧</b>
                                 </a>
                             </li>
                             <li class="nav-second">
-                                <a href="picture/product.php?lang=cn&class2=113"  title="平面设计" data-alert="全部">
-                                    <b>平面设计</b>
+                                <a href="<?= Url::toRoute(['demo/goods','goods_id'=>3433])?>"  title="都市印象" data-alert="全部" target="_blank">
+                                    <b>都市印象</b>
                                 </a>
                             </li>
                         </ul>
@@ -108,18 +108,18 @@ use yii\helpers\Url;
                         <ul>
                             <dl>
                                 <dt>
-                                    <img width="400" data-original="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500550854.jpg">
+                                    <img width="400" data-original="http://hjzimage.image.alimmdn.com/hjz/3/%E9%BB%91%E7%99%BD%E7%81%B0%E5%A4%B4%E5%9B%BE.png@1e_1c_400w_216h">
                                 </dt>
-                                <dd>网站打开慢的其中一个原因是图片文件过大，一个网站在打开时需要同时加载很多图片，如果网站中每张图片都很大就容易发生卡顿状态！</dd>
+                                <dd>荟家装-装修学问课堂,为你推介入门装修攻略,新家宝典</dd>
                             </dl>
                             <li class="nav-second">
-                                <a href="news/news.php?lang=cn&class2=115"  title="公司新闻" data-alert="全部">
-                                    <b>公司新闻</b>
+                                <a href="<?= Url::toRoute(['news','type'=>89])?>"  title="新家宝典" data-alert="全部">
+                                    <b>新家宝典</b>
                                 </a>
                             </li>
                             <li class="nav-second">
-                                <a href="news/news.php?lang=cn&class2=116"  title="行业资讯" data-alert="全部">
-                                    <b>行业资讯</b>
+                                <a href="<?= Url::toRoute(['news','type'=>88])?>"  title="家装攻略" data-alert="全部">
+                                    <b>家装攻略</b>
                                 </a>
                             </li>
                         </ul>
@@ -147,7 +147,7 @@ use yii\helpers\Url;
                     <a rel="nofollow" data-toggle="modal" data-target="#met-share-modal">
                         <i class="fa fa-share-alt"></i>
                     </a>
-                    <a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40000844433&aty=0&a=0&curl=&ty=1" rel="nofollow" target="_blank">
+                    <a href="javascript:;" rel="nofollow" target="_blank">
                         <i class="fa fa-qq"></i>
                     </a>
                     <a href="http://www.weibo.com" rel="nofollow" target="_blank">
