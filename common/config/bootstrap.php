@@ -20,9 +20,11 @@ Yii::setAlias('@frontend', dirname(dirname(__DIR__)) . '/frontend'); // 前台pa
 Yii::setAlias('@console', dirname(dirname(__DIR__)) . '/console'); //命令行path
 Yii::setAlias('@api', dirname(dirname(__DIR__)) . '/api'); //API的path
 Yii::setAlias('@storage', dirname(dirname(__DIR__)) . '/storage'); //存储目录path
+Yii::setAlias('@hjzhome', dirname(dirname(__DIR__)) . '/hjzhome'); //存储目录path
 
 /* 设置 url 别名 */
 Yii::setAlias('@backendUrl', env('BACKEND_URL')); //后台url
 Yii::setAlias('@frontendUrl', env('FRONTEND_URL')); //前台url
 Yii::setAlias('@apiUrl', env('API_URL')); //API的url
 Yii::setAlias('@storageUrl', env('STORAGE_URL')); //存储url
+Yii::setAlias('@hjzhomeUrl', env('HJZHOME_URL')); //荟家装url
