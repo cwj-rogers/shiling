@@ -50,7 +50,7 @@ use yii\helpers\Url;
     <div class="banner-sub auto not-has" data-height="420|350|200">
     </div>
     <div class="side-html">
-        <div class="side-body swiper-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/201707/1500274209.jpg">
+        <div class="side-body swiper-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/9.jpg">
             <div class="met-img animsition imgs0">
                 <div class="container">
                     <div class="row">
