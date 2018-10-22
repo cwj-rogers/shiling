@@ -124,7 +124,7 @@ use yii\helpers\Url;
                                                 <em class="fa fa-cloud-download"></em> 广东省佛山市禅城区季华路智慧新城T15栋10楼
                                             </h3>
                                             <h3>
-                                                <em class="fa fa-tty"></em> 400-6966-398 / (+86) 1370000000
+                                                <em class="fa fa-tty"></em> 400-6966-398 / 18676036969
                                             </h3>
                                             <h3>
                                                 <em class="fa fa-envelope"></em> 001@hjzhome.com

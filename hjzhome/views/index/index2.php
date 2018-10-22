@@ -524,7 +524,7 @@ use yii\helpers\Html;
                                 </p>
                                 <p>
                                     <em class="fa fa-tty"></em>
-                                    <span>400-6966-398 / (+86) 13700000000</span>
+                                    <span>400-6966-398 / 18676036969</span>
                                 </p>
                                 <p>
                                     <em class="fa fa-envelope"></em>
