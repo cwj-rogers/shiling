@@ -621,13 +621,13 @@ use yii\helpers\Html;
     };
     region.loadProvinces = function(county,classname){
         var url = "http://www.hjzhome.com/region.php?type=1&target=hjz-province&parent="+county+"&1539314969773773";
-        $.getJSON('http://'+location.host+'/demo/region',{url:url},function(data){
+        $.getJSON('http://'+location.host+'/index/region',{url:url},function(data){
             region.response(data);
         })
     };
     region.loadCities = function(provinces,classname){
         var url = "http://www.hjzhome.com/region.php?type=2&target=hjz-city&parent="+provinces+"&1539314969774774";
-        $.getJSON('http://'+location.host+'/demo/region',{url:url},function(data){
+        $.getJSON('http://'+location.host+'/index/region',{url:url},function(data){
             region.response(data);
         })
     };
