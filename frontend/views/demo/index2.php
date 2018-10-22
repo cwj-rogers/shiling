@@ -316,6 +316,7 @@ use yii\helpers\Html;
             <div class="window-next">SCROLL</div>
         </div>
 
+        <!--   全景效果图产品   -->
         <div class="window-bin swiper-lazy"
              data-hash="picture"
              data-title="产品"
@@ -348,7 +349,7 @@ use yii\helpers\Html;
                                                 </div>
                                             </div>
                                             <div class="bc-right">
-                                                <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
+                                                <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc" target="_blank">
                                                     <div class="vr-pic">
                                                         <img src="<?= $v['img_url']?>" alt="">
                                                     </div>
