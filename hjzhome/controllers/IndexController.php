@@ -1,7 +1,7 @@
 <?php
 
 namespace hjzhome\controllers;
-use \common\helpers\FuncHelper as output;
+use common\helpers\FuncHelper as output;
 use Yii;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
