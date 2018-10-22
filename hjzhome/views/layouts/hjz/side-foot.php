@@ -5,7 +5,7 @@ use yii\helpers\Url;
     <div class="foot-nav">
         <div class="foot-nav">
             <a href="<?= Url::toRoute(['about'])?>" title="关于我们">关于我们</a>
-            <a href="<?= Url::toRoute(['page','id'=>16])?>" title="服务项目">服务项目</a>
+            <a href="<?= Url::toRoute(['page','id'=>16])?>" title="免费设计">免费设计</a>
             <a href="<?= Url::toRoute(['picture'])?>" title="产品中心">产品中心</a>
             <a href="<?= Url::toRoute(['news'])?>" title="新闻资讯">新闻资讯</a>
             <a href="<?= Url::toRoute(['case'])?>" title="案例展示">案例展示</a>
