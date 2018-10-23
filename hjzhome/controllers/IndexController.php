@@ -33,7 +33,7 @@ class IndexController extends \yii\web\Controller
                 'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) '.
                 'ORDER BY gal.img_id desc';
         $sql2 = "SELECT * FROM ($sql1) as ggal GROUP BY  ggal.goods_name";
-        $vrres = Yii::$app->db_bw->createCommand($sql2)->queryAll();
+        $vrres = Yii::$app->db_hjz->createCommand($sql2)->queryAll();
 
         //资讯文章
         $query = new Query();
@@ -94,7 +94,7 @@ class IndexController extends \yii\web\Controller
             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) '.
             'ORDER BY gal.img_id desc';
         $sql2 = "SELECT * FROM ($sql1) as ggal GROUP BY  ggal.goods_name";
-        $vrres = Yii::$app->db_bw->createCommand($sql2)->queryAll();
+        $vrres = Yii::$app->db_hjz->createCommand($sql2)->queryAll();
         //p($vrres);
         return $this->render('picture2',['vrres'=>$vrres]);
     }
@@ -154,12 +154,12 @@ class IndexController extends \yii\web\Controller
             $res = $query->from("ecs_goods")
                 ->select("goods_id,goods_name as title,goods_desc as intro")
                 ->where(["goods_id"=>$id])
-                ->one(Yii::$app->db_bw);
+                ->one(Yii::$app->db_hjz);
             $res['keywords'] = "NEGATIVE IONS FITNESS DECORATE";
         }else{
             $res = $query->from("ecs_topic")
                 ->where(["topic_id"=>$id])
-                ->one(Yii::$app->db_bw);
+                ->one(Yii::$app->db_hjz);
         }
         //p($res,1);
         return $this->render('page',['content'=>$res]);
@@ -171,7 +171,7 @@ class IndexController extends \yii\web\Controller
         $res = $query->from("ecs_goods")
             ->select("goods_id,goods_name,goods_desc as intro,last_update,click_count")
             ->where(["goods_id"=>$goods_id])
-            ->one(Yii::$app->db_bw);
+            ->one(Yii::$app->db_hjz);
         //标题美化
         $res['title'] = mb_strpos($res['goods_name'],'预')?mb_strrchr($res['goods_name'],'预',true):$res['goods_name'];
 
@@ -187,7 +187,7 @@ class IndexController extends \yii\web\Controller
         $sql1 = 'SELECT g.goods_id,g.goods_name,g.goods_thumb, g.goods_img, g.goods_sn ' .
             'FROM ecs_goods AS g '.
             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN ('.implode(',',$rand).') ';
-        $vrres = Yii::$app->db_bw->createCommand($sql1)->queryAll();
+        $vrres = Yii::$app->db_hjz->createCommand($sql1)->queryAll();
         //p(mb_strpos($res['goods_name'],'预'),1);
         return $this->render('goods',['res'=>$matches[0],'src'=>$src,'goods'=>$res,'vrres'=>$vrres]);
     }
