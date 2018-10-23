@@ -39873,8 +39873,29 @@ body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:ho
     background: rgba(255,255,255,.8);
 }
 
-
-
+/*媒体查询*/
+@media (max-width:1599px) {
+ 
+}
+@media (max-width:1199px) {
+ 
+}
+@media (max-width:992px) {
+ .video-text h3{display:none}
+ .video-text ul{display:none}
+ .video-left .video-content{height:430px}
+ #section-A .A-body-content .bc-left{display:none}
+ #section-A .A-body-content .bc-right{width:100%}
+ .hjz-case .case-left{width:100%}
+ .foot-content{min-width: 345px;}
+ .contact-bin{width:100%}
+}
+@media (max-width:767px) {
+ .window-bin.swiper-slide-active .video-right{display:none}
+ .video-text{width:100%}
+ #section-A .gallery-top{width:100%}
+ #section-A .gallery-thumbs{display:none}
+}
 
 
 

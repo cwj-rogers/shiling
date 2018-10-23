@@ -27381,7 +27381,7 @@ if (M['module'] && M['id']) {
         })
     }
 }
-var url = "/demo/uidata",
+var url = "/index/uidata",
     h = window.location.href;
 if (h.indexOf('preview=1') != - 1) {
     url = url + '&theme_preview=1'
