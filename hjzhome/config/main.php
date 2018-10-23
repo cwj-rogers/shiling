@@ -12,6 +12,11 @@ return [
     'defaultRoute' => 'index',
     /* 控制器默认命名空间 */
     'controllerNamespace' => 'hjzhome\controllers',
+    /* 源语言 */
+    'sourceLanguage' => 'zh-CN',
+    /* 目标语言 */
+    'language' => 'zh-CN',
+    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
