@@ -11,6 +11,24 @@ class IndexController extends \yii\web\Controller
 {
     public $layout = false;
     public $enableCsrfValidation = false;
+
+    /**
+     * 监听扫码跳转
+     */
+    public static function qrcodeWatch(){
+//        p($_SERVER);
+        $host = "mall.hjzhome.com";
+        $path = $_SERVER['REQUEST_URI'];//p(1,1);
+        if (strpos($path,'mobile') !== false){
+            //p('Location:http://'.$host.$path,1);
+            header('Location:http://'.$host.$path);die;
+        }
+    }
+
+    /**
+     * 新官网首页
+     * @return string
+     */
     public function actionIndex()
     {
         //case 案例数据
