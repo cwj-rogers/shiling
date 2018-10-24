@@ -16,11 +16,9 @@ class IndexController extends \yii\web\Controller
      * 监听扫码跳转
      */
     public static function qrcodeWatch(){
-//        p($_SERVER);
         $host = "mall.hjzhome.com";
-        $path = $_SERVER['REQUEST_URI'];//p(1,1);
+        $path = $_SERVER['REQUEST_URI'];
         if (strpos($path,'mobile') !== false){
-            //p('Location:http://'.$host.$path,1);
             header('Location:http://'.$host.$path);die;
         }
     }
