@@ -39895,8 +39895,12 @@ body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:ho
  .video-text{width:100%}
  #section-A .gallery-top{width:100%}
  #section-A .gallery-thumbs{display:none}
+ /*轮播图大小*/
+ .window-bin .container:before {background-size: 100% 80%;}
+ .window-bin.swiper-slide-active .video-text p{display:none}
+ .contact-cut {transform: translate3d(0,0,0)!important;}
+ #map{display:none}
 }
-
 
 
 
