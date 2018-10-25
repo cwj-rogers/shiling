@@ -44,99 +44,18 @@ use yii\helpers\Html;
              data-hash="index"
              data-title="首页">
             <div class="banner-box">
-                <div class="banner-cut">
+                <div class="banner-cut" id="white-board">
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/21.jpg">
-                        <div class="container  hjz-container1 ">
-                            <div class="row">
-                                <div class="banner-bin-o">
-                                    <p>
-                                        <span>DEVELOPMENT</span>
-                                        <span>IOS程序 + APK程序</span>
-                                        <span><u>APP</u>应用开发</span>
-                                    </p>
-                                    <p>
-                                        <span>APP</span>
-                                    </p>
-                                    <p>
-                                        <span>
-                                            <u>——</u> 为企业快速打造全平台应用制作开发
-                                        </span>
-                                        <span>For the rapid development of enterprise application development</span>
-                                    </p>
-                                    <p>
-                                        <span>&radic;</span>
-                                        <span>高品质服务</span>
-                                        <span>&radic;</span>
-                                        <span>扁平化设计</span>
-                                        <span>&radic;</span>
-                                        <span>专业性开发</span>
-                                    </p>
-                                </div>
-                                <div class="banner-bin-p">
-                                    <p>
-                                        <span>让营销变得
-                                            <u> </u>更简单
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="container  hjz-container1"><a href="" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
-                        <div class="container hjz-container2">
-                            <div class="row">
-                                <div class="banner-bin-h">
-                                    <span>互联网
-                                        <u>+</u>
-                                    </span>
-                                    <span>营销型建站</span>
-                                </div>
-                                <div class="banner-bin-i">
-                                    <p>
-                                        <span>SEO OPTIMIZING</span>
-                                    </p>
-                                    <p>
-                                        <span>咨询策划　创意设计　技术开发　运营维护　营销推广</span>
-                                    </p>
-                                </div>
-                                <div class="banner-bin-j">
-                                    <p>
-                                        <span>技术优势</span>
-                                        <span>“互联网+”就是“互联网+各传统行业”，但这并不是简单相加</span>
-                                    </p>
-                                    <p>
-                                        <span>解决方案</span>
-                                        <span>资源中的优化和集成，将互联网的创新成果深度融合于经济</span>
-                                    </p>
-                                    <p>
-                                        <span>服务流程</span>
-                                        <span>它代表一种新的社会形态，让互联网与传统行业进行深度融合</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="container hjz-container2"><a href="" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/7.jpg">
-                        <div class="container hjz-container3">
-                            <div class="row">
-                                <div class="banner-bin-a">
-                                    <span>零</span>
-                                    <span>元</span>
-                                    <span>开</span>
-                                    <span>店</span>
-                                </div>
-                                <div class="banner-bin-b">
-                                    <span>GRAPHIC DESIGN</span>
-                                    <span>创意新思维
-                                                <br>尽在掌握
-                                            </span>
-                                    <span>广告策划</span>
-                                    <span>服务理念：提供售前、售中和售后的一条龙服务，
-                                                <br>全过程把满足客户需求作为企业活动的核心。
-                                            </span>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="container hjz-container3"><a href="" target="_blank"></a></div>
+                    </div>
+                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/19.jpg">
+                        <div class="container hjz-container4"><a href="http://hjzhome.hjz.com/index/goods?goods_id=3439" target="_blank"></a></div>
                     </div>
                 </div>
                 <div class="banner-pager"></div>
@@ -279,8 +198,8 @@ use yii\helpers\Html;
                             </li>
                             <li>
                                 <strong>
-                                    <hr class="n1">
                                     <hr class="n3">
+                                    <hr class="n6">
                                 </strong>
                                 <font>个</font>
                                 <span>全国线下门店</span>
