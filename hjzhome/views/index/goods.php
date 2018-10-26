@@ -152,7 +152,7 @@ $(function () {
     setTimeout(function () {
         var src = $("#effect-pic").data("src");
         $("#effect-pic").attr("src",src);
-    },300);
+    },1000);
 })
 </script>
 </body>

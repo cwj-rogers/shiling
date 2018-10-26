@@ -91,7 +91,7 @@ class IndexController extends \yii\web\Controller
                     "姓名：{$info['para115']}  电话：{$info['para116']}  邮箱：{$info['para117']}".PHP_EOL.
                     "内容：{$info['para118']}".PHP_EOL.PHP_EOL;
 
-                $file = Yii::getAlias("@app/views/demo/contact.txt");
+                $file = Yii::getAlias("@app/views/index/contact.txt");
                 file_put_contents($file,$data,FILE_APPEND);
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>Yii::$app->request->referrer]);
             }
@@ -252,7 +252,7 @@ class IndexController extends \yii\web\Controller
     public function actionMessage(){
         if ($pwd = Yii::$app->request->get('password',null)){
             if ($pwd=="hjzhome888"){
-                $file = Yii::getAlias("@app/views/demo/contact.txt");
+                $file = Yii::getAlias("@app/views/index/contact.txt");
                 $info = file_get_contents($file);
                 return $this->render('message2',['info'=>$info,'checkout'=>1]);
             }else{
@@ -293,7 +293,7 @@ class IndexController extends \yii\web\Controller
         if (Yii::$app->request->isPost){
             if (!empty($_POST)){
                 $data = "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}，姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL;
-                $file = Yii::getAlias("@app/views/demo/info.txt");
+                $file = Yii::getAlias("@app/views/index/info.txt");
                 file_put_contents($file,$data,FILE_APPEND);
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>'index#video']);
             }
