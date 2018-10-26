@@ -192,16 +192,19 @@ class IndexController extends \yii\web\Controller
         $res['title'] = mb_strpos($res['goods_name'],'预')?mb_strrchr($res['goods_name'],'预',true):$res['goods_name'];
 
         //正则获取详情页内容
-//        $pregRule = "/<p style=\"(.*)<\/p>/U";
         $pregRule = "/<p style=\"(.*)<\/p>/U";
         preg_match_all($pregRule, $res['intro'], $matches);//正则匹配图片地址
-//        p($matches,1);
-        $iframe = array_pop($matches[0]);
-        $pregRuleIf = "/src=\"(.*)\"/U";
-        preg_match($pregRuleIf, $iframe, $src);//正则匹配
-        $src = isset($src[1])&&!empty($src[1])? $src[1]:"";
+        //
+        if (count($matches[0])>2){
+            $iframe = array_pop($matches[0]);//推出数组最后一条, 用来获取房点地址
+            $pregRuleIf = "/src=\"(.*)\"/U";
+            preg_match($pregRuleIf, $iframe, $src);//正则匹配
+            $src = isset($src[1])&&!empty($src[1])? $src[1]:"";
+        }else{
+            $src = "";
+        }
 
-        //右侧推荐方案
+        //右侧推荐方案(随机5个)
         $rand = array_rand(array_flip(explode(',',"1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678")),5);
         $sql1 = 'SELECT g.goods_id,g.goods_name,g.goods_thumb, g.goods_img, g.goods_sn ' .
             'FROM ecs_goods AS g '.

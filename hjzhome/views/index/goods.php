@@ -56,6 +56,7 @@ use yii\helpers\Url;
         <div class="side-body swiper-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/9.jpg">
             <div class="page met-showproduct pagetype1 animsition">
                 <!--       头部效果图开始         -->
+                <?php if (!empty($src)):?>
                 <div class="met-showproduct-head">
                     <div class="container">
                         <div class="row">
@@ -80,6 +81,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </div>
+                <?php endif;?>
                 <!--       头部效果图结束         -->
                 <div class="met-showproduct-body">
                     <div class="container">
