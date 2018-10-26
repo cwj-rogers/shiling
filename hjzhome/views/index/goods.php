@@ -62,7 +62,7 @@ use yii\helpers\Url;
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="row iframe">
-                                    <iframe src="<?= $src?>" width="100%" height="400rem" scrolling="no" frameborder="0"></iframe>
+                                    <iframe id="effect-pic" src="" data-src="<?= $src?>" width="100%" height="400rem" scrolling="no" frameborder="0"></iframe>
                                 </div>
                             </div>
                             <div class="col-md-3 product-intro">
@@ -147,7 +147,13 @@ use yii\helpers\Url;
 
 <script src="/static/demo/metinfos.js"></script>
 <script>
-
+$(function () {
+    //1秒后加载全景图
+    setTimeout(function () {
+        var src = $("#effect-pic").data("src");
+        $("#effect-pic").attr("src",src);
+    },300);
+})
 </script>
 </body>
 </html>
