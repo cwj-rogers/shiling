@@ -191,8 +191,11 @@ class IndexController extends \yii\web\Controller
         //标题美化
         $res['title'] = mb_strpos($res['goods_name'],'预')?mb_strrchr($res['goods_name'],'预',true):$res['goods_name'];
 
+        //正则获取详情页内容
+//        $pregRule = "/<p style=\"(.*)<\/p>/U";
         $pregRule = "/<p style=\"(.*)<\/p>/U";
         preg_match_all($pregRule, $res['intro'], $matches);//正则匹配图片地址
+        p($matches,1);
         $iframe = array_pop($matches[0]);
         $pregRuleIf = "/src=\"(.*)\"/U";
         preg_match($pregRuleIf, $iframe, $src);//正则匹配
@@ -204,6 +207,7 @@ class IndexController extends \yii\web\Controller
             'FROM ecs_goods AS g '.
             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN ('.implode(',',$rand).') ';
         $vrres = Yii::$app->db_hjz->createCommand($sql1)->queryAll();
+
         //p(mb_strpos($res['goods_name'],'预'),1);
         return $this->render('goods',['res'=>$matches[0],'src'=>$src,'goods'=>$res,'vrres'=>$vrres]);
     }

@@ -39689,11 +39689,9 @@ html:not(.isMobile) *::-webkit-resizer {
 .window-bin .hjz-container4:before{
 	background:url("https://hjzhome.oss-cn-shenzhen.aliyuncs.com/%E5%AE%98%E7%BD%91/%E8%B4%A8%E6%A3%80%E6%A0%87%E5%87%86.png") no-repeat;
 }
-.window-bin #white-board .container{opacity:1;width: 60% !important;height:400px;}
+.window-bin #white-board .container{opacity:1;width: 60% !important;height:435px;}
 .window-bin #white-board .container a{width:100%;height:100%;position:absolute;z-index:888;top:0;left:0}
-.window-bin #white-board .container:before{
-	background-size: 100% 100%;
-}
+.window-bin #white-board .container:before{background-size: 100% 100%;}
 /*首页改为品牌用色*/
 .sign-box>ul>li>a:before{background:#b1191a}
 .side-open hr{background:#b1191a}
