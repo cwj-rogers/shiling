@@ -11,6 +11,22 @@ class IndexController extends \yii\web\Controller
 {
     public $layout = false;
     public $enableCsrfValidation = false;
+
+    /**
+     * 监听扫码跳转
+     */
+    public static function qrcodeWatch(){
+        $host = "mall.hjzhome.com";
+        $path = $_SERVER['REQUEST_URI'];
+        if (strpos($path,'mobile') !== false){
+            header('Location:http://'.$host.$path);die;
+        }
+    }
+
+    /**
+     * 新官网首页
+     * @return string
+     */
     public function actionIndex()
     {
         //case 案例数据
@@ -28,12 +44,12 @@ class IndexController extends \yii\web\Controller
         }
 
         //VR方案
-        $sql1 = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img, g.market_price, gal.img_url, gal.img_id ' .
+        $sql1 = 'SELECT g.goods_id, g.goods_name, g.goods_brief, g.goods_thumb, g.goods_img, g.market_price, g.provider_name, gal.img_url, gal.img_id ' .
                 'FROM ecs_goods AS g LEFT JOIN ecs_goods_gallery as gal on g.goods_id=gal.goods_id '.
                 'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) '.
                 'ORDER BY gal.img_id desc';
         $sql2 = "SELECT * FROM ($sql1) as ggal GROUP BY  ggal.goods_name";
-        $vrres = Yii::$app->db_bw->createCommand($sql2)->queryAll();
+        $vrres = Yii::$app->db_hjz->createCommand($sql2)->queryAll();
 
         //资讯文章
         $query = new Query();
@@ -75,7 +91,7 @@ class IndexController extends \yii\web\Controller
                     "姓名：{$info['para115']}  电话：{$info['para116']}  邮箱：{$info['para117']}".PHP_EOL.
                     "内容：{$info['para118']}".PHP_EOL.PHP_EOL;
 
-                $file = Yii::getAlias("@app/views/demo/contact.txt");
+                $file = Yii::getAlias("@app/views/index/contact.txt");
                 file_put_contents($file,$data,FILE_APPEND);
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>Yii::$app->request->referrer]);
             }
@@ -94,7 +110,7 @@ class IndexController extends \yii\web\Controller
             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) '.
             'ORDER BY gal.img_id desc';
         $sql2 = "SELECT * FROM ($sql1) as ggal GROUP BY  ggal.goods_name";
-        $vrres = Yii::$app->db_bw->createCommand($sql2)->queryAll();
+        $vrres = Yii::$app->db_hjz->createCommand($sql2)->queryAll();
         //p($vrres);
         return $this->render('picture2',['vrres'=>$vrres]);
     }
@@ -154,12 +170,12 @@ class IndexController extends \yii\web\Controller
             $res = $query->from("ecs_goods")
                 ->select("goods_id,goods_name as title,goods_desc as intro")
                 ->where(["goods_id"=>$id])
-                ->one(Yii::$app->db_bw);
+                ->one(Yii::$app->db_hjz);
             $res['keywords'] = "NEGATIVE IONS FITNESS DECORATE";
         }else{
             $res = $query->from("ecs_topic")
                 ->where(["topic_id"=>$id])
-                ->one(Yii::$app->db_bw);
+                ->one(Yii::$app->db_hjz);
         }
         //p($res,1);
         return $this->render('page',['content'=>$res]);
@@ -171,23 +187,30 @@ class IndexController extends \yii\web\Controller
         $res = $query->from("ecs_goods")
             ->select("goods_id,goods_name,goods_desc as intro,last_update,click_count")
             ->where(["goods_id"=>$goods_id])
-            ->one(Yii::$app->db_bw);
+            ->one(Yii::$app->db_hjz);
         //标题美化
         $res['title'] = mb_strpos($res['goods_name'],'预')?mb_strrchr($res['goods_name'],'预',true):$res['goods_name'];
 
+        //正则获取详情页内容
         $pregRule = "/<p style=\"(.*)<\/p>/U";
         preg_match_all($pregRule, $res['intro'], $matches);//正则匹配图片地址
-        $iframe = array_pop($matches[0]);
-        $pregRuleIf = "/src=\"(.*)\"/U";
-        preg_match($pregRuleIf, $iframe, $src);//正则匹配
-        $src = isset($src[1])&&!empty($src[1])? $src[1]:"";
+        //
+        if (count($matches[0])>2){
+            $iframe = array_pop($matches[0]);//推出数组最后一条, 用来获取房点地址
+            $pregRuleIf = "/src=\"(.*)\"/U";
+            preg_match($pregRuleIf, $iframe, $src);//正则匹配
+            $src = isset($src[1])&&!empty($src[1])? $src[1]:"";
+        }else{
+            $src = "";
+        }
 
-        //右侧推荐方案
+        //右侧推荐方案(随机5个)
         $rand = array_rand(array_flip(explode(',',"1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678")),5);
         $sql1 = 'SELECT g.goods_id,g.goods_name,g.goods_thumb, g.goods_img, g.goods_sn ' .
             'FROM ecs_goods AS g '.
             'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN ('.implode(',',$rand).') ';
-        $vrres = Yii::$app->db_bw->createCommand($sql1)->queryAll();
+        $vrres = Yii::$app->db_hjz->createCommand($sql1)->queryAll();
+
         //p(mb_strpos($res['goods_name'],'预'),1);
         return $this->render('goods',['res'=>$matches[0],'src'=>$src,'goods'=>$res,'vrres'=>$vrres]);
     }
@@ -229,14 +252,16 @@ class IndexController extends \yii\web\Controller
     public function actionMessage(){
         if ($pwd = Yii::$app->request->get('password',null)){
             if ($pwd=="hjzhome888"){
-                $file = Yii::getAlias("@app/views/demo/contact.txt");
+                $file = Yii::getAlias("@app/views/index/contact.txt");
                 $info = file_get_contents($file);
-                return $this->render('message2',['info'=>$info,'checkout'=>1]);
+                $file2 = Yii::getAlias("@app/views/index/info.txt");
+                $info2 = file_get_contents($file2);
+                return $this->render('message2',['info'=>$info,'info2'=>$info2,'checkout'=>1]);
             }else{
                 return $this->render('@app/views/public/error',['message'=>'密码错误','waitSecond'=>3,'jumpUrl'=>'message']);
             }
         }else{
-            return $this->render('message2',['info'=>'','checkout'=>0]);
+            return $this->render('message2',['info'=>'','info2'=>'','checkout'=>0]);
         }
     }
 
@@ -269,8 +294,10 @@ class IndexController extends \yii\web\Controller
     public function actionFree(){
         if (Yii::$app->request->isPost){
             if (!empty($_POST)){
-                $data = "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}，姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL;
-                $file = Yii::getAlias("@app/views/demo/info.txt");
+                $data = date("Y-m-d H:i:s").PHP_EOL.
+                    "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}".PHP_EOL.
+                    "姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL.PHP_EOL;
+                $file = Yii::getAlias("@app/views/index/info.txt");
                 file_put_contents($file,$data,FILE_APPEND);
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>'index#video']);
             }

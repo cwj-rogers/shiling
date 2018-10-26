@@ -62,7 +62,7 @@ use yii\helpers\Url;
                         <a href="<?= Url::toRoute('picture')?>"  title="产品中心" data-alert="全部">
                             <i class="fa fa-home fa-camera"></i>
                             <b>产品中心</b>
-                            <p>16</p>
+                            <p>11</p>
                         </a>
                         <u>&nbsp;</u>
                         <i>&nbsp;</i>
@@ -94,7 +94,7 @@ use yii\helpers\Url;
                         <a href="<?= Url::toRoute('case')?>"  title="案例展示" data-alert="全部" >
                             <i class="fa fa-home fa-flag"></i>
                             <b>案例展示</b>
-                            <p>24</p>
+                            <p>64</p>
                         </a>
                     </li>
                     <li class="nav-first has ">

@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\controllers;
+namespace hjzhome\controllers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
