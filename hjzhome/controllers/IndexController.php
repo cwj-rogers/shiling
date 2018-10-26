@@ -195,6 +195,7 @@ class IndexController extends \yii\web\Controller
 //        $pregRule = "/<p style=\"(.*)<\/p>/U";
         $pregRule = "/<p style=\"(.*)<\/p>/U";
         preg_match_all($pregRule, $res['intro'], $matches);//正则匹配图片地址
+//        p($matches,1);
         $iframe = array_pop($matches[0]);
         $pregRuleIf = "/src=\"(.*)\"/U";
         preg_match($pregRuleIf, $iframe, $src);//正则匹配

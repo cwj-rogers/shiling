@@ -46,16 +46,16 @@ use yii\helpers\Html;
             <div class="banner-box">
                 <div class="banner-cut" id="white-board">
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/21.jpg">
-                        <div class="container  hjz-container1"><a href="" target="_blank"></a></div>
+                        <div class="container  hjz-container1"><a href="<?= Url::toRoute(['about'])?>" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
-                        <div class="container hjz-container2"><a href="" target="_blank"></a></div>
+                        <div class="container hjz-container2"><a href="<?= Url::toRoute(['page','id'=>16])?>" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/7.jpg">
-                        <div class="container hjz-container3"><a href="" target="_blank"></a></div>
+                        <div class="container hjz-container3"><a href="<?= Url::toRoute(['picture'])?>" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/19.jpg">
-                        <div class="container hjz-container4"><a href="http://hjzhome.hjz.com/index/goods?goods_id=3439" target="_blank"></a></div>
+                        <div class="container hjz-container4"><a href="<?= Url::toRoute(['goods','goods_id'=>3439])?>" target="_blank"></a></div>
                     </div>
                 </div>
                 <div class="banner-pager"></div>
