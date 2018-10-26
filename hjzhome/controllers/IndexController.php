@@ -44,7 +44,7 @@ class IndexController extends \yii\web\Controller
         }
 
         //VR方案
-        $sql1 = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img, g.market_price, gal.img_url, gal.img_id ' .
+        $sql1 = 'SELECT g.goods_id, g.goods_name, g.goods_brief, g.goods_thumb, g.goods_img, g.market_price, g.provider_name, gal.img_url, gal.img_id ' .
                 'FROM ecs_goods AS g LEFT JOIN ecs_goods_gallery as gal on g.goods_id=gal.goods_id '.
                 'WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND g.goods_id IN (1980,2250,3434,3433,3432,3437,3435,3431,2443,1902,1678) '.
                 'ORDER BY gal.img_id desc';
@@ -254,12 +254,14 @@ class IndexController extends \yii\web\Controller
             if ($pwd=="hjzhome888"){
                 $file = Yii::getAlias("@app/views/index/contact.txt");
                 $info = file_get_contents($file);
-                return $this->render('message2',['info'=>$info,'checkout'=>1]);
+                $file2 = Yii::getAlias("@app/views/index/info.txt");
+                $info2 = file_get_contents($file2);
+                return $this->render('message2',['info'=>$info,'info2'=>$info2,'checkout'=>1]);
             }else{
                 return $this->render('@app/views/public/error',['message'=>'密码错误','waitSecond'=>3,'jumpUrl'=>'message']);
             }
         }else{
-            return $this->render('message2',['info'=>'','checkout'=>0]);
+            return $this->render('message2',['info'=>'','info2'=>'','checkout'=>0]);
         }
     }
 
@@ -292,7 +294,9 @@ class IndexController extends \yii\web\Controller
     public function actionFree(){
         if (Yii::$app->request->isPost){
             if (!empty($_POST)){
-                $data = "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}，姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL;
+                $data = date("Y-m-d H:i:s").PHP_EOL.
+                    "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}".PHP_EOL.
+                    "姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL.PHP_EOL;
                 $file = Yii::getAlias("@app/views/index/info.txt");
                 file_put_contents($file,$data,FILE_APPEND);
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>'index#video']);

@@ -267,7 +267,7 @@ use yii\helpers\Html;
                                                 </div>
                                             </div>
                                             <div class="bc-right">
-                                                <a href="https://www.jiasc.com/tour/5833faa75aa5d1bc">
+                                                <a href="<?= $v['provider_name']?>" target="_blank">
                                                     <div class="vr-pic">
                                                         <img src="<?= $v['img_url']?>" alt="">
                                                     </div>

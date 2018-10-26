@@ -58,13 +58,36 @@ use yii\helpers\Url;
         <div class="side-body swiper-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/18.jpg">
             <section class="met-show animsition">
                 <div class="container">
-                    <div class="row">
-                        <div class="met-editor lazyload clearfix">
-                            <div class="form-group ftype_textarea">
-                                <div>
-                                    <?php if ($checkout):?>
-                                    <textarea name='para118' class='form-control' placeholder='内容 ' rows='20'><?= $info?></textarea>
-                                    <?php endif;?>
+                    <div class="row" id="show-msg">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#contract" aria-controls="contract" role="tab" data-toggle="tab">联系方式留言</a></li>
+                                <li role="presentation"><a href="#free" aria-controls="free" role="tab" data-toggle="tab">免费设计留言</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="contract">
+                                    <div class="met-editor lazyload clearfix">
+                                        <div class="form-group ftype_textarea">
+                                            <div>
+                                                <?php if ($checkout):?>
+                                                    <textarea name='para118' class='form-control' placeholder='内容 ' rows='20'><?= $info?></textarea>
+                                                <?php endif;?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="free">
+                                    <div class="met-editor lazyload clearfix">
+                                        <div class="form-group ftype_textarea">
+                                            <div>
+                                                <?php if ($checkout):?>
+                                                    <textarea name='para118' class='form-control' placeholder='内容 ' rows='20'><?= $info2?></textarea>
+                                                <?php endif;?>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
