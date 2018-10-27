@@ -515,6 +515,37 @@ use yii\helpers\Html;
         });
     });
 
+    //百度地图标志
+    function coordinate_func() {
+        var script = document.createElement('script'),
+            coordinate = $('#map').attr('coordinate') || '105,25';
+        script.src = '//api.map.baidu.com/api?v=2.0&ak=gnFREoDcGvimV2KZOmSPIy1fNPE5IgdH&callback=map_func';
+        document.body.appendChild(script);
+        map_func = function () {
+            console.log(BMap);
+            var coo = coordinate && coordinate.split(',');
+            var map = new BMap.Map('map');//实例化地图对象
+            map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);//地图对象设置地图中心
+            map.enableScrollWheelZoom();//地图对象禁止缩放地图
+
+            var Icon = new BMap.Icon(M['tem'] + "/min/svg/point.svg\" class=\"point_svg", new BMap.Size(28, 56));//实例化ICON对象
+            var marker = new BMap.Marker(new BMap.Point(coo[0] * 1, coo[1] * 1), {icon: Icon,});//实例化标识对象
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE);//标识对象设置动画属性
+            map.addOverlay(marker);//添加覆盖物
+
+            var sContent = "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>深圳市荟家装科技有限公司</h4>" +
+                "<img style='float:right;margin:4px' id='imgDemo' src='http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png' width='100' height='100' title='深圳市荟家装科技有限公司'/>" +
+                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>广东省佛山市禅城区季华路智慧新城T15栋10楼（佛山总部）</p>";
+            var opts = {
+                offset : {width:0,height:-40}
+            }
+            var infoWindow = new BMap.InfoWindow(sContent,opts);//实例化窗口对象
+            infoWindow.enableAutoPan();
+
+            marker.openInfoWindow(infoWindow);//标识对象设置信息窗口
+        }
+    }
+
     /*省份城市二级联动*/
     var region=function(){};
     region.response = function(result){
