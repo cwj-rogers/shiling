@@ -39692,6 +39692,8 @@ html:not(.isMobile) *::-webkit-resizer {
 .window-bin #white-board .container{opacity:1;width: 60% !important;height:435px;}
 .window-bin #white-board .container a{width:100%;height:100%;position:absolute;z-index:888;top:0;left:0}
 .window-bin #white-board .container:before{background-size: 100% 100%;}
+.side-head .side-logo a img {padding: 5px 0;}
+.side-head .side-logo a #hjz-gif{padding: 15px 0;}
 
 /*首页改为品牌用色*/
 .sign-box>ul>li>a:before{background:#b1191a}
@@ -39867,10 +39869,7 @@ footer{display:flex;flex-direction: column;justify-content: flex-start;align-ite
 
 /*侧边栏*/
 .nav-first>a:before{background: #b1191a;}
-body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:hover>.nav-first.active:hover>a>p {
-    color: #b1191a;
-    background: rgba(255,255,255,.8);
-}
+body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:hover>.nav-first.active:hover>a>p {color: #b1191a;background: rgba(255,255,255,.8);}
 
 /*媒体查询*/
 @media (max-width:1599px) {
