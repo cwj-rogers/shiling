@@ -294,8 +294,9 @@ class IndexController extends \yii\web\Controller
     public function actionFree(){
         if (Yii::$app->request->isPost){
             if (!empty($_POST)){
+                $addrInfo = explode(',',$_POST['py2cn']);
                 $data = date("Y-m-d H:i:s").PHP_EOL.
-                    "省份城市：{$_POST['province']}-{$_POST['city']}，房屋面积：{$_POST['area']}".PHP_EOL.
+                    "省份城市：{$addrInfo[0]}-{$addrInfo[1]}，房屋面积：{$_POST['area']}".PHP_EOL.
                     "姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL.PHP_EOL;
                 $file = Yii::getAlias("@app/views/index/info.txt");
                 file_put_contents($file,$data,FILE_APPEND);

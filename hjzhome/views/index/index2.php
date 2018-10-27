@@ -83,6 +83,8 @@ use yii\helpers\Html;
                                             <!--下拉列表-->
                                             <?=Html::dropDownList('province',null,[],['class'=>'form-control apply-prov','id'=>"hjz-province"])?>
                                             <?=Html::dropDownList('city',null,[],['class'=>'form-control apply-city','id'=>"hjz-city"])?>
+                                            <!--转中文-->
+                                            <input type="hidden" name="py2cn">
                                         </div>
                                         <small class="help-block" data-fv-validator="notEmpty" data-fv-for="para115" data-fv-result="NOT_VALIDATED" style="display: none;">不能为空</small>
                                     </div>
@@ -551,26 +553,35 @@ use yii\helpers\Html;
         })
     };
     region.changed = function(obj,selName){
-        var parent = obj.options[obj.selectedIndex].value;console.log(parent);
+        var parent = obj.options[obj.selectedIndex].value;
         region.loadCities(parent,"hjz-city");
     };
 
     $(document).ready(function(){
         //弹窗获取地区列表
-        region.loadProvinces(1,"hjz-province");
-        region.loadCities(6,"hjz-city");
-        $('#hjz-province').change(function () {
-            var selectid = $(this).val();
-            if(selectid>0){
-                var obj = document.getElementById("hjz-province");
-                region.changed(obj,"hjz-city");
-            }
-        });
-        //默认选中地区
+        region.loadProvinces(1,"hjz-province");//获取省份列表
+        region.loadCities(6,"hjz-city");//获取城市列表
         setTimeout(function () {
+            //默认选中地区
             $("#hjz-province option[value='6']").prop("selected","selected");
             $("#hjz-city option[value='80']").prop("selected","selected");
         },1500);
+        $('#hjz-province,#hjz-city').change(function () {
+            if ($(this).attr("id")=="hjz-province"){
+                //绑定下拉事件
+                var selectid = $(this).val();
+                if(selectid>0){
+                    var obj = document.getElementById("hjz-province");
+                    region.changed(obj,"hjz-city");
+                }
+            }
+
+            //拼接城市
+            var pro = $("#hjz-province").find("option:selected").text() || "广东";
+            var city = $("#hjz-city").find("option:selected").text() || "佛山";
+            $("input[name=py2cn]").val(pro+','+city);
+        });
+
         //预估报价动画效果
         setInterval(function(){
             $('.offer1').text(Math.round(Math.random()*80000 + 20000));

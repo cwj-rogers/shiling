@@ -39901,7 +39901,7 @@ body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:ho
  .window-bin.swiper-slide-active .video-text p{display:none}
  .contact-cut {transform: translate3d(0,0,0)!important;}
  #map{display:none}
- .window-bin #white-board .container{width: 80% !important;height:200px;}
+ .window-bin #white-board .container{width: 100% !important;height:200px;}
 }
 
 /*查看留言*/

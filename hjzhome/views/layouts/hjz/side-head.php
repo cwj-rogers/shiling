@@ -14,3 +14,4 @@
 <meta name="baidu-site-verification" content="hfzddniCv7" />
 <link href="http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png" rel="shortcut icon" type="image/x-icon" />
 <link rel='stylesheet' href='/static/demo/metinfos.css'>
+<script src="https://hm.baidu.com/hm.js?56db0dd9e9cedd8449a9e3d32b6ff577"></script>
