@@ -238,6 +238,20 @@ use yii\helpers\Html;
         </div>
 
         <div class="window-bin swiper-lazy"
+             data-hash="mall"
+             data-title="建材商城"
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
+            <div class="container mall-box hjz-mall">
+                <div class="row">
+                    <a href="<?= Url::toRoute(['link-mall'])?>" target="_blank" style="width: 100%;height: 400px;display: block;">
+                        <img src="https://hjz888.oss-cn-shenzhen.aliyuncs.com/%E7%99%BE%E5%BA%A6%E8%AE%A4%E8%AF%81%E5%AE%98%E7%BD%91/%E5%BB%BA%E6%9D%90%E5%95%86%E5%9F%8E.png" alt="" style="width: 100%;height: 100%;">
+                    </a>
+                </div>
+            </div>
+            <div class="window-next">SCROLL</div>
+        </div>
+
+        <div class="window-bin swiper-lazy"
              data-hash="picture"
              data-title="产品"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/%E8%83%8C%E6%99%AF%E5%9B%BE/14.jpg?t=1539163663000">
@@ -522,7 +536,6 @@ use yii\helpers\Html;
         script.src = '//api.map.baidu.com/api?v=2.0&ak=gnFREoDcGvimV2KZOmSPIy1fNPE5IgdH&callback=map_func';
         document.body.appendChild(script);
         map_func = function () {
-            console.log(BMap);
             var coo = coordinate && coordinate.split(',');
             var map = new BMap.Map('map');//实例化地图对象
             map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);//地图对象设置地图中心

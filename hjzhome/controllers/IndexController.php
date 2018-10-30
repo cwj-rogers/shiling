@@ -13,7 +13,7 @@ class IndexController extends \yii\web\Controller
     public $enableCsrfValidation = false;
 
     /**
-     * 监听扫码跳转
+     * 监听商城扫码跳转
      */
     public static function qrcodeWatch(){
         $host = "mall.hjzhome.com";
@@ -83,6 +83,10 @@ class IndexController extends \yii\web\Controller
         return $this->render('index2',['case'=>$newRes,'vr'=>$vrres, 'article'=>$artByType, 'artType'=>array_keys($artByType)]);
     }
 
+    /**
+     * 公司简介
+     * @return string
+     */
     public function actionAbout(){
         if (Yii::$app->request->isPost){
             if (!empty($_POST)){
@@ -103,6 +107,10 @@ class IndexController extends \yii\web\Controller
         return $this->render('server2');
     }
 
+    /**
+     * 整装产品版块
+     * @return string
+     */
     public function actionPicture(){
         //VR方案
         $sql1 = 'SELECT g.goods_id,g.cat_id, g.goods_name, g.sales_volume,g.comments_number,g.goods_brief, g.goods_thumb, g.goods_img, g.market_price, gal.img_url, gal.img_id ' .
@@ -144,6 +152,11 @@ class IndexController extends \yii\web\Controller
         return $this->render('news2',['article'=>$article,'artRList'=>$artRList]);
     }
 
+    /**
+     * 文章详情
+     * @param int $artid
+     * @return string
+     */
     public function actionShownews($artid=0){
         //统计文章点击次数
         Yii::$app->db_hjz->createCommand()->update("ecs_article",["click"=>new Expression("`click`+1")],['article_id'=>$artid])->execute();
@@ -303,5 +316,12 @@ class IndexController extends \yii\web\Controller
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>'index#video']);
             }
         }
+    }
+
+    /**
+     * 跳转商城页面
+     */
+    public function actionLinkMall(){
+        return $this->render('linkmall');
     }
 }

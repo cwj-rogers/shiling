@@ -53,9 +53,9 @@ use yii\helpers\Url;
                         </a>
                     </li>
                     <li class="nav-first  ">
-                        <a href="<?= Url::toRoute('about')?>"  title="关于我们" data-alert="全部" >
+                        <a href="<?= Url::toRoute('link-mall')?>"  title="建材商城" data-alert="全部" target="_blank">
                             <i class="fa fa-home fa-pie-chart"></i>
-                            <b>关于我们</b>
+                            <b>建材商城</b>
                         </a>
                     </li>
                     <li class="nav-first has ">

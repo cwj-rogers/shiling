@@ -26902,9 +26902,22 @@ $.components.register('filterable', {
         return !$.cookie(key);
     };
 }));
+/**
+ *  Request.js 按需加载模块结束
+ */
+
+
+
+
+
+
+
+
+
+
 /*
 *
-* 网站动画控制JS脚本
+* 官网JS脚本 start
 *
 */
 $(document).ready(function () {
@@ -28135,6 +28148,7 @@ $(document).ready(function () {
         });
     }
     
+    //首页导航栏和版块脚本
     $('.window-bin').each(function (index, element) {
         data_hash = $(this).attr('data-hash');
         data_hash = data_hash ? 'data-hash="' + data_hash + '"' : '';
@@ -28220,6 +28234,7 @@ $(document).ready(function () {
             nextButton: '.window-next',
             uniqueNavElements: false,
             onInit: function (swiper) {
+                //绑定版块方法
                 var hashNow = window.location.hash.replace('#', '');
                 var hash = swiper.slides[0].getAttribute('data-hash');
                 if (!hashNow || hashNow == hash) {
@@ -28320,6 +28335,9 @@ $(document).ready(function () {
             } else if (O == 3) {
                 if (M['about']) M['about'].destroy(false);
             }
+        }
+        function mall_func(O) {
+
         }
         function picture_func(O) {
 			/*
