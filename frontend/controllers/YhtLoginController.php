@@ -54,8 +54,9 @@ class YhtLoginController extends \yii\web\Controller
             if(!Yii::$app->session->has("userinfo") && Yii::$app->wechat->isAuthorized()){
                 (new WxUser)->createUser();
             }
-            // 确认授权
+
             if (Yii::$app->request->isAjax){
+                // 确认授权
                 $echostr = Yii::$app->request->param('echostr',0);
                 $confirm = Yii::$app->request->param('confirm',0);
                 if ($echostr>0 && $confirm==1){
@@ -66,6 +67,7 @@ class YhtLoginController extends \yii\web\Controller
                     output::ajaxReturn(204,'登录失败');
                 }
             }else{
+                //授权页面
                 return $this->render('/yht/web-login',['qrAuth'=>1,'echostr'=>0]);
             }
         }else{

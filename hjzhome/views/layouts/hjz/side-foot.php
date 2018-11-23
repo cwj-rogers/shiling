@@ -15,7 +15,7 @@ use yii\helpers\Url;
     <div class="foot-content">
         <a target="_blank" href="http://gdcainfo.miitbeian.gov.cn/publish/query/indexFirst.action;jsessionid=081D7AD5EF606B4F9BF0F028CAE6DBF0" class="footer_new_ga" rel="nofollow">
             <i class="index-icon6 fl"></i>
-            <span>ICP备案证书号:粤ICP备16047718号</span>
+            <span>ICP备案证书号: 粤ICP备16047718号</span>
             <span>Copyright © 2018 荟家装健康智慧整装</span>
         </a>
         <div class="footer-qr-code">

@@ -130,6 +130,7 @@ sup{top:-0.5em;}sub{bottom:-0.25em;}
 
 /*云合同web登录*/
 #container .weui-msg__icon-area img{width: 100%}
+#container .weui-btn_primary{background-color: #4280FF}
 /*云合同用户注册*/
 #register{}
     #register #tab1 .weui-cells__tips{text-align: center}

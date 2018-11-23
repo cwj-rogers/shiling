@@ -35,3 +35,4 @@ composer.lock
 *.log
 /frontend/config/params-local.php
 /backend/config/main-local.php
+/hjzhome/web/static/demo/.vscode/

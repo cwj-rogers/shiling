@@ -83,6 +83,8 @@ use yii\helpers\Html;
                                             <!--下拉列表-->
                                             <?=Html::dropDownList('province',null,[],['class'=>'form-control apply-prov','id'=>"hjz-province"])?>
                                             <?=Html::dropDownList('city',null,[],['class'=>'form-control apply-city','id'=>"hjz-city"])?>
+                                            <!--转中文-->
+                                            <input type="hidden" name="py2cn">
                                         </div>
                                         <small class="help-block" data-fv-validator="notEmpty" data-fv-for="para115" data-fv-result="NOT_VALIDATED" style="display: none;">不能为空</small>
                                     </div>
@@ -230,6 +232,20 @@ use yii\helpers\Html;
                             <span>READ MORE</span>
                         </a>
                     </div>
+                </div>
+            </div>
+            <div class="window-next">SCROLL</div>
+        </div>
+
+        <div class="window-bin swiper-lazy"
+             data-hash="mall"
+             data-title="建材商城"
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
+            <div class="container mall-box hjz-mall">
+                <div class="row">
+                    <a href="<?= Url::toRoute(['link-mall'])?>" target="_blank" style="width: 100%;height: 400px;display: block;">
+                        <img src="https://hjz888.oss-cn-shenzhen.aliyuncs.com/%E7%99%BE%E5%BA%A6%E8%AE%A4%E8%AF%81%E5%AE%98%E7%BD%91/%E5%BB%BA%E6%9D%90%E5%95%86%E5%9F%8E.png" alt="" style="width: 100%;height: 100%;">
+                    </a>
                 </div>
             </div>
             <div class="window-next">SCROLL</div>
@@ -513,6 +529,36 @@ use yii\helpers\Html;
         });
     });
 
+    //百度地图标志
+    function coordinate_func() {
+        var script = document.createElement('script'),
+            coordinate = $('#map').attr('coordinate') || '105,25';
+        script.src = '//api.map.baidu.com/api?v=2.0&ak=gnFREoDcGvimV2KZOmSPIy1fNPE5IgdH&callback=map_func';
+        document.body.appendChild(script);
+        map_func = function () {
+            var coo = coordinate && coordinate.split(',');
+            var map = new BMap.Map('map');//实例化地图对象
+            map.centerAndZoom(new BMap.Point(coo[0] * 1, coo[1] * 1), 19);//地图对象设置地图中心
+            map.enableScrollWheelZoom();//地图对象禁止缩放地图
+
+            var Icon = new BMap.Icon(M['tem'] + "/min/svg/point.svg\" class=\"point_svg", new BMap.Size(28, 56));//实例化ICON对象
+            var marker = new BMap.Marker(new BMap.Point(coo[0] * 1, coo[1] * 1), {icon: Icon,});//实例化标识对象
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE);//标识对象设置动画属性
+            map.addOverlay(marker);//添加覆盖物
+
+            var sContent = "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>深圳市荟家装科技有限公司</h4>" +
+                "<img style='float:right;margin:4px' id='imgDemo' src='http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png' width='100' height='100' title='深圳市荟家装科技有限公司'/>" +
+                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>广东省佛山市禅城区季华路智慧新城T15栋10楼（佛山总部）</p>";
+            var opts = {
+                offset : {width:0,height:-40}
+            }
+            var infoWindow = new BMap.InfoWindow(sContent,opts);//实例化窗口对象
+            infoWindow.enableAutoPan();
+
+            marker.openInfoWindow(infoWindow);//标识对象设置信息窗口
+        }
+    }
+
     /*省份城市二级联动*/
     var region=function(){};
     region.response = function(result){
@@ -551,26 +597,35 @@ use yii\helpers\Html;
         })
     };
     region.changed = function(obj,selName){
-        var parent = obj.options[obj.selectedIndex].value;console.log(parent);
+        var parent = obj.options[obj.selectedIndex].value;
         region.loadCities(parent,"hjz-city");
     };
 
     $(document).ready(function(){
         //弹窗获取地区列表
-        region.loadProvinces(1,"hjz-province");
-        region.loadCities(6,"hjz-city");
-        $('#hjz-province').change(function () {
-            var selectid = $(this).val();
-            if(selectid>0){
-                var obj = document.getElementById("hjz-province");
-                region.changed(obj,"hjz-city");
-            }
-        });
-        //默认选中地区
+        region.loadProvinces(1,"hjz-province");//获取省份列表
+        region.loadCities(6,"hjz-city");//获取城市列表
         setTimeout(function () {
+            //默认选中地区
             $("#hjz-province option[value='6']").prop("selected","selected");
             $("#hjz-city option[value='80']").prop("selected","selected");
         },1500);
+        $('#hjz-province,#hjz-city').change(function () {
+            if ($(this).attr("id")=="hjz-province"){
+                //绑定下拉事件
+                var selectid = $(this).val();
+                if(selectid>0){
+                    var obj = document.getElementById("hjz-province");
+                    region.changed(obj,"hjz-city");
+                }
+            }
+
+            //拼接城市
+            var pro = $("#hjz-province").find("option:selected").text() || "广东";
+            var city = $("#hjz-city").find("option:selected").text() || "佛山";
+            $("input[name=py2cn]").val(pro+','+city);
+        });
+
         //预估报价动画效果
         setInterval(function(){
             $('.offer1').text(Math.round(Math.random()*80000 + 20000));
