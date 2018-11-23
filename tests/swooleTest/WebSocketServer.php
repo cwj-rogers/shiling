@@ -1,23 +1,5 @@
 <?php
-function p($var,$is_die=0,$is_gbk=0)
-{
-    if (is_bool($var)) {
-        var_dump($var);
-    } else if (is_null($var)) {
-        var_dump(NULL);
-    } else {
-        $is_cli = preg_match("/cli/i", php_sapi_name()) ? true : false;
-        if (!$is_cli){
-            echo "<pre style='position:relative;z-index:1000;padding:10px;border-radius:5px;background:#F5F5F5;border:1px solid #aaa;font-size:14px;line-height:18px;opacity:0.9;'>" . print_r($var, true) . "</pre>";
-        }else{
-            if($is_gbk) $var = iconv("utf-8","gbk",$var);
-            echo print_r($var, true);
-        }
-    }
-    if ($is_die==1) die;
-}
-
-
+require "../public.php";
 
 $server = new swoole_websocket_server("0.0.0.0", 9501);
 
@@ -32,6 +14,14 @@ $server->on('message', function (swoole_websocket_server $server, $frame) {
      * 接收client数据, 处理业务逻辑
      */
     $server->push($frame->fd, "this is server");
+});
+
+$server->on('request', function (swoole_http_request $request, swoole_http_response $response) {
+    global $server;//调用外部的server
+    // $server->connections 遍历所有websocket连接用户的fd，给所有用户推送
+    foreach ($server->connections as $fd) {
+        $server->push($fd, $request->get['message']);
+    }
 });
 
 $server->on('close', function ($server, $fd) {
