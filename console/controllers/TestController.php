@@ -127,4 +127,28 @@ class TestController extends \yii\console\Controller
         return $content;
     }
 
+    public function actionSql(){
+        Yii::$app->setComponents([
+            'db2'=>[
+                'class'       => 'yii\db\Connection',
+                'dsn'         => 'mysql:host=127.0.0.1;port=3306;dbname=yii2admin',
+                'username'    => 'root',
+                'password'    => 'root',
+                'charset'     => 'utf8',
+                'tablePrefix' => 'ecs_',
+            ]
+        ]);
+        $sql = Yii::$app->db2->createCommand()->insert('goods',['username'=>'123','phone'=>'123','addr'=>'123','date'=>'123'])->getRawSql();
+        p($sql);
+    }
+
+
+
+
+
+
+
+
+
+    
 }

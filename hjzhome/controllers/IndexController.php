@@ -103,10 +103,6 @@ class IndexController extends \yii\web\Controller
         return $this->render('about2');
     }
 
-    public function actionServer(){
-        return $this->render('server2');
-    }
-
     /**
      * 整装产品版块
      * @return string
@@ -228,6 +224,11 @@ class IndexController extends \yii\web\Controller
         return $this->render('goods',['res'=>$matches[0],'src'=>$src,'goods'=>$res,'vrres'=>$vrres]);
     }
 
+    /**
+     * 查看案例
+     * @param int $page
+     * @return string
+     */
     public function actionCase($page=1){
         $offsetNum = ($page-1)*12;
         //case 案例数据
@@ -252,10 +253,6 @@ class IndexController extends \yii\web\Controller
         }
         //p($res);
         return $this->render('case2',['res'=>$res]);
-    }
-
-    public function actionCaseThumbnail(){
-
     }
 
     /**
