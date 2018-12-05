@@ -39808,6 +39808,11 @@ a:focus, a:hover {color: #b1191a;}
     #section-A .swiper-button-next{position: absolute;top: 210px;right: 0;height: 80px;width: 40px;background-color: black;opacity: 0.3;}
     #section-A .swiper-button-prev{position: absolute;top: 210px;left: 0;height: 80px;width: 40px;background-color: black;opacity: 0.3;}
     #section-A .swiper-button-hidden{display: none}
+    @media (max-width:767px) {
+        #section-A .A-body-content .bc-right{height: 300px;}
+        #section-A .bc-right .vr-pic img{height: 300px;}
+        #section-A .swiper-button-next,#section-A .swiper-button-prev{top: 128px;}
+    }
 
 /*案例*/
 .hjz-case .case-left{width:35%}
