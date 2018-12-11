@@ -266,12 +266,18 @@ class IndexController extends \yii\web\Controller
                 $info = file_get_contents($file);
                 $file2 = Yii::getAlias("@app/views/index/info.txt");
                 $info2 = file_get_contents($file2);
-                return $this->render('message2',['info'=>$info,'info2'=>$info2,'checkout'=>1]);
+                //620活动数据
+                $query = new Query();
+                $res = $query->from("esc_leave_msg")
+                    ->orderBy("created_at desc")
+                    ->all(Yii::$app->db_hjz);
+                $res = array_merge($res,$res);
+                return $this->render('message2',['info'=>$info,'info2'=>$info2,'checkout'=>1,'info620'=>$res]);
             }else{
                 return $this->render('@app/views/public/error',['message'=>'密码错误','waitSecond'=>3,'jumpUrl'=>'message']);
             }
         }else{
-            return $this->render('message2',['info'=>'','info2'=>'','checkout'=>0]);
+            return $this->render('message2',['info'=>'','info2'=>'','checkout'=>0,'info620'=>'']);
         }
     }
 
@@ -309,7 +315,7 @@ class IndexController extends \yii\web\Controller
                     "省份城市：{$addrInfo[0]}-{$addrInfo[1]}，房屋面积：{$_POST['area']}".PHP_EOL.
                     "姓名：{$_POST['name']}，手机号：{$_POST['phone']}".PHP_EOL.PHP_EOL;
                 $file = Yii::getAlias("@app/views/index/info.txt");
-                file_put_contents($file,$data,FILE_APPEND);
+                file_put_contents($file,$data);
                 return $this->render('@app/views/public/success',['message'=>'提交成功','waitSecond'=>3,'jumpUrl'=>'index#video']);
             }
         }

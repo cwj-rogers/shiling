@@ -39837,10 +39837,12 @@ a:focus, a:hover {color: #b1191a;}
 .video-text ul li span{color:#b1191a;font-weight:bold;margin:0 5px;}
 
 /*建材商城*/
-.hjz-mall a{width: 100%;height: 400px;display: block;}
+.hjz-mall a{width: 100%;height: 400px;display: block;position: relative;}
 .hjz-mall a img{width: 100%;height: 100%;}
+.hjz-mall .hjz-mall-hint{position: absolute;top:10%;right:0%;padding: 5px 10px;background-color:white;font-size:24px;border-top-left-radius:5px;border-bottom-left-radius: 5px;}
 @media (max-width:767px) {
  .hjz-mall a{width: 100%;height: 200px;display: block;}
+ .container,.hjz-mall{padding: 0;}
 }
 
 /*公司简介详情*/
@@ -39881,7 +39883,8 @@ footer{display:flex;flex-direction: column;justify-content: flex-start;align-ite
 
 /*侧边栏*/
 .nav-first>a:before{background: #b1191a;}
-body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:hover>.nav-first.active:hover>a>p {color: #b1191a;background: rgba(255,255,255,.8);}
+body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:hover>.nav-first.active:hover>a>p {color: #b1191a;background: rgba(255,255,255,.8);
+}
 
 /*媒体查询*/
 @media (max-width:1599px) {

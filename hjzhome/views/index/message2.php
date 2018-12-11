@@ -62,12 +62,50 @@ use yii\helpers\Url;
                         <div>
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#contract" aria-controls="contract" role="tab" data-toggle="tab">联系方式留言</a></li>
+                                <li role="presentation" class="active"><a href="#hjz620" aria-controls="hjz620" role="tab" data-toggle="tab">620套餐意向用户</a></li>
+                                <li role="presentation" ><a href="#contract" aria-controls="contract" role="tab" data-toggle="tab">联系方式留言</a></li>
                                 <li role="presentation"><a href="#free" aria-controls="free" role="tab" data-toggle="tab">免费设计留言</a></li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="contract">
+                                <!--     620    -->
+                                <div role="tabpanel" class="tab-pane active" id="hjz620">
+                                    <div class="met-editor lazyload clearfix">
+                                        <div class="form-group ftype_textarea">
+                                            <div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>序号</th>
+                                                            <th>用户名</th>
+                                                            <th>电话</th>
+                                                            <th>地址</th>
+                                                            <th>预约日期</th>
+                                                            <th>提交时间</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <?php foreach ($info620 as $k=>$v):?>
+                                                        <tr>
+                                                            <th scope="row"><?= $k+1?></th>
+                                                            <td><?= $v['msg_username']?></td>
+                                                            <td><?= $v['msg_phone']?></td>
+                                                            <td><?= $v['msg_addr']?></td>
+                                                            <td><?= $v['msg_date']?></td>
+                                                            <td><?= $v['created_at']?></td>
+                                                        </tr>
+                                                        <?php endforeach;?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="contract">
                                     <div class="met-editor lazyload clearfix">
                                         <div class="form-group ftype_textarea">
                                             <div>
@@ -78,6 +116,7 @@ use yii\helpers\Url;
                                         </div>
                                     </div>
                                 </div>
+
                                 <div role="tabpanel" class="tab-pane" id="free">
                                     <div class="met-editor lazyload clearfix">
                                         <div class="form-group ftype_textarea">

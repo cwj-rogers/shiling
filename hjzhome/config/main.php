@@ -60,13 +60,14 @@ return [
             'rules' => [
             ],
         ],
+        // 新官网数据库
         'db' => [
             'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=bdm314524321_db',
+            'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=yii2admin',
             'username'    => 'hjzhome',
             'password'    => 'Hjzhome888'
         ],
-        //阿里
+        // 旧官网数据库
         'db_hjz' => [
             'class'       => 'yii\db\Connection',
             'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=bdm314524321_db',

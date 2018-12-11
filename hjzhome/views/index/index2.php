@@ -244,6 +244,7 @@ use yii\helpers\Html;
             <div class="container mall-box hjz-mall">
                 <div class="row">
                     <a href="<?= Url::toRoute(['link-mall'])?>" target="_blank">
+                        <span class="hjz-mall-hint">点击进入建材商城</span>
                         <img src="https://hjz888.oss-cn-shenzhen.aliyuncs.com/%E7%99%BE%E5%BA%A6%E8%AE%A4%E8%AF%81%E5%AE%98%E7%BD%91/%E5%BB%BA%E6%9D%90%E5%95%86%E5%9F%8E.png" alt="">
                     </a>
                 </div>

@@ -12,13 +12,6 @@ $config = [
 //            'username'    => 'root',
 //            'password'    => 'root'
 //        ],
-        //公司阿里云数据库
-        'db' => [
-            'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=rm-wz9v7k8a32633m1zt5o.mysql.rds.aliyuncs.com;port=3306;dbname=yii2admin',
-            'username'    => 'hjzhome',
-            'password'    => 'Hjzhome888'
-        ],
     ],
 ];
 
