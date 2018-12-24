@@ -81,7 +81,7 @@ use yii\helpers\Url;
             <div class="weui-cell__ft">
                 <div class="weui-count">
                     <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" name="money1" type="number" value="10000" style="font-size: 18px;width: 80px">
+                    <input class="weui-count__number" name="money2" type="number" value="10000" style="font-size: 18px;width: 80px">
                     <a class="weui-count__btn weui-count__increase"></a>
                 </div>
             </div>
