@@ -30,7 +30,7 @@ class YhtLoginController extends \yii\web\Controller
             }
 
             if (Yii::$app->request->isAjax){
-                //WX端 异步提交验证码
+                //WX 端异步提交验证码
                 $vcode = Yii::$app->request->param('vcode',0);
                 $confirm = Yii::$app->request->param('confirm',0);
                 if ($vcode>0 && $confirm==1){
@@ -50,6 +50,7 @@ class YhtLoginController extends \yii\web\Controller
                 return $this->render('/yht/web-login',['qrAuth'=>1,'vcode'=>'']);
             }
         }else{
+
             //PC 端页面
             $vcode = rand(1000,9999);
             Yii::$app->cache->set($vcode,'');

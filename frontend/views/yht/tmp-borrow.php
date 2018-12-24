@@ -12,42 +12,26 @@ use yii\helpers\Url;
     <div class="weui-cells">
         <div class="weui-cell">
             <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>甲方：</p>
+                <p>甲方(出借方)：</p>
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input" type="text" placeholder="请输入文本" value="深圳市荟家装科技有限公司" disabled="disabled">
             </div>
         </div>
         <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>法定代表人：</p>
+            <div class="weui-cell__hd">
+                <p>住址：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="请输入文本" value="刘 遵 华" disabled="disabled">
+                <input class="weui-input" type="text" placeholder="请输入文本" value="佛山市禅城区季华路智慧新城T15栋1001" disabled="disabled">
             </div>
         </div>
         <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>签约代表：</p>
+            <div class="weui-cell__hd">
+                <p>电话：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="name1" type="text" placeholder="请输入">
-            </div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>地址：</p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="请输入文本" value="深圳市南山区沿山路" disabled="disabled">
-            </div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>联系电话：</p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="请输入文本" value="400-6966-398" disabled="disabled">
+                <input class="weui-input" type="number" placeholder="请输入" value="18676036969" disabled="disabled">
             </div>
         </div>
     </div>
@@ -56,7 +40,7 @@ use yii\helpers\Url;
     <div class="weui-cells">
         <div class="weui-cell">
             <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>乙方代表：</p>
+                <p>乙方(借款方)：</p>
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input" name="name2" type="text" placeholder="请输入" value="">
@@ -64,18 +48,10 @@ use yii\helpers\Url;
         </div>
         <div class="weui-cell">
             <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>身份证号码：</p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" name="identity" type="text" placeholder="请输入" value="">
-            </div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
                 <p>地址：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="address" type="text" placeholder="请输入" value="">
+                <input class="weui-input" name="addr2" type="text" placeholder="请输入" value="">
             </div>
         </div>
         <div class="weui-cell">
@@ -83,39 +59,24 @@ use yii\helpers\Url;
                 <p>联系电话：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="phone" type="text" placeholder="请输入" value="">
+                <input class="weui-input" name="phone2" type="text" placeholder="请输入" value="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd" style="margin-right: 0px">
+                <p>身份证号码：</p>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" name="id2" type="text" placeholder="请输入" value="">
             </div>
         </div>
     </div>
 
-    <div class="weui-cells__title">乙方认购整装家居套餐日期</div>
-    <div class="weui-cells">
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p></p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input dates" name="dateA" type="text" placeholder="请输入" value="" data-toggle='date' item="<?= date("Y-m-d")?>">
-            </div>
-        </div>
-    </div>
-    <div class="weui-cells__title">乙方签订《整装合同》日期</div>
-    <div class="weui-cells">
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p></p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input dates" name="dateB" type="text" placeholder="请输入" value="" data-toggle='date' item="<?= date("Y-m-d")?>">
-            </div>
-        </div>
-    </div>
-
-    <div class="weui-cells__title">补贴金额</div>
+    <div class="weui-cells__title">借款的金额</div>
     <div class="weui-cells">
         <div class="weui-cell">
             <div class="weui-cell__hd" style="margin-right: 10px">
-                <p>工程价款总金额 ：</p>
+                <p>借款总金额 ：</p>
             </div>
             <div class="weui-cell__ft">
                 <div class="weui-count">
@@ -126,57 +87,37 @@ use yii\helpers\Url;
             </div>
             <div class="weui-cell__hd" style="width: 30px;text-align: center">元</div>
         </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 10px">
-                <p>政策补贴金额 ：</p>
-            </div>
-            <div class="weui-cell__ft">
-                <div class="weui-count">
-                    <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" name="money2" type="number" value="10000" style="font-size: 18px;width: 80px">
-                    <a class="weui-count__btn weui-count__increase"></a>
-                </div>
-            </div>
-            <div class="weui-cell__hd" style="width: 30px;text-align: center">元</div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>户名：</p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" name="accountName" type="text" placeholder="请输入" value="">
-            </div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>开户行：</p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" name="accountBank" type="text" placeholder="请输入" value="">
-            </div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p>账号：</p>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" name="account" type="text" placeholder="请输入" value="">
-            </div>
-        </div>
     </div>
-
-
-    <div class="weui-cells__title">认购整装产品,签订本协议,完成客户信息注册的日期</div>
+    <div class="weui-cells__title">还款期限</div>
     <div class="weui-cells">
         <div class="weui-cell">
-            <div class="weui-cell__hd" style="margin-right: 0px">
-                <p></p>
+            <div class="weui-cell__hd">
+                <p>借款时长 ：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input dates" name="dateC" type="text" placeholder="请输入" value="" data-toggle='date' item="<?= date("Y-m-d")?>">
+                <input class="weui-input" type="text" placeholder="请输入" value="15天" disabled="disabled">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <p>开始时间 ：</p>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="请输入" value="<?= date("Y年m月d日")?>" disabled="disabled">
+                <input type="hidden" name="date"  value="<?= date("Y年m月d日")?>">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <p>结束时间 ：</p>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="请输入" value="<?= date("Y年m月d日",strtotime("+15day"))?>" disabled="disabled">
+                <input type="hidden" name="date+15" value="<?= date("Y年m月d日",strtotime("+15day"))?>">
             </div>
         </div>
     </div>
+
 
     <div class="weui-cells__title">合同补充条款</div>
     <div class="weui-cells weui-cells_form">
@@ -188,8 +129,6 @@ use yii\helpers\Url;
         </div>
     </div>
 
-    <input type="hidden" name="dateD" value="<?= date("Y年m月d日")?>">
-    <input type="hidden" name="dateD" value="<?= date("Y年m月d日")?>">
 
     <div class="weui-cell tmp-submit">
         <input type="submit" class="weui-btn weui-btn_primary">
