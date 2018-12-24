@@ -74,13 +74,6 @@ return [
             'username'    => 'hjzhome',
             'password'    => 'Hjzhome888'
         ],
-        //搬瓦
-        'db_bw' => [
-            'class'       => 'yii\db\Connection',
-            'dsn'         => 'mysql:host=95.169.30.158;port=3306;dbname=bdm314524321_db',
-            'username'    => 'root',
-            'password'    => 'root'
-        ],
     ],
     'params' => $params,
 ];

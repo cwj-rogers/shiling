@@ -16,35 +16,9 @@ class YhtLoginController extends \yii\web\Controller
     /**
      * PC web端登录
      * @return string|\yii\web\Response
-     * Todo 二维码下面显示随机数字
+     * Todo 显示随机数字
      */
     public function actionWeb(){
-        //非微信用户登录
-//        if (Yii::$app->request->isPost){
-//            $username = Yii::$app->request->post('yht_username','');
-//            $phoneNum = Yii::$app->request->post('yht_phoneNo','');
-//            if ($username && $phoneNum){
-//                $yhtInfo = WxYhtInfo::findOne(['yht_username'=>$username,'yht_phoneNo'=>$phoneNum]);
-//                if (empty($yhtInfo)){
-//                    return $this->render('/yht/fail',['msg'=>"1.用户名或密码错误  2.用户未注册"]);
-//                }else{
-//                    $userInfo = WxUser::findOne(['user_id'=>$yhtInfo->user_id]);
-//                    if (empty($userInfo)){
-//                        return $this->render('/yht/fail',['msg'=>"用户不存在"]);
-//                    }
-//                    $userInfo = $userInfo->toArray();
-//                    Yii::$app->session->set('userinfo',$userInfo);
-//                    $_SESSION['userinfo']['yht_signerId'] = $yhtInfo->yht_signerId;
-//                    $_SESSION['userinfo']['yht_username'] = $yhtInfo->yht_username;
-//                    $_SESSION['userinfo']['yht_authority'] = $yhtInfo->yht_authority;
-//                    $_SESSION['userinfo']['client'] = 'web';
-//                    $accessUrl = array_key_exists('accessUrl',$_SESSION)? $_SESSION['accessUrl']:Url::toRoute(['yht/index'],true);
-//                    return $this->redirect($accessUrl);
-//                }
-//            }
-//        }else{
-//            return $this->render('/yht/web-login');
-//        }
         if (Yii::$app->wechat->isWechat){
             //平台验证和授权验证
             if (!Yii::$app->wechat->isAuthorized()){
@@ -56,25 +30,35 @@ class YhtLoginController extends \yii\web\Controller
             }
 
             if (Yii::$app->request->isAjax){
-                // 确认授权
-                $echostr = Yii::$app->request->param('echostr',0);
+                //WX端 异步提交验证码
+                $vcode = Yii::$app->request->param('vcode',0);
                 $confirm = Yii::$app->request->param('confirm',0);
-                if ($echostr>0 && $confirm==1){
+                if ($vcode>0 && $confirm==1){
                     $openId = $_SESSION['userinfo']['open_id'];
-                    Yii::$app->cache->set($echostr,$openId);
+                    // 判断验证码是否存在
+                    $exist = Yii::$app->cache->exists($vcode);
+                    if (!$exist){
+                        output::ajaxReturn(205,'验证码错误');
+                    }
+                    Yii::$app->cache->set($vcode,$openId);
                     output::ajaxReturn(200);
                 }else{
-                    output::ajaxReturn(204,'登录失败');
+                    output::ajaxReturn(204,'缺少验证码');
                 }
             }else{
-                //授权页面
-                return $this->render('/yht/web-login',['qrAuth'=>1,'echostr'=>0]);
+                //WX 端授权页面
+                return $this->render('/yht/web-login',['qrAuth'=>1,'vcode'=>'']);
             }
         }else{
-            //设置redis key
-            Yii::$app->cache->set('12345','');
-            return $this->render('/yht/web-login',['qrAuth'=>0,'echostr'=>12345]);
+            //PC 端页面
+            $vcode = rand(1000,9999);
+            Yii::$app->cache->set($vcode,'');
+            return $this->render('/yht/web-login',['qrAuth'=>0,'vcode'=>$vcode]);
         }
+    }
+
+    public function actionTest(){
+        return $this->render('/yht/web-login',['qrAuth'=>1,'vcode'=>'']);
     }
 
     /**
@@ -115,20 +99,19 @@ class YhtLoginController extends \yii\web\Controller
     }
 
     /**
-     * 轮询扫码结果
+     * PC 端轮询获取结果
      */
     public function actionAskauth(){
         if (Yii::$app->request->isAjax){
-            $echostr = Yii::$app->request->get('echostr',0);
-            if (!empty($echostr)){
-                $openId = Yii::$app->cache->get($echostr);
-                if (!empty($openId)){
-                    //跳转地址
-                    $returnUrl = Url::toRoute(['yht/index'],true);
-                    if(Yii::$app->session->has("userinfo") && !empty($_SESSION['userinfo'])){
-                        Yii::$app->cache->delete($echostr);
-                        output::ajaxReturn(200,'success',$returnUrl);
-                    }
+            $vcode = Yii::$app->request->get('vcode',0);
+            $openId = Yii::$app->cache->get($vcode);
+            if ($openId){
+                //跳转地址
+                $returnUrl = Url::toRoute(['yht/index'],true);
+                if(Yii::$app->session->has("userinfo") && !empty($_SESSION['userinfo'])){
+                    Yii::$app->cache->delete($vcode);
+                    output::ajaxReturn(200,'success',$returnUrl);
+                }else{
                     $userInfo = WxUser::findOne(['open_id'=>$openId]);
                     if (!empty($userInfo)){
                         $info = $userInfo->toArray();
@@ -138,13 +121,13 @@ class YhtLoginController extends \yii\web\Controller
                             $info['yht_username'] = $yhtInfo->yht_username;
                             $info['yht_authority'] = $yhtInfo->yht_authority;
                             Yii::$app->session->set('userinfo',$info);
-                            Yii::$app->cache->delete($echostr);
+                            Yii::$app->cache->delete($vcode);
                             output::ajaxReturn(200,'success',$returnUrl);
                         }else{
-                            output::ajaxReturn(203,'授权失败');
+                            output::ajaxReturn(203,'授权失败,请刷新页面');
                         }
                     }else{
-                        output::ajaxReturn(203,'授权失败');
+                        output::ajaxReturn(203,'授权失败,请刷新页面');
                     }
                 }
             }
