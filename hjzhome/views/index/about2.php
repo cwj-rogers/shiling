@@ -116,6 +116,9 @@ use yii\helpers\Url;
                                         </div>
                                     </div>
 
+                                    <div class="contact-info" style="margin-top: 60px;padding: 0 40px;">
+                                        <iframe src="https://book.yunzhan365.com/bicl/bnnc/mobile/index.html" width="100%" height="1000rem" scrolling="no" frameborder="0"></iframe>
+                                    </div>
                                     <div class="contact-info">
                                         <h2></h2>
                                         <div class="contact-bin">
@@ -131,6 +134,7 @@ use yii\helpers\Url;
                                             </h3>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 
