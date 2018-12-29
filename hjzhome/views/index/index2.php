@@ -45,7 +45,7 @@ use yii\helpers\Html;
              data-title="首页">
             <div class="banner-box">
                 <div class="banner-cut" id="white-board">
-                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/21.jpg">
+                    <div class="banner-bin banner-lazy" data-background="https://hjz888.oss-cn-shenzhen.aliyuncs.com/%E7%99%BE%E5%BA%A6%E8%AE%A4%E8%AF%81%E5%AE%98%E7%BD%91/%E8%B5%84%E6%BA%90%204%401ax.png">
                         <div class="container  hjz-container1"><a href="<?= Url::toRoute(['about'])?>" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
@@ -448,7 +448,7 @@ use yii\helpers\Html;
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/12.jpg" >
             <div class="container contact-box">
                 <div class="row">
-                    <div class="contact-left" id="map" coordinate="113.063379,23.013639"></div>
+                    <div class="contact-left" id="map" coordinate="113.923165,22.501953"></div>
                     <div class="contact-right">
                         <div class="contact-cut">
                             <div class="contact-bin">
@@ -456,11 +456,13 @@ use yii\helpers\Html;
                                 <h1>400-6966-398</h1>
                                 <p>
                                     <em class="fa fa-cloud-download"></em>
-                                    <span>广东省佛山市禅城区季华路智慧新城T15栋10楼</span>
+<!--                                    <span>广东省佛山市禅城区季华路智慧新城T15栋10楼</span>-->
+                                    <span>深圳市南山区招商街道沿山路创业壹号大厦A栋107室 </span>
                                 </p>
                                 <p>
                                     <em class="fa fa-tty"></em>
-                                    <span>400-6966-398 / 18676036969</span>
+                                    <span>400-6966-398</span>
+<!--                                    <span>400-6966-398 / 18676036969</span>-->
                                 </p>
                                 <p>
                                     <em class="fa fa-envelope"></em>
@@ -549,7 +551,7 @@ use yii\helpers\Html;
 
             var sContent = "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>深圳市荟家装科技有限公司</h4>" +
                 "<img style='float:right;margin:4px' id='imgDemo' src='http://hjzhome.image.alimmdn.com/hjzWebsite/首页图/红底LOGO+500px.png' width='100' height='100' title='深圳市荟家装科技有限公司'/>" +
-                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>广东省佛山市禅城区季华路智慧新城T15栋10楼（佛山总部）</p>";
+                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>深圳市南山区招商街道沿山路创业壹号大厦A栋107室 </p>";
             var opts = {
                 offset : {width:0,height:-40}
             }
