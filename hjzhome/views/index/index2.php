@@ -45,7 +45,7 @@ use yii\helpers\Html;
              data-title="首页">
             <div class="banner-box">
                 <div class="banner-cut" id="white-board">
-                    <div class="banner-bin banner-lazy" data-background="https://hjz888.oss-cn-shenzhen.aliyuncs.com/%E7%99%BE%E5%BA%A6%E8%AE%A4%E8%AF%81%E5%AE%98%E7%BD%91/%E8%B5%84%E6%BA%90%204%401ax.png">
+                    <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/21.jpg">
                         <div class="container  hjz-container1"><a href="<?= Url::toRoute(['about'])?>" target="_blank"></a></div>
                     </div>
                     <div class="banner-bin banner-lazy" data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/2.jpg">
