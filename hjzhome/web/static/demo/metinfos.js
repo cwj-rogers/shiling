@@ -24559,7 +24559,7 @@ $(document).ready(function () {
         value = value.substring(0, value.length - 2);
         $text.val(value);
     });
-	
+
     function message_fun() {
         $('.message-box .ftype_checkbox, .message-box .ftype_radio').each(function () {
             $(this).removeClass('mr10');
@@ -26915,6 +26915,14 @@ $.components.register('filterable', {
 
 
 
+
+
+
+
+
+
+
+
 /*
 *
 * 官网JS脚本 start
@@ -27649,7 +27657,7 @@ $.ajax({
                             }
                         })
                 }(jQuery, window);
-			
+
             var t,
                 x,
                 y;
@@ -28147,7 +28155,7 @@ $(document).ready(function () {
             }, 100);
         });
     }
-    
+
     //首页导航栏和版块脚本
     $('.window-bin').each(function (index, element) {
         data_hash = $(this).attr('data-hash');
@@ -28205,7 +28213,7 @@ $(document).ready(function () {
             sign_func(0);
         }, 100);
     });
-	
+
     if (M['classnow'] == 10001) {
         var hashNav = 'null';
         if (IE9) {
@@ -28338,6 +28346,10 @@ $(document).ready(function () {
         }
         function mall_func(O) {
 
+        }
+        function jiklik_func(O){
+            var url = $("#jiklik").data('link');
+            location.href = url;
         }
         function picture_func(O) {
 			/*
@@ -28823,7 +28835,7 @@ $(document).ready(function () {
         })
         if ($('#map').length > 0) coordinate_func();
     }
-	
+
     $(window).load(function () {
         if (!$('html').hasClass('isWinSafari')) {
             $('.load-box').addClass('active');
@@ -28838,13 +28850,13 @@ $(document).ready(function () {
             $('.load-box').remove();
         }
     });
-	
+
     window.setTimeout(function () {
         $('.load-box').addClass('active');
     }, 5000);
-	
+
 	/* hjzJS */
-	
+
 	/* 公司简介轮播 */
 	$(document).ready(function(){
 		var company_profile = new Swiper('.company-container', {

@@ -29660,7 +29660,7 @@ body.open .nav-first.active>a>p {
 }
 .sign-box>ul>li>a>b {
  display:block;
- padding:0 25px;
+ padding:0 10px;
  font-weight:normal;
  position:relative;
  z-index:2;
@@ -39888,10 +39888,10 @@ body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:ho
 
 /*媒体查询*/
 @media (max-width:1599px) {
- 
+
 }
 @media (max-width:1199px) {
- 
+
 }
 @media (max-width:992px) {
  .video-text h3{display:none}
@@ -39909,7 +39909,7 @@ body.open .nav-first:hover>a>p, body.open .nav-first.active>a>p, .side-nav>ul:ho
  .video-text{width:100%}
  #section-A .gallery-top{width:100%}
  #section-A .gallery-thumbs{display:none}
- 
+
  /*轮播图大小*/
  .window-bin .container:before {background-size: 100% 80%;}
  .window-bin.swiper-slide-active .video-text p{display:none}

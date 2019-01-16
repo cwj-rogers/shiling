@@ -34,6 +34,7 @@ use yii\helpers\Html;
     <!--  品牌LOGO  -->
     <?php $this->beginContent('@app/views/layouts/hjz/side-logo.php') ?><?php $this->endContent() ?>
     <div class="sign-box">
+        <!-- <span>软件登录</span> -->
         <ul class="sign-ul swiper-nav"></ul>
     </div>
 </div>
@@ -64,8 +65,21 @@ use yii\helpers\Html;
         </div>
 
         <div class="window-bin swiper-lazy"
+             id="jiklik"
+             data-link="http://hjzhome.jiklik.com"
+             data-hash="jiklik"
+             data-title="设计软件登录"
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+            <div class="window-next">SCROLL</div>
+        </div>
+
+        <div class="window-bin swiper-lazy"
              data-hash="video"
-             data-title="免费设计"
+             data-title="免费设计报价"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
             <div class="container video-box">
                 <div class="row">
@@ -160,7 +174,7 @@ use yii\helpers\Html;
 
         <div class="window-bin swiper-lazy"
              data-hash="about"
-             data-title="关于"
+             data-title="公司业务介绍"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
             <div class="container about-box">
                 <div class="row">
@@ -239,7 +253,7 @@ use yii\helpers\Html;
 
         <div class="window-bin swiper-lazy"
              data-hash="mall"
-             data-title="建材商城"
+             data-title="建材家居商城"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
             <div class="container mall-box hjz-mall">
                 <div class="row">
@@ -254,7 +268,7 @@ use yii\helpers\Html;
 
         <div class="window-bin swiper-lazy"
              data-hash="picture"
-             data-title="产品"
+             data-title="全景整装产品"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/%E8%83%8C%E6%99%AF%E5%9B%BE/14.jpg?t=1539163663000">
             <div class="container">
                 <div class="row">
@@ -310,7 +324,7 @@ use yii\helpers\Html;
 
         <div class="window-bin swiper-lazy"
              data-hash="case"
-             data-title="案例"
+             data-title="全国实景案例"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
             <div class="container case-box hjz-case">
                 <div class="row">
