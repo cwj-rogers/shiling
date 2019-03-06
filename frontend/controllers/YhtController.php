@@ -177,7 +177,7 @@ class YhtController extends \yii\web\Controller
         $contractInfo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>$signerId,'cont_has_bind'=>0,'cont_status'=>0]);
         if (empty($contractInfo)){
             //查出数据库可当demo的合同
-            $demo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_owner_signerId'=>YhtClient::$hjzSignerId,'cont_type'=>2]);
+            $demo = WxYhtContract::findOne(['cont_templateId'=>$tid,'cont_type'=>2]);
             $demoId = 0;
             if (!empty($demo)){
                 $demoId = $demo->cont_contractId;

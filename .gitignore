@@ -36,3 +36,5 @@ composer.lock
 /frontend/config/params-local.php
 /backend/config/main-local.php
 /hjzhome/web/static/demo/.vscode/
+.tags
+.tags_sorted_by_file
