@@ -31,7 +31,7 @@ use yii\helpers\Url;
                 <p>电话：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" placeholder="请输入" value="0757-82701376" disabled="disabled">
+                <input class="weui-input" type="text" placeholder="请输入" value="0757-82701376" disabled="disabled">
             </div>
         </div>
     </div>
