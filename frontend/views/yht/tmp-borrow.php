@@ -15,7 +15,7 @@ use yii\helpers\Url;
                 <p>甲方(出借方)：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="请输入文本" value="深圳市荟家装科技有限公司" disabled="disabled">
+                <input class="weui-input" type="text" placeholder="请输入文本" value="佛山市五只羊家居科技有限责任公司" disabled="disabled">
             </div>
         </div>
         <div class="weui-cell">
@@ -23,7 +23,7 @@ use yii\helpers\Url;
                 <p>住址：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="请输入文本" value="佛山市禅城区季华路智慧新城T15栋1001" disabled="disabled">
+                <input class="weui-input" type="text" placeholder="请输入文本" value="佛山市禅城区季华路智慧新城T15栋1001 之二" disabled="disabled">
             </div>
         </div>
         <div class="weui-cell">
@@ -31,7 +31,7 @@ use yii\helpers\Url;
                 <p>电话：</p>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" placeholder="请输入" value="18676036969" disabled="disabled">
+                <input class="weui-input" type="number" placeholder="请输入" value="0757-82701376" disabled="disabled">
             </div>
         </div>
     </div>
