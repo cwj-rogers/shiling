@@ -39,7 +39,7 @@ class YhtClient extends \yii\base\Component
     public static $pos = ['jiafang','yifang'];//占位符定位
     public static $posKey = ['*甲方定位符*','*乙方定位符*'];//关键字定位
     public static $timeOut = 888;//token失效时间
-    public static $hjzSignerId = 2064620;//超级管理员(公司)的signerId
+    public static $hjzSignerId = 4576202;//2064620 //超级管理员(公司)的signerId
     //public static $hjzSignerId = 1099894;//测试超级管理员(公司)的signerId
     public static $verifyPhone = 1;//验证手机
     public static $cz = 1;//是否开启合同存证
