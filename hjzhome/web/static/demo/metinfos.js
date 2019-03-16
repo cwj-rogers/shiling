@@ -28348,8 +28348,8 @@ $(document).ready(function () {
 
         }
         function jiklik_func(O){
-            var url = $("#jiklik").data('link');
-            location.href = url;
+            // var url = $("#jiklik").data('link');
+            // location.href = url;
         }
         function picture_func(O) {
 			/*

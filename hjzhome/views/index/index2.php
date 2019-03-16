@@ -65,19 +65,6 @@ use yii\helpers\Html;
         </div>
 
         <div class="window-bin swiper-lazy"
-             id="jiklik"
-             data-link="http://hjzhome.jiklik.com"
-             data-hash="jiklik"
-             data-title="设计软件登录"
-             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
-            <div class="container">
-                <div class="row">
-                </div>
-            </div>
-            <div class="window-next">SCROLL</div>
-        </div>
-
-        <div class="window-bin swiper-lazy"
              data-hash="video"
              data-title="免费设计报价"
              data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/20.jpg">
@@ -511,6 +498,22 @@ use yii\helpers\Html;
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="window-next">SCROLL</div>
+        </div>
+
+        <div class="window-bin swiper-lazy"
+             id="jiklik"
+             data-link="http://hjzhome.jiklik.com"
+             data-hash="jiklik"
+             data-title="设计软件登录"
+             data-background="http://hjzhome.image.alimmdn.com/hjzWebsite/背景图/14.jpg">
+            <div class="container">
+                <div class="row">
+                    <a href="http://hjzhome.jiklik.com/" target="_blank">
+                        <button class="btn btn">点击进入设计软件</button>
+                    </a>
                 </div>
             </div>
             <div class="window-next">SCROLL</div>
